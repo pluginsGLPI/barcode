@@ -1,0 +1,325 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<TITLE>Ajout de polices et encodages</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="../fpdf.css">
+</HEAD>
+<BODY>
+<H2>Ajout de polices et encodages</H2>
+Ce tutoriel explique comment ajouter des polices TrueType ou Type1 afin de ne plus se limiter
+aux polices standard. L'autre intérêt est que l'on peut également choisir l'encodage des
+caractères afin d'utiliser d'autres langues (les polices standard ayant trop peu de caractères
+disponibles).
+<BR>
+<BR>
+Il y a deux façons d'utiliser une nouvelle police : en l'incorporant ou pas. Lorsqu'une police
+n'est pas incorporée, elle est recherchée dans le système. L'avantage est que le fichier PDF est
+plus léger ; par contre, si elle n'est pas trouvée, une police de substitution est utilisée. Il
+vaut donc mieux s'assurer que le système qui lit le PDF a bien la police installée ; si le fichier
+doit être largement diffusé, il est préférable d'incorporer.
+<BR>
+<BR>
+L'ajout d'une police se fait en trois étapes pour les TrueType :
+<UL>
+<LI>Génération du fichier de métrique (.afm)
+<LI>Génération du fichier de définition de police (.php)
+<LI>Déclaration de la police dans le script
+</UL>
+Pour les Type1, la première étape n'est en principe pas nécessaire car le fichier AFM est
+généralement déjà fourni avec la police. Dans le cas où vous ne disposeriez que d'un fichier de
+métrique au format PFM, utilisez le convertisseur disponible <A HREF="http://www.fpdf.org/fr/dl.php?id=33">ici</A>.
+<H4 CLASS='st'>Génération du fichier de métrique</H4>
+La première étape pour une TrueType consiste à générer le fichier AFM. Il existe un utilitaire
+permettant de le faire : <A HREF="http://ttf2pt1.sourceforge.net" TARGET="_blank">ttf2pt1</A>.
+L'exécutable pour Windows est disponible <A HREF="http://www.fpdf.org/fr/dl.php?id=21">ici</A>.
+La syntaxe à utiliser est la suivante :
+<BR>
+<BR>
+<TT>ttf2pt1 -a police.ttf police</TT>
+<BR>
+<BR>
+Par exemple, pour la police Comic Sans MS Normal :
+<BR>
+<BR>
+<TT>ttf2pt1 -a c:\windows\fonts\comic.ttf comic</TT>
+<BR>
+<BR>
+Deux fichiers sont créés ; celui qui nous intéresse est comic.afm.
+<H4 CLASS='st'>Génération du fichier de définition de police</H4>
+L'étape suivante consiste à générer un fichier PHP contenant toutes les informations dont a
+besoin FPDF ; on en profite également pour compresser le fichier de police. Pour cela, un script
+est fourni dans le répertoire font/makefont/ de l'archive : makefont.php. Il contient la
+fonction suivante :
+<BR>
+<BR>
+<TT>MakeFont(<B>string</B> fontfile, <B>string</B> afmfile [, <B>string</B> enc [, <B>array</B> patch [, <B>string</B> type]]])</TT>
+<BR>
+<BR>
+<TT><U>fontfile</U></TT>
+<BLOCKQUOTE>
+Chemin du fichier .ttf ou .pfb.
+</BLOCKQUOTE>
+<TT><U>afmfile</U></TT>
+<BLOCKQUOTE>
+Chemin du fichier .afm.
+</BLOCKQUOTE>
+<TT><U>enc</U></TT>
+<BLOCKQUOTE>
+Nom de l'encodage à utiliser. Valeur par défaut : <TT>cp1252</TT>.
+</BLOCKQUOTE>
+<TT><U>patch</U></TT>
+<BLOCKQUOTE>
+Modification de l'encodage. Vide par défaut.
+</BLOCKQUOTE>
+<TT><U>type</U></TT>
+<BLOCKQUOTE>
+Le type de la police (<TT>TrueType</TT> ou <TT>Type1</TT>). Valeur par défaut : <TT>TrueType</TT>.
+</BLOCKQUOTE>
+<BR>
+Le premier paramètre est le nom du fichier de police. L'extension doit être .ttf ou .pfb et
+détermine le type de la police. Si vous possédez une police Type1 au format ASCII (.pfa), vous
+pouvez la convertir au format binaire grâce à <A HREF="http://www.lcdf.org/~eddietwo/type/#t1utils" TARGET="_blank">t1utils</A>.
+<BR>
+Si vous ne voulez pas incorporer la police, passez une chaîne vide. Le type est alors déterminé
+par le paramètre <TT>type</TT>.
+<BR>
+Note : dans le cas d'une police qui porte le même nom qu'une police standard, par exemple
+arial.ttf, il est obligatoire d'incorporer ; sinon, Acrobat utilisera sa propre police du même
+nom.
+<BR>
+<BR>
+Le fichier AFM est celui précédemment généré ou déjà fourni avec la police.
+<BR>
+<BR>
+L'encodage définit l'association entre un code (compris entre 0 et 255) et un caractère. Les 128
+premières sont fixes et correspondent à l'ASCII ; les suivantes sont variables. Les encodages sont
+stockés dans des fichiers .map. Ceux disponibles sont les suivants :
+<UL>
+<LI>cp1250 (Europe Centrale)
+<LI>cp1251 (cyrillique)
+<LI>cp1252 (Europe de l'Ouest)
+<LI>cp1253 (grec)
+<LI>cp1254 (turc)
+<LI>cp1255 (hébreu)
+<LI>cp1257 (pays baltes)
+<LI>cp1258 (vietnamien)
+<LI>cp874 (thaïlandais)
+<LI>ISO-8859-1 (Europe de l'Ouest)
+<LI>ISO-8859-2 (Europe Centrale)
+<LI>ISO-8859-4 (pays Baltes)
+<LI>ISO-8859-5 (cyrillique)
+<LI>ISO-8859-7 (grec)
+<LI>ISO-8859-9 (turc)
+<LI>ISO-8859-11 (thaïlandais)
+<LI>ISO-8859-15 (Europe de l'Ouest)
+<LI>ISO-8859-16 (Europe Centrale)
+<LI>KOI8-R (russe)
+<LI>KOI8-U (ukrainien)
+</UL>
+Il faut bien sûr que la police contienne les caractères correspondant à l'encodage choisi.
+<BR>
+Dans le cas particulier d'une police symbolique (c'est-à-dire qui ne contient pas de lettres,
+comme Symbol et ZapfDingbats), il faut passer une chaîne vide.
+<BR>
+Les encodages commençant par cp sont ceux utilisés par Windows ; les systèmes Linux utilisent
+généralement les ISO.
+<BR>
+Remarque : les polices standard utilisent cp1252.
+<BR>
+<BR>
+Le quatrième paramètre permet d'apporter des modifications à l'encodage. Il peut en effet arriver
+que l'on souhaite ajouter des caractères. Par exemple, l'encodage ISO-8859-1 ne comporte pas
+le symbole euro. Pour l'ajouter en position 164, il faut passer <TT>array(164=>'Euro')</TT>.
+<BR>
+<BR>
+Le dernier paramètre est utilisé pour préciser le type de la police au cas où elle n'est pas
+incorporée (c'est-à-dire où <TT>fontfile</TT> est vide).
+<BR>
+<BR>
+Après avoir appelé la fonction (créez pour cela un nouveau fichier et incluez makefont.php, ou
+bien ajoutez l'appel directement dedans), un fichier .php est créé, avec comme nom celui du
+fichier AFM. Vous pouvez le renommer si vous le souhaitez. Dans le cas de l'incorporation, le
+fichier de police est compressé et donne un second fichier avec comme extension .z (sauf si la
+fonction de compression n'est pas disponible, elle nécessite zlib). Vous pouvez également le
+renommer, mais dans ce cas vous devez modifier la variable <TT>$file</TT> en conséquence dans le
+fichier .php.
+<BR>
+<BR>
+Exemple :
+<BR>
+<BR>
+<TT>MakeFont('c:\\windows\\fonts\\comic.ttf','comic.afm','cp1252');</TT>
+<BR>
+<BR>
+Ce qui donne les fichiers comic.php et comic.z.
+<BR>
+<BR>
+Vous devez ensuite copier le ou les fichiers générés dans le répertoire des polices.
+Si la police n'a pas pu être compressée, il faut copier le .ttf ou .pfb à la place du .z.
+<H4 CLASS='st'>Déclaration de la police dans le script</H4>
+Cette dernière étape est la plus simple. Il suffit d'appeler la méthode <A HREF='../doc/addfont.htm'>AddFont()</A>. Par
+exemple :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+$pdf<font class="kw">-&gt;</font>AddFont<font class="kw">(</font><font class="str">'Comic'</font><font class="kw">,</font><font class="str">''</font><font class="kw">,</font><font class="str">'comic.php'</font><font class="kw">);</font><br>
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+ou tout simplement :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+$pdf<font class="kw">-&gt;</font>AddFont<font class="kw">(</font><font class="str">'Comic'</font><font class="kw">);</font><br>
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+Et la police est maintenant disponible (dans le style normal et souligné), utilisable comme les
+autres. Si on avait traité le Comic Sans MS Gras (comicbd.ttf), on aurait mis :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+$pdf<font class="kw">-&gt;</font>AddFont<font class="kw">(</font><font class="str">'Comic'</font><font class="kw">,</font><font class="str">'B'</font><font class="kw">,</font><font class="str">'comicbd.php'</font><font class="kw">);</font><br>
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+<H4 CLASS='st'>Exemple</H4>
+Voyons maintenant un petit exemple complet. La police utilisée est Calligrapher, disponible sur
+<A HREF="http://www.abstractfonts.com/fonts/" TARGET="_blank">www.abstractfonts.com</A> (un site proposant de
+nombreuses polices TrueType gratuites). La première étape est la génération du fichier AFM :
+<BR>
+<BR>
+<TT>ttf2pt1 -a calligra.ttf calligra</TT>
+<BR>
+<BR>
+ce qui donne calligra.afm (et calligra.t1a qu'on peut effacer). Générons ensuite le fichier de
+définition :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+&lt;?php<br><font class="kw">require(</font><font class="str">'font/makefont/makefont.php'</font><font class="kw">);<br><br></font>MakeFont<font class="kw">(</font><font class="str">'calligra.ttf'</font><font class="kw">,</font><font class="str">'calligra.afm'</font><font class="kw">);<br></font>?&gt;
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+L'exécution de la fonction donne lieu au compte-rendu suivant :
+<BR>
+<BR>
+<B>Warning:</B> character Euro is missing<BR>
+<B>Warning:</B> character Zcaron is missing<BR>
+<B>Warning:</B> character zcaron is missing<BR>
+<B>Warning:</B> character eth is missing<BR>
+Font file compressed (calligra.z)<BR>
+Font definition file generated (calligra.php)<BR>
+<BR>
+Le caractère euro n'est pas présent dans la police (elle est trop ancienne). Trois autres
+caractères sont également absents, mais ils ne nous intéressent pas.
+<BR>
+Nous pouvons maintenant copier les deux fichiers dans le répertoire des polices et écrire le
+script :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+&lt;?php<br><font class="kw">require(</font><font class="str">'fpdf.php'</font><font class="kw">);<br><br></font>$pdf<font class="kw">=new </font>FPDF<font class="kw">();<br></font>$pdf<font class="kw">-&gt;</font>AddFont<font class="kw">(</font><font class="str">'Calligrapher'</font><font class="kw">,</font><font class="str">''</font><font class="kw">,</font><font class="str">'calligra.php'</font><font class="kw">);<br></font>$pdf<font class="kw">-&gt;</font>AddPage<font class="kw">();<br></font>$pdf<font class="kw">-&gt;</font>SetFont<font class="kw">(</font><font class="str">'Calligrapher'</font><font class="kw">,</font><font class="str">''</font><font class="kw">,</font>35<font class="kw">);<br></font>$pdf<font class="kw">-&gt;</font>Cell<font class="kw">(</font>0<font class="kw">,</font>10<font class="kw">,</font><font class="str">'Changez de police avec FPDF !'</font><font class="kw">);<br></font>$pdf<font class="kw">-&gt;</font>Output<font class="kw">();<br></font>?&gt;
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+<SCRIPT>
+<!--
+if(document.location.href.indexOf('http:')==0)
+{
+document.write("<P CLASS='demo'><A HREF='tuto7.php' TARGET='_blank' CLASS='demo'>[Démo]</A></P>");
+}
+//-->
+</SCRIPT>
+<H4 CLASS="st">A propos du symbole euro</H4>
+Le caractère euro n'est pas présent dans tous les encodages, et n'est pas toujours situé à la
+même position :<BR>
+<BR>
+<STYLE>
+TH {text-align:left; background:#E0EBFF}
+TH, TD {padding-left:10px; padding-right:10px; border-bottom-width:0px; border-left-width:1px; border-right-width:0px; border-top-width:1px}
+TR.alt0 {background:#FFFFEE}
+TR.alt1 {background:#FFFFDF}
+</STYLE>
+<TABLE STYLE="margin-left:15px; border-style:outset" BORDER="2" CELLSPACING="0" CELLPADDING="2" BGCOLOR2="#FFFFEE">
+<TR><TH CLASS="st">Encodage</TH><TH CLASS="st">Position</TH></TR>
+<TR CLASS="alt0"><TD>cp1250</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt1"><TD>cp1251</TD><TD>136<BR></TD></TR>
+<TR CLASS="alt0"><TD>cp1252</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt1"><TD>cp1253</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt0"><TD>cp1254</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt1"><TD>cp1255</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt0"><TD>cp1257</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt1"><TD>cp1258</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt0"><TD>cp874</TD><TD>128<BR></TD></TR>
+<TR CLASS="alt1"><TD>ISO-8859-1</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt0"><TD>ISO-8859-2</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt1"><TD>ISO-8859-4</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt0"><TD>ISO-8859-5</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt1"><TD>ISO-8859-7</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt0"><TD>ISO-8859-9</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt1"><TD>ISO-8859-11</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt0"><TD>ISO-8859-15</TD><TD>164<BR></TD></TR>
+<TR CLASS="alt1"><TD>ISO-8859-16</TD><TD>164<BR></TD></TR>
+<TR CLASS="alt0"><TD>KOI8-R</TD><TD>absent<BR></TD></TR>
+<TR CLASS="alt1"><TD>KOI8-U</TD><TD>absent<BR></TD></TR>
+</TABLE>
+<BR>
+ISO-8859-1 est très répandu mais ne comporte pas l'euro. Si vous en avez besoin, le plus simple
+consiste à prendre à la place cp1252 ou ISO-8859-15, qui sont pratiquement identiques mais
+disposent du précieux caractère.
+<BR>
+Pour ISO-8859-2, il est possible de prendre à la place ISO-8859-16, mais ce dernier présente de
+nombreuses différences. Le plus simple consiste à patcher l'encodage pour ajouter l'euro, comme
+expliqué plus haut. Même chose pour les autres.
+<H4 CLASS='st'>Synthèse de police sous Windows</H4>
+Lorsqu'une police TrueType n'est pas disponible dans un style donné, Windows est capable de la synthétiser
+à partir de la version normale. Par exemple, il n'y a pas de police Comic Sans MS Italique, mais
+elle peut être fabriquée à partir de Comic Sans MS Normal. Ceci peut être exploité dans un PDF,
+mais nécessite malheureusement que la police normale soit présente dans le système (il ne faut
+pas l'incorporer). La marche à suivre est la suivante :
+<UL>
+<LI>Générez le fichier de définition pour la police normale sans incorporation (et renommez-le
+éventuellement pour refléter le style désiré)
+<LI>Ouvrez-le et ajoutez à la variable <TT>$name</TT> une virgule suivie du style (<TT>Italic</TT>,
+<TT>Bold</TT> ou <TT>BoldItalic</TT>)
+</UL>
+Par exemple, pour le fichier comici.php :
+<BR>
+<BR>
+<TT>$name='ComicSansMS,Italic';</TT>
+<BR>
+<BR>
+On l'utilise ensuite normalement :
+<BR>
+<BR>
+<TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+$pdf<font class="kw">-&gt;</font>AddFont<font class="kw">(</font><font class="str">'Comic'</font><font class="kw">,</font><font class="str">'I'</font><font class="kw">,</font><font class="str">'comici.php'</font><font class="kw">);</font><br>
+</font>
+</code></NOBR></TD></TR></TABLE><P></P>
+<H4 CLASS='st'>Réduction de la taille des polices TrueType</H4>
+Les fichiers de police sont souvent volumineux (plus de 100, voire 200 Ko) ; c'est dû au fait
+qu'ils contiennent les caractères correspondant à de nombreux encodages. La compression par
+zlib les réduit mais les fichiers restent encombrants. Il existe une technique pour diminuer
+la taille de ces fichiers. Elle consiste à convertir la police en Type1 avec ttf2pt1 en précisant
+l'encodage qui nous intéresse ; tous les autres caractères sont écartés.
+<BR>
+Par exemple, la police arial.ttf livrée avec Windows 98 fait 267 Ko (elle contient 1296
+caractères). Compressée, elle en fait 147. Convertissons-là en Type1 en ne conservant que
+les caractères correspondant à l'encodage cp1250 :
+<BR>
+<BR>
+<TT>ttf2pt1 -b -L cp1250.map c:\windows\fonts\arial.ttf arial</TT>
+<BR>
+<BR>
+Les fichiers .map se trouvent dans le répertoire font/makefont/ de l'archive. On obtient alors
+les fichiers arial.pfb et arial.afm. arial.pfb ne fait plus que 35 Ko, et 30 Ko après compression.
+<BR>
+<BR>
+Il est possible d'aller encore plus loin. Si vous n'êtes intéressé que par un sous-ensemble
+de l'encodage (il est peu probable que vous ayez besoin des 217 caractères), vous pouvez ouvrir
+le fichier .map et enlever les lignes qui ne vous intéressent pas. Cela réduira d'autant la
+taille du fichier obtenu.
+</BODY>
+</HTML>
