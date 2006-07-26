@@ -33,7 +33,7 @@
 include ("_relpos.php");
 $NEEDED_ITEMS=array("setup");
 include ($phproot . "/inc/includes.php");
-checkRight("config","w");
+
 
 
 if(!TableExists("glpi_plugin_barscode_config")) {
@@ -63,6 +63,11 @@ elseif(!empty($_POST["update_conf_bc"])) {
 	echo "<table class='tab_cadre' cellpadding='5'>";
 	echo "<tr><th>".$langbc["setup"][1];
 	echo "</th></tr>";
+	if (haveRight("config","w") && haveRight("profile","w")){
+	echo "<tr class='tab_bg_1'><td align='center'>";
+	echo "<a href=\"./plugin_barscode.profile.php\">".$langbc["profile"][0]."</a>";
+	echo "</td></tr>";
+	}
 	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$langbc["setup"][4]."</a>";
 		echo " <img src='".$HTMLRel."pics/aide.png' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
 	echo "<span class='over_link' id='commentsup'>".$langbc["setup"][6]."</span>";

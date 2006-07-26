@@ -36,6 +36,7 @@
 
 
 include ("_relpos.php");
+include_once ("inc/plugin_barscode.functions_auth.php");
 include_once ("inc/plugin_barscode.functions_display.php");
 include_once ("inc/plugin_barscode.functions_db.php");
 include_once ("inc/plugin_barscode.functions_setup.php");
@@ -44,18 +45,21 @@ include_once ("inc/plugin_barscode.classes.php");
 	require('fpdf/code39.php');
 	require('fpdf/avery.php');
 
-
+plugin_barscode_initSession();
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
         global $plugin_hooks;
 	
 	// Display a menu entry ?
+	if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 	$plugin_hooks['menu_entry']['barscode'] = true;
 	// Setup/Update functions
 	// Config function
+	if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
     $plugin_hooks['config']['barscode'] = 'plugin_config_barscode';
 	// Config page
+	if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
 	$plugin_hooks['config_page']['barscode'] = 'front/plugin_barscode.config.php';
 }
 
@@ -65,12 +69,7 @@ function plugin_version_barscode(){
                       'version' => 'RC1');
 }
 
-// Get config of the plugin
-function plugin_config_barscode(){
-	global $cfg_glpi_plugins;
 
-	$cfg_glpi_plugins["barscode"]["test"]="test";
-}
 
 
 ?>

@@ -47,6 +47,12 @@ $langbc["config"][10] = "Landscape";
 $langbc["config"][11] = "Published it ";
 $langbc["config"][12] = "Page ";
 
+$langbc["profile"][0] = "Rights management";
+$langbc["profile"][1] = "$title";
+$langbc["profile"][2] = "Setup";
+$langbc["profile"][3] = "Create an ".$title."";
+$langbc["profile"][4] = "Update an ".$title."";
+$langbc["profile"][5] = "Delete an ".$title."";
 
 $langbc["buttons"][0] = "Refresh";
 $langbc["buttons"][1] = "Create";

@@ -49,6 +49,12 @@ $langbc["config"][10] = "Paysage";
 $langbc["config"][11] = "Edité le ";
 $langbc["config"][12] = "Page ";
 
+$langbc["profile"][0] = "Gestion des droits";
+$langbc["profile"][1] = "$title";
+$langbc["profile"][2] = "Configuration";
+$langbc["profile"][3] = "Créer un ".$title."";
+$langbc["profile"][4] = "Mettre à jour un ".$title."";
+$langbc["profile"][5] = "Supprimer un ".$title."";
 
 $langbc["buttons"][0] = "Actualiser";
 $langbc["buttons"][1] = "Créer";
