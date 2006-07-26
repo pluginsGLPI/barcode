@@ -40,7 +40,7 @@ checkRight("computer","r");
 
 
 if(!TableExists("glpi_plugin_barscode_config")) {
-	glpi_header("./config.php");
+	glpi_header("./front/plugin_barscode.config.php");
 } else {
 	
 	commonHeader($langbc["title"][1],$_SERVER["PHP_SELF"]);
