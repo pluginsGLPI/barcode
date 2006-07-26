@@ -1,10 +1,11 @@
 <?php
 /*
+* @version $Id$
  ----------------------------------------------------------------------
  GLPI - Gestionnaire Libre de Parc Informatique
- Copyright (C) 2003-2005 by the INDEPNET Development Team.
+ Copyright (C) 2003-2006 by the INDEPNET Development Team.
  
- http://indepnet.net/   http://glpi-project.org/
+ http://indepnet.net/   http://glpi-project.org
  ----------------------------------------------------------------------
 
  LICENSE
@@ -26,24 +27,21 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ------------------------------------------------------------------------
 */
- 
+
 // ----------------------------------------------------------------------
-// Original Author of file: GRISARD Jean Marc & CAILLAUD Xavier
+// Original Author of file: Julien Dombre
 // Purpose of file:
 // ----------------------------------------------------------------------
-include ("_relpos.php");
-include ($phproot . "/inc/includes.php");
-	if (haveRight("config","w") && haveRight("profile","w")){
+	include ("_relpos.php");
+	include ($phproot."/inc/includes.php");
 
- 
-if(TableExists("glpi_plugin_barscode_config"))
-	plugin_barscode_uninstallv11();
-	glpi_header($_SERVER['HTTP_REFERER']);
-	}else{
-	commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
-		echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$lang["login"][5]."</b></div>";
-		commonFooter();
-		}
+	header("Content-Type: text/html; charset=UTF-8");
+	header_nocache();
+
+	checkRight("profile","r");
+	
+	$prof=new plugin_barscode_Profile();
+	if ($_POST["interface"]=="barscode")
+		$prof->showbarscodeForm($_POST["ID"]);
 
 ?>

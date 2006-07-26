@@ -35,9 +35,7 @@
 include ("_relpos.php");
 include ($phproot . "/inc/includes.php");
 
-checkRight("computer","r");
-
-
+if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 
 if(!TableExists("glpi_plugin_barscode_config")) {
 	glpi_header("./front/plugin_barscode.config.php");
@@ -93,6 +91,8 @@ echo "</table>";
 echo "</div>";
 echo "</form>";
 }
-
+}
 	commonFooter();
+	
+	
 ?>

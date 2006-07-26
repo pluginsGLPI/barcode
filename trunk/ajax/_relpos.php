@@ -26,24 +26,25 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ------------------------------------------------------------------------
 */
- 
+
 // ----------------------------------------------------------------------
-// Original Author of file: GRISARD Jean Marc & CAILLAUD Xavier
+// Original Author of file:
 // Purpose of file:
 // ----------------------------------------------------------------------
-include ("_relpos.php");
-include ($phproot . "/inc/includes.php");
-	if (haveRight("config","w") && haveRight("profile","w")){
 
- 
-if(TableExists("glpi_plugin_barscode_config"))
-	plugin_barscode_uninstallv11();
-	glpi_header($_SERVER['HTTP_REFERER']);
-	}else{
-	commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
-		echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$lang["login"][5]."</b></div>";
-		commonFooter();
-		}
+$Dir = str_replace('\\', '/', getcwd());
+$Dir = explode('/', $Dir);
+$NDir = count($Dir);
+for($i=count($Dir); $i>0;$i--)
+{
+if(file_exists(implode('/', $Dir) . '/siteroot.php'))
+{
+$phproot = implode('/', $Dir);
+$HTMLRel = str_repeat("../", $NDir - count($Dir));
+$i = 0;
+}
+unset($Dir[$i]);
+}
+
 
 ?>

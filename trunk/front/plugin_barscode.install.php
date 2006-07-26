@@ -33,11 +33,18 @@
 // ----------------------------------------------------------------------
 include ("_relpos.php");
 include ($phproot . "/inc/includes.php");
-checkRight("computer","r");
+
+	if (haveRight("config","w") && haveRight("profile","w")){
 
  
 if(!TableExists("glpi_plugin_barscode_config"))
 	plugin_barscode_installv11();
 	glpi_header($_SERVER['HTTP_REFERER']);
+	}else{
+	commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
+		echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
+		echo "<b>".$lang["login"][5]."</b></div>";
+		commonFooter();
+		}
 
 ?>
