@@ -40,7 +40,6 @@ function plugin_barscode_initSession()
 		if(!session_id()) session_start();
 		$prof=new plugin_barscode_Profile();
 		$prof->getFromDBForUser($_SESSION["glpiID"]);
-		//$prof->cleanProfile();
 		$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
 	}
 

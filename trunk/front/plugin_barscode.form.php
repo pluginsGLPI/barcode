@@ -48,8 +48,6 @@ if(!isset($_POST["format"])) $_POST["format"] = "";
 
 include ($phproot . "/inc/includes.php");
 
-checkRight("computer","r");
-
 	
 plugin_barscode_print($_POST["nb"],$_POST["from"],$_POST["lenght"],$_POST["prefixe"],$_POST["size"],$_POST["format"]);
 
