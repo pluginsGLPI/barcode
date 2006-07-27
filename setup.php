@@ -65,8 +65,9 @@ function plugin_init_barscode() {
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_barscode(){
-	return array( 'name'    => 'Code barre',
-                      'version' => 'RC1');
+global $langbc;
+	return array( 'name'    => $langbc["title"][1],
+                      'version' => '1.0');
 }
 
 
