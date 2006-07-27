@@ -29,8 +29,10 @@
 // Original Author of file: GRISARD Jean Marc
 // Purpose of file:
 // ----------------------------------------------------------------------
+$title = "Bars Code";
+
 $langbc["title"][0] = "Make a bars code...";
-$langbc["title"][1] = "Bars code";
+$langbc["title"][1]	= "".$title."";
 $langbc["title"][2] = "Page Configuration";
 
 $langbc["config"][0] = "Stroke has left";
@@ -44,7 +46,7 @@ $langbc["config"][7] = "Numbers labels by column (collars)";
 $langbc["config"][8] = "Position of the page";
 $langbc["config"][9] = "Portrait";
 $langbc["config"][10] = "Landscape";
-$langbc["config"][11] = "Published it ";
+$langbc["config"][11] = "Published";
 $langbc["config"][12] = "Page ";
 
 $langbc["profile"][0] = "Rights management";
@@ -65,5 +67,13 @@ $langbc["bc"][4] = "The 'prefixe' in front of the number";
 $langbc["bc"][5] = "A4";
 $langbc["bc"][6] = "A3";
 $langbc["bc"][7] = "A5";
+
+
+$langbc["setup"][1] = "Setup of $title plugin";
+$langbc["setup"][2] = "Install $title plugin ";
+$langbc["setup"][3] = "Update $title plugin to version";
+$langbc["setup"][4] = "Uninstall $title plugin";
+$langbc["setup"][5] = "Warning, the update is irreversible.";
+$langbc["setup"][6] = "Warning, the uninstallation of the plugin is irreversible.<br> You will loose all the data.";
 
 ?>
