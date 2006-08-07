@@ -51,6 +51,9 @@ function plugin_barscode_FormConfig($target, $id) {
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$db->result($result,0,"etiquetteH")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$db->result($result,0,"etiquetteR")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][7]." </td><td> <input type=\"text\" name=\"etiquetteC\" value=\"".$db->result($result,0,"etiquetteC")."\"></td></tr>";
+
+        echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$db->result($result,0,"etiquetteRL")."\"></td></tr>";
+        echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$db->result($result,0,"etiquetteCL")."\"></td></tr>";
 	echo "</table></div>";
 	echo "<p class=\"submit\"><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$langbc["buttons"][0]."\" ></p>";
 	echo "</form>";
@@ -58,8 +61,8 @@ function plugin_barscode_FormConfig($target, $id) {
 }
 
 
-function plugin_barscode_print($nb,$from,$lenght,$prefixe,$size,$format){
-
+function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
+	
 	GLOBAL  $lang, $langbc, $pdf;
 
 	$Logo['F']   = '../pics/logo.png';	// Fichier du logo
@@ -82,6 +85,8 @@ function plugin_barscode_print($nb,$from,$lenght,$prefixe,$size,$format){
 	$Etiquette['H'] = $db->result($result, $i, "etiquetteH");		// Hauteur des etiquette
 	$Etiquette['R'] = $db->result($result, $i, "etiquetteR");			// NB etiquettes par ligne (rows)
 	$Etiquette['C'] = $db->result($result, $i, "etiquetteC");			// NB etiquettes par colonne (cols)
+	$Etiquette['RL']= $db->result($result, $i, "etiquetteRL");		//NB etiquette par ligne en mode Paysage
+	$Etiquette['CL']= $db->result($result, $i, "etiquetteCL");		//NB etiquette par colonne en mode Paysage
 
 	$pdf=new PDF_Avery();
 	$pdf->AliasNbPages(); 
@@ -95,14 +100,21 @@ function plugin_barscode_print($nb,$from,$lenght,$prefixe,$size,$format){
 	$pdf->SetFont('Arial','',6);
 	$pdf->SetTextColor(0,0,0);
 
-for ($page=1; $page<=ceil($nb / ($Etiquette['R'] * $Etiquette['C'])); $page++)
+	if($format=='L')
+		$nbppage = $Etiquette['RL'] * $Etiquette['CL'];
+	else
+		$nbppage = $Etiquette['R'] * $Etiquette['C'];
+		
+	for ($page=1; $page<=ceil(($nb) / $nbppage); $page++)
 	{
-		$from = ($page * ($Etiquette['R'] * $Etiquette['C'])) - ($Etiquette['R'] * $Etiquette['C']) + $from;
-		$to = $from + ($Etiquette['R'] * $Etiquette['C']) - 1;
-		if ($to > $nb) { $to = $nb; }
+
+		$from = ($page * ($nbppage)) - ($nbppage) + $begin;
+		$to = $from + ($nbppage) - 1;
+		if ($begin==0){$to=$nb-1;}
+		if ($to > $nb-1) { $to = $nb; }
 		$pdf->AddPage();
 		$pdf->Cell(0,3, $langbc["config"][12].$pdf->PageNo().'/{nb}',0,0,'C'); 
-		plugin_barscode_GeneratePage($Etiquette, $Marge, $Logo, $from, $to, $lenght, $prefixe);
+		plugin_barscode_GeneratePage($Etiquette, $Marge, $Logo, $from, $to, $lenght, $prefixe, $format);
 	}
 	
 $pdf->Output();
@@ -129,13 +141,24 @@ function plugin_barscode_GenerateEtiquette($X_From, $Y_From, $X_To, $Y_To, $Weig
 }
 
 
-function plugin_barscode_GeneratePage($Etiquette, $Marge, $Logo, $from, $to, $length, $prefixe)
+function plugin_barscode_GeneratePage($Etiquette, $Marge, $Logo, $from, $to, $length, $prefixe, $format)
 {
-	for ($row=1; ( ($row<=$Etiquette['C']) && ($from <= $to) ); $row++)
+
+	if($format == 'L')
+	{
+		$nbligne = $Etiquette['CL'];
+		$nbcolone = $Etiquette['RL'];
+	}
+	else
+	{
+		$nbligne = $Etiquette['C'];
+		$nbcolone = $Etiquette['R'];
+	}
+	for ($row=1; ( ($row<=$nbligne) && ($from <= $to) ); $row++)
 		{
 			$Y_From = $Marge['T']+( (($row-1)*$Etiquette['H']) + (($row-1)*$Marge['W']) );;
 			$Y_To   = $Y_From+$Etiquette['H'];
-			for ($col=1; ( ($col<=$Etiquette['R']) && ($from <= $to) ); $col++)
+			for ($col=1; ( ($col<=$nbcolone) && ($from <= $to) ); $col++)
 				{
 					$X_From = $Marge['L']+( (($col-1)*$Etiquette['W']) + (($col-1)*$Marge['H']) );
 					$X_To   = $X_From+$Etiquette['W'];

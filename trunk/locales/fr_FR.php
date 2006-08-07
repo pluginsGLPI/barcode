@@ -48,6 +48,8 @@ $langbc["config"][9] = "Portrait";
 $langbc["config"][10] = "Paysage";
 $langbc["config"][11] = "Edité le ";
 $langbc["config"][12] = "Page ";
+$langbc["config"][13] = "NB Etiquette par ligne en mode Paysage";
+$langbc["config"][14] = "NB Etiquette par colonne en mode Paysage";
 
 $langbc["profile"][0] = "Gestion des droits";
 $langbc["profile"][1] = "$title";

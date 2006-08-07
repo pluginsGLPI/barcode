@@ -42,7 +42,7 @@ if(!isset($_POST["prefixe"])) $_POST["prefixe"] = "";
 if(!isset($_POST["size"])) $_POST["size"] = "";
 if(!isset($_POST["format"])) $_POST["format"] = "";
 
-	define('FPDF_FONTPATH','fpdf/font/');
+	define('FPDF_FONTPATH','../fpdf/font/');
 	include ("_relpos.php");
 	
 
