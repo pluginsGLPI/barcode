@@ -37,7 +37,7 @@ function plugin_barscode_UpdateConfig($input, $id) {
 	
 	global $phproot, $langbc;
 		$db = new DB;
-		$query = "update glpi_plugin_barscode_config set margeL = '".$input["margeL"]."', margeT = '".$input["margeT"]."', margeH = '".$input["margeH"]."', margeW = '".$input["margeW"]."', etiquetteW = '".$input["etiquetteW"]."', etiquetteH= '".$input["etiquetteH"]."', etiquetteR = '".$input["etiquetteR"]."',etiquetteC = '".$input["etiquetteC"]."'  where ID = '".$id."'";
+		$query = "update glpi_plugin_barscode_config set margeL = '".$input["margeL"]."', margeT = '".$input["margeT"]."', margeH = '".$input["margeH"]."', margeW = '".$input["margeW"]."', etiquetteW = '".$input["etiquetteW"]."', etiquetteH= '".$input["etiquetteH"]."', etiquetteR = '".$input["etiquetteR"]."',etiquetteC = '".$input["etiquetteC"]."',etiquetteRL='".$input["etiquetteRL"]."',etiquetteCL='".$input["etiquetteCL"]."'  where ID = '".$id."'";
 		if($db->query($query)) {
 			glpi_header($_SERVER["HTTP_REFERER"]); 
 		} else {

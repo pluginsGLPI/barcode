@@ -48,6 +48,8 @@ $langbc["config"][9] = "Portrait";
 $langbc["config"][10] = "Landscape";
 $langbc["config"][11] = "Published the ";
 $langbc["config"][12] = "Page ";
+$langbc["config"][13] = "Numbers labels by line in Landscape mode";
+$langbc["config"][14] = "Numbers labels by column in Landscape mode";
 
 $langbc["profile"][0] = "Rights management";
 $langbc["profile"][1] = "$title";

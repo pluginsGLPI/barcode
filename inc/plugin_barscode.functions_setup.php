@@ -45,11 +45,15 @@ function plugin_barscode_Installv11() {
   `etiquetteH` varchar(255) NOT NULL default '',
   `etiquetteR` varchar(255) NOT NULL default '',
   `etiquetteC` varchar(255) NOT NULL default '',
+  `etiquetteRL` varchar(255) NOT NULL default '',
+  `etiquetteCL` varchar(255) NOT NULL default '',    
+
+  
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM";
 	
 	$db->query($query1) or die($db->error());
-	$query3 = "INSERT INTO `glpi_plugin_barscode_config` ( `ID` , `margeL` , `margeT` , `margeH` , `margeW`, `etiquetteW`, `etiquetteH`, `etiquetteR`, `etiquetteC` )VALUES ('1', '2', '8.6', '4', '0', '66.5', '35.9', '3', '8')";
+	$query3 = "INSERT INTO `glpi_plugin_barscode_config` ( `ID` , `margeL` , `margeT` , `margeH` , `margeW`, `etiquetteW`, `etiquetteH`, `etiquetteR`, `etiquetteC`, `etiquetteRL`, `etiquetteCL` )VALUES ('1', '2', '8.6', '4', '0', '66.5', '35.9', '3', '8','4','5' )";
 	$db->query($query3) or die($db->error());
 	
 	$query5="CREATE TABLE `glpi_plugin_barscode_profiles` (
