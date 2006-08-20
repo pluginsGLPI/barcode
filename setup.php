@@ -45,12 +45,14 @@ include_once ("inc/plugin_barscode.classes.php");
 	require('fpdf/code39.php');
 	require('fpdf/avery.php');
 
-plugin_barscode_initSession();
+
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
         global $plugin_hooks;
 	
+	 if (isset($_SESSION["glpiID"])){
+	 plugin_barscode_initSession();
 	// Display a menu entry ?
 	if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 	$plugin_hooks['menu_entry']['barscode'] = true;
@@ -61,6 +63,7 @@ function plugin_init_barscode() {
 	// Config page
 	if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
 	$plugin_hooks['config_page']['barscode'] = 'front/plugin_barscode.config.php';
+}
 }
 
 // Get the name and the version of the plugin - Needed
