@@ -52,7 +52,7 @@ function plugin_init_barscode() {
         global $plugin_hooks;
 	
 	 if (isset($_SESSION["glpiID"])){
-	 plugin_barscode_initSession();
+    $plugin_hooks['init_session']['barscode'] = 'plugin_barscode_initSession'; 
 	// Display a menu entry ?
 	if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 	$plugin_hooks['menu_entry']['barscode'] = true;
