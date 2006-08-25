@@ -50,9 +50,9 @@ include_once ("inc/plugin_barscode.classes.php");
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
         global $plugin_hooks;
-	
+	$plugin_hooks['init_session']['barscode'] = 'plugin_barscode_initSession'; 
 	 if (isset($_SESSION["glpiID"])){
-    $plugin_hooks['init_session']['barscode'] = 'plugin_barscode_initSession'; 
+    
 	// Display a menu entry ?
 	if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 	$plugin_hooks['menu_entry']['barscode'] = true;
