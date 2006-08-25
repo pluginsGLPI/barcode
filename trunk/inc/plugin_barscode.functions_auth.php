@@ -37,11 +37,11 @@ function plugin_barscode_initSession()
 	{
 		global $cfg_glpi;
 
-		 if (isset($_SESSION["glpiID"])){
+		
 		$prof=new plugin_barscode_Profile();
 		$prof->getFromDBForUser($_SESSION["glpiID"]);
 		$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
-		}
+		
 	}
 
 function plugin_barscode_haveRight($module,$right){
