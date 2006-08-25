@@ -1,31 +1,31 @@
 <?php
 /*
- ----------------------------------------------------------------------
- GLPI - Gestionnaire Libre de Parc Informatique
- Copyright (C) 2003-2006 by the INDEPNET Development Team.
- 
- http://indepnet.net/   http://glpi.indepnet.org
- ----------------------------------------------------------------------
+   ----------------------------------------------------------------------
+   GLPI - Gestionnaire Libre de Parc Informatique
+   Copyright (C) 2003-2006 by the INDEPNET Development Team.
 
- LICENSE
+   http://indepnet.net/   http://glpi.indepnet.org
+   ----------------------------------------------------------------------
 
-	This file is part of GLPI.
+   LICENSE
 
-    GLPI is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+   This file is part of GLPI.
 
-    GLPI is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   GLPI is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
 
-    You should have received a copy of the GNU General Public License
-    along with GLPI; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ------------------------------------------------------------------------
-*/
+   GLPI is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with GLPI; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+   ------------------------------------------------------------------------
+ */
 
 // ----------------------------------------------------------------------
 // Original Author of file:
@@ -42,35 +42,35 @@ include_once ("inc/plugin_barscode.functions_db.php");
 include_once ("inc/plugin_barscode.functions_setup.php");
 include_once ("inc/plugin_barscode.classes.php");
 
-	require('fpdf/code39.php');
-	require('fpdf/avery.php');
+require('fpdf/code39.php');
+require('fpdf/avery.php');
 
 
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
-        global $plugin_hooks;
+	global $plugin_hooks;
 	$plugin_hooks['init_session']['barscode'] = 'plugin_barscode_initSession'; 
-	 if (isset($_SESSION["glpiID"])){
-    
-	// Display a menu entry ?
-	if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
-	$plugin_hooks['menu_entry']['barscode'] = true;
-	// Setup/Update functions
-	// Config function
-	if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
-    $plugin_hooks['config']['barscode'] = 'plugin_config_barscode';
-	// Config page
-	if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
-	$plugin_hooks['config_page']['barscode'] = 'front/plugin_barscode.config.php';
-}
+	if (isset($_SESSION["glpiID"])){
+
+		// Display a menu entry ?
+		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
+			$plugin_hooks['menu_entry']['barscode'] = true;
+		// Setup/Update functions
+		// Config function
+		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
+			$plugin_hooks['config']['barscode'] = 'plugin_config_barscode';
+		// Config page
+		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
+			$plugin_hooks['config_page']['barscode'] = 'front/plugin_barscode.config.php';
+	}
 }
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_barscode(){
-global $langbc;
+	global $langbc;
 	return array( 'name'    => $langbc["title"][1],
-                      'version' => '1.1');
+			'version' => '1.1');
 }
 
 
