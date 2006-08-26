@@ -70,13 +70,13 @@ function plugin_barscode_Installv11() {
 		VALUES ('1', 'post-only','barscode','1',NULL);";
 
 	$query7 ="INSERT INTO `glpi_plugin_barscode_profiles` ( `ID`, `name` , `interface`, `is_default`, `barscode`)
-		VALUES ('2', 'normal','barscode','0',NULL);";
+		VALUES ('2', 'normal','barscode','0','r');";
 
 	$query8 ="INSERT INTO `glpi_plugin_barscode_profiles` ( `ID`, `name` , `interface`, `is_default`, `barscode`)
-		VALUES ('3', 'admin','barscode','0','r');";
+		VALUES ('3', 'admin','barscode','0','w');";
 
 	$query9 ="INSERT INTO `glpi_plugin_barscode_profiles` ( `ID`, `name` , `interface`, `is_default`, `barscode`)
-		VALUES ('4', 'super-admin','barscode','0','r');";
+		VALUES ('4', 'super-admin','barscode','0','w');";
 
 	$db->query($query5) or die($db->error());
 	$db->query($query6) or die($db->error());
