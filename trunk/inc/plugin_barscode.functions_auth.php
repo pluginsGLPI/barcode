@@ -45,7 +45,6 @@ function plugin_barscode_initSession()
 }
 
 function plugin_barscode_haveRight($module,$right){
-
 	$matches=array(
 			""  => array("","r","w"), // ne doit pas arriver normalement
 			"r" => array("r","w"),
@@ -53,64 +52,9 @@ function plugin_barscode_haveRight($module,$right){
 			"1" => array("1"),
 			"0" => array("0","1"), // ne doit pas arriver non plus
 		      );
-
-
-	if (isset($_SESSION["glpi_plugin_barscode_profile"]["barscode"])&&in_array($_SESSION["glpi_plugin_barscode_profile"]["barscode"],$matches[$right]))
+	if (isset($_SESSION["glpi_plugin_barscode_profile"][$module])&&in_array($_SESSION["glpi_plugin_barscode_profile"][$module],$matches[$right]))
 		return true;
 	else return false;
-
-}
-
-
-function plugin_barscode_haveRight_create($module,$right){
-
-	$matches=array(
-			""  => array("","r","w"), // ne doit pas arriver normalement
-			"r" => array("r","w"),
-			"w" => array("w"),
-			"1" => array("1"),
-			"0" => array("0","1"), // ne doit pas arriver non plus
-		      );
-
-
-	if (isset($_SESSION["glpi_plugin_barscode_profile"]["create_barscode"])&&in_array($_SESSION["glpi_plugin_barscode_profile"]["create_barscode"],$matches[$right]))
-		return true;
-	else return false;
-
-}
-
-function plugin_barscode_haveRight_update($module,$right){
-
-	$matches=array(
-			""  => array("","r","w"), // ne doit pas arriver normalement
-			"r" => array("r","w"),
-			"w" => array("w"),
-			"1" => array("1"),
-			"0" => array("0","1"), // ne doit pas arriver non plus
-		      );
-
-
-	if (isset($_SESSION["glpi_plugin_barscode_profile"]["update_barscode"])&&in_array($_SESSION["glpi_plugin_barscode_profile"]["update_barscode"],$matches[$right]))
-		return true;
-	else return false;
-
-}
-
-function plugin_barscode_haveRight_delete($module,$right){
-
-	$matches=array(
-			""  => array("","r","w"), // ne doit pas arriver normalement
-			"r" => array("r","w"),
-			"w" => array("w"),
-			"1" => array("1"),
-			"0" => array("0","1"), // ne doit pas arriver non plus
-		      );
-
-
-	if (isset($_SESSION["glpi_plugin_barscode_profile"]["delete_barscode"])&&in_array($_SESSION["glpi_plugin_barscode_profile"]["delete_barscode"],$matches[$right]))
-		return true;
-	else return false;
-
 }
 
 
