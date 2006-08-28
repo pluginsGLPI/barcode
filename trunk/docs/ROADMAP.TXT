@@ -30,3 +30,5 @@
 // Original Author of file: GRISARD Jean Marc & CAILLAUD Xavier
 // Purpose of file:
 // ----------------------------------------------------------------------
+
+Pb génération codes barre au format paysage

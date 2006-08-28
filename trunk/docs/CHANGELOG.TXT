@@ -31,7 +31,16 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-
 version 1.1
+
+Compatibilité GLPI 0.68
+
+version 1.2
+Contribution CedricR
+
+Correction bug FPDF
+Correction nb d'étiquettes générées
+Utilisation du Hook d'authentification
+maj des functions d'authentification
 
 
