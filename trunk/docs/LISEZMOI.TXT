@@ -36,6 +36,7 @@ Auteur : GRISARD Jean marc
 1 - Présentation
 
 Ce plugin vous permet de générer des codes barres au format avery.
+Compatibilité 0.68.1
 
 2 - Installation
 
