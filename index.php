@@ -49,10 +49,9 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		echo "<form name='form' method='post' action='front/plugin_barscode.form.php'>";
 
 		echo "<div align='center'>";
-		echo "<table class='tab_cadre' >";
+		echo "<table class='tab_cadre' ><tr>";
 
-
-		echo "<th colspan='8'>".$langbc["title"][1]."</th>";
+		echo "<th colspan='8'>".$langbc["title"][1]."</th></tr>";
 		echo "<tr class='tab_bg_1'>";
 
 		echo "<td>".$langbc["bc"][0]."</td><td>";

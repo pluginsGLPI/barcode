@@ -44,7 +44,7 @@ if(!TableExists("glpi_plugin_barscode_config")) {
 	echo "<tr><th>".$langbc["setup"][1];
 	echo "</th></tr>";
 	echo "<tr class='tab_bg_1'><td>";
-	echo "<a href='plugin_barscode.install.php'>".$langbc["setup"][2]."</a></td></tr>";
+	echo "<a href='plugin_barscode.install.php'>".$langbc["setup"][2]." v1.3</a></td></tr>";
 
 	echo "</table></div>";
 
@@ -57,7 +57,7 @@ elseif(!empty($_POST["update_conf_bc"])) {
 } else {
 
 	commonHeader($langbc["title"][1],$_SERVER["PHP_SELF"]);
-	echo "<div align='center'><a class='icon_consol' href=\"".$HTMLRel."front/setup.plugins.php\">".$lang["buttons"][13]."</a><br><br>";
+	echo "<div align='center'><a class='icon_consol' href=\"".$HTMLRel."front/setup.plugins.php\">".$lang["buttons"][13]."</a></div><br>";
 	plugin_barscode_FormConfig($_SERVER["PHP_SELF"],1);
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
@@ -68,8 +68,8 @@ elseif(!empty($_POST["update_conf_bc"])) {
 		echo "<a href=\"./plugin_barscode.profile.php\">".$langbc["profile"][0]."</a>";
 		echo "</td></tr>";
 	}
-	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$langbc["setup"][4]."</a>";
-	echo " <img src='".$HTMLRel."pics/aide.png' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
+	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$langbc["setup"][4]." v1.3</a>";
+	echo " <img src='".$HTMLRel."pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
 	echo "<span class='over_link' id='commentsup'>".$langbc["setup"][6]."</span>";
 	echo "</td></tr>";
 	echo "</table></div>";
