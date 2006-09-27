@@ -70,7 +70,7 @@ function plugin_init_barscode() {
 function plugin_version_barscode(){
 	global $langbc;
 	return array( 'name'    => $langbc["title"][1],
-			'version' => '1.2');
+			'version' => '1.3');
 }
 
 

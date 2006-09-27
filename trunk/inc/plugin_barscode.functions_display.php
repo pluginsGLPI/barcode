@@ -46,7 +46,7 @@ function plugin_barscode_FormConfig($target, $id) {
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][0]." </td><td> <input type=\"text\" name=\"margeL\" value=\"".$db->result($result,0,"margeL")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][1]." </td><td> <input type=\"text\" name=\"margeT\" value=\"".$db->result($result,0,"margeT")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][2]." </td><td> <input type=\"text\" name=\"margeH\" value=\"".$db->result($result,0,"margeH")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][3]." </td><td> <input type=\"test\" name=\"margeW\" value=\"".$db->result($result,0,"margeW")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][3]." </td><td> <input type=\"text\" name=\"margeW\" value=\"".$db->result($result,0,"margeW")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][4]." </td><td> <input type=\"text\" name=\"etiquetteW\" value=\"".$db->result($result,0,"etiquetteW")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$db->result($result,0,"etiquetteH")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$db->result($result,0,"etiquetteR")."\"></td></tr>";

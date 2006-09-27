@@ -43,8 +43,8 @@ class plugin_barscode extends CommonDBTM {
 		GLOBAL  $langbc,$HTMLRel;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"./pics/barscode.png\" alt='".$langbc["title"][0]."' title='".$langbc["title"][0]."'></td><td align ='center'><b><span class='icon_nav'>".$langbc["title"][0]."</span>";
-		echo "</b><tr><td>&nbsp;</td></tr></tr></table>&nbsp;</div>";
+		echo "<img src=\"./pics/barscode.png\" alt='".$langbc["title"][0]."' title='".$langbc["title"][0]."'></td><td align ='center'><span class='icon_nav'>".$langbc["title"][0]."</span>";
+		echo "</td></tr></table></div><br>";
 	}
 
 }
