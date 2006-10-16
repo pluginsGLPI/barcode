@@ -31,6 +31,10 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
+define('GLPI_ROOT', '../../..'); 
+include (GLPI_ROOT . "/inc/includes.php");
+define('FPDF_FONTPATH','../fpdf/font/');
+
 if(isset($_GET)) $tab = $_GET;
 if(empty($tab) && isset($_POST)) $tab = $_POST;
 if(!isset($tab["ID"])) $tab["ID"] = "";
@@ -41,13 +45,6 @@ if(!isset($_POST["prefixe"])) $_POST["prefixe"] = "";
 
 if(!isset($_POST["size"])) $_POST["size"] = "";
 if(!isset($_POST["format"])) $_POST["format"] = "";
-
-define('FPDF_FONTPATH','../fpdf/font/');
-include ("_relpos.php");
-
-
-include ($phproot . "/inc/includes.php");
-
 
 plugin_barscode_print($_POST["nb"],$_POST["from"],$_POST["lenght"],$_POST["prefixe"],$_POST["size"],$_POST["format"]);
 
