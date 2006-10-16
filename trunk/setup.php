@@ -44,20 +44,20 @@ require('fpdf/avery.php');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
-	global $plugin_hooks;
-	$plugin_hooks['init_session']['barscode'] = 'plugin_barscode_initSession'; 
+	global $PLUGIN_HOOKS;
+	$PLUGIN_HOOKS['init_session']['barscode'] = 'plugin_barscode_initSession'; 
 	if (isset($_SESSION["glpiID"])){
 
 		// Display a menu entry ?
 		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
-			$plugin_hooks['menu_entry']['barscode'] = true;
+			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
 		// Setup/Update functions
 		// Config function
 		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
-			$plugin_hooks['config']['barscode'] = 'plugin_config_barscode';
+			$PLUGIN_HOOKS['config']['barscode'] = 'plugin_config_barscode';
 		// Config page
 		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
-			$plugin_hooks['config_page']['barscode'] = 'front/plugin_barscode.config.php';
+			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
 	}
 }
 
