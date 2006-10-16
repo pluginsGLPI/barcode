@@ -71,8 +71,8 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		echo "<tr class='tab_bg_1'>";
 		echo "<td>".$LANGBARSCODE["bc"][4]."</td><td>";
 		echo "<select name='size'>";
-		echo "<option value='A4'>".$LANGBARSCODE["bc"][5]."</option>";
 		echo "<option value='A3'>".$LANGBARSCODE["bc"][6]."</option>";
+		echo "<option value='A4'>".$LANGBARSCODE["bc"][5]."</option>";
 		echo "<option value='A5'>".$LANGBARSCODE["bc"][7]."</option>";
 		echo "</select>";
 		echo "</td>";
