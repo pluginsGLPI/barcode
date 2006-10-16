@@ -30,47 +30,48 @@
 // Original Author of file: GRISARD Jean Marc
 // Purpose of file:
 // ----------------------------------------------------------------------
-include ("_relpos.php");
+
 $NEEDED_ITEMS=array("setup");
-include ($phproot . "/inc/includes.php");
+define('GLPI_ROOT', '../../..'); 
+include (GLPI_ROOT . "/inc/includes.php");
 
 
 
 if(!TableExists("glpi_plugin_barscode_config")) {
 
-	commonHeader($langbc["title"][1],$_SERVER["PHP_SELF"]);
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"]);
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
-	echo "<tr><th>".$langbc["setup"][1];
+	echo "<tr><th>".$LANGBARSCODE["setup"][1];
 	echo "</th></tr>";
 	echo "<tr class='tab_bg_1'><td>";
-	echo "<a href='plugin_barscode.install.php'>".$langbc["setup"][2]." v1.3</a></td></tr>";
+	echo "<a href='plugin_barscode.install.php'>".$LANGBARSCODE["setup"][2]." v1.3</a></td></tr>";
 
 	echo "</table></div>";
 
 
 }
 elseif(!empty($_POST["update_conf_bc"])) {
-	commonHeader($langbc["title"][1],$_SERVER["PHP_SELF"]);
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"]);
 	plugin_barscode_UpdateConfig($_POST,1);
 
 } else {
 
-	commonHeader($langbc["title"][1],$_SERVER["PHP_SELF"]);
-	echo "<div align='center'><a class='icon_consol' href=\"".$HTMLRel."front/setup.plugins.php\">".$lang["buttons"][13]."</a></div><br>";
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"]);
+	echo "<div align='center'><a class='icon_consol' href=\"".$CFG_GLPI["root_doc"]."/front/setup.plugins.php\">".$LANG["buttons"][13]."</a></div><br>";
 	plugin_barscode_FormConfig($_SERVER["PHP_SELF"],1);
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
-	echo "<tr><th>".$langbc["setup"][1];
+	echo "<tr><th>".$LANGBARSCODE["setup"][1];
 	echo "</th></tr>";
 	if (haveRight("config","w") && haveRight("profile","w")){
 		echo "<tr class='tab_bg_1'><td align='center'>";
-		echo "<a href=\"./plugin_barscode.profile.php\">".$langbc["profile"][0]."</a>";
+		echo "<a href=\"./plugin_barscode.profile.php\">".$LANGBARSCODE["profile"][0]."</a>";
 		echo "</td></tr>";
 	}
-	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$langbc["setup"][4]." v1.3</a>";
-	echo " <img src='".$HTMLRel."pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
-	echo "<span class='over_link' id='commentsup'>".$langbc["setup"][6]."</span>";
+	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$LANGBARSCODE["setup"][4]." v1.3</a>";
+	echo " <img src='".$CFG_GLPI["root_doc"]."/pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
+	echo "<span class='over_link' id='commentsup'>".$LANGBARSCODE["setup"][6]."</span>";
 	echo "</td></tr>";
 	echo "</table></div>";
 

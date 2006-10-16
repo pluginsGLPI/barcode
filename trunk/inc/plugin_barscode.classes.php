@@ -40,10 +40,10 @@ class plugin_barscode extends CommonDBTM {
 
 	function title(){
 
-		GLOBAL  $langbc,$HTMLRel;
+		GLOBAL  $LANGBARSCODE,$CFG_GLPI;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"./pics/barscode.png\" alt='".$langbc["title"][0]."' title='".$langbc["title"][0]."'></td><td align ='center'><span class='icon_nav'>".$langbc["title"][0]."</span>";
+		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_nav'>".$LANGBARSCODE["title"][0]."</span>";
 		echo "</td></tr></table></div><br>";
 	}
 
@@ -57,11 +57,11 @@ class plugin_barscode_Profile extends CommonDBTM {
 	}
 
 	function post_updateItem($input,$updates,$history=1) {
-		global $db;
+		global $DB;
 
 		if (isset($input["is_default"])&&$input["is_default"]==1){
 			$query="UPDATE glpi_plugin_barscode_profiles SET `is_default`='0' WHERE ID <> '".$input['ID']."'";
-			$db->query($query);
+			$DB->query($query);
 		}
 	}
 
@@ -78,30 +78,30 @@ class plugin_barscode_Profile extends CommonDBTM {
 	function title(){
 		//titre
 
-		global  $lang,$HTMLRel;
+		global  $LANG,$CFG_GLPI;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"".$HTMLRel."pics/preferences.png\" alt='".$lang["Menu"][35]."' title='".$lang["Menu"][35]."'></td><td><span class='icon_sous_nav'><b>".$lang["Menu"][35]."</b></span>";
+		echo "<img src=\"".$CFG_GLPI["root_doc"]."/pics/preferences.png\" alt='".$LANG["Menu"][35]."' title='".$LANG["Menu"][35]."'></td><td><span class='icon_sous_nav'><b>".$LANG["Menu"][35]."</b></span>";
 		echo "</td>";
 
 		echo "</tr></table></div>";
 	}
 
 	function updateForUser($ID,$prof){
-		global $db;
+		global $DB;
 		// Get user profile
 		$query = "SELECT FK_profiles, ID FROM glpi_users_profiles WHERE (FK_users = '$ID')";
-		if ($result = $db->query($query)) {
+		if ($result = $DB->query($query)) {
 			// Profile found
-			if ($db->numrows($result)){
-				$data=$db->fetch_array($result);
+			if ($DB->numrows($result)){
+				$data=$DB->fetch_array($result);
 				if ($data["FK_profiles"]!=$prof){
 					$query="UPDATE glpi_users_profiles SET FK_profiles='$prof' WHERE ID='".$data["ID"]."';";
-					$db->query($query);
+					$DB->query($query);
 				}
 			} else { // Profile not found
 				$query="INSERT INTO glpi_users_profiles (FK_users, FK_profiles) VALUES ('$ID','$prof');";
-				$db->query($query);
+				$DB->query($query);
 			}
 		}
 
@@ -110,27 +110,27 @@ class plugin_barscode_Profile extends CommonDBTM {
 	function getFromDBForUser($ID){
 
 		// Make new database object and fill variables
-		global $db;
+		global $DB;
 		$ID_profile=0;
 		// Get user profile
 		$query = "SELECT FK_profiles FROM glpi_users_profiles WHERE (FK_users = '$ID')";
 
-		if ($result = $db->query($query)) {
-			if ($db->numrows($result)){
-				$ID_profile = $db->result($result,0,0);
+		if ($result = $DB->query($query)) {
+			if ($DB->numrows($result)){
+				$ID_profile = $DB->result($result,0,0);
 			} else {
 				// Get default profile
 				$query = "SELECT ID FROM glpi_plugin_barscode_profiles WHERE (`is_default` = '1')";
-				$result = $db->query($query);
-				if ($db->numrows($result)){
-					$ID_profile = $db->result($result,0,0);
+				$result = $DB->query($query);
+				if ($DB->numrows($result)){
+					$ID_profile = $DB->result($result,0,0);
 					$this->updateForUser($ID,$ID_profile);
 				} else {
 					// Get first helpdesk profile
 					$query = "SELECT ID FROM glpi_plugin_barscode_profiles WHERE (interface = 'helpdesk')";
-					$result = $db->query($query);
-					if ($db->numrows($result)){
-						$ID_profile = $db->result($result,0,0);
+					$result = $DB->query($query);
+					if ($DB->numrows($result)){
+						$ID_profile = $DB->result($result,0,0);
 					}
 				}
 			}
@@ -144,7 +144,7 @@ class plugin_barscode_Profile extends CommonDBTM {
 
 
 	function showprofileForm($target,$ID){
-		global $lang,$cfg_glpi,$langbc;
+		global $LANG,$CFG_GLPI,$LANGBARSCODE;
 
 		if (!haveRight("profile","r")) return false;
 
@@ -157,18 +157,18 @@ class plugin_barscode_Profile extends CommonDBTM {
 		}
 
 		if (empty($this->fields["interface"])) $this->fields["interface"]="barscode";
-		if (empty($this->fields["name"])) $this->fields["name"]=$lang["common"][0];
+		if (empty($this->fields["name"])) $this->fields["name"]=$LANG["common"][0];
 
 
 		echo "<form name='form' method='post' action=\"$target\">";
 		echo "<div align='center'>";
 		echo "<table class='tab_cadre'><tr>";
-		echo "<th>".$lang["common"][16].":</th>";
+		echo "<th>".$LANG["common"][16].":</th>";
 		echo "<th><input type='text' name='name' value=\"".$this->fields["name"]."\" $onfocus></th>";
-		echo "<th>".$lang["profiles"][2].":</th>";
+		echo "<th>".$LANG["profiles"][2].":</th>";
 		echo "<th><select name='interface' id='profile_interface'>";
 		echo "<option value=''>----</option>";
-		echo "<option value='barscode' ".($this->fields["interface"]!="barscode"?"selected":"").">".$langbc["profile"][1]."</option>";
+		echo "<option value='barscode' ".($this->fields["interface"]!="barscode"?"selected":"").">".$LANGBARSCODE["profile"][1]."</option>";
 
 		echo "</select></th>";
 		echo "</tr></table>";
@@ -177,7 +177,7 @@ class plugin_barscode_Profile extends CommonDBTM {
 		echo "<script type='text/javascript' >\n";
 		echo "   new Form.Element.Observer('profile_interface', 1, \n";
 		echo "      function(element, value) {\n";
-		echo "      	new Ajax.Updater('profile_form','".$cfg_glpi["root_doc"]."/plugins/barscode/ajax/profiles.php',{asynchronous:true, evalScripts:true, \n";
+		echo "      	new Ajax.Updater('profile_form','".$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php',{asynchronous:true, evalScripts:true, \n";
 		echo "           method:'post', parameters:'interface=' + value+'&ID=$ID'\n";
 		echo "})});\n";
 		echo "document.getElementById('profile_interface').value='".$this->fields["interface"]."';";
@@ -192,7 +192,7 @@ class plugin_barscode_Profile extends CommonDBTM {
 	}
 
 	function showbarscodeForm($ID){
-		global $lang,$langbc;
+		global $LANG,$LANGBARSCODE;
 
 		if (!haveRight("profile","r")) return false;
 		$canedit=haveRight("profile","w");
@@ -205,10 +205,10 @@ class plugin_barscode_Profile extends CommonDBTM {
 
 		echo "<table class='tab_cadre'><tr>";
 
-		echo "<tr><th colspan='2' align='center'><strong>".$langbc["profile"][0]."</strong></td></tr>";
+		echo "<tr><th colspan='2' align='center'><strong>".$LANGBARSCODE["profile"][0]."</strong></td></tr>";
 
 		echo "<tr class='tab_bg_2'>";
-		echo "<td>".$langbc["profile"][1].":</td><td>";
+		echo "<td>".$LANGBARSCODE["profile"][1].":</td><td>";
 		dropdownNoneReadWrite("barscode",$this->fields["barscode"],1,1,0);
 		echo "</td>";
 		echo "</tr>";
@@ -223,12 +223,12 @@ class plugin_barscode_Profile extends CommonDBTM {
 			if ($ID){
 				echo "<td  align='center'>";
 				echo "<input type='hidden' name='ID' value=$ID>";
-				echo "<input type='submit' name='update' value=\"".$lang["buttons"][7]."\" class='submit'>";
+				echo "<input type='submit' name='update' value=\"".$LANG["buttons"][7]."\" class='submit'>";
 				echo "</td><td  align='center'>";
-				echo "<input type='submit' name='delete' value=\"".$lang["buttons"][6]."\" class='submit'>";
+				echo "<input type='submit' name='delete' value=\"".$LANG["buttons"][6]."\" class='submit'>";
 			} else {
 				echo "<td colspan='2' align='center'>";
-				echo "<input type='submit' name='add' value=\"".$lang["buttons"][8]."\" class='submit'>";
+				echo "<input type='submit' name='add' value=\"".$LANG["buttons"][8]."\" class='submit'>";
 			}
 			echo "</td></tr>";
 		}

@@ -31,8 +31,9 @@
 // Original Author of file: GRISARD Jean Marc & CAILLAUD Xavier
 // Purpose of file:
 // ----------------------------------------------------------------------
-include ("_relpos.php");
-include ($phproot . "/inc/includes.php");
+define('GLPI_ROOT', '../../..'); 
+include (GLPI_ROOT . "/inc/includes.php");
+
 if (haveRight("config","w") && haveRight("profile","w")){
 
 
@@ -40,9 +41,9 @@ if (haveRight("config","w") && haveRight("profile","w")){
 		plugin_barscode_uninstallv11();
 	glpi_header($_SERVER['HTTP_REFERER']);
 }else{
-	commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
-	echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
-	echo "<b>".$lang["login"][5]."</b></div>";
+	commonHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
+	echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
+	echo "<b>".$LANG["login"][5]."</b></div>";
 	commonFooter();
 }
 

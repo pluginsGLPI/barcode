@@ -35,9 +35,6 @@
 
 function plugin_barscode_initSession()
 {
-	global $cfg_glpi;
-
-
 	$prof=new plugin_barscode_Profile();
 	$prof->getFromDBForUser($_SESSION["glpiID"]);
 	$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
@@ -61,10 +58,10 @@ function plugin_barscode_haveRight($module,$right){
 /**
  * Get The Type Name of the Object
  *
- * @return String: name of the object type in the current language
+ * @return String: name of the object type in the current LANGuage
  */
 function plugin_barscode_haveTypeRight ($type,$right){
-	global $lang;
+	global $LANG;
 
 	switch ($type){
 		case GENERAL_TYPE :
@@ -80,18 +77,18 @@ function plugin_barscode_haveTypeRight ($type,$right){
 
 
 function plugin_barscode_checkRight($module,$right) {
-	global $lang,$HTMLRel,$HEADER_LOADED;
+	global $LANG,$CFG_GLPI,$HEADER_LOADED;
 
 	if (!plugin_barscode_haveRight($module,$right)){
 		if (!$HEADER_LOADED){
 			if (!isset($_SESSION["glpi_plugin_barscode_profile"]["interface"]))
-				nullHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
+				nullHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
 			else if ($_SESSION["glpi_plugin_barscode_profile"]["interface"]=="barscode")
-				commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
+				commonHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
 
 		}
-		echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$lang["login"][5]."</b></div>";
+		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
+		echo "<b>".$LANG["login"][5]."</b></div>";
 		nullFooter();
 		exit();
 	}
@@ -100,18 +97,18 @@ function plugin_barscode_checkRight($module,$right) {
 
 function plugin_barscode_checkLoginUser(){
 
-	global $lang,$HTMLRel,$HEADER_LOADED;
+	global $LANG,$CFG_GLPI,$HEADER_LOADED;
 
 	if (!isset($_SESSION["glpiname"])){
 		if (!$HEADER_LOADED){
 			if (!isset($_SESSION["glpi_plugin_barscode_profile"]["interface"]))
-				nullHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
+				nullHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
 			else if ($_SESSION["glpi_plugin_barscode_profile"]["interface"]=="barscode")
-				commonHeader($lang["login"][5],$_SERVER["PHP_SELF"]);
+				commonHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
 
 		}
-		echo "<div align='center'><br><br><img src=\"".$HTMLRel."pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$lang["login"][5]."</b></div>";
+		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
+		echo "<b>".$LANG["login"][5]."</b></div>";
 		nullFooter();
 		exit();
 	}

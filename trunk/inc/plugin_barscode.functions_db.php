@@ -35,10 +35,10 @@
 
 function plugin_barscode_UpdateConfig($input, $id) {
 
-	global $phproot, $langbc;
-	$db = new DB;
+	
+	$DB = new DB;
 	$query = "update glpi_plugin_barscode_config set margeL = '".$input["margeL"]."', margeT = '".$input["margeT"]."', margeH = '".$input["margeH"]."', margeW = '".$input["margeW"]."', etiquetteW = '".$input["etiquetteW"]."', etiquetteH= '".$input["etiquetteH"]."', etiquetteR = '".$input["etiquetteR"]."',etiquetteC = '".$input["etiquetteC"]."',etiquetteRL='".$input["etiquetteRL"]."',etiquetteCL='".$input["etiquetteCL"]."'  where ID = '".$id."'";
-	if($db->query($query)) {
+	if($DB->query($query)) {
 		glpi_header($_SERVER["HTTP_REFERER"]); 
 	} else {
 		glpi_header($_SERVER["HTTP_REFERER"]);	
@@ -47,15 +47,15 @@ function plugin_barscode_UpdateConfig($input, $id) {
 
 function plugin_barscode_createaccess($ID){
 
-	$db = new DB;
+	$DB = new DB;
 	$query="SELECT * FROM glpi_profiles where ID='$ID';";
-	$result=$db->query($query);
+	$result=$DB->query($query);
 	$i = 0;
-	$name = $db->result($result, $i, "glpi_profiles.name");
+	$name = $DB->result($result, $i, "glpi_profiles.name");
 
 	$query1 ="INSERT INTO `glpi_plugin_barscode_profiles` ( `ID`, `name` , `interface`, `is_default`, `barscode`) VALUES ('$ID', '$name','barscode','0',NULL);";
 
-	$db->query($query1);
+	$DB->query($query1);
 
 }
 

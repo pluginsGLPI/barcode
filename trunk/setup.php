@@ -32,10 +32,6 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-// TODO
-
-
-include ("_relpos.php");
 include_once ("inc/plugin_barscode.functions_auth.php");
 include_once ("inc/plugin_barscode.functions_display.php");
 include_once ("inc/plugin_barscode.functions_db.php");
@@ -44,7 +40,6 @@ include_once ("inc/plugin_barscode.classes.php");
 
 require('fpdf/code39.php');
 require('fpdf/avery.php');
-
 
 
 // Init the hooks of the plugins -Needed
@@ -68,8 +63,8 @@ function plugin_init_barscode() {
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_barscode(){
-	global $langbc;
-	return array( 'name'    => $langbc["title"][1],
+	global $LANGBARSCODE;
+	return array( 'name'    => $LANGBARSCODE["title"][1],
 			'version' => '1.3');
 }
 

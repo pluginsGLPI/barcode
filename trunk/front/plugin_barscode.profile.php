@@ -33,16 +33,16 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-include ("_relpos.php");
+define('GLPI_ROOT', '../../..'); 
+include (GLPI_ROOT . "/inc/includes.php");
 
 $NEEDED_ITEMS=array("profile");
-include ($phproot . "/inc/includes.php");
 
 checkRight("profile","r");
 $prof=new plugin_barscode_Profile();
 
 
-commonHeader($lang["Menu"][35],$_SERVER["PHP_SELF"]);
+commonHeader($LANG["Menu"][35],$_SERVER["PHP_SELF"]);
 
 
 if(!isset($_POST["ID"])) $ID=0;
@@ -65,27 +65,27 @@ else  if (isset($_POST["update"])){
 	$prof->update($_POST);
 }
 
-echo "<div align='center'><a class='icon_consol' href=\"plugin_barscode.config.php\">".$lang["buttons"][13]."</a></div><br>";
+echo "<div align='center'><a class='icon_consol' href=\"plugin_barscode.config.php\">".$LANG["buttons"][13]."</a></div><br>";
 $prof->title();
-echo "<div align='center'><form method='post' action=\"".$cfg_glpi["root_doc"]."/plugins/barscode/front/plugin_barscode.profile.php\">";
+echo "<div align='center'><form method='post' action=\"".$CFG_GLPI["root_doc"]."/plugins/barscode/front/plugin_barscode.profile.php\">";
 echo "<table class='tab_cadre' cellpadding='5'><tr><th colspan='2'>";
-echo $lang["profiles"][1].": </th></tr><tr class='tab_bg_1'><td>";
+echo $LANG["profiles"][1].": </th></tr><tr class='tab_bg_1'><td>";
 
 $query="SELECT ID, name FROM glpi_profiles ORDER BY name";
-$result=$db->query($query);
+$result=$DB->query($query);
 
 echo "<select name='ID'>";
-while ($data=$db->fetch_assoc($result)){
+while ($data=$DB->fetch_assoc($result)){
 	echo "<option value='".$data["ID"]."' ".($ID==$data["ID"]?"selected":"").">".$data['name']."</option>";
 }
 echo "</select>";
-echo "<td><input type='submit' value=\"".$lang["buttons"][2]."\" class='submit' ></td></tr>";
+echo "<td><input type='submit' value=\"".$LANG["buttons"][2]."\" class='submit' ></td></tr>";
 echo "</table></form></div>";
 
 if ($ID>0){	
 	$query1="SELECT * FROM glpi_plugin_barscode_profiles where ID=$ID";
-	$result1=$db->query($query1);
-	$number1 = $db->numrows($result1);
+	$result1=$DB->query($query1);
+	$number1 = $DB->numrows($result1);
 
 	if (!empty($number1)){
 		$prof->showprofileForm($_SERVER["PHP_SELF"],$ID);

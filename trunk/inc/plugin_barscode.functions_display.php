@@ -35,27 +35,27 @@
 
 function plugin_barscode_FormConfig($target, $id) {
 
-	GLOBAL  $lang, $langbc;
+	GLOBAL  $LANG, $LANGBARSCODE;
 
-	$db = new DB;
+	$DB = new DB;
 	$query = "select * from glpi_plugin_barscode_config where ID = '".$id."'";
-	$result = $db->query($query);
+	$result = $DB->query($query);
 	echo "<form name='formconfig' action=\"$target\" method=\"post\">";
 	echo "<div align='center'><table class='tab_cadre'>";
-	echo "<tr><th colspan='2'>".$langbc["title"][2]."</th></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][0]." </td><td> <input type=\"text\" name=\"margeL\" value=\"".$db->result($result,0,"margeL")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][1]." </td><td> <input type=\"text\" name=\"margeT\" value=\"".$db->result($result,0,"margeT")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][2]." </td><td> <input type=\"text\" name=\"margeH\" value=\"".$db->result($result,0,"margeH")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][3]." </td><td> <input type=\"text\" name=\"margeW\" value=\"".$db->result($result,0,"margeW")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][4]." </td><td> <input type=\"text\" name=\"etiquetteW\" value=\"".$db->result($result,0,"etiquetteW")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$db->result($result,0,"etiquetteH")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$db->result($result,0,"etiquetteR")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][7]." </td><td> <input type=\"text\" name=\"etiquetteC\" value=\"".$db->result($result,0,"etiquetteC")."\"></td></tr>";
+	echo "<tr><th colspan='2'>".$LANGBARSCODE["title"][2]."</th></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][0]." </td><td> <input type=\"text\" name=\"margeL\" value=\"".$DB->result($result,0,"margeL")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][1]." </td><td> <input type=\"text\" name=\"margeT\" value=\"".$DB->result($result,0,"margeT")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][2]." </td><td> <input type=\"text\" name=\"margeH\" value=\"".$DB->result($result,0,"margeH")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][3]." </td><td> <input type=\"text\" name=\"margeW\" value=\"".$DB->result($result,0,"margeW")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][4]." </td><td> <input type=\"text\" name=\"etiquetteW\" value=\"".$DB->result($result,0,"etiquetteW")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$DB->result($result,0,"etiquetteH")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$DB->result($result,0,"etiquetteR")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][7]." </td><td> <input type=\"text\" name=\"etiquetteC\" value=\"".$DB->result($result,0,"etiquetteC")."\"></td></tr>";
 
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$db->result($result,0,"etiquetteRL")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$langbc["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$db->result($result,0,"etiquetteCL")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$DB->result($result,0,"etiquetteRL")."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$DB->result($result,0,"etiquetteCL")."\"></td></tr>";
 	echo "</table></div>";
-	echo "<p class=\"submit\"><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$langbc["buttons"][0]."\" ></p>";
+	echo "<p class=\"submit\"><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$LANGBARSCODE["buttons"][0]."\" ></p>";
 	echo "</form>";
 
 }
@@ -63,42 +63,42 @@ function plugin_barscode_FormConfig($target, $id) {
 
 function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 
-	GLOBAL  $lang, $langbc, $pdf;
+	GLOBAL  $LANG, $LANGBARSCODE, $PDF;
 
 	$Logo['F']   = '../pics/logo.png';	// Fichier du logo
 
-	$db = new DB;
+	$DB = new DB;
 	$query = "SELECT * FROM glpi_plugin_barscode_config";
 
-	$result = $db->query($query);
-	$number = $db->numrows($result);
+	$result = $DB->query($query);
+	$number = $DB->numrows($result);
 	$i = 0;
 
-	$db->query($query) or die("Lien impossible : ".$db->error());
+	$DB->query($query) or die("Lien impossible : ".$DB->error());
 
-	$Marge['L'] = $db->result($result, $i, "margeL");			// Marge a gauche
-	$Marge['T'] = $db->result($result, $i, "margeT");		// Marge en Haut
-	$Marge['H'] = $db->result($result, $i, "margeH");			// Marge Horizontale entre les etiquettes (entre chaque colonne d'etiquettes)
-	$Marge['W'] = $db->result($result, $i, "margeW");			// Marge Verticale entre les etiquettes (entre chaque ligne d'etiquettes)
+	$Marge['L'] = $DB->result($result, $i, "margeL");			// Marge a gauche
+	$Marge['T'] = $DB->result($result, $i, "margeT");		// Marge en Haut
+	$Marge['H'] = $DB->result($result, $i, "margeH");			// Marge Horizontale entre les etiquettes (entre chaque colonne d'etiquettes)
+	$Marge['W'] = $DB->result($result, $i, "margeW");			// Marge Verticale entre les etiquettes (entre chaque ligne d'etiquettes)
 
-	$Etiquette['W'] = $db->result($result, $i, "etiquetteW");		// Largeur des etiquette
-	$Etiquette['H'] = $db->result($result, $i, "etiquetteH");		// Hauteur des etiquette
-	$Etiquette['R'] = $db->result($result, $i, "etiquetteR");			// NB etiquettes par ligne (rows)
-	$Etiquette['C'] = $db->result($result, $i, "etiquetteC");			// NB etiquettes par colonne (cols)
-	$Etiquette['RL']= $db->result($result, $i, "etiquetteRL");		//NB etiquette par ligne en mode Paysage
-	$Etiquette['CL']= $db->result($result, $i, "etiquetteCL");		//NB etiquette par colonne en mode Paysage
+	$Etiquette['W'] = $DB->result($result, $i, "etiquetteW");		// Largeur des etiquette
+	$Etiquette['H'] = $DB->result($result, $i, "etiquetteH");		// Hauteur des etiquette
+	$Etiquette['R'] = $DB->result($result, $i, "etiquetteR");			// NB etiquettes par ligne (rows)
+	$Etiquette['C'] = $DB->result($result, $i, "etiquetteC");			// NB etiquettes par colonne (cols)
+	$Etiquette['RL']= $DB->result($result, $i, "etiquetteRL");		//NB etiquette par ligne en mode Paysage
+	$Etiquette['CL']= $DB->result($result, $i, "etiquetteCL");		//NB etiquette par colonne en mode Paysage
 
-	$pdf=new PDF_Avery();
-	$pdf->AliasNbPages(); 
-	$pdf->PDF($format,'mm', $size);
-	$pdf->SetTopMargin('0');
-	$pdf->SetRightMargin('0');
-	$pdf->SetLeftMargin('0');
-	$pdf->SetMargins('0', '0', '0');
+	$PDF=new PDF_Avery();
+	$PDF->AliasNbPages(); 
+	$PDF->PDF($format,'mm', $size);
+	$PDF->SetTopMargin('0');
+	$PDF->SetRightMargin('0');
+	$PDF->SetLeftMargin('0');
+	$PDF->SetMargins('0', '0', '0');
 
-	$pdf->Open();
-	$pdf->SetFont('Arial','',6);
-	$pdf->SetTextColor(0,0,0);
+	$PDF->Open();
+	$PDF->SetFont('Arial','',6);
+	$PDF->SetTextColor(0,0,0);
 
 	if($format=='L')
 		$nbppage = $Etiquette['RL'] * $Etiquette['CL'];
@@ -112,32 +112,32 @@ function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 		$to = $from + ($nbppage) - 1;
 		if ($begin==0){$to=$nb-1;}
 		if ($to > $nb-1) { $to = $nb; }
-		$pdf->AddPage();
-		$pdf->Cell(0,3, $langbc["config"][12].$pdf->PageNo().'/{nb}',0,0,'C'); 
+		$PDF->AddPage();
+		$PDF->Cell(0,3, $LANGBARSCODE["config"][12].$PDF->PageNo().'/{nb}',0,0,'C'); 
 		plugin_barscode_GeneratePage($Etiquette, $Marge, $Logo, $from, $to, $lenght, $prefixe, $format);
 	}
 
-	$pdf->Output();
+	$PDF->Output();
 
 }
 
 function plugin_barscode_GenerateEtiquette($X_From, $Y_From, $X_To, $Y_To, $Weight, $Height, $Logo, $num, $length, $prefixe)
 {
-	GLOBAL  $lang, $langbc, $pdf;
+	GLOBAL  $LANG, $LANGBARSCODE, $PDF;
 
-	$pdf->Image($Logo['F'], $X_From+2, $Y_From+2);
+	$PDF->Image($Logo['F'], $X_From+2, $Y_From+2);
 
-	$pdf->SetFont('Arial','',8);
-	$pdf->SetTextColor(192,192,192);
-	$pdf->SetXY($X_From+20, $Y_From+2);
-	$pdf->Cell(43, 5, $langbc["config"][11].date("j M Y"), 0, 0, 'R');
+	$PDF->SetFont('Arial','',8);
+	$PDF->SetTextColor(192,192,192);
+	$PDF->SetXY($X_From+20, $Y_From+2);
+	$PDF->Cell(43, 5, $LANGBARSCODE["config"][11].date("j M Y"), 0, 0, 'R');
 
-	$pdf->SetTextColor(0,0,0);
+	$PDF->SetTextColor(0,0,0);
 
 	if (strlen($prefixe) > 0) { $length = $length - strlen($prefixe); }
 	$num = str_pad($num, $length, '0', STR_PAD_LEFT);
 
-	$pdf->Code39($X_From+5, $Y_From+12, $prefixe.$num, '8');
+	$PDF->Code39($X_From+5, $Y_From+12, $prefixe.$num, '8');
 }
 
 

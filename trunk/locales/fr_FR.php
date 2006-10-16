@@ -31,49 +31,49 @@ $title = "Codes barres";
 
 
 //Français
-$langbc["title"][0] = "Faire un code barre...";
-$langbc["title"][1]	= "".$title."";
-$langbc["title"][2] = "Configuration de mise en page";
+$LANGBARSCODE["title"][0] = "Faire un code barre...";
+$LANGBARSCODE["title"][1]	= "".$title."";
+$LANGBARSCODE["title"][2] = "Configuration de mise en page";
 
-$langbc["config"][0] = "Marge à gauche";
-$langbc["config"][1] = "Marge en haut";
-$langbc["config"][2] = "Marge Horizontale entre les étiquettes (entre chaque colonne d'étiquettes)";
-$langbc["config"][3] = "Marge Verticale entre les étiquettes (entre chaque ligne d'étiquettes)";
-$langbc["config"][4] = "Largeur des étiquettes";
-$langbc["config"][5] = "Hauteurs des étiquettes";
-$langbc["config"][6] = "NB étiquettes par ligne (rows)";
-$langbc["config"][7] = "NB étiquettes par colonne (cols)";
-$langbc["config"][8] = "Positionnement de la page";
-$langbc["config"][9] = "Portrait";
-$langbc["config"][10] = "Paysage";
-$langbc["config"][11] = "Edité le ";
-$langbc["config"][12] = "Page ";
-$langbc["config"][13] = "NB Etiquette par ligne en mode Paysage";
-$langbc["config"][14] = "NB Etiquette par colonne en mode Paysage";
+$LANGBARSCODE["config"][0] = "Marge à gauche";
+$LANGBARSCODE["config"][1] = "Marge en haut";
+$LANGBARSCODE["config"][2] = "Marge Horizontale entre les étiquettes (entre chaque colonne d'étiquettes)";
+$LANGBARSCODE["config"][3] = "Marge Verticale entre les étiquettes (entre chaque ligne d'étiquettes)";
+$LANGBARSCODE["config"][4] = "Largeur des étiquettes";
+$LANGBARSCODE["config"][5] = "Hauteurs des étiquettes";
+$LANGBARSCODE["config"][6] = "NB étiquettes par ligne (rows)";
+$LANGBARSCODE["config"][7] = "NB étiquettes par colonne (cols)";
+$LANGBARSCODE["config"][8] = "Positionnement de la page";
+$LANGBARSCODE["config"][9] = "Portrait";
+$LANGBARSCODE["config"][10] = "Paysage";
+$LANGBARSCODE["config"][11] = "Edité le ";
+$LANGBARSCODE["config"][12] = "Page ";
+$LANGBARSCODE["config"][13] = "NB Etiquette par ligne en mode Paysage";
+$LANGBARSCODE["config"][14] = "NB Etiquette par colonne en mode Paysage";
 
-$langbc["profile"][0] = "Gestion des droits";
-$langbc["profile"][1] = "$title";
-$langbc["profile"][2] = "Configuration";
-$langbc["profile"][3] = "Créer un ".$title."";
-$langbc["profile"][4] = "Mettre à jour un ".$title."";
-$langbc["profile"][5] = "Supprimer un ".$title."";
+$LANGBARSCODE["profile"][0] = "Gestion des droits";
+$LANGBARSCODE["profile"][1] = "$title";
+$LANGBARSCODE["profile"][2] = "Configuration";
+$LANGBARSCODE["profile"][3] = "Créer un ".$title."";
+$LANGBARSCODE["profile"][4] = "Mettre à jour un ".$title."";
+$LANGBARSCODE["profile"][5] = "Supprimer un ".$title."";
 
-$langbc["buttons"][0] = "Actualiser";
-$langbc["buttons"][1] = "Créer";
+$LANGBARSCODE["buttons"][0] = "Actualiser";
+$LANGBARSCODE["buttons"][1] = "Créer";
 
-$langbc["bc"][0] = "Le nombre d'étiquette a imprimer";
-$langbc["bc"][1] = "Le numéro par lequel commencer";
-$langbc["bc"][2] = "La longueur des numéros";
-$langbc["bc"][3] = "Le préfixe devant le numéro";
-$langbc["bc"][4] = "Format de la page";
-$langbc["bc"][5] = "A4";
-$langbc["bc"][6] = "A3";
-$langbc["bc"][7] = "A5";
+$LANGBARSCODE["bc"][0] = "Le nombre d'étiquettes a imprimer";
+$LANGBARSCODE["bc"][1] = "Le numéro par lequel commencer";
+$LANGBARSCODE["bc"][2] = "La longueur des numéros";
+$LANGBARSCODE["bc"][3] = "Le préfixe devant le numéro";
+$LANGBARSCODE["bc"][4] = "Format de la page";
+$LANGBARSCODE["bc"][5] = "A4";
+$LANGBARSCODE["bc"][6] = "A3";
+$LANGBARSCODE["bc"][7] = "A5";
 
-$langbc["setup"][1] = "Configuration du plugin ".$title;
-$langbc["setup"][2] = "Installer le plugin $title";
-$langbc["setup"][3] = "Mettre à jour le plugin $title vers la version";
-$langbc["setup"][4] = "Désinstaller le plugin $title";
-$langbc["setup"][5] = "Attention, la mise à jour du plugin est irréversible.";
-$langbc["setup"][6] = "Attention, la désinstallation du plugin est irréversible.<br> Vous perdrez toutes les données.";
+$LANGBARSCODE["setup"][1] = "Configuration du plugin ".$title;
+$LANGBARSCODE["setup"][2] = "Installer le plugin $title";
+$LANGBARSCODE["setup"][3] = "Mettre à jour le plugin $title vers la version";
+$LANGBARSCODE["setup"][4] = "Désinstaller le plugin $title";
+$LANGBARSCODE["setup"][5] = "Attention, la mise à jour du plugin est irréversible.";
+$LANGBARSCODE["setup"][6] = "Attention, la désinstallation du plugin est irréversible.<br> Vous perdrez toutes les données.";
 ?>
