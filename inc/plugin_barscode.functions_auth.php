@@ -32,7 +32,10 @@
 // Original Author of file:
 // Purpose of file:
 // ----------------------------------------------------------------------
-
+if (!defined('GLPI_ROOT')){
+	die("Sorry. You can't access directly to this file");
+	}
+	
 function plugin_barscode_initSession()
 {
 	$prof=new plugin_barscode_Profile();
