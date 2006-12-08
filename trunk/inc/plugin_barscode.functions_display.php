@@ -132,7 +132,7 @@ function plugin_barscode_GenerateEtiquette($X_From, $Y_From, $X_To, $Y_To, $Weig
 	$PDF->SetFont('Arial','',8);
 	$PDF->SetTextColor(192,192,192);
 	$PDF->SetXY($X_From+20, $Y_From+2);
-	$PDF->Cell(43, 5, $LANGBARSCODE["config"][11].date("j M Y"), 0, 0, 'R');
+	$PDF->Cell(43, 5, utf8_decode($LANGBARSCODE["config"][11]).date("j M Y"), 0, 0, 'R');
 
 	$PDF->SetTextColor(0,0,0);
 
