@@ -45,7 +45,10 @@ require('fpdf/avery.php');
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
 	global $PLUGIN_HOOKS;
-	$PLUGIN_HOOKS['init_session']['barscode'] = 'plugin_barscode_initSession'; 
+	
+	if(TableExists("glpi_plugin_barscode_config"))
+	$PLUGIN_HOOKS['init_session']['barscode'] = 'plugin_barscode_initSession';
+	
 	if (isset($_SESSION["glpiID"])){
 
 		// Display a menu entry ?
