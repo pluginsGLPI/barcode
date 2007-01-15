@@ -42,7 +42,7 @@ checkRight("profile","r");
 $prof=new plugin_barscode_Profile();
 
 
-commonHeader($LANG["Menu"][35],$_SERVER["PHP_SELF"]);
+commonHeader($LANG["Menu"][35],$_SERVER["PHP_SELF"],"plugins");
 
 
 if(!isset($_POST["ID"])) $ID=0;
