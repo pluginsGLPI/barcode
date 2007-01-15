@@ -41,7 +41,7 @@ include (GLPI_ROOT . "/inc/includes.php");
 
 if(!TableExists("glpi_plugin_barscode_config")) {
 
-	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"]);
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins");
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
 	echo "<tr><th>".$LANGBARSCODE["setup"][1];
@@ -54,7 +54,7 @@ if(!TableExists("glpi_plugin_barscode_config")) {
 
 }
 elseif(!empty($_POST["update_conf_bc"])) {
-	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"]);
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins");
 	plugin_barscode_UpdateConfig($_POST,1);
 
 } else {
