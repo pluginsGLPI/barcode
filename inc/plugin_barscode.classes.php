@@ -45,7 +45,7 @@ class plugin_barscode extends CommonDBTM {
 		GLOBAL  $LANGBARSCODE,$CFG_GLPI;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_nav'>".$LANGBARSCODE["title"][0]."</span>";
+		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_sous_nav'>".$LANGBARSCODE["title"][0]."</span>";
 		echo "</td></tr></table></div><br>";
 	}
 
