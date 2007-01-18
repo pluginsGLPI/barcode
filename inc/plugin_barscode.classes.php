@@ -45,9 +45,9 @@ class plugin_barscode extends CommonDBTM {
 		GLOBAL  $LANGBARSCODE,$CFG_GLPI;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_sous_nav'>".$LANGBARSCODE["title"][0]."</span></td>";
+		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_consol'>".$LANGBARSCODE["title"][0]."</span></td>";
 		if(plugin_badges_haveRight("barscode","r") || haveRight("config","w"))
-				echo "<td><a class='icon_sous_nav' href=\"front/plugin_barscode.config.php\">".$LANGBARSCODE["profile"][2]."</a></td>";
+				echo "<td><a class='icon_consol' href=\"front/plugin_barscode.config.php\">".$LANGBARSCODE["profile"][2]."</a></td>";
 		echo "</tr></table></div>";
 	}
 
@@ -85,7 +85,7 @@ class plugin_barscode_Profile extends CommonDBTM {
 		global  $LANG,$CFG_GLPI;
 
 		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"".$CFG_GLPI["root_doc"]."/pics/preferences.png\" alt='".$LANG["Menu"][35]."' title='".$LANG["Menu"][35]."'></td><td><span class='icon_sous_nav'><b>".$LANG["Menu"][35]."</b></span>";
+		echo "<img src=\"".$CFG_GLPI["root_doc"]."/pics/preferences.png\" alt='".$LANG["Menu"][35]."' title='".$LANG["Menu"][35]."'></td><td><span class='icon_consol'><b>".$LANG["Menu"][35]."</b></span>";
 		echo "</td>";
 
 		echo "</tr></table></div>";

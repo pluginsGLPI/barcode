@@ -65,7 +65,7 @@ else  if (isset($_POST["update"])){
 	$prof->update($_POST);
 }
 
-echo "<div align='center'><a class='icon_sous_nav' href=\"plugin_barscode.config.php\">".$LANG["buttons"][13]."</a></div><br>";
+echo "<div align='center'><a class='icon_consol' href=\"plugin_barscode.config.php\">".$LANG["buttons"][13]."</a></div><br>";
 $prof->title();
 echo "<div align='center'><form method='post' action=\"".$CFG_GLPI["root_doc"]."/plugins/barscode/front/plugin_barscode.profile.php\">";
 echo "<table class='tab_cadre' cellpadding='5'><tr><th colspan='2'>";
