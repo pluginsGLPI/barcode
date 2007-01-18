@@ -60,7 +60,7 @@ elseif(!empty($_POST["update_conf_bc"])) {
 } else {
 
 	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins");
-	echo "<div align='center'><a class='icon_sous_nav' href=\"".$CFG_GLPI["root_doc"]."/front/setup.plugins.php\">".$LANG["buttons"][13]."</a></div><br>";
+	echo "<div align='center'><a class='icon_sous_nav' href=\"../index.php\">".$LANG["buttons"][13]."</a></div><br>";
 	plugin_barscode_FormConfig($_SERVER["PHP_SELF"],1);
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
