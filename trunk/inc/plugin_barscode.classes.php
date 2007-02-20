@@ -46,7 +46,7 @@ class plugin_barscode extends CommonDBTM {
 
 		echo "<div align='center'><table border='0'><tr><td>";
 		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_consol'>".$LANGBARSCODE["title"][0]."</span></td>";
-		if(plugin_badges_haveRight("barscode","r") || haveRight("config","w"))
+		if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 				echo "<td><a class='icon_consol' href=\"front/plugin_barscode.config.php\">".$LANGBARSCODE["profile"][2]."</a></td>";
 		echo "</tr></table></div>";
 	}
