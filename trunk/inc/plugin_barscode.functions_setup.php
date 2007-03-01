@@ -63,7 +63,7 @@ function plugin_barscode_Installv11() {
 		`ID` int(11) NOT NULL auto_increment,
 		`name` varchar(255) default NULL,
 		`interface` varchar(50) NOT NULL default 'barscode',
-		`is_default` enum('0','1') NOT NULL default '0',
+		`is_default` smallint(6) NOT NULL default '0',
 		`barscode` char(1) default NULL,
 		PRIMARY KEY  (`ID`),
 		KEY `interface` (`interface`)
