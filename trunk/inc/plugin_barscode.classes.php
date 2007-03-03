@@ -40,17 +40,6 @@ class plugin_barscode extends CommonDBTM {
 		$this->table="glpi_plugin_barscode_config";
 	}
 
-	function title(){
-
-		GLOBAL  $LANGBARSCODE,$CFG_GLPI;
-
-		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"./pics/barscode.png\" alt='".$LANGBARSCODE["title"][0]."' title='".$LANGBARSCODE["title"][0]."'></td><td align ='center'><span class='icon_consol'>".$LANGBARSCODE["title"][0]."</span></td>";
-		if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
-				echo "<td><a class='icon_consol' href=\"front/plugin_barscode.config.php\">".$LANGBARSCODE["profile"][2]."</a></td>";
-		echo "</tr></table></div>";
-	}
-
 }
 
 class plugin_barscode_Profile extends CommonDBTM {
@@ -69,27 +58,6 @@ class plugin_barscode_Profile extends CommonDBTM {
 		}
 	}
 
-
-	/**
-	 * Print a good title for profiles pages
-	 *
-	 *
-	 *
-	 *
-	 *@return nothing (diplays)
-	 *
-	 **/
-	function title(){
-		//titre
-
-		global  $LANG,$CFG_GLPI;
-
-		echo "<div align='center'><table border='0'><tr><td>";
-		echo "<img src=\"".$CFG_GLPI["root_doc"]."/pics/preferences.png\" alt='".$LANG["Menu"][35]."' title='".$LANG["Menu"][35]."'></td><td><span class='icon_consol'><b>".$LANG["Menu"][35]."</b></span>";
-		echo "</td>";
-
-		echo "</tr></table></div>";
-	}
 
 	function updateForUser($ID,$prof){
 		global $DB;

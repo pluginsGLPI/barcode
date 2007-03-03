@@ -40,10 +40,7 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		glpi_header("./front/plugin_barscode.config.php");
 	} else {
 
-		commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins");
-
-		$plugin_barscode= new plugin_barscode;
-		$plugin_barscode->title();
+		commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
 
 		echo "<form name='form' method='post' action='front/plugin_barscode.form.php'>";
 

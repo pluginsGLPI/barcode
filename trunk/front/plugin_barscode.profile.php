@@ -41,9 +41,7 @@ $NEEDED_ITEMS=array("profile");
 checkRight("profile","r");
 $prof=new plugin_barscode_Profile();
 
-
-commonHeader($LANG["Menu"][35],$_SERVER["PHP_SELF"],"plugins");
-
+commonHeader($LANG["Menu"][35],$_SERVER["PHP_SELF"],"plugins","barscode");
 
 if(!isset($_POST["ID"])) $ID=0;
 else $ID=$_POST["ID"];
@@ -65,8 +63,6 @@ else  if (isset($_POST["update"])){
 	$prof->update($_POST);
 }
 
-echo "<div align='center'><a class='icon_consol' href=\"plugin_barscode.config.php\">".$LANG["buttons"][13]."</a></div><br>";
-$prof->title();
 echo "<div align='center'><form method='post' action=\"".$CFG_GLPI["root_doc"]."/plugins/barscode/front/plugin_barscode.profile.php\">";
 echo "<table class='tab_cadre' cellpadding='5'><tr><th colspan='2'>";
 echo $LANG["profiles"][1].": </th></tr><tr class='tab_bg_1'><td>";
