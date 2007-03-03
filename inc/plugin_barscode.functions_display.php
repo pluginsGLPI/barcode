@@ -56,8 +56,9 @@ function plugin_barscode_FormConfig($target, $id) {
 
 	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$DB->result($result,0,"etiquetteRL")."\"></td></tr>";
 	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$DB->result($result,0,"etiquetteCL")."\"></td></tr>";
+	
+	echo "<tr><th colspan='2'><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$LANGBARSCODE["buttons"][0]."\" ></th></tr>";
 	echo "</table></div>";
-	echo "<p class=\"submit\"><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$LANGBARSCODE["buttons"][0]."\" ></p>";
 	echo "</form>";
 
 }
