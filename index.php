@@ -34,13 +34,13 @@
 define('GLPI_ROOT', '../..'); 
 include (GLPI_ROOT . "/inc/includes.php");
 
+commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
+
 if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 
 	if(!TableExists("glpi_plugin_barscode_config")) {
 		glpi_header("./front/plugin_barscode.config.php");
 	} else {
-
-		commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
 
 		echo "<form name='form' method='post' action='front/plugin_barscode.form.php'>";
 
@@ -86,6 +86,9 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		echo "</div>";
 		echo "</form>";
 	}
+}else{
+	echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
+		echo "<b>".$LANG["login"][5]."</b></div>";
 }
 commonFooter();
 
