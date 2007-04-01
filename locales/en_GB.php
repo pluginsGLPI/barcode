@@ -70,12 +70,10 @@ $LANGBARSCODE["bc"][5] = "A4";
 $LANGBARSCODE["bc"][6] = "A3";
 $LANGBARSCODE["bc"][7] = "A5";
 
-
 $LANGBARSCODE["setup"][1] = "Setup of $title plugin";
 $LANGBARSCODE["setup"][2] = "Install $title plugin ";
 $LANGBARSCODE["setup"][3] = "Update $title plugin to version";
 $LANGBARSCODE["setup"][4] = "Uninstall $title plugin";
 $LANGBARSCODE["setup"][5] = "Warning, the update is irreversible.";
 $LANGBARSCODE["setup"][6] = "Warning, the uninstallation of the plugin is irreversible.<br> You will loose all the data.";
-
 ?>
