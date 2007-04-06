@@ -61,7 +61,27 @@ elseif(!empty($_POST["update_conf_bc"])) {
 
 } else {
 
-	plugin_barscode_FormConfig($_SERVER["PHP_SELF"],1);
+	$plugin_barscode=new plugin_barscode();
+	$plugin_barscode->getFromDB(1);
+	
+	echo "<form name='formconfig' action=\"./plugin_barscode.config.php\" method=\"post\">";
+	echo "<div align='center'><table class='tab_cadre'>";
+	echo "<tr><th colspan='2'>".$LANGBARSCODE["title"][2]."</th></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][0]." </td><td> <input type=\"text\" name=\"margeL\" value=\"".$plugin_barscode->fields["margeL"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][1]." </td><td> <input type=\"text\" name=\"margeT\" value=\"".$plugin_barscode->fields["margeT"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][2]." </td><td> <input type=\"text\" name=\"margeH\" value=\"".$plugin_barscode->fields["margeH"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][3]." </td><td> <input type=\"text\" name=\"margeW\" value=\"".$plugin_barscode->fields["margeW"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][4]." </td><td> <input type=\"text\" name=\"etiquetteW\" value=\"".$plugin_barscode->fields["etiquetteW"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$plugin_barscode->fields["etiquetteH"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$plugin_barscode->fields["etiquetteR"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][7]." </td><td> <input type=\"text\" name=\"etiquetteC\" value=\"".$plugin_barscode->fields["etiquetteC"]."\"></td></tr>";
+
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$plugin_barscode->fields["etiquetteRL"]."\"></td></tr>";
+	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$plugin_barscode->fields["etiquetteCL"]."\"></td></tr>";
+	
+	echo "<tr><th colspan='2'><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$LANGBARSCODE["buttons"][0]."\" ></th></tr>";
+	echo "</table></div>";
+	echo "</form>";
 	echo "<div align='center'>";
 	echo "<table class='tab_cadre' cellpadding='5'>";
 	echo "<tr><th>".$LANGBARSCODE["setup"][1];
