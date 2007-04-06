@@ -34,62 +34,26 @@ if (!defined('GLPI_ROOT')){
 	die("Sorry. You can't access directly to this file");
 	}
 
-
-function plugin_barscode_FormConfig($target, $id) {
-
-	GLOBAL  $LANG, $LANGBARSCODE;
-
-	$DB = new DB;
-	$query = "select * from glpi_plugin_barscode_config where ID = '".$id."'";
-	$result = $DB->query($query);
-	echo "<form name='formconfig' action=\"$target\" method=\"post\">";
-	echo "<div align='center'><table class='tab_cadre'>";
-	echo "<tr><th colspan='2'>".$LANGBARSCODE["title"][2]."</th></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][0]." </td><td> <input type=\"text\" name=\"margeL\" value=\"".$DB->result($result,0,"margeL")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][1]." </td><td> <input type=\"text\" name=\"margeT\" value=\"".$DB->result($result,0,"margeT")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][2]." </td><td> <input type=\"text\" name=\"margeH\" value=\"".$DB->result($result,0,"margeH")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][3]." </td><td> <input type=\"text\" name=\"margeW\" value=\"".$DB->result($result,0,"margeW")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][4]." </td><td> <input type=\"text\" name=\"etiquetteW\" value=\"".$DB->result($result,0,"etiquetteW")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][5]." </td><td> <input type=\"text\" name=\"etiquetteH\" value=\"".$DB->result($result,0,"etiquetteH")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][6]." </td><td> <input type=\"text\" name=\"etiquetteR\" value=\"".$DB->result($result,0,"etiquetteR")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][7]." </td><td> <input type=\"text\" name=\"etiquetteC\" value=\"".$DB->result($result,0,"etiquetteC")."\"></td></tr>";
-
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][13]." </td><td> <input type=\"text\" name=\"etiquetteRL\" value=\"".$DB->result($result,0,"etiquetteRL")."\"></td></tr>";
-	echo "<tr class='tab_bg_2'><td align='center'>".$LANGBARSCODE["config"][14]." </td><td> <input type=\"text\" name=\"etiquetteCL\" value=\"".$DB->result($result,0,"etiquetteCL")."\"></td></tr>";
-	
-	echo "<tr><th colspan='2'><input type=\"submit\" name=\"update_conf_bc\" class=\"submit\" value=\"".$LANGBARSCODE["buttons"][0]."\" ></th></tr>";
-	echo "</table></div>";
-	echo "</form>";
-
-}
-
-
 function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 
-	GLOBAL  $LANG, $LANGBARSCODE, $PDF;
+	GLOBAL  $DB,$LANG, $LANGBARSCODE, $PDF;
 
 	$Logo['F']   = '../pics/logo.png';	// Fichier du logo
 
-	$DB = new DB;
-	$query = "SELECT * FROM glpi_plugin_barscode_config";
+	$plugin_barscode=new plugin_barscode();
+	$plugin_barscode->getFromDB(1);
 
-	$result = $DB->query($query);
-	$number = $DB->numrows($result);
-	$i = 0;
+	$Marge['L'] = $plugin_barscode->fields["margeL"];			// Marge a gauche
+	$Marge['T'] = $plugin_barscode->fields["margeT"];		// Marge en Haut
+	$Marge['H'] = $plugin_barscode->fields["margeH"];			// Marge Horizontale entre les etiquettes (entre chaque colonne d'etiquettes)
+	$Marge['W'] = $plugin_barscode->fields["margeW"];			// Marge Verticale entre les etiquettes (entre chaque ligne d'etiquettes)
 
-	$DB->query($query) or die("Lien impossible : ".$DB->error());
-
-	$Marge['L'] = $DB->result($result, $i, "margeL");			// Marge a gauche
-	$Marge['T'] = $DB->result($result, $i, "margeT");		// Marge en Haut
-	$Marge['H'] = $DB->result($result, $i, "margeH");			// Marge Horizontale entre les etiquettes (entre chaque colonne d'etiquettes)
-	$Marge['W'] = $DB->result($result, $i, "margeW");			// Marge Verticale entre les etiquettes (entre chaque ligne d'etiquettes)
-
-	$Etiquette['W'] = $DB->result($result, $i, "etiquetteW");		// Largeur des etiquette
-	$Etiquette['H'] = $DB->result($result, $i, "etiquetteH");		// Hauteur des etiquette
-	$Etiquette['R'] = $DB->result($result, $i, "etiquetteR");			// NB etiquettes par ligne (rows)
-	$Etiquette['C'] = $DB->result($result, $i, "etiquetteC");			// NB etiquettes par colonne (cols)
-	$Etiquette['RL']= $DB->result($result, $i, "etiquetteRL");		//NB etiquette par ligne en mode Paysage
-	$Etiquette['CL']= $DB->result($result, $i, "etiquetteCL");		//NB etiquette par colonne en mode Paysage
+	$Etiquette['W'] = $plugin_barscode->fields["etiquetteW"];		// Largeur des etiquette
+	$Etiquette['H'] = $plugin_barscode->fields["etiquetteH"];		// Hauteur des etiquette
+	$Etiquette['R'] = $plugin_barscode->fields["etiquetteR"];			// NB etiquettes par ligne (rows)
+	$Etiquette['C'] = $plugin_barscode->fields["etiquetteC"];			// NB etiquettes par colonne (cols)
+	$Etiquette['RL']= $plugin_barscode->fields["etiquetteRL"];		//NB etiquette par ligne en mode Paysage
+	$Etiquette['CL']= $plugin_barscode->fields["etiquetteCL"];		//NB etiquette par colonne en mode Paysage
 
 	$PDF=new PDF_Avery();
 	$PDF->AliasNbPages(); 
