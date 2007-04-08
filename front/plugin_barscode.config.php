@@ -91,6 +91,10 @@ elseif(!empty($_POST["update_conf_bc"])) {
 		echo "<a href=\"./plugin_barscode.profile.php\">".$LANGBARSCODE["profile"][0]."</a>";
 		echo "</td></tr>";
 	}
+	echo "<tr class='tab_bg_1'><td align='center'>";
+			echo "<a href='http://glpi-project.org/wiki/doku.php?id=".substr($_SESSION["glpilanguage"],0,2).":plugins:barscode_use' target='_blank'>".$LANGBARSCODE["setup"][7]."&nbsp;</a>";
+			echo "/&nbsp;<a href='http://glpi-project.org/wiki/doku.php?id=".substr($_SESSION["glpilanguage"],0,2).":plugins:barscode_faq' target='_blank'>".$LANGBARSCODE["setup"][8]." </a>";
+			echo "</td></tr>";
 	if ($_SESSION["glpiactive_entity"]==0){
 	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$LANGBARSCODE["setup"][4]." v1.3</a>";
 	echo " <img src='".$CFG_GLPI["root_doc"]."/pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
