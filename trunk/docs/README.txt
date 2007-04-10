@@ -36,7 +36,7 @@ Author : GRISARD Jean Marc
 1 - Presentation
 
 This plugin allow you to generate automatically a bars code with avery format.
-Compatibility 0.68.1
+Compatibility 0.70
 
 2 - Installation
 
