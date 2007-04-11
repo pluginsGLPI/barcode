@@ -49,36 +49,6 @@ class plugin_barscode_Profile extends CommonDBTM {
 		$this->type=-1;
 	}
 
-	function post_updateItem($input,$updates,$history=1) {
-		global $DB;
-
-		if (isset($input["is_default"])&&$input["is_default"]==1){
-			$query="UPDATE glpi_plugin_barscode_profiles SET `is_default`='0' WHERE ID <> '".$input['ID']."'";
-			$DB->query($query);
-		}
-	}
-
-
-	function updateForUser($ID,$prof){
-		global $DB;
-		// Get user profile
-		$query = "SELECT FK_profiles, ID FROM glpi_users_profiles WHERE (FK_users = '$ID')";
-		if ($result = $DB->query($query)) {
-			// Profile found
-			if ($DB->numrows($result)){
-				$data=$DB->fetch_array($result);
-				if ($data["FK_profiles"]!=$prof){
-					$query="UPDATE glpi_users_profiles SET FK_profiles='$prof' WHERE ID='".$data["ID"]."';";
-					$DB->query($query);
-				}
-			} else { // Profile not found
-				$query="INSERT INTO glpi_users_profiles (FK_users, FK_profiles) VALUES ('$ID','$prof');";
-				$DB->query($query);
-			}
-		}
-
-	}
-
 	function getFromDBForUser($ID){
 
 		// Make new database object and fill variables
@@ -90,25 +60,9 @@ class plugin_barscode_Profile extends CommonDBTM {
 		if ($result = $DB->query($query)) {
 			if ($DB->numrows($result)){
 				$ID_profile = $DB->result($result,0,0);
-			} else {
-				// Get default profile
-				$query = "SELECT ID FROM glpi_plugin_barscode_profiles WHERE (`is_default` = '1')";
-				$result = $DB->query($query);
-				if ($DB->numrows($result)){
-					$ID_profile = $DB->result($result,0,0);
-					$this->updateForUser($ID,$ID_profile);
-				} else {
-					// Get first helpdesk profile
-					$query = "SELECT ID FROM glpi_plugin_barscode_profiles WHERE (interface = 'helpdesk')";
-					$result = $DB->query($query);
-					if ($DB->numrows($result)){
-						$ID_profile = $DB->result($result,0,0);
-					}
-				}
 			}
 		}
 		if ($ID_profile){
-			$this->updateForUser($ID,$ID_profile);
 			return $this->getFromDB($ID_profile);
 		} else return false;
 	}
