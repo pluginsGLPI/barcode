@@ -40,6 +40,7 @@ if (haveRight("config","w") && haveRight("profile","w")){
 	if(TableExists("glpi_plugin_barscode_config")){
 		cleanCache("GLPI_HEADER_".$_SESSION["glpiID"]);
 		plugin_barscode_uninstallv11();
+		$_SESSION["glpi_plugin_barscode_installed"]=0;
 	}
 	glpi_header($_SERVER['HTTP_REFERER']);
 }else{
