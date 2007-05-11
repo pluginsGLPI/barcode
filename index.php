@@ -38,7 +38,7 @@ commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode"
 
 if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 
-	if(!TableExists("glpi_plugin_barscode_config")) {
+	if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin_barscode_installed"]!=1) {
 		glpi_header("./front/plugin_barscode.config.php");
 	} else {
 

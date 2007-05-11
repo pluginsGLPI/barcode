@@ -45,8 +45,7 @@ require('fpdf/avery.php');
 // Init the hooks of the plugins -Needed
 function plugin_init_barscode() {
 	global $PLUGIN_HOOKS,$LANGBARSCODE,$CFG_GLPI;
-	
-	if(TableExists("glpi_plugin_barscode_config"))
+
 	$PLUGIN_HOOKS['init_session']['barscode'] = 'plugin_barscode_initSession';
 	
 	if (isset($_SESSION["glpiID"])){
@@ -54,14 +53,14 @@ function plugin_init_barscode() {
 		// Display a menu entry ?
 		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
-		if (haveRight("config","w") && TableExists("glpi_plugin_barscode_config"))
+		if (haveRight("config","w") && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1))
             $PLUGIN_HOOKS['submenu_entry']['barscode']["<img  src='".$CFG_GLPI["root_doc"]."/pics/addresa.png' title='".$LANGBARSCODE["profile"][2]."' alt='".$LANGBARSCODE["profile"][2]."'>"] = 'front/plugin_barscode.config.php'; 
 		// Setup/Update functions
 		// Config function
-		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
+		if((isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1) && haveRight("config","w"))
 			$PLUGIN_HOOKS['config']['barscode'] = 'plugin_config_barscode';
 		// Config page
-		if(TableExists("glpi_plugin_barscode_config") && haveRight("config","w"))
+		if((isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1) && haveRight("config","w"))
 			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
 	}
 }
