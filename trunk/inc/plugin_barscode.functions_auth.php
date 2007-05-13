@@ -38,13 +38,14 @@ if (!defined('GLPI_ROOT')){
 	
 function plugin_barscode_initSession()
 {	
-	$prof=new plugin_barscode_Profile();
-	if($prof->getFromDBForUser($_SESSION["glpiID"]) && TableExists("glpi_plugin_barscode_config")){
-	//$prof->cleanProfile();
-		$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
-		$_SESSION["glpi_plugin_barscode_installed"]=1;
+	if(TableExists("glpi_plugin_barscode_config")){
+		$prof=new plugin_barscode_Profile();
+		if($prof->getFromDBForUser($_SESSION["glpiID"])){
+		//$prof->cleanProfile();
+			$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
+			$_SESSION["glpi_plugin_barscode_installed"]=1;
+		}
 	}
-
 }
 
 function plugin_barscode_haveRight($module,$right){
