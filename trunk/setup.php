@@ -55,10 +55,7 @@ function plugin_init_barscode() {
 			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
 		if (haveRight("config","w") && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1))
             $PLUGIN_HOOKS['submenu_entry']['barscode']["<img  src='".$CFG_GLPI["root_doc"]."/pics/addresa.png' title='".$LANGBARSCODE["profile"][2]."' alt='".$LANGBARSCODE["profile"][2]."'>"] = 'front/plugin_barscode.config.php'; 
-		// Setup/Update functions
-		// Config function
-		if((isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1) && haveRight("config","w"))
-			$PLUGIN_HOOKS['config']['barscode'] = 'plugin_config_barscode';
+
 		// Config page
 		if((isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1) && haveRight("config","w"))
 			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
@@ -71,8 +68,5 @@ function plugin_version_barscode(){
 	return array( 'name'    => $LANGBARSCODE["title"][1],
 			'version' => '1.3');
 }
-
-
-
 
 ?>
