@@ -93,21 +93,17 @@ class plugin_barscode_Profile extends CommonDBTM {
 		echo "<th><input type='text' name='name' value=\"".$this->fields["name"]."\" $onfocus></th>";
 		echo "<th>".$LANG["profiles"][2].":</th>";
 		echo "<th><select name='interface' id='profile_interface'>";
-		echo "<option value=''>----</option>";
 		echo "<option value='barscode' ".($this->fields["interface"]!="barscode"?"selected":"").">".$LANGBARSCODE["profile"][1]."</option>";
 
 		echo "</select></th>";
 		echo "</tr></table>";
 		echo "</div>";
 
-		echo "<script type='text/javascript' >\n";
-		echo "   new Form.Element.Observer('profile_interface', 1, \n";
-		echo "      function(element, value) {\n";
-		echo "      	new Ajax.Updater('profile_form','".$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php',{asynchronous:true, evalScripts:true, \n";
-		echo "           method:'post', parameters:'interface=' + value+'&ID=$ID'\n";
-		echo "})});\n";
-		echo "document.getElementById('profile_interface').value='".$this->fields["interface"]."';";
-		echo "</script>\n";
+		$params=array('interface'=>'__VALUE__',
+				'ID'=>$ID,
+		);
+		ajaxUpdateItemOnSelectEvent("profile_interface","profile_form",$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php",$params,false);
+		ajaxUpdateItem("profile_form",$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php",$params,false,'profile_interface');
 		echo "<br>";
 
 		echo "<div align='center' id='profile_form'>";
@@ -138,11 +134,6 @@ class plugin_barscode_Profile extends CommonDBTM {
 		dropdownNoneReadWrite("barscode",$this->fields["barscode"],1,1,0);
 		echo "</td>";
 		echo "</tr>";
-
-		echo "</tr>";
-
-
-
 
 		if ($canedit){
 			echo "<tr class='tab_bg_1'>";
