@@ -63,7 +63,7 @@ $LANGBARSCODE["buttons"][1] = "Créer";
 
 $LANGBARSCODE["bc"][0] = "Le nombre d'étiquettes a imprimer";
 $LANGBARSCODE["bc"][1] = "Le numéro par lequel commencer";
-$LANGBARSCODE["bc"][2] = "La longueur des numéros";
+$LANGBARSCODE["bc"][2] = "La longueur des codes barres";
 $LANGBARSCODE["bc"][3] = "Le préfixe devant le numéro";
 $LANGBARSCODE["bc"][4] = "Format de la page";
 $LANGBARSCODE["bc"][5] = "A4";
