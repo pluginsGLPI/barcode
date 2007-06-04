@@ -63,7 +63,7 @@ $LANGBARSCODE["buttons"][1] = "Create";
 
 $LANGBARSCODE["bc"][0] = "The number of label has to print";
 $LANGBARSCODE["bc"][1] = "The number by which to start";
-$LANGBARSCODE["bc"][2] = "The length of the numbers";
+$LANGBARSCODE["bc"][2] = "The length of the bars codes";
 $LANGBARSCODE["bc"][3] = "The 'prefixe' in front of the number";
 $LANGBARSCODE["bc"][4] = "Format of page";
 $LANGBARSCODE["bc"][5] = "A4";

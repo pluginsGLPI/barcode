@@ -71,7 +71,8 @@ function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 		$nbppage = $Etiquette['RL'] * $Etiquette['CL'];
 	else
 		$nbppage = $Etiquette['R'] * $Etiquette['C'];
-
+	
+	if ($nb<$begin) $nb=$nb+$begin;
 	for ($page=1; $page<=ceil(($nb) / $nbppage); $page++)
 	{
 
