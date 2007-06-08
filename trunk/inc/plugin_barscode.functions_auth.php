@@ -61,65 +61,18 @@ function plugin_barscode_haveRight($module,$right){
 	else return false;
 }
 
+function plugin_barscode_checkRight($module, $right) {
+	global $CFG_GLPI;
 
-/**
- * Get The Type Name of the Object
- *
- * @return String: name of the object type in the current LANGuage
- */
-function plugin_barscode_haveTypeRight ($type,$right){
-	global $LANG;
-
-	switch ($type){
-		case GENERAL_TYPE :
-			return true;;
-			break;
-		case COMPUTER_TYPE :
-			return haveRight("computer",$right);
-			break;
-
-	}
-	return false;
-}
-
-
-function plugin_barscode_checkRight($module,$right) {
-	global $LANG,$CFG_GLPI,$HEADER_LOADED;
-
-	if (!plugin_barscode_haveRight($module,$right)){
-		if (!$HEADER_LOADED){
-			if (!isset($_SESSION["glpi_plugin_barscode_profile"]["interface"]))
-				nullHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
-			else if ($_SESSION["glpi_plugin_barscode_profile"]["interface"]=="barscode")
-				commonHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
-
+	if (!plugin_barscode_haveRight($module, $right)) {
+		// Gestion timeout session
+		if (!isset ($_SESSION["glpiID"])) {
+			glpi_header($CFG_GLPI["root_doc"] . "/index.php");
+			exit ();
 		}
-		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$LANG["login"][5]."</b></div>";
-		nullFooter();
-		exit();
+
+		displayRightError();
 	}
 }
-
-
-function plugin_barscode_checkLoginUser(){
-
-	global $LANG,$CFG_GLPI,$HEADER_LOADED;
-
-	if (!isset($_SESSION["glpiname"])){
-		if (!$HEADER_LOADED){
-			if (!isset($_SESSION["glpi_plugin_barscode_profile"]["interface"]))
-				nullHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
-			else if ($_SESSION["glpi_plugin_barscode_profile"]["interface"]=="barscode")
-				commonHeader($LANG["login"][5],$_SERVER["PHP_SELF"]);
-
-		}
-		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
-		echo "<b>".$LANG["login"][5]."</b></div>";
-		nullFooter();
-		exit();
-	}
-}
-
 
 ?>
