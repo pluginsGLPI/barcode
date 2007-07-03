@@ -47,7 +47,7 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		echo "<div align='center'>";
 		echo "<table class='tab_cadre' ><tr>";
 
-		echo "<th colspan='8'>".$LANGBARSCODE["title"][1]."</th></tr>";
+		echo "<th colspan='4'>".$LANGBARSCODE["title"][1]."</th></tr>";
 		echo "<tr class='tab_bg_1'>";
 
 		echo "<td>".$LANGBARSCODE["bc"][0]."</td><td>";
@@ -81,7 +81,7 @@ if(plugin_barscode_haveRight("barscode","r") || haveRight("config","w")){
 		echo "</td>";
 		echo "</tr>";
 
-		echo "<tr><td class='tab_bg_1' colspan='8' align='center'><input type='submit' value='".$LANGBARSCODE["buttons"][1]."' class='submit'></td></tr>";
+		echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".$LANGBARSCODE["buttons"][1]."' class='submit'></td></tr>";
 		echo "</table>";
 		echo "</div>";
 		echo "</form>";
