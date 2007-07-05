@@ -31,4 +31,3 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-Pb génération codes barre au format paysage
