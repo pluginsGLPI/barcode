@@ -37,9 +37,9 @@ if(!defined('GLPI_ROOT')){
 }
 include (GLPI_ROOT . "/inc/includes.php");
 
-commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
-
 if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin_barscode_installed"]!=1) {
+	
+	commonHeader($LANG["title"][2],$_SERVER['PHP_SELF'],"config","plugins");
 	if(!TableExists("glpi_plugin_barscode_config")) {
 		if ($_SESSION["glpiactive_entity"]==0){
 			echo "<div align='center'>";
@@ -62,7 +62,9 @@ elseif(!empty($_POST["update_conf_bc"])) {
 	plugin_barscode_UpdateConfig($_POST,1);
 
 } else {
-
+	
+	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
+	
 	$plugin_barscode=new plugin_barscode();
 	$plugin_barscode->getFromDB(1);
 	

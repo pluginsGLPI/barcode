@@ -51,13 +51,14 @@ function plugin_init_barscode() {
 	if (isset($_SESSION["glpiID"])){
 
 		// Display a menu entry ?
-		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
+		if (plugin_barscode_haveRight("barscode","r") && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1))
 			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
-		if (haveRight("config","w") && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1))
+			
+		if ((plugin_barscode_haveRight("barscode","r") || haveRight("config","w")) && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1))
             $PLUGIN_HOOKS['submenu_entry']['barscode']["<img  src='".$CFG_GLPI["root_doc"]."/pics/addresa.png' title='".$LANGBARSCODE["profile"][2]."' alt='".$LANGBARSCODE["profile"][2]."'>"] = 'front/plugin_barscode.config.php'; 
 
 		// Config page
-		if (plugin_barscode_haveRight("barscode","w") || haveRight("config","w"))
+		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
 	}
 }
