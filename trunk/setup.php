@@ -47,6 +47,7 @@ function plugin_init_barscode() {
 	global $PLUGIN_HOOKS,$LANGBARSCODE,$CFG_GLPI;
 
 	$PLUGIN_HOOKS['init_session']['barscode'] = 'plugin_barscode_initSession';
+	$PLUGIN_HOOKS['change_profile']['barscode'] = 'plugin_barscode_changeprofile';
 	
 	if (isset($_SESSION["glpiID"])){
 

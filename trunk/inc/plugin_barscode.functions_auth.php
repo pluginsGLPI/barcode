@@ -48,6 +48,15 @@ function plugin_barscode_initSession()
 	}
 }
 
+function plugin_barscode_changeprofile()
+{
+	if(isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1){
+		$prof=new plugin_barscode_Profile();
+		if($prof->getFromDB($_SESSION['glpiactiveprofile']['ID']))
+			$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
+	}
+}
+
 function plugin_barscode_haveRight($module,$right){
 	$matches=array(
 			""  => array("","r","w"), // ne doit pas arriver normalement
