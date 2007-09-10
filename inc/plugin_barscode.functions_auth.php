@@ -54,6 +54,8 @@ function plugin_barscode_changeprofile()
 		$prof=new plugin_barscode_Profile();
 		if($prof->getFromDB($_SESSION['glpiactiveprofile']['ID']))
 			$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
+		else
+			unset($_SESSION["glpi_plugin_barscode_profile"]);
 	}
 }
 
