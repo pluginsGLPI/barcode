@@ -40,8 +40,11 @@ include (GLPI_ROOT . "/inc/includes.php");
 if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin_barscode_installed"]!=1) {
 	
 	commonHeader($LANG["title"][2],$_SERVER['PHP_SELF'],"config","plugins");
-	if(!TableExists("glpi_plugin_barscode_config")) {
-		if ($_SESSION["glpiactive_entity"]==0){
+	
+	if ($_SESSION["glpiactive_entity"]==0){
+	
+		if(!TableExists("glpi_plugin_barscode_config")) {
+		
 			echo "<div align='center'>";
 			echo "<table class='tab_cadre' cellpadding='5'>";
 			echo "<tr><th>".$LANGBARSCODE["setup"][1];
@@ -50,11 +53,10 @@ if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin
 			echo "<a href='plugin_barscode.install.php'>".$LANGBARSCODE["setup"][2]." v1.3</a></td></tr>";
 		
 			echo "</table></div>";
-		}else{ 
-				echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>"; 
-				echo "<b>".$LANG["login"][5]."</b></div>"; 
-			}
-	
+		}
+	}else{ 
+		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>"; 
+		echo "<b>".$LANG["login"][5]."</b></div>"; 
 	}
 }
 elseif(!empty($_POST["update_conf_bc"])) {
