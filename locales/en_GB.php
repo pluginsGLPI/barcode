@@ -57,6 +57,7 @@ $LANGBARSCODE["profile"][2] = "Setup";
 $LANGBARSCODE["profile"][3] = "Create an ".$title."";
 $LANGBARSCODE["profile"][4] = "Update an ".$title."";
 $LANGBARSCODE["profile"][5] = "Delete an ".$title."";
+$LANGBARSCODE["profile"][6] = "List of profiles already configured";
 
 $LANGBARSCODE["buttons"][0] = "Refresh";
 $LANGBARSCODE["buttons"][1] = "Create";
