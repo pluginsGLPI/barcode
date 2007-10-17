@@ -47,6 +47,22 @@ function plugin_barscode_UpdateConfig($input, $id) {
 	}
 }
 
+function plugin_barscode_createfirstaccess($ID){
+
+	GLOBAL $DB;
+	
+	$query0 ="SELECT * FROM glpi_plugin_barscode_profiles where ID='".$ID."';";
+	$result0=$DB->query($query0);
+	if ($DB->numrows($result0)==0){
+		$query="SELECT * FROM glpi_profiles where ID='$ID';";
+		$result=$DB->query($query);
+		$name = $DB->result($result, 0, "glpi_profiles.name");
+		
+		$query1 ="INSERT INTO `glpi_plugin_barscode_profiles` ( `ID`, `name` , `interface`, `is_default`, `barscode`) VALUES ('$ID', '$name','barscode','0','r');";
+		$DB->query($query1);
+	}
+}
+
 function plugin_barscode_createaccess($ID){
 
 	$DB = new DB;

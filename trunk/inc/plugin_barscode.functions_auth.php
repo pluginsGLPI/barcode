@@ -35,16 +35,34 @@
 if (!defined('GLPI_ROOT')){
 	die("Sorry. You can't access directly to this file");
 	}
-	
+
 function plugin_barscode_initSession()
-{	
+{
+	global $CFG_GLPI,$DB;
+	
 	if(TableExists("glpi_plugin_barscode_config")){
+
 		$prof=new plugin_barscode_Profile();
-		if($prof->getFromDBForUser($_SESSION["glpiID"])){
-		//$prof->cleanProfile();
-			$_SESSION["glpi_plugin_barscode_profile"]=$prof->fields;
-			$_SESSION["glpi_plugin_barscode_installed"]=1;
-		}
+		$_SESSION['glpi_plugin_barscode_profile'] = array ();
+		
+		$query0 = "SELECT DISTINCT glpi_profiles.name FROM glpi_users_profiles INNER JOIN glpi_profiles ON (glpi_users_profiles.FK_profiles = glpi_profiles.ID)
+					WHERE glpi_users_profiles.FK_users='".$_SESSION["glpiID"]."'";
+		$result0 = $DB->query($query0);
+		if ($DB->numrows($result0)) {
+			while ($data0 = $DB->fetch_assoc($result0)) {
+				$query = "SELECT * FROM glpi_plugin_barscode_profiles WHERE (name = '".$data0["name"]."')";
+				$result = $DB->query($query);
+					
+				if ($DB->numrows($result)) {
+					while ($data = $DB->fetch_assoc($result)) {
+						$prof->fields = array ();
+						$prof->getFromDB($data['ID']);
+						$_SESSION['glpi_plugin_barscode_profile'] = $prof->fields;
+						$_SESSION["glpi_plugin_barscode_installed"]=1;
+					}		
+				}	
+			}		
+		}			
 	}
 }
 

@@ -49,26 +49,6 @@ class plugin_barscode_Profile extends CommonDBTM {
 		$this->type=-1;
 	}
 
-	function getFromDBForUser($ID){
-
-		// Make new database object and fill variables
-		global $DB;
-		$ID_profile=0;
-		// Get user profile
-		$query = "SELECT FK_profiles FROM glpi_users_profiles WHERE (FK_users = '$ID')";
-
-		if ($result = $DB->query($query)) {
-			if ($DB->numrows($result)){
-				$ID_profile = $DB->result($result,0,0);
-			}
-		}
-		if ($ID_profile){
-			return $this->getFromDB($ID_profile);
-		} else return false;
-	}
-	// Unset unused rights for helpdesk
-
-
 	function showprofileForm($target,$ID){
 		global $LANG,$CFG_GLPI,$LANGBARSCODE;
 
@@ -152,5 +132,6 @@ class plugin_barscode_Profile extends CommonDBTM {
 		echo "</table>";
 
 	}
+}
 
-}?>
+?>
