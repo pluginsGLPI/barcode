@@ -48,7 +48,18 @@ class plugin_barscode_Profile extends CommonDBTM {
 		$this->table="glpi_plugin_barscode_profiles";
 		$this->type=-1;
 	}
-
+	
+	//if profile deleted
+	function cleanProfiles($ID) {
+	
+		global $DB;
+		$prof=new profile;
+		$prof->getFromDB($ID);
+		$name=$prof->fields["name"];
+		$query = "DELETE FROM glpi_plugin_barscode_profiles WHERE name='$name' ";
+		$DB->query($query);
+	}
+	
 	function showprofileForm($target,$ID){
 		global $LANG,$CFG_GLPI,$LANGBARSCODE;
 
