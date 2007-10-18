@@ -59,6 +59,8 @@ function plugin_init_barscode() {
 		// Config page
 		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
 			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
+			
+		$PLUGIN_HOOKS['pre_item_delete']['barscode'] = 'plugin_pre_item_delete_barscode';
 	}
 }
 
@@ -69,4 +71,17 @@ function plugin_version_barscode(){
 			'version' => '1.3');
 }
 
+// Hook done on delete item case
+
+function plugin_pre_item_delete_barscode($input){
+	if (isset($input["_item_type_"]))
+		switch ($input["_item_type_"]){
+			case PROFILE_TYPE :
+				// Manipulate data if needed 
+				$plugin_barscode_Profile=new plugin_barscode_Profile;
+				$plugin_barscode_Profile->cleanProfiles($input["ID"]);
+				break;
+		}
+	return $input;
+}
 ?>
