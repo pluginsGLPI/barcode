@@ -53,10 +53,7 @@ class plugin_barscode_Profile extends CommonDBTM {
 	function cleanProfiles($ID) {
 	
 		global $DB;
-		$prof=new profile;
-		$prof->getFromDB($ID);
-		$name=$prof->fields["name"];
-		$query = "DELETE FROM glpi_plugin_barscode_profiles WHERE name='$name' ";
+		$query = "DELETE FROM glpi_plugin_barscode_profiles WHERE name='$ID' ";
 		$DB->query($query);
 	}
 	
