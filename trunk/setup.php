@@ -54,7 +54,7 @@ function plugin_init_barscode() {
 		// Display a menu entry ?		
 		if (plugin_barscode_haveRight("barscode","r") && (isset($_SESSION["glpi_plugin_barscode_installed"]) && $_SESSION["glpi_plugin_barscode_installed"]==1) && isset($_SESSION["glpi_plugin_barscode_profile"])){
 			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
-            $PLUGIN_HOOKS['submenu_entry']['barscode']["<img  src='".$CFG_GLPI["root_doc"]."/pics/addresa.png' title='".$LANGBARSCODE["profile"][2]."' alt='".$LANGBARSCODE["profile"][2]."'>"] = 'front/plugin_barscode.config.php';
+            $PLUGIN_HOOKS['submenu_entry']['barscode']['config'] = 'front/plugin_barscode.config.php';
             $PLUGIN_HOOKS['pre_item_delete']['barscode'] = 'plugin_pre_item_delete_barscode'; 
 		}
 		// Config page
