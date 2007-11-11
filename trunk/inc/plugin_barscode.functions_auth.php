@@ -45,12 +45,11 @@ function plugin_barscode_initSession()
 		$prof=new plugin_barscode_Profile();
 		$_SESSION['glpi_plugin_barscode_profile'] = array ();
 		
-		$query0 = "SELECT DISTINCT glpi_profiles.name FROM glpi_users_profiles INNER JOIN glpi_profiles ON (glpi_users_profiles.FK_profiles = glpi_profiles.ID)
-					WHERE glpi_users_profiles.FK_users='".$_SESSION["glpiID"]."'";
+		$query0 = "SELECT DISTINCT glpi_profiles.ID FROM glpi_users_profiles INNER JOIN glpi_profiles ON (glpi_users_profiles.FK_profiles = glpi_profiles.ID) WHERE glpi_users_profiles.FK_users='".$_SESSION["glpiID"]."'";
 		$result0 = $DB->query($query0);
 		if ($DB->numrows($result0)) {
 			while ($data0 = $DB->fetch_assoc($result0)) {
-				$query = "SELECT * FROM glpi_plugin_barscode_profiles WHERE (name = '".$data0["name"]."')";
+				$query = "SELECT * FROM glpi_plugin_barscode_profiles WHERE (ID = '".$data0["ID"]."')";
 				$result = $DB->query($query);
 					
 				if ($DB->numrows($result)) {
