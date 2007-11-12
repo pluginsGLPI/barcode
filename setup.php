@@ -59,9 +59,7 @@ function plugin_init_barscode() {
 		}
 		// Config page
 		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
-			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';
-			
-		
+			$PLUGIN_HOOKS['config_page']['barscode'] = 'front/plugin_barscode.config.php';	
 	}
 }
 
@@ -85,4 +83,5 @@ function plugin_pre_item_delete_barscode($input){
 		}
 	return $input;
 }
+
 ?>
