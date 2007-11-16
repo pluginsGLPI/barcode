@@ -79,31 +79,31 @@ echo "<div align='center'><form method='post' name='massiveaction_form' id='mass
 
 echo "<table class='tab_cadre' cellpadding='5'><tr><th colspan='4'>";
 echo $LANGBARSCODE["profile"][6]." : </th></tr>";
+echo "<tr><th></th><th></th><th>".$LANG["Menu"][35]."</th><th>".$LANGBARSCODE["profile"][1]."</th></tr>";
 
 $query0="SELECT * FROM glpi_plugin_barscode_profiles ORDER BY name";
 $result0=$DB->query($query0);
 
 while ($data0=$DB->fetch_assoc($result0)){
-$ID0=$data0['ID'];
-echo "<tr class='tab_bg_1'>";
-echo "<td align='center'>";
-echo "<input type='hidden' name='ID' value='$ID0'>";
-echo "<input type='checkbox' name='item[$ID0]' value='1'>";
-echo "</td>";
-echo "<td>".$data0['ID']."</td><td>".$data0['name']."</td>";
-if ($data0['barscode']=='r')
-echo "<td>".$LANG["profiles"][10]."</td>";
-elseif ($data0['barscode']=='w')
-echo "<td>".$LANG["profiles"][11]."</td>";
-else
-echo "<td>".$LANG["profiles"][12]."</td>";
-
+	$ID0=$data0['ID'];
+	echo "<tr class='tab_bg_1'>";
+	echo "<td align='center'>";
+	echo "<input type='hidden' name='ID' value='$ID0'>";
+	echo "<input type='checkbox' name='item[$ID0]' value='1'>";
+	echo "</td>";
+	echo "<td>".$data0['ID']."</td><td>".$data0['name']."</td>";
+	if ($data0['barscode']=='r')
+		echo "<td>".$LANG["profiles"][10]."</td>";
+	elseif ($data0['barscode']=='w')
+		echo "<td>".$LANG["profiles"][11]."</td>";
+	else
+		echo "<td>".$LANG["profiles"][12]."</td>";
 }
 
 echo "<tr class='tab_bg_1'><td colspan='4'>";
-			echo "<div align='center'><a onclick= \"if ( markAllRows('massiveaction_form') ) return false;\" href='".$_SERVER['PHP_SELF']."?select=all'>".$LANG["buttons"][18]."</a>";
-			echo " - <a onclick= \"if ( unMarkAllRows('massiveaction_form') ) return false;\" href='".$_SERVER['PHP_SELF']."?select=none'>".$LANG["buttons"][19]."</a> ";
-			echo "<input type='submit' name='delete_profile' value=\"".$LANG["buttons"][6]."\" class='submit' ></div></td></tr>";
+echo "<div align='center'><a onclick= \"if ( markAllRows('massiveaction_form') ) return false;\" href='".$_SERVER['PHP_SELF']."?select=all'>".$LANG["buttons"][18]."</a>";
+echo " - <a onclick= \"if ( unMarkAllRows('massiveaction_form') ) return false;\" href='".$_SERVER['PHP_SELF']."?select=none'>".$LANG["buttons"][19]."</a> ";
+echo "<input type='submit' name='delete_profile' value=\"".$LANG["buttons"][6]."\" class='submit' ></div></td></tr>";
 			
 echo "</table></form></div>";
 
@@ -123,23 +123,15 @@ echo "<td><input type='submit' value=\"".$LANG["buttons"][2]."\" class='submit' 
 echo "</table></form></div>";
 
 if ($ID>0){	
-	$query1="SELECT * FROM glpi_plugin_barscode_profiles where ID=$ID";
-	$result1=$DB->query($query1);
-	$number1 = $DB->numrows($result1);
-
-	if (!empty($number1)){
+	if ($prof->GetfromDB($ID)){
 		$prof->showprofileForm($_SERVER["PHP_SELF"],$ID);
 	}
 	else {
-
 		plugin_barscode_createaccess($ID);
-
 		$prof->showprofileForm($_SERVER["PHP_SELF"],$ID);
-
 	}
 }
 
 commonFooter();
-
 
 ?>
