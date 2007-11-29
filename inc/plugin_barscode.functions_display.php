@@ -105,7 +105,7 @@ function plugin_barscode_GenerateEtiquette($X_From, $Y_From, $X_To, $Y_To, $Weig
 	if (strlen($prefixe) > 0) { $length = $length - strlen($prefixe); }
 	$num = str_pad($num, $length, '0', STR_PAD_LEFT);
 
-	$PDF->Code39($X_From+5, $Y_From+12, $prefixe.$num, '8');
+	$PDF->Code39($X_From+5, $Y_From+12, $prefixe.$num, '8', 0.5,$Height);
 }
 
 
