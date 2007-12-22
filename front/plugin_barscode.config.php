@@ -50,7 +50,7 @@ if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin
 			echo "<tr><th>".$LANGBARSCODE["setup"][1];
 			echo "</th></tr>";
 			echo "<tr class='tab_bg_1'><td>";
-			echo "<a href='plugin_barscode.install.php'>".$LANGBARSCODE["setup"][2]." v1.3</a></td></tr>";
+			echo "<a href='plugin_barscode.install.php'>".$LANGBARSCODE["setup"][2]."</a></td></tr>";
 		
 			echo "</table></div>";
 		}
@@ -102,7 +102,7 @@ elseif(!empty($_POST["update_conf_bc"])) {
 			echo "/&nbsp;<a href='http://glpi-project.org/wiki/doku.php?id=".substr($_SESSION["glpilanguage"],0,2).":plugins:barscode_faq' target='_blank'>".$LANGBARSCODE["setup"][8]." </a>";
 			echo "</td></tr>";
 	if ($_SESSION["glpiactive_entity"]==0){
-	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$LANGBARSCODE["setup"][4]." v1.3</a>";
+	echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$LANGBARSCODE["setup"][4]."</a>";
 	echo " <img src='".$CFG_GLPI["root_doc"]."/pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
 	echo "<span class='over_link' id='commentsup'>".$LANGBARSCODE["setup"][6]."</span>";
 	echo "</td></tr>";

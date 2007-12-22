@@ -67,7 +67,7 @@ function plugin_init_barscode() {
 function plugin_version_barscode(){
 	global $LANGBARSCODE;
 	return array( 'name'    => $LANGBARSCODE["title"][1],
-			'version' => '1.3');
+			'version' => '1.4');
 }
 
 // Hook done on delete item case
