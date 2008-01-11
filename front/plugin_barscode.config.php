@@ -39,7 +39,7 @@ include (GLPI_ROOT . "/inc/includes.php");
 
 if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin_barscode_installed"]!=1) {
 	
-	commonHeader($LANG["title"][2],$_SERVER['PHP_SELF'],"config","plugins");
+	commonHeader($LANG["common"][12],$_SERVER['PHP_SELF'],"config","plugins");
 	
 	if ($_SESSION["glpiactive_entity"]==0){
 	
