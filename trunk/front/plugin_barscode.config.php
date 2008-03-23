@@ -56,7 +56,7 @@ if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin
 		}
 	}else{ 
 		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>"; 
-		echo "<b>".$LANG["login"][5]."</b></div>"; 
+		echo "<b>".$LANGBARSCODE["setup"][9]."</b></div>"; 
 	}
 }
 elseif(!empty($_POST["update_conf_bc"])) {
