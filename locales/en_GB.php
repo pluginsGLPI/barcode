@@ -79,4 +79,6 @@ $LANGBARSCODE["setup"][5] = "Warning, the update is irreversible.";
 $LANGBARSCODE["setup"][6] = "Warning, the uninstallation of the plugin is irreversible.<br> You will loose all the data.";
 $LANGBARSCODE["setup"][7] = "Instructions";
 $LANGBARSCODE["setup"][8] = "FAQ";
+$LANGBARSCODE["setup"][9] = "Merci de vous placer sur l'entité racine (voir tous)";
+
 ?>

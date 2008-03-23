@@ -31,6 +31,8 @@
 // Original Author of file: GRISARD Jean Marc & CAILLAUD Xavier
 // Purpose of file:
 // ----------------------------------------------------------------------
+
+$NEEDED_ITEMS=array("profile");
 define('GLPI_ROOT', '../../..'); 
 include (GLPI_ROOT . "/inc/includes.php");
 
