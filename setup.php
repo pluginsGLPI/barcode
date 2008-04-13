@@ -67,6 +67,7 @@ function plugin_init_barscode() {
 function plugin_version_barscode(){
 	global $LANGBARSCODE;
 	return array( 'name'    => $LANGBARSCODE["title"][1],
+			'minGlpiVersion' => '0.71',
 			'version' => '1.4');
 }
 
