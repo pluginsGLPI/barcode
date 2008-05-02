@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------
 $title = "Bars Code";
 
-$LANGBARSCODE["title"][0] = "Make a bars code...";
 $LANGBARSCODE["title"][1]	= "".$title."";
 $LANGBARSCODE["title"][2] = "Page Configuration";
 
@@ -53,10 +52,6 @@ $LANGBARSCODE["config"][14] = "Numbers labels by column in Landscape mode";
 
 $LANGBARSCODE["profile"][0] = "Rights management";
 $LANGBARSCODE["profile"][1] = "$title";
-$LANGBARSCODE["profile"][2] = "Setup";
-$LANGBARSCODE["profile"][3] = "Create an ".$title."";
-$LANGBARSCODE["profile"][4] = "Update an ".$title."";
-$LANGBARSCODE["profile"][5] = "Delete an ".$title."";
 $LANGBARSCODE["profile"][6] = "List of profiles already configured";
 
 $LANGBARSCODE["buttons"][0] = "Refresh";
@@ -75,7 +70,6 @@ $LANGBARSCODE["setup"][1] = "Setup of $title plugin";
 $LANGBARSCODE["setup"][2] = "Install $title plugin ";
 $LANGBARSCODE["setup"][3] = "Update $title plugin to version";
 $LANGBARSCODE["setup"][4] = "Uninstall $title plugin";
-$LANGBARSCODE["setup"][5] = "Warning, the update is irreversible.";
 $LANGBARSCODE["setup"][6] = "Warning, the uninstallation of the plugin is irreversible.<br> You will loose all the data.";
 $LANGBARSCODE["setup"][7] = "Instructions";
 $LANGBARSCODE["setup"][8] = "FAQ";

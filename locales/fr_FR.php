@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------
 $title = "Codes barres";
 
-$LANGBARSCODE["title"][0] = "Faire un code barre...";
 $LANGBARSCODE["title"][1]	= "".$title."";
 $LANGBARSCODE["title"][2] = "Configuration de mise en page";
 
@@ -53,10 +52,6 @@ $LANGBARSCODE["config"][14] = "NB Etiquette par colonne en mode Paysage";
 
 $LANGBARSCODE["profile"][0] = "Gestion des droits";
 $LANGBARSCODE["profile"][1] = "$title";
-$LANGBARSCODE["profile"][2] = "Configuration";
-$LANGBARSCODE["profile"][3] = "Créer un ".$title."";
-$LANGBARSCODE["profile"][4] = "Mettre à jour un ".$title."";
-$LANGBARSCODE["profile"][5] = "Supprimer un ".$title."";
 $LANGBARSCODE["profile"][6] = "Listes des profils déjà configurés";
 
 $LANGBARSCODE["buttons"][0] = "Actualiser";
@@ -75,7 +70,6 @@ $LANGBARSCODE["setup"][1] = "Configuration du plugin ".$title;
 $LANGBARSCODE["setup"][2] = "Installer le plugin $title";
 $LANGBARSCODE["setup"][3] = "Mettre à jour le plugin $title vers la version";
 $LANGBARSCODE["setup"][4] = "Désinstaller le plugin $title";
-$LANGBARSCODE["setup"][5] = "Attention, la mise à jour du plugin est irréversible.";
 $LANGBARSCODE["setup"][6] = "Attention, la désinstallation du plugin est irréversible.<br> Vous perdrez toutes les données.";
 $LANGBARSCODE["setup"][7] = "Mode d'emploi";
 $LANGBARSCODE["setup"][8] = "FAQ";
