@@ -59,41 +59,17 @@ if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin
 		echo "<b>".$LANGBARSCODE["setup"][9]."</b></div>"; 
 	}
 }
-elseif(!empty($_POST["update_conf_bc"])) {
-
-	plugin_barscode_UpdateConfig($_POST,1);
-
-} else {
-	
-	commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
-
-		echo "<div align='center'><table class='tab_cadre'>";
-
-		echo "<tr><th>".$LANGBARSCODE["setup"][1];
-		echo "</th></tr>";
-
-		if (haveRight("config","w") && haveRight("profile","w")){
-			echo "<tr class='tab_bg_1'><td align='center'>";
-			echo "<a href=\"./plugin_barscode.profile.php\">".$LANGBARSCODE["profile"][0]."</a>";
-			echo "</td></tr>";
-		}
-
-		echo "<tr class='tab_bg_1'><td align='center'>";
-		echo "<a href=\"./plugin_barscode.layout.config.php\">".$LANGBARSCODE["profile"][2]."</a>";
-		echo "</td></tr>";
-
-		echo "<tr class='tab_bg_1'><td align='center'>";
-				echo "<a href='http://glpi-project.org/wiki/doku.php?id=".substr($_SESSION["glpilanguage"],0,2).":plugins:barscode_use' target='_blank'>".$LANGBARSCODE["setup"][7]."&nbsp;</a>";
-				echo "/&nbsp;<a href='http://glpi-project.org/wiki/doku.php?id=".substr($_SESSION["glpilanguage"],0,2).":plugins:barscode_faq' target='_blank'>".$LANGBARSCODE["setup"][8]." </a>";
-				echo "</td></tr>";
-		if ($_SESSION["glpiactive_entity"]==0){
-		echo "<tr class='tab_bg_1'><td><a href='plugin_barscode.uninstall.php'>".$LANGBARSCODE["setup"][4]."</a>";
-		echo " <img src='".$CFG_GLPI["root_doc"]."/pics/aide.png' alt='' onmouseout=\"setdisplay(getElementById('commentsup'),'none')\" onmouseover=\"setdisplay(getElementById('commentsup'),'block')\">";
-		echo "<span class='over_link' id='commentsup'>".$LANGBARSCODE["setup"][6]."</span>";
-		echo "</td></tr>";
-		}
-		echo "</table></div>";
+else
+{
+	$config = new plugin_barscode;
+	if(!empty($_POST["update_conf_bc"])) {
+		$config->update($_POST);
+		glpi_header($_SERVER["HTTP_REFERER"]);	
+	} else {
+		commonHeader($LANGBARSCODE["title"][1],$_SERVER["PHP_SELF"],"plugins","barscode");
+		$config->showForm($_SERVER["PHP_SELF"]);
+		commonFooter();
+	}
 }
 
-commonFooter();
 ?>

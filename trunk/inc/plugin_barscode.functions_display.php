@@ -36,7 +36,7 @@ if (!defined('GLPI_ROOT')){
 
 function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 
-	GLOBAL  $DB,$LANG, $LANGBARSCODE, $PDF;
+	global  $DB,$LANG, $LANGBARSCODE, $PDF;
 
 	$Logo['F']   = '../pics/logo.png';	// Fichier du logo
 
@@ -91,7 +91,7 @@ function plugin_barscode_print($nb,$begin,$lenght,$prefixe,$size,$format){
 
 function plugin_barscode_GenerateEtiquette($X_From, $Y_From, $X_To, $Y_To, $Weight, $Height, $Logo, $num, $length, $prefixe)
 {
-	GLOBAL  $LANG, $LANGBARSCODE, $PDF;
+	global  $LANG, $LANGBARSCODE, $PDF;
 
 	$PDF->Image($Logo['F'], $X_From+2, $Y_From+2);
 

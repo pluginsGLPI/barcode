@@ -33,15 +33,6 @@
 if (!defined('GLPI_ROOT')){
 	die("Sorry. You can't access directly to this file");
 	}
-
-class plugin_barscode extends CommonDBTM {
-
-	function plugin_barscode () {
-		$this->table="glpi_plugin_barscode_config";
-	}
-
-}
-
 class plugin_barscode_Profile extends CommonDBTM {
 
 	function plugin_barscode_Profile () {

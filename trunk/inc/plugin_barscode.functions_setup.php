@@ -38,7 +38,7 @@ if (!defined('GLPI_ROOT')){
 function plugin_barscode_Install() {
 	
 	$DB = new DB;
-	$DB_file = GLPI_ROOT ."/plugins/barscode/inc/plugin_barscode-1.3-empty.sql";
+	$DB_file = GLPI_ROOT ."/plugins/barscode/inc/plugin_barscode-1.4-empty.sql";
 	$DBf_handle = fopen($DB_file, "rt");
 	$sql_query = fread($DBf_handle, filesize($DB_file));
 	fclose($DBf_handle);

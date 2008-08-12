@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------
 $title = "Codes barres";
 
-$LANGBARSCODE["title"][1]	= "".$title."";
+$LANGBARSCODE["title"][1]	= $title;
 $LANGBARSCODE["title"][2] = "Configuration de mise en page";
 
 $LANGBARSCODE["config"][0] = "Marge à gauche";
@@ -49,10 +49,14 @@ $LANGBARSCODE["config"][11] = "Edité le ";
 $LANGBARSCODE["config"][12] = "Page ";
 $LANGBARSCODE["config"][13] = "NB Etiquette par ligne en mode Paysage";
 $LANGBARSCODE["config"][14] = "NB Etiquette par colonne en mode Paysage";
+$LANGBARSCODE["config"][15] = "Champs à utiliser pour le code barre";
 
 $LANGBARSCODE["profile"][0] = "Gestion des droits";
 $LANGBARSCODE["profile"][1] = "$title";
+$LANGBARSCODE["profile"][2] = "Configuration de la mise en page";
 $LANGBARSCODE["profile"][6] = "Listes des profils déjà configurés";
+
+$LANGBARSCODE["massiveaction"][0] = "Imprimer les codes barres";
 
 $LANGBARSCODE["buttons"][0] = "Actualiser";
 $LANGBARSCODE["buttons"][1] = "Créer";
@@ -75,4 +79,5 @@ $LANGBARSCODE["setup"][7] = "Mode d'emploi";
 $LANGBARSCODE["setup"][8] = "FAQ";
 $LANGBARSCODE["setup"][9] = "Merci de vous placer sur l'entité racine (voir tous)";
 
+$LANGBARSCODE["preference"][0] = "Préférences du plugin PDF";
 ?>
