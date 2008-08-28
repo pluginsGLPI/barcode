@@ -59,13 +59,14 @@ function plugin_init_barscode() {
 
 		// Display a menu entry ?		
 		if (plugin_barscode_haveRight("barscode","r") && (isPluginBarscodeInstalled() && isset($_SESSION["glpi_plugin_barscode_profile"]))){
-
-						
+	
 			$PLUGIN_HOOKS['use_massive_action']['barscode']=1;
 			$PLUGIN_HOOKS['menu_entry']['barscode'] = true;
             $PLUGIN_HOOKS['submenu_entry']['barscode']['config'] = 'front/plugin_barscode.config.php';
-            $PLUGIN_HOOKS['pre_item_delete']['barscode'] = 'plugin_pre_item_delete_barscode'; 
-            $PLUGIN_HOOKS['user_preferences']['barscode'] = 'plugin_user_preferences_barscode';
+            $PLUGIN_HOOKS['pre_item_delete']['barscode'] = 'plugin_pre_item_delete_barscode';
+            $PLUGIN_HOOKS['headings']['barscode'] = 'plugin_get_headings_barscode';
+			$PLUGIN_HOOKS['headings_action']['barscode'] = 'plugin_headings_actions_barscode';
+
 		}
 		// Config page
 		if (plugin_barscode_haveRight("barscode","r") || haveRight("config","w"))
@@ -183,6 +184,7 @@ function plugin_get_headings_barscode($type,$withtemplate){
 		case PRINTER_TYPE :
 		case PHONE_TYPE:
 		case SOFTWARE_TYPE:
+		case "prefs":
 			// template case
 			if ($withtemplate){
 				return array();
@@ -200,6 +202,10 @@ function plugin_headings_actions_barscode($type){
 	switch ($type){
 		case COMPUTER_TYPE :
 			return array(1 => "plugin_barscode_showBarscodeForm");
+
+			break;
+		case "prefs":
+			return array(1 => "plugin_user_preferences_barscode");
 
 			break;
 	}
