@@ -57,7 +57,7 @@ class plugin_barscode_UserPreferences extends CommonDBTM{
 			$result = $DB->query($sql);
 		}
 
-		echo "<form name='software' action='".$_SERVER['PHP_SELF']."' method='post'>";
+		echo "<form name='software' action='".$CFG_GLPI['root_doc']."/front/user.form.my.php' method='post'>";
 		echo "<div align='center' id='pdf_type'>";
 		echo "<table class='tab_cadre_fixe'>";
 		echo "<tr class='tab_bg_1' align='center'><th colspan='6'>".$LANGBARSCODE["preference"][0]."</th></tr>";		
