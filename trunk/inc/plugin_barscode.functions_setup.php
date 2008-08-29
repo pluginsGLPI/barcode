@@ -48,12 +48,27 @@ function plugin_barscode_Install() {
 	}
 }
 
+function plugin_barscode_update14() {
+	
+	$DB = new DB;
+	$DB_file = GLPI_ROOT ."/plugins/barscode/inc/plugin_barscode-1.4-update.sql";
+	$DBf_handle = fopen($DB_file, "rt");
+	$sql_query = fread($DBf_handle, filesize($DB_file));
+	fclose($DBf_handle);
+	foreach ( explode(";\n", "$sql_query") as $sql_line) {
+		if (get_magic_quotes_runtime()) $sql_line=stripslashes_deep($sql_line);
+		$DB->query($sql_line);
+	}
+}
+
 function plugin_barscode_uninstall() {
 
 	$DB = new DB;
 	$query = "DROP TABLE `glpi_plugin_barscode_config`;";
 	$DB->query($query) or die($DB->error());
 	$query = "DROP TABLE `glpi_plugin_barscode_profiles`;";
+	$DB->query($query) or die($DB->error());
+	$query = "DROP TABLE `glpi_plugin_barscode_preference`;";
 	$DB->query($query) or die($DB->error());
 
 }

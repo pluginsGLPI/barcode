@@ -39,7 +39,7 @@ if (!defined('GLPI_ROOT')){
 function plugin_barscode_initSession() {
 	global $DB;
 	
-	if(TableExists("glpi_plugin_barscode_config")){
+	if(TableExists("glpi_plugin_barscode_preference")){
 		$profile=new plugin_barscode_Profile();
 	
 		$query = "SELECT DISTINCT glpi_profiles.* FROM glpi_users_profiles INNER JOIN glpi_profiles ON (glpi_users_profiles.FK_profiles = glpi_profiles.ID) WHERE glpi_users_profiles.FK_users='".$_SESSION["glpiID"]."'";
