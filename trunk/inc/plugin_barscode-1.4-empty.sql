@@ -28,7 +28,7 @@ CREATE TABLE `glpi_plugin_barscode_profiles` (
 	KEY `interface` (`interface`)
 ) TYPE=MyISAM;
 
-CREATE TABLE IF NOT EXISTS `glpi_plugin_barscode_profiles` (
+CREATE TABLE IF NOT EXISTS `glpi_plugin_barscode_preference` (
   `ID` int(11) NOT NULL auto_increment,
   `user` int(11) NOT NULL default '0',
   `page_format` varchar(2) NOT NULL default 'A4',
