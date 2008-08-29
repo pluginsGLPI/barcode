@@ -53,6 +53,16 @@ if(!isset($_SESSION["glpi_plugin_barscode_installed"]) || $_SESSION["glpi_plugin
 			echo "<a href='plugin_barscode.install.php'>".$LANGBARSCODE["setup"][2]."</a></td></tr>";
 		
 			echo "</table></div>";
+		}elseif(!TableExists("glpi_plugin_barscode_preference")) {
+		
+			echo "<div align='center'>";
+			echo "<table class='tab_cadre' cellpadding='5'>";
+			echo "<tr><th>".$LANGBARSCODE["setup"][1];
+			echo "</th></tr>";
+			echo "<tr class='tab_bg_1'><td>";
+			echo "<a href='plugin_barscode.update.php'>".$LANGBARSCODE["setup"][3]."</a></td></tr>";
+		
+			echo "</table></div>";
 		}
 	}else{ 
 		echo "<div align='center'><br><br><img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>"; 

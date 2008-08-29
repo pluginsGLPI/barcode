@@ -71,9 +71,9 @@ $LANGBARSCODE["bc"][6] = "A3";
 $LANGBARSCODE["bc"][7] = "A5";
 
 $LANGBARSCODE["setup"][1] = "Configuration du plugin ".$title;
-$LANGBARSCODE["setup"][2] = "Installer le plugin $title";
-$LANGBARSCODE["setup"][3] = "Mettre à jour le plugin $title vers la version";
-$LANGBARSCODE["setup"][4] = "Désinstaller le plugin $title";
+$LANGBARSCODE["setup"][2] = "Installer le plugin $title 1.4";
+$LANGBARSCODE["setup"][3] = "Mettre à jour le plugin $title vers la version 1.4";
+$LANGBARSCODE["setup"][4] = "Désinstaller le plugin $title 1.4";
 $LANGBARSCODE["setup"][6] = "Attention, la désinstallation du plugin est irréversible.<br> Vous perdrez toutes les données.";
 $LANGBARSCODE["setup"][7] = "Mode d'emploi";
 $LANGBARSCODE["setup"][8] = "FAQ";
