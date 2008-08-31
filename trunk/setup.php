@@ -212,8 +212,9 @@ function plugin_headings_actions_barscode($type){
 	return false;
 }
 
-function plugin_user_preferences_barscode($post){
+function plugin_user_preferences_barscode(){
 	global $DB;
+print_r($_POST);
 
 	$pref = new plugin_barscode_UserPreferences;
 	$pref->showForm($_SERVER["PHP_SELF"],$_POST);
