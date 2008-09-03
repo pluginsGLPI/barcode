@@ -219,7 +219,7 @@ function plugin_headings_barscode($type,$ID,$withtemplate=0){
 		switch ($type){
 			case "prefs":
 				$pref = new plugin_barscode_UserPreferences;
-				$pref->showForm($CFG_GLPI['root_doc']."/front/user.form.my.php",$_POST);
+				$pref->showForm($CFG_GLPI['root_doc']."/plugins/barscode/front/plugin_barscode.preferences.form.php");
 			break;
 			default :
 			break;
