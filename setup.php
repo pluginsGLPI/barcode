@@ -178,12 +178,12 @@ function plugin_barscode_MassiveActionsProcess($data){
 function plugin_get_headings_barscode($type,$withtemplate){
 	global $LANGBARSCODE;
 	switch ($type){
-		case COMPUTER_TYPE :
+		/*case COMPUTER_TYPE :
 		case MONITOR_TYPE :
 		case NETWORKING_TYPE :
 		case PRINTER_TYPE :
 		case PHONE_TYPE:
-		case SOFTWARE_TYPE:
+		case SOFTWARE_TYPE:*/
 		case "prefs":
 			// template case
 			if ($withtemplate){
@@ -200,10 +200,10 @@ function plugin_get_headings_barscode($type,$withtemplate){
 function plugin_headings_actions_barscode($type){
 
 	switch ($type){
-		case COMPUTER_TYPE :
+		/*case COMPUTER_TYPE :
 			return array(1 => "plugin_barscode_showBarscodeForm");
 
-			break;
+			break;*/
 		case "prefs":
 			return array(1 => "plugin_headings_barscode");
 
