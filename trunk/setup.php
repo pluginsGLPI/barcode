@@ -205,17 +205,26 @@ function plugin_headings_actions_barscode($type){
 
 			break;
 		case "prefs":
-			return array(1 => "plugin_user_preferences_barscode");
+			return array(1 => "plugin_headings_barscode");
 
 			break;
 	}
 	return false;
 }
 
-function plugin_user_preferences_barscode(){
-	global $DB;
+// action heading
+function plugin_headings_barscode($type,$ID,$withtemplate=0){
+	global $CFG_GLPI;
 
-	$pref = new plugin_barscode_UserPreferences;
-	$pref->showForm($_SERVER["PHP_SELF"],$_POST);
+		switch ($type){
+			case "prefs":
+				$pref = new plugin_barscode_UserPreferences;
+				$pref->showForm($CFG_GLPI['root_doc']."/front/user.form.my.php",$_POST);
+			break;
+			default :
+			break;
+		}
+
 }
+
 ?>
