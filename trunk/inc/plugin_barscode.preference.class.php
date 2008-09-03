@@ -45,19 +45,13 @@ class plugin_barscode_UserPreferences extends CommonDBTM{
 		$this->fields["pdf_type"]="L";	
 	}
 	
-	function showForm($target,$post) {
+	function showForm($target) {
 		global $LANGBARSCODE, $LANG, $DB, $CFG_GLPI;
 		
 		$sql = "DELETE FROM glpi_plugin_barscode_preference WHERE user=".$_SESSION["glpiID"];
 		$result = $DB->query($sql);
 		
-		if (isset($post["page_format"]) && isset($post["pdf_type"]) )
-		{
-			$sql = "INSERT INTO glpi_plugin_barscode_preference SET user=".$_SESSION["glpiID"]." AND page_format=".$post["page_format"]." AND pdf_type=".$post["pdf_type"];
-			$result = $DB->query($sql);
-		}
-
-		echo "<form name='software' action='".$CFG_GLPI['root_doc']."/front/user.form.my.php' method='post'>";
+		echo "<form name='software' action='".$target."' method='post'>";
 		echo "<div align='center' id='pdf_type'>";
 		echo "<table class='tab_cadre_fixe'>";
 		echo "<tr class='tab_bg_1' align='center'><th colspan='6'>".$LANGBARSCODE["preference"][0]."</th></tr>";		
