@@ -40,8 +40,8 @@ header_nocache();
 
 checkRight("profile","r");
 
-$prof=new plugin_barscode_Profile();
-if ($_POST["interface"]=="barscode")
-$prof->showbarscodeForm($_POST["ID"]);
+$prof=new GenerateInventoryNumberProfile();
+if ($_POST["interface"]=="generateinventorynumber")
+$prof->showGenerateinventorynumberForm($_POST["ID"]);
 
 ?>
