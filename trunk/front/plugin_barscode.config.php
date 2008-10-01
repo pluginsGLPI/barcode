@@ -81,13 +81,6 @@ elseif(!empty($_POST["update_conf_bc"])) {
 
 		echo "<tr><th>".$LANGBARSCODE["setup"][1];
 		echo "</th></tr>";
-
-		if (haveRight("config","w") && haveRight("profile","w")){
-			echo "<tr class='tab_bg_1'><td align='center'>";
-			echo "<a href=\"./plugin_barscode.profile.php\">".$LANGBARSCODE["profile"][0]."</a>";
-			echo "</td></tr>";
-		}
-
 		echo "<tr class='tab_bg_1'><td align='center'>";
 		echo "<a href=\"./plugin_barscode.layout.config.php\">".$LANGBARSCODE["profile"][2]."</a>";
 		echo "</td></tr>";
