@@ -48,63 +48,19 @@ class plugin_barscode_Profile extends CommonDBTM {
 		$DB->query($query);
 	}
 	
-	function showprofileForm($target,$ID){
-		global $LANG,$CFG_GLPI,$LANGBARSCODE;
-
-		if (!haveRight("profile","r")) return false;
-
-		$onfocus="";
-		if ($ID){
-			$this->getFromDB($ID);
-		} else {
-			$this->getEmpty();
-			$onfocus="onfocus=\"this.value=''\"";
-		}
-
-		if (empty($this->fields["interface"])) $this->fields["interface"]="barscode";
-		if (empty($this->fields["name"])) $this->fields["name"]=$LANG["common"][0];
-
-
-		echo "<form name='form' method='post' action=\"$target\">";
-		echo "<div align='center'>";
-		echo "<table class='tab_cadre'><tr>";
-		echo "<th>".$LANG["common"][16].":</th>";
-		echo "<th><input type='text' name='name' value=\"".$this->fields["name"]."\" $onfocus></th>";
-		echo "<th>".$LANG["profiles"][2].":</th>";
-		echo "<th><select name='interface' id='profile_interface'>";
-		echo "<option value='barscode' ".($this->fields["interface"]!="barscode"?"selected":"").">".$LANGBARSCODE["profile"][1]."</option>";
-
-		echo "</select></th>";
-		echo "</tr></table>";
-		echo "</div>";
-		
-		echo "<div align='center' id='profile_form'>";
-		$params=array('interface'=>'__VALUE__',
-				'ID'=>$ID,
-		);
-		ajaxUpdateItemOnSelectEvent("profile_interface","profile_form",$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php",$params,false);
-		ajaxUpdateItem("profile_form",$CFG_GLPI["root_doc"]."/plugins/barscode/ajax/profiles.php",$params,false,'profile_interface');
-
-		echo "</div>";
-		echo "</form>";
-
-	}
-
-	function showbarscodeForm($ID){
+	//profiles modification
+	function showForm($target,$ID){
 		global $LANG,$LANGBARSCODE;
 
 		if (!haveRight("profile","r")) return false;
 		$canedit=haveRight("profile","w");
-
 		if ($ID){
 			$this->getFromDB($ID);
-		} else {
-			$this->getEmpty();
 		}
+		echo "<form action='".$target."' method='post'>";
+		echo "<table class='tab_cadre_fixe'>";
 
-		echo "<br><table class='tab_cadre'>";
-
-		echo "<tr><th colspan='2' align='center'><strong>".$LANGBARSCODE["profile"][0]."</strong></th></tr>";
+		echo "<tr><th colspan='2' align='center'><strong>".$LANGBARSCODE["profile"][0]." ".$this->fields["name"]."</strong></th></tr>";
 
 		echo "<tr class='tab_bg_2'>";
 		echo "<td>".$LANGBARSCODE["profile"][1].":</td><td>";
@@ -114,19 +70,12 @@ class plugin_barscode_Profile extends CommonDBTM {
 
 		if ($canedit){
 			echo "<tr class='tab_bg_1'>";
-			if ($ID){
-				echo "<td  align='center'>";
-				echo "<input type='hidden' name='ID' value=$ID>";
-				echo "<input type='submit' name='update' value=\"".$LANG["buttons"][7]."\" class='submit'>";
-				echo "</td><td  align='center'>";
-				echo "<input type='submit' name='delete' value=\"".$LANG["buttons"][6]."\" class='submit'>";
-			} else {
-				echo "<td colspan='2' align='center'>";
-				echo "<input type='submit' name='add' value=\"".$LANG["buttons"][8]."\" class='submit'>";
-			}
+			echo "<td align='center' colspan='2'>";
+			echo "<input type='hidden' name='ID' value=$ID>";
+			echo "<input type='submit' name='update_user_profile' value=\"".$LANG["buttons"][7]."\" class='submit'>";
 			echo "</td></tr>";
 		}
-		echo "</table>";
+		echo "</table></form>";
 
 	}
 }

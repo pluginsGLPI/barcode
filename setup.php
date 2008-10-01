@@ -185,6 +185,7 @@ function plugin_get_headings_barscode($type,$withtemplate){
 		case PHONE_TYPE:
 		case SOFTWARE_TYPE:*/
 		case "prefs":
+		case PROFILE_TYPE:
 			// template case
 			if ($withtemplate){
 				return array();
@@ -192,6 +193,7 @@ function plugin_get_headings_barscode($type,$withtemplate){
 				return array(1 => $LANGBARSCODE["massiveaction"][0]);
                         }
 			break;
+		
 	}
 	return false;
 }
@@ -205,6 +207,7 @@ function plugin_headings_actions_barscode($type){
 
 			break;*/
 		case "prefs":
+		case PROFILE_TYPE:
 			return array(1 => "plugin_headings_barscode");
 
 			break;
@@ -220,6 +223,12 @@ function plugin_headings_barscode($type,$ID,$withtemplate=0){
 			case "prefs":
 				$pref = new plugin_barscode_UserPreferences;
 				$pref->showForm($CFG_GLPI['root_doc']."/plugins/barscode/front/plugin_barscode.preferences.form.php");
+			break;
+			case PROFILE_TYPE :
+				$prof=new plugin_barscode_Profile();	
+				if (!$prof->GetfromDB($ID))
+					plugin_barscode_createaccess($ID);				
+				$prof->showForm($CFG_GLPI["root_doc"]."/plugins/barscode/front/plugin_barscode.profile.php",$ID);		
 			break;
 			default :
 			break;
