@@ -84,7 +84,7 @@ function plugin_init_barcode() {
 function plugin_version_barcode() {
 
    return array('name'           => 'Plugin Barcode',
-                'version'        => '2.0.0',
+                'version'        => '2.0',
                 'author'         => 'Jean Marc GRISARD & <a href="mailto:v.mazzoni@siprossii.com">Vincent MAZZONI</a>',
                 'homepage'       => 'https://forge.indepnet.net/projects/show/barscode',
                 'minGlpiVersion' => '0.78');// For compatibility / no install in version < minGlpiVersion
