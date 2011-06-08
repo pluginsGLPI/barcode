@@ -409,8 +409,15 @@ class PluginBarcodeBarcode {
          if (file_exists($imgFile)) {
             $imgSize = getimagesize($imgFile);
             $imgWidth = $imgSize[0];
+            $imgHeight = $imgSize[1];
             if ($imgWidth > $width) {
-               addMessageAfterRedirect($LANG['plugin_barcode']["message"][1]);
+               $ratio = (100 * $width ) / $imgWidth;
+               $imgWidth = $width;
+               $imgHeight = $imgHeight * ($ratio / 100);
+            } else if ($imgHeight > $height) {
+               $ratio = (100 * $height ) / $imgHeight;
+               $imgHeight = $height;
+               $imgWidth = $imgWidth * ($ratio / 100);
             }
             $image = imagecreatefrompng($imgFile);
             if ($first) {
@@ -428,7 +435,30 @@ class PluginBarcodeBarcode {
                   }
                }
             }
-            $pdf->addImage($image, $x, $y, 0, $height, 100);
+            $pdf->addImage($image, $x, $y, $imgWidth, $imgHeight);
+
+            if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
+               // Add logo to barcode
+               $heightyposText = 30;
+               $heightLogomax = $height - $heightyposText;
+               $imgSize = getimagesize(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+               $logoWidth = $imgSize[0];
+               $logoHeight = $imgSize[1];
+               if ($logoHeight > $heightLogomax) {
+                  $ratio = (100 * $heightLogomax ) / $logoHeight;
+                  $logoHeight = $heightLogomax;
+                  $logoWidth = $logoWidth * ($ratio / 100);
+               } 
+               if ($logoWidth > $width) {
+                  $ratio = (100 * $width ) / $logoWidth;
+                  $logoWidth = $width;
+                  $logoHeight = $logoHeight * ($ratio / 100);
+               }
+               $logoimg = imagecreatefrompng(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+               $pdf->addImage($logoimg, $x + (($width - $logoWidth) / 2), $y + $heightyposText, $logoWidth, $logoHeight);
+            }
+            
+            $pdf->Rectangle($x, $y, $width, $height);
             $x += $width + $marginH;
             $y -= 0;
          }
