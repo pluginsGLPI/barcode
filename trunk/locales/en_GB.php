@@ -40,6 +40,7 @@ $LANG['plugin_barcode']["title"][2] = "Layout";
 $LANG['plugin_barcode']["title"][3] = "Generation";
 $LANG['plugin_barcode']["title"][4] = "Print barcodes";
 $LANG['plugin_barcode']["title"][5] = "General configuration";
+$LANG['plugin_barcode']["title"][6] = "Company logo";
 
 $LANG['plugin_barcode']["print"][0] = "Number of labels to print";
 $LANG['plugin_barcode']["print"][1] = "Start number";

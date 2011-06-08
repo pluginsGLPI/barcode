@@ -192,23 +192,49 @@ class PluginBarcodeBarcode {
 
       $defaultType = $this->getConfig();
       echo "<form name='form' method='post'
-                  action='".GLPI_ROOT."/plugins/barcode/front/config.form.php'>";
+                  action='".GLPI_ROOT."/plugins/barcode/front/config.form.php'
+                   enctype='multipart/form-data'>";
 
 		echo "<div align='center'>";
-		echo "<table class='tab_cadre'>";
+		echo "<table class='tab_cadre' width='550'>";
 		echo "<tr><th colspan='4'>".$LANG['plugin_barcode']["title"][1]."</th></tr>";
 		echo "</table><br>";
 
-		echo "<table class='tab_cadre'>";
-		echo "<tr><th colspan='4'>".$LANG['plugin_barcode']["title"][5]."</th></tr>";
+		echo "<table class='tab_cadre' width='550'>";
 		echo "<tr class='tab_bg_1'>";
-      echo "<td>".$LANG['plugin_barcode']["print"][13]."</td><td>";
-            $this->showTypeSelect($defaultType);
+      echo "<th colspan='4'>".$LANG['plugin_barcode']["title"][5]."</th>";
+      echo "</tr>";
+      
+		echo "<tr class='tab_bg_1'>";
+      echo "<td>".$LANG['plugin_barcode']["print"][13]."</td>";
+      echo "<td>";
+      $this->showTypeSelect($defaultType);
       echo "</td>";
-      echo "<td colspan='2'></td>";
+      echo "<td colspan='2'><input type='submit' value='".$LANG['buttons'][2]."' class='submit'></td>";
 		echo "</tr>";
-      echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".$LANG['buttons'][2]."' class='submit'></td></tr>";
-		echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".$LANG['plugin_barcode']["message"][2]."' class='submit' name='dropCache'></td></tr>";
+ 
+		echo "<tr class='tab_bg_1'>";
+      echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".$LANG['plugin_barcode']["message"][2]."' class='submit' name='dropCache'></td>";
+      echo "</tr>";
+
+      echo "<tr class='tab_bg_1'>";
+      echo "<th colspan='4'>".$LANG['plugin_barcode']["title"][6]."</th>";
+      echo "</tr>";
+
+      if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
+         echo "<tr class='tab_bg_1'>";
+         echo "<td colspan='4' align='center'>";
+         echo "<img src='".GLPI_ROOT."/plugins/barcode/front/document.send.php?file=barcode/logo.png'
+               width='300'/>";
+         echo "</td>";
+         echo "</tr>";
+      }
+      
+      echo "<tr class='tab_bg_1'>";
+      echo "<td colspan='2' align='center'><input type='file' name='logo' value='' /></td>";
+      echo "<td colspan='2'><input type='submit' value='".$LANG['buttons'][2]."' class='submit'></td>";
+      echo "</tr>";
+      
 		echo "</table>";
 		echo "</div>";
 		echo "</form>";
@@ -402,7 +428,7 @@ class PluginBarcodeBarcode {
                   }
                }
             }
-            $pdf->addImage($image, $x, $y, 0, $height);
+            $pdf->addImage($image, $x, $y, 0, $height, 100);
             $x += $width + $marginH;
             $y -= 0;
          }
