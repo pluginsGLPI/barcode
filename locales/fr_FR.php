@@ -41,6 +41,7 @@ $LANG['plugin_barcode']["title"][2] = "Mise en page";
 $LANG['plugin_barcode']["title"][3] = "Génération";
 $LANG['plugin_barcode']["title"][4] = "Imprimer les code-barres";
 $LANG['plugin_barcode']["title"][5] = "Configuration générale";
+$LANG['plugin_barcode']["title"][6] = "Logo de la société";
 
 $LANG['plugin_barcode']["print"][0] = "Nombre d'étiquettes à imprimer";
 $LANG['plugin_barcode']["print"][1] = "Numéro de début";

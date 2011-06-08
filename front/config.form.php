@@ -40,7 +40,7 @@ if (isset($_POST['dropCache'])) {
    if (is_dir($dir)) {
       if ($dh = opendir($dir)) {
          while (($file = readdir($dh)) !== false) {
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != ".." && $file != "logo.png") {
                unlink($dir.'/'.$file);
             }
          }
@@ -48,7 +48,14 @@ if (isset($_POST['dropCache'])) {
       }
    }
    addMessageAfterRedirect($LANG['plugin_barcode']["message"][3]);
-} elseif (isset($_POST['type'])) {
+} else if (!empty($_FILES['logo']['name'])) {
+   if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
+      @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+   }
+   // Move
+   rename($_FILES['logo']['tmp_name'],GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+
+} else if (isset($_POST['type'])) {
    $pbconf = new PluginBarcodeConfig();
    $_POST['id']=1;
    $pbconf->update($_POST);
