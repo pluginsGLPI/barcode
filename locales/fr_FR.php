@@ -126,4 +126,8 @@ $LANG['plugin_barcode']['size'][45] = 'LETTER';
 $LANG['plugin_barcode']['size'][46] = 'LEGAL';
 $LANG['plugin_barcode']['size'][47] = 'EXECUTIVE';
 $LANG['plugin_barcode']['size'][48] = 'FOLIO';
+
+$LANG['plugin_barcode']["profile"][0] = 'Génération des codes barre';
+$LANG['plugin_barcode']["profile"][1] = 'Configuration';
+
 ?>
