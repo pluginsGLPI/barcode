@@ -39,19 +39,36 @@ function plugin_init_barcode() {
    // Params : plugin name - string type - ID - Array of attributes
    Plugin::registerClass('PluginBarcodeDropdown');
 
+   Plugin::registerClass('PluginBarcodeProfile');
+
    Plugin::registerClass('PluginBarcode');
 
+   $PLUGIN_HOOKS['change_profile']['barcode'] = array('PluginBarcodeProfile','changeprofile');
+
    // Display a menu entry ?
-   if (isset($_SESSION["glpi_plugin_barcode_profile"])) { // Right set in change_profile hook
+   if ((isset($_SESSION["glpi_plugin_barcode_profile"])
+           && $_SESSION["glpi_plugin_barcode_profile"]["generate"])
+        OR (isset($_SESSION["glpi_plugin_barcode_profile"])
+           && $_SESSION["glpi_plugin_barcode_profile"]["config"])) {  // Right set in change_profile hook
+
+      $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
+
       $PLUGIN_HOOKS['menu_entry']['barcode'] = 'front/barcode.php';
+
+      // Onglets management
+      $PLUGIN_HOOKS['headings']['barcode']        = 'plugin_get_headings_barcode';
+      $PLUGIN_HOOKS['headings_action']['barcode'] = 'plugin_headings_actions_barcode';
+
+      // Massive Action definition
+      $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['title'] = "Search";
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page'] = '/plugins/barcode/front/barcode.php';
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = '/plugins/barcode/front/barcode.php';
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = '/plugins/barcode/front/barcode.form.php';
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = '/plugins/barcode/index.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']["<img  src='".$CFG_GLPI["root_doc"]."/pics/menu_showall.png' title='".$LANG['plugin_barcode']["test"]."' alt='".$LANG['plugin_barcode']["test"]."'>"] = '/plugins/barcode/index.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links'][$LANG['plugin_barcode']["test"]] = '/plugins/barcode/index.php';
+      //$PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']["<img  src='".$CFG_GLPI["root_doc"]."/pics/menu_showall.png' title='".$LANG['plugin_barcode']["test"]."' alt='".$LANG['plugin_barcode']["test"]."'>"] = '/plugins/barcode/index.php';
+      //$PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links'][$LANG['plugin_barcode']["test"]] = '/plugins/barcode/index.php';
 
       $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
    }
@@ -61,22 +78,9 @@ function plugin_init_barcode() {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
 
-   // Init session
-   //$PLUGIN_HOOKS['init_session']['example'] = 'plugin_init_session_example';
-   // Change profile
-   $PLUGIN_HOOKS['change_profile']['barcode'] = 'plugin_change_profile_barcode';
-   // Change entity
-   //$PLUGIN_HOOKS['change_entity']['example'] = 'plugin_change_entity_example';
-
-   // Onglets management
-   $PLUGIN_HOOKS['headings']['barcode']        = 'plugin_get_headings_barcode';
-   $PLUGIN_HOOKS['headings_action']['barcode'] = 'plugin_headings_actions_barcode';
-
    //redirect appel http://localhost/glpi/index.php?redirect=plugin_example_2 (ID 2 du form)
    $PLUGIN_HOOKS['redirect_page']['barcode'] = 'barcode.form.php';
 
-   // Massive Action definition
-   $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 }
 
 
