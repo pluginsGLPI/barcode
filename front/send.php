@@ -35,6 +35,7 @@
 
 if (!defined('GLPI_ROOT')) {
 	define('GLPI_ROOT', '../../..');
+   include (GLPI_ROOT . "/inc/includes.php");
 }
 if (!defined("GLPI_PLUGIN_DOC_DIR")){
 	define("GLPI_PLUGIN_DOC_DIR",GLPI_ROOT . "/files/_plugins");
@@ -61,7 +62,7 @@ if (isset($_GET['file'])) {
       //header('Pragma: no-cache');
       header('Cache-control: private, must-revalidate'); /// IE BUG + SSL
       header("Content-disposition: filename=\"$filename\"");
-      header("Content-type: ".$mime);
+      header("Content-type: application/pdf");
 
       $f=fopen($file,"r");
 
@@ -69,7 +70,7 @@ if (isset($_GET['file'])) {
          echo "Error opening file $filename";
       } else {
          // Pour que les \x00 ne devienne pas \0
-         $mc=Toolbox::get_magic_quotes_runtime();
+         $mc = Toolbox::get_magic_quotes_runtime();
          if ($mc) @set_magic_quotes_runtime(0);
          $fsize=filesize($file);
 

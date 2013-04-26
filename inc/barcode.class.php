@@ -175,8 +175,8 @@ class PluginBarcodeBarcode {
       global $LANG;
 
       $config = $this->getConfigType();
-      echo "<form name='form' method='post'
-                  action='".GLPI_ROOT."/plugins/barcode/front/barcode.form.php'>";
+//      echo "<form name='form' method='post'
+//                  action='".GLPI_ROOT."/plugins/barcode/front/barcode.form.php'>";
 		echo $LANG['plugin_barcode']["print"][13]." : ";
 		$this->showTypeSelect($config['type']);
 		echo " ".$LANG['plugin_barcode']["print"][4]." : ";
@@ -184,7 +184,7 @@ class PluginBarcodeBarcode {
 		echo " ".$LANG['plugin_barcode']["print"][8]." : ";
 		$this->showOrientationSelect($config['orientation']);
 		echo "<input type='submit' value='".$LANG['plugin_barcode']["print"][11]."' class='submit'>";
-		Html::closeForm();
+//		Html::closeForm();
    }
 
    function showFormConfig($p_type=NULL) {
@@ -360,7 +360,7 @@ class PluginBarcodeBarcode {
 
    function printPDF($p_params) {
       global $LANG;
-      
+
       // create barcodes
       $ext = 'png';
       $type = $p_params['type'];
