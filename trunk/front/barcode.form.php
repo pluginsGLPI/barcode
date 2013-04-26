@@ -48,7 +48,7 @@ $filename = $filePath[count($filePath)-1];
 // TODO : recup GLPI_ROOT de la page d'origine via SESSION ?
 $pathOrigin = '..';
 $msg = "<a href='".$pathOrigin.'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".$LANG['plugin_barcode']["message"][0]."</a>";
-addMessageAfterRedirect($msg);
+Session::addMessageAfterRedirect($msg);
 
-glpi_header($_SERVER['HTTP_REFERER']);
+Html::back();
 ?>

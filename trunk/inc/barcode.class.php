@@ -168,7 +168,7 @@ class PluginBarcodeBarcode {
                           class='submit'></td></tr>";
 		echo "</table>";
 		echo "</div>";
-		echo "</form>";
+		Html::closeForm();
    }
 
    function showFormMassiveAction() {
@@ -184,7 +184,7 @@ class PluginBarcodeBarcode {
 		echo " ".$LANG['plugin_barcode']["print"][8]." : ";
 		$this->showOrientationSelect($config['orientation']);
 		echo "<input type='submit' value='".$LANG['plugin_barcode']["print"][11]."' class='submit'>";
-		echo "</form>";
+		Html::closeForm();
    }
 
    function showFormConfig($p_type=NULL) {
@@ -237,7 +237,7 @@ class PluginBarcodeBarcode {
       
 		echo "</table>";
 		echo "</div>";
-		echo "</form>";
+		Html::closeForm();
       $types = $this->getCodeTypes();
       foreach($types as $type) {
          echo '<br>';
@@ -307,7 +307,7 @@ class PluginBarcodeBarcode {
 		echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".$LANG['buttons'][2]."' class='submit'></td></tr>";
 		echo "</table>";
 		echo "</div>";
-		echo "</form>";
+		Html::closeForm();
    }
 
    function getConfigType($p_type=NULL) {
@@ -375,7 +375,7 @@ class PluginBarcodeBarcode {
             }
          } else {
             if (!$this->create($p_params['code'], $type, $ext)) {
-               addMessageAfterRedirect($LANG['plugin_barcode']["message"][1]);
+               Session::addMessageAfterRedirect($LANG['plugin_barcode']["message"][1]);
             }
             $codes[] = $p_params['code'];
          }

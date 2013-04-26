@@ -42,5 +42,5 @@ if (isset($_POST['type'])) {
       $pbcconf->update($_POST);
    }
 }
-glpi_header($_SERVER['HTTP_REFERER']);
+Html::back();
 ?>

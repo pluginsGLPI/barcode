@@ -38,7 +38,7 @@ define('GLPI_ROOT', '../../..');
 include (GLPI_ROOT . "/inc/includes.php");
 
 if (!$CFG_GLPI["use_public_faq"]) {
-   checkLoginUser();
+   Session::checkLoginUser();
 }
 
 $doc = new Document;
@@ -53,12 +53,12 @@ if (isset($_GET["file"])) { // for other file
       }
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"])) {
-         sendFile(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"],$splitter[1]);
+         Toolbox::sendFile(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"],$splitter[1]);
       } else {
-         displayErrorAndDie($LANG['document'][45],true);
+         Html::displayErrorAndDie($LANG['document'][45],true);
       }
    } else {
-      displayErrorAndDie($LANG['document'][44],true);
+      Html::displayErrorAndDie($LANG['document'][44],true);
    }
 }
 
