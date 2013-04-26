@@ -55,8 +55,6 @@ function plugin_init_barcode() {
 
       $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
 
-      $PLUGIN_HOOKS['menu_entry']['barcode'] = 'front/barcode.php';
-
       // Onglets management
       $PLUGIN_HOOKS['headings']['barcode']        = 'plugin_get_headings_barcode';
       $PLUGIN_HOOKS['headings_action']['barcode'] = 'plugin_headings_actions_barcode';
