@@ -36,6 +36,8 @@
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS,$LANG,$CFG_GLPI;
 
+   $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
+   
    // Params : plugin name - string type - ID - Array of attributes
    Plugin::registerClass('PluginBarcodeDropdown');
 
@@ -88,22 +90,23 @@ function plugin_init_barcode() {
 function plugin_version_barcode() {
 
    return array('name'           => 'Plugin Barcode',
-                'version'        => '2.0',
-                'author'         => 'Jean Marc GRISARD & <a href="mailto:v.mazzoni@siprossii.com">Vincent MAZZONI</a>
-                   & <a href="mailto:d.durieux@siprossii.com">David DURIEUX</a>',
+                'version'        => '0.83+1.0',
+                'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
+                   Jean Marc GRISARD & Vincent MAZZONI',
                 'homepage'       => 'https://forge.indepnet.net/projects/show/barscode',
-                'minGlpiVersion' => '0.78');// For compatibility / no install in version < minGlpiVersion
+                'minGlpiVersion' => '0.83');// For compatibility / no install in version < minGlpiVersion
 }
 
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_barcode_check_prerequisites() {
+   
 
-   if (GLPI_VERSION >= 0.78) {
-      return true;
-   } else {
-      echo "GLPI version not compatible need 0.78";
+   if (version_compare(GLPI_VERSION,'0.83.3','lt') || version_compare(GLPI_VERSION,'0.84','ge')) {
+      echo "GLPI version not compatible need 0.83.x";
+      return false;
    }
+   return true;
 }
 
 
