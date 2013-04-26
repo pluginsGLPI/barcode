@@ -37,7 +37,7 @@ if (!defined('GLPI_ROOT')) {
 }
 
 include_once (GLPI_ROOT . "/inc/includes.php");
-checkRight("profile","r");
+Session::checkRight("profile","r");
 
 // Mainly usefull if not actived
 Plugin::load('barcode',true);
@@ -45,9 +45,9 @@ Plugin::load('barcode',true);
 $prof = new PluginBarcodeProfile();
 
 if (isset($_POST["update_user_profile"])) {
-   checkRight("profile","w");
+   Session::checkRight("profile","w");
    $prof->update($_POST);
-   glpi_header($_SERVER['HTTP_REFERER']);
+Html::back();
 }
 
 ?>

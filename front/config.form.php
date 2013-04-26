@@ -47,7 +47,7 @@ if (isset($_POST['dropCache'])) {
          closedir($dh);
       }
    }
-   addMessageAfterRedirect($LANG['plugin_barcode']["message"][3]);
+   Session::addMessageAfterRedirect($LANG['plugin_barcode']["message"][3]);
 } else if (!empty($_FILES['logo']['name'])) {
    if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
       @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
@@ -60,5 +60,5 @@ if (isset($_POST['dropCache'])) {
    $_POST['id']=1;
    $pbconf->update($_POST);
 }
-glpi_header($_SERVER['HTTP_REFERER']);
+Html::back();
 ?>

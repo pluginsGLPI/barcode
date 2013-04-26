@@ -121,11 +121,11 @@ class PluginBarcodeProfile extends CommonDBTM {
    }
 
    function canView() {
-      return haveRight('profile','r');
+      return Session::haveRight('profile','r');
    }
 
    function canCreate() {
-      return haveRight('profile','w');
+      return Session::haveRight('profile','w');
    }
 }
 ?>

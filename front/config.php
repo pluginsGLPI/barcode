@@ -39,14 +39,14 @@
 define('GLPI_ROOT', '../../..');
 include (GLPI_ROOT . "/inc/includes.php");
 
-checkRight("config","w");
+Session::checkRight("config","w");
 
 // To be available when plugin is not activated
 Plugin::load('barcode');
 
-commonHeader($LANG['plugin_barcode']["name"],$_SERVER['PHP_SELF'],"config","plugins");
+Html::header($LANG['plugin_barcode']["name"],$_SERVER['PHP_SELF'],"config","plugins");
 $barcode = new PluginBarcodeBarcode();
 $barcode->showFormConfig('');
 
-commonFooter();
+Html::footer();
 ?>
