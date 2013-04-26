@@ -76,7 +76,7 @@ function plugin_init_barcode() {
    }
 
    // Config page
-   if (haveRight('config','w')) {
+   if (Session::haveRight('config','w')) {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
 
@@ -90,11 +90,13 @@ function plugin_init_barcode() {
 function plugin_version_barcode() {
 
    return array('name'           => 'Plugin Barcode',
+                'shortname'      => 'barcode',
                 'version'        => '0.83+1.0',
-                'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
+                'license'        => 'AGPLv3+',
+                'author'         => '<a href="<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
                    Jean Marc GRISARD & Vincent MAZZONI',
                 'homepage'       => 'https://forge.indepnet.net/projects/show/barscode',
-                'minGlpiVersion' => '0.83');// For compatibility / no install in version < minGlpiVersion
+                'minGlpiVersion' => '0.83.3');// For compatibility / no install in version < minGlpiVersion
 }
 
 
