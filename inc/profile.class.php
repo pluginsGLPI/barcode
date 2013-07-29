@@ -1,36 +1,43 @@
 <?php
+
 /*
-  ----------------------------------------------------------------------
-  GLPI - Gestionnaire Libre de Parc Informatique
-  Copyright (C) 2003-2008 by the INDEPNET Development Team.
+   ------------------------------------------------------------------------
+   Barcode
+   Copyright (C) 2009-2013 by the Barcode plugin Development Team.
 
-  http://indepnet.net/   http://glpi-project.org/
-  ----------------------------------------------------------------------
+   https://forge.indepnet.net/projects/barscode
+   ------------------------------------------------------------------------
 
-  LICENSE
+   LICENSE
 
-  This file is part of GLPI.
+   This file is part of barcode plugin project.
 
-  GLPI is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+   Plugin Barcode is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-  GLPI is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   Plugin Barcode is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with GLPI; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-  ------------------------------------------------------------------------
+   You should have received a copy of the GNU Affero General Public License
+   along with Plugin Barcode. If not, see <http://www.gnu.org/licenses/>.
+
+   ------------------------------------------------------------------------
+
+   @package   Plugin Barcode
+   @author    David Durieux
+   @co-author
+   @copyright Copyright (c) 2009-2013 Barcode plugin Development team
+   @license   AGPL License 3.0 or (at your option) any later version
+              http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   @link      https://forge.indepnet.net/projects/barscode
+   @since     2009
+
+   ------------------------------------------------------------------------
  */
-
-// ----------------------------------------------------------------------
-// Original Author of file: Remi Collet
-// Purpose of file:
-// ----------------------------------------------------------------------
 
 class PluginBarcodeProfile extends CommonDBTM {
 
