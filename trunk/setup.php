@@ -94,7 +94,7 @@ function plugin_init_barcode() {
 // Get the name and the version of the plugin - Needed
 function plugin_version_barcode() {
 
-   return array('name'           => 'Plugin Barcode',
+   return array('name'           => 'Barcode',
                 'shortname'      => 'barcode',
                 'version'        => '0.84+1.0',
                 'license'        => 'AGPLv3+',
@@ -110,7 +110,7 @@ function plugin_barcode_check_prerequisites() {
    
 
    if (version_compare(GLPI_VERSION,'0.84','lt') || version_compare(GLPI_VERSION,'0.85','ge')) {
-      echo "GLPI version not compatible need 0.84.x";
+      echo __('GLPI version not compatible need 0.84.x', 'barcode');
       return false;
    }
    return true;

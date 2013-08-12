@@ -41,17 +41,27 @@
 
 class PluginBarcodeProfile extends CommonDBTM {
 
+   static function canView() {
+      return Session::haveRight('profile','r');
+   }
+
+   
+   
+   static function canCreate() {
+      return Session::haveRight('profile','w');
+   }
+   
+   
 
    function getSearchOptions() {
-      global $LANG;
 
       $tab = array();
 
-      $tab['common'] = $LANG['pulse2'][1];
+      $tab['common'] = __('Characteristics');
 
       $tab['table']     = $this->getTable();
       $tab['field']     = 'use';
-      $tab['linkfield'] = 'id';$LANG['plugin_barcode']["name"];
+      $tab['linkfield'] = 'id';
       $tab['datatype']  = 'bool';
 
       return $tab;
@@ -73,7 +83,7 @@ class PluginBarcodeProfile extends CommonDBTM {
 
 
    function showForm($ID, $options=array()) {
-      global $LANG,$DB;
+      global $DB;
 
       $target = $this->getFormURL();
       if (isset($options['target'])) {
@@ -92,15 +102,15 @@ class PluginBarcodeProfile extends CommonDBTM {
       echo "<form action='".$target."' method='post'>";
       echo "<table class='tab_cadre_fixe'>";
       echo "<tr><th colspan='2' class='center b'>".
-            $LANG['plugin_barcode']["name"]. " - " .$this->fields["profile"]."</th></tr>";
+            __('Barcode', 'barcode'). " - " .$this->fields["profile"]."</th></tr>";
 
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".$LANG['plugin_barcode']["profile"][0] ."&nbsp;:</td><td>";
+      echo "<td>".__('Generate barcode pdf', 'barcode')."&nbsp;:</td><td>";
       Dropdown::showYesNo("generate",(isset($this->fields["generate"])?$this->fields["generate"]:''));
       echo "</td></tr>\n";
 
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".$LANG['plugin_barcode']["profile"][1] ."&nbsp;:</td><td>";
+      echo "<td>".__('Configuration')."&nbsp;:</td><td>";
       Dropdown::showYesNo("config",(isset($this->fields["config"])?$this->fields["config"]:''));
       echo "</td></tr>\n";
 
@@ -108,7 +118,7 @@ class PluginBarcodeProfile extends CommonDBTM {
          echo "<tr class='tab_bg_1'>";
          echo "<td colspan='2' class='center'>";
          echo "<input type='hidden' name='id' value=$ID>";
-         echo "<input type='submit' name='update_user_profile' value='".$LANG["buttons"][7].
+         echo "<input type='submit' name='update_user_profile' value='".__('Save').
                "' class='submit'>&nbsp;";
          echo "</td></tr>\n";
       }
@@ -125,14 +135,6 @@ class PluginBarcodeProfile extends CommonDBTM {
        } else {
           unset($_SESSION["glpi_plugin_barcode_profile"]);
        }
-   }
-
-   function canView() {
-      return Session::haveRight('profile','r');
-   }
-
-   function canCreate() {
-      return Session::haveRight('profile','w');
    }
 }
 ?>
