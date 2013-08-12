@@ -59,10 +59,10 @@ if (isset($_GET["file"])) { // for other file
       if (file_exists(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"])) {
          Toolbox::sendFile(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"],$splitter[1]);
       } else {
-         Html::displayErrorAndDie($LANG['document'][45],true);
+         Html::displayErrorAndDie(__('Unauthorized access to this file'),true);
       }
    } else {
-      Html::displayErrorAndDie($LANG['document'][44],true);
+      Html::displayErrorAndDie(__('Invalid Filename'),true);
    }
 }
 

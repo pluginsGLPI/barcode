@@ -49,9 +49,9 @@ Session::checkRight("config","w");
 // To be available when plugin is not activated
 Plugin::load('barcode');
 
-Html::header($LANG['plugin_barcode']["name"],$_SERVER['PHP_SELF'],"config","plugins");
-$barcode = new PluginBarcodeBarcode();
-$barcode->showFormConfig('');
+Html::header(__('Barcode', 'barcode'), $_SERVER['PHP_SELF'], "config", "plugins");
+$pbConfig = new PluginBarcodeConfig();
+$pbConfig->showForm('');
 
 Html::footer();
 ?>

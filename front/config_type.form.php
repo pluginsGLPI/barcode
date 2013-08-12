@@ -49,7 +49,7 @@ include ('../../../inc/includes.php');
 if (isset($_POST['type'])) {
    $pbcconf = new PluginBarcodeConfig_Type();
    if ($res=array_keys($pbcconf->find("`type`='".$_POST['type']."'"))) {
-      $_POST['id']=$res[0];;
+      $_POST['id']=$res[0];
       $pbcconf->update($_POST);
    }
 }

@@ -45,9 +45,6 @@ if (!defined('GLPI_ROOT')) {
 
 class PluginBarcodeConfig_Type extends CommonDBTM {
 
-   function __construct() {
-		$this->table = "glpi_plugin_barcode_config_type";
-	}
 }
 
 ?>

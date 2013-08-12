@@ -41,7 +41,6 @@
 
 // Define actions :
 function plugin_barcode_MassiveActions($type) {
-   global $LANG;
 
    switch ($type) {
       // New action for core and other plugin types : name = plugin_PLUGINNAME_actionname
@@ -50,10 +49,11 @@ function plugin_barcode_MassiveActions($type) {
 		case 'Networking' :
 		case 'Printer' :
 		case 'Peripheral' :
-         return array("plugin_barcode_barcode" => $LANG['plugin_barcode']["title"][4]);
+         return array("plugin_barcode_barcode" => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
+                      "plugin_barcode_qrcode"  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
 
       case 'Profile' :
-         return array("plugin_barcode_allow"=>$LANG['plugin_barcode']["name"]);
+         return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
    }
    return array();
 }
@@ -62,7 +62,6 @@ function plugin_barcode_MassiveActions($type) {
 // How to display specific actions ?
 // options contain at least itemtype and and action
 function plugin_barcode_MassiveActionsDisplay($options=array()) {
-   global $LANG;
 
    switch ($options['itemtype']) {
       case 'Computer' :
@@ -75,6 +74,11 @@ function plugin_barcode_MassiveActionsDisplay($options=array()) {
                $barcode = new PluginBarcodeBarcode();
                $barcode->showFormMassiveAction();
             break;
+         
+            case "plugin_barcode_qrcode" :
+               $pbQRcode = new PluginBarcodeQRcode();
+               $pbQRcode->showFormMassiveAction();
+            break;
          }
          break;
 
@@ -84,7 +88,7 @@ function plugin_barcode_MassiveActionsDisplay($options=array()) {
                Dropdown::showYesNo('generate');
                Dropdown::showYesNo('config');
                echo "<input type='submit' name='massiveaction' class='submit' value='".
-                     $LANG['buttons'][2]."'>";
+                     __('Save')."'>";
                break;
          }
          break;
@@ -96,34 +100,59 @@ function plugin_barcode_MassiveActionsDisplay($options=array()) {
 
 // How to process specific actions ?
 function plugin_barcode_MassiveActionsProcess($data) {
-   global $LANG;
+   global $CFG_GLPI;
 
    switch ($data['action']) {
-      case 'plugin_barcode_barcode' :
-         $ci = new $data['itemtype']();
+      case 'plugin_barcode_barcode':
+      case 'plugin_barcode_qrcode' :
+         $pbConfig = new PluginBarcodeConfig();
+         $pbQRcode = new PluginBarcodeQRcode();
+         $itemtype = $data['itemtype'];
+         $item = new $itemtype();
+         $rand = mt_rand();
+         $number = 0;     
          $codes = array();
-         foreach ($data['item'] as $key => $val) {
-            if ($val == 1) {
-               $ci->getFromDB($key);
-               if ($ci->isField('otherserial')) {
-                  $codes[] = $ci->getField('otherserial');
+         if ($data['eliminate'] > 0) {
+            for ($nb=0; $nb < $data['eliminate']; $nb++) {
+               $codes[] = '';
+            }
+         }
+         if ($data['type'] == 'QRcode') {
+            foreach ($data['item'] as $key => $val) {
+               if ($val == 1) {
+                  $filename = $pbQRcode->generateQRcode($itemtype, $key, $rand, $number, $data);
+                  if ($filename) {
+                     $codes[] = $filename;
+                     $number++;
+                  }
+               }
+            }
+         } else {    
+            foreach ($data['item'] as $key => $val) {
+               if ($val == 1) {
+                  $item->getFromDB($key);
+                  if ($item->isField('otherserial')) {
+                     $codes[] = $item->getField('otherserial');
+                  }
                }
             }
          }
-         if (sizeof($codes)) {
-            $params['codes'] = $codes;
-            $params['type'] = $data['type'];
-            $params['size'] = $data['size'];
+         if (count($codes) > 0) {
+            $params['codes']  = $codes;
+            $params['type']   = $data['type'];
+            $params['size']   = $data['size'];
+            $params['border'] = $data['border'];
             $params['orientation'] = $data['orientation'];
             $barcode = new PluginBarcodeBarcode();
             $file = $barcode->printPDF($params);
             $filePath = explode('/', $file);
             $filename = $filePath[count($filePath)-1];
-            // TODO : recup GLPI_ROOT de la page d'origine via SESSION ?
-            $pathOrigin = '..';
-            $msg = "<a href='".$pathOrigin.'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".$LANG['plugin_barcode']["message"][0]."</a>";
+
+            $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
             Session::addMessageAfterRedirect($msg);
+            $pbQRcode->cleanQRcodefiles($rand, $number);
          }
+         return true;
          break;
 
       case "plugin_barcode_allow" :
@@ -181,9 +210,10 @@ function plugin_barcode_MassiveActionsFieldsDisplay($options=array()) {
    return false;
 }
 
+
+
 // Define headings added by the plugin
 function plugin_get_headings_barcode($item, $withtemplate) {
-   global $LANG;
 
    switch (get_class($item)) {
       case 'Computer' :
@@ -196,17 +226,18 @@ function plugin_get_headings_barcode($item, $withtemplate) {
             return array();
             // Non template case / editing an existing object
          } else {
-            return array(1 => $LANG['plugin_barcode']["name"]);
+            return array(1 => __('Barcode', 'barcode'));
          }
 
       case 'Profile':
          if ($item->fields['interface']!='helpdesk') {
-            return array(1 => $LANG['plugin_barcode']["name"]);
+            return array(1 => __('Barcode', 'barcode'));
          }
          break;
     }
    return false;
 }
+
 
 
 // Define headings actions added by the plugin
@@ -230,9 +261,10 @@ function plugin_headings_actions_barcode($item) {
 }
 
 
+
 // Example of an action heading
 function plugin_headings_barcode($item, $withtemplate=0) {
-   global $LANG,$CFG_GLPI;
+   global $CFG_GLPI;
 
    if (!$withtemplate) {
       echo "<div class='center'>";
@@ -245,7 +277,7 @@ function plugin_headings_barcode($item, $withtemplate=0) {
             $prof->createProfile($item);
          }
          $prof->showForm($ID,
-                         array('target' => $CFG_GLPI["root_doc"]."/plugins/barcode/front/profile.php"));
+                         array('target' => $CFG_GLPI['root_doc']."/plugins/barcode/front/profile.php"));
          break;
 
          default :
@@ -256,6 +288,8 @@ function plugin_headings_barcode($item, $withtemplate=0) {
       echo "</div>";
    }
 }
+
+
 
 // Install process for plugin : need to return true if succeeded
 function plugin_barcode_install() {
@@ -342,6 +376,7 @@ function plugin_barcode_install() {
 
    return true;
 }
+
 
 
 // Uninstall process for plugin : need to return true if succeeded
