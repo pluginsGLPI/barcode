@@ -10,8 +10,8 @@
          <en><![CDATA[This plugin allow you to generate bars code]]></en>
       </short>
       <long>
-         <fr><![CDATA[Ce plugin vous permet de générer et d'export en PDF des codes barre]]></fr>
-         <en><![CDATA[This plugin allow you to generate and export in PDF bars code]]></en>
+         <fr><![CDATA[Ce plugin vous permet de générer et d'export en PDF des codes barre et QRcode]]></fr>
+         <en><![CDATA[This plugin allow you to generate and export in PDF bars code and QRcode]]></en>
        </long>
    </description>
    <homepage>https://forge.indepnet.net/projects/barscode</homepage>
@@ -20,6 +20,10 @@
       <author>David DURIEUX</author>
    </authors>
    <versions>
+       <version>
+          <num>0.84+1.0</num>
+          <compatibility>0.84</compatibility>
+      </version>
        <version>
           <num>2.1.0</num>
           <compatibility>0.80</compatibility>
@@ -45,16 +49,18 @@
       <lang>en_GB</lang>
       <lang>fr_FR</lang>
     </langs>
-   <license><![CDATA[GPL v2+]]></license>
+   <license><![CDATA[AGPL v3+]]></license>
       <tags>
          <fr>
             <tag>export</tag>
             <tag>code barre</tag>
+            <tag>QRcode</tag>
             <tag>données</tag>
          </fr>
          <en>
             <tag>export</tag>
             <tag>barcode</tag>
+            <tag>QRcode</tag>
             <tag>data</tag>
          </en>
    </tags>
