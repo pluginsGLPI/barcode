@@ -182,18 +182,59 @@ class PluginBarcodeBarcode {
 
       $pbConfig = new PluginBarcodeConfig();
       
+      echo '<center>';
+      echo '<table>';
+      echo '<tr>';
+      echo '<td>';
       $config = $pbConfig->getConfigType();
-		echo __('Type', 'barcode')." : ";
+		echo __('Type', 'barcode')." : </td><td>";
 		$pbConfig->showTypeSelect($config['type']);
-		echo "<br/>".__('Page size', 'barcode')." : ";
-		$this->showSizeSelect($config['size']);
-		echo "<br/>".__('Orientation', 'barcode')." : ";
-		$this->showOrientationSelect($config['orientation']);
-      echo "<br/>".__('Not use first xx barcodes', 'barcode')." : ";
-      Dropdown::showNumber("eliminate");
-      echo "<br/>".__('Display border', 'barcode')." : ";
+      echo '</td>';
+      echo '</tr>';
+      echo '</table>';
+      echo '<br/>';
+      
+      PluginBarcodeBarcode::commonShowMassiveAction();
+   }
+   
+   
+   
+   static function commonShowMassiveAction() {
+      
+      $pbBarcode = new PluginBarcodeBarcode();
+      $pbConfig = new PluginBarcodeConfig();
+
+      $config = $pbConfig->getConfigType();
+
+      echo '<table>';
+      echo '<tr>';
+      echo '<td>';
+		echo "<br/>".__('Page size', 'barcode')." : </td><td>";
+		$pbBarcode->showSizeSelect($config['size']);
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
+      echo '<td>';
+		echo "<br/>".__('Orientation', 'barcode')." : </td><td>";
+		$pbBarcode->showOrientationSelect($config['orientation']);
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
+      echo '<td>';
+      echo __('Not use first xx barcodes', 'barcode')." : </td><td>";
+      Dropdown::showNumber("eliminate"); 
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
+      echo '<td>';
+      echo __('Display border', 'barcode')." : </td><td>";
       Dropdown::showYesNo("border", 1);
-		echo "<br/><input type='submit' value='".__('Create', 'barcode')."' class='submit'>";
+      echo '</td>';
+      echo '</tr>';
+      echo '</table>';
+      echo '</center>';
+      
+      echo "<br/><input type='submit' value='".__('Create', 'barcode')."' class='submit'>";
    }
 
    
