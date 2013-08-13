@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI_barcode\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 18:32+0200\n"
+"POT-Creation-Date: 2013-08-13 10:03+0200\n"
 "PO-Revision-Date: 2013-08-12 16:33+0000\n"
 "Last-Translator: David Durieux <d.durieux@siprossii.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: hook.php:52 hook.php:53 hook.php:56 hook.php:229 hook.php:234
-#: front/config.php:52 inc/profile.class.php:105
+#: front/config.php:52 inc/profile.class.php:59 inc/profile.class.php:130
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -34,7 +34,7 @@ msgstr "Print QRcodes"
 msgid "Generated file"
 msgstr "Generated file"
 
-#: setup.php:113
+#: setup.php:115
 msgid "GLPI version not compatible need 0.84.x"
 msgstr "GLPI version not compatible need 0.84.x"
 
@@ -254,16 +254,16 @@ msgstr "Generation"
 msgid "Code"
 msgstr "Code"
 
-#: inc/barcode.class.php:155 inc/barcode.class.php:186 inc/config.class.php:75
+#: inc/barcode.class.php:155 inc/barcode.class.php:190 inc/config.class.php:75
 msgid "Type"
 msgstr "Type"
 
-#: inc/barcode.class.php:159 inc/barcode.class.php:188
+#: inc/barcode.class.php:159 inc/barcode.class.php:212
 #: inc/config.class.php:147
 msgid "Page size"
 msgstr "Page size"
 
-#: inc/barcode.class.php:162 inc/barcode.class.php:190
+#: inc/barcode.class.php:162 inc/barcode.class.php:218
 #: inc/config.class.php:150
 msgid "Orientation"
 msgstr "Orientation"
@@ -272,20 +272,19 @@ msgstr "Orientation"
 msgid "Number fo copies"
 msgstr "Number fo copies"
 
-#: inc/barcode.class.php:172 inc/barcode.class.php:196
-#: inc/qrcode.class.php:144
+#: inc/barcode.class.php:172 inc/barcode.class.php:237
 msgid "Create"
 msgstr "Create"
 
-#: inc/barcode.class.php:192 inc/qrcode.class.php:133
+#: inc/barcode.class.php:224
 msgid "Not use first xx barcodes"
 msgstr "Not use first xx barcodes"
 
-#: inc/barcode.class.php:194 inc/qrcode.class.php:139
+#: inc/barcode.class.php:230
 msgid "Display border"
 msgstr "Display border"
 
-#: inc/barcode.class.php:222
+#: inc/barcode.class.php:263
 msgid "The generation of some bacodes produced errors."
 msgstr "The generation of some bacodes produced errors."
 
@@ -373,6 +372,6 @@ msgstr "upca"
 msgid "QRcode"
 msgstr "QRcode"
 
-#: inc/profile.class.php:108
+#: inc/profile.class.php:133
 msgid "Generate barcode pdf"
 msgstr "Generate barcode pdf"

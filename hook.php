@@ -361,7 +361,7 @@ function plugin_barcode_install() {
                      '25', '30', '110', '70'),
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70')";
+                     '25', '30', '110', '100')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
    
@@ -374,7 +374,7 @@ function plugin_barcode_install() {
                 VALUES
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70')";
+                     '25', '30', '110', '100')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 

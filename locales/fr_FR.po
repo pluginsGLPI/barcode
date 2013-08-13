@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# David Durieux <d.durieux@siprossii.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI_barcode\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 18:32+0200\n"
-"PO-Revision-Date: 2013-08-12 16:33+0000\n"
+"POT-Creation-Date: 2013-08-13 10:03+0200\n"
+"PO-Revision-Date: 2013-08-13 08:24+0000\n"
 "Last-Translator: David Durieux <d.durieux@siprossii.com>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/glpi_barcode/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -18,361 +19,360 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: hook.php:52 hook.php:53 hook.php:56 hook.php:229 hook.php:234
-#: front/config.php:52 inc/profile.class.php:105
+#: front/config.php:52 inc/profile.class.php:59 inc/profile.class.php:130
 msgid "Barcode"
-msgstr ""
+msgstr "Barcode"
 
 #: hook.php:52
 msgid "Print barcodes"
-msgstr ""
+msgstr "Imprimer des codes barres"
 
 #: hook.php:53
 msgid "Print QRcodes"
-msgstr ""
+msgstr "Imprimer des QRcode"
 
 #: hook.php:151 front/barcode.form.php:56
 msgid "Generated file"
-msgstr ""
+msgstr "Fichier généré"
 
-#: setup.php:113
+#: setup.php:115
 msgid "GLPI version not compatible need 0.84.x"
-msgstr ""
+msgstr "La version de GLPI n'est pas compatible, il faut la 0.84.x"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr ""
+msgstr "Le cache a été vidé."
 
 #: inc/barcode.class.php:71
 msgid "4A0"
-msgstr ""
+msgstr "4A0"
 
 #: inc/barcode.class.php:72
 msgid "2A0"
-msgstr ""
+msgstr "2A0"
 
 #: inc/barcode.class.php:73
 msgid "A0"
-msgstr ""
+msgstr "A0"
 
 #: inc/barcode.class.php:74
 msgid "A1"
-msgstr ""
+msgstr "A1"
 
 #: inc/barcode.class.php:75
 msgid "A2"
-msgstr ""
+msgstr "A2"
 
 #: inc/barcode.class.php:76
 msgid "A3"
-msgstr ""
+msgstr "A3"
 
 #: inc/barcode.class.php:77
 msgid "A4"
-msgstr ""
+msgstr "A4"
 
 #: inc/barcode.class.php:78
 msgid "A5"
-msgstr ""
+msgstr "A5"
 
 #: inc/barcode.class.php:79
 msgid "A6"
-msgstr ""
+msgstr "A6"
 
 #: inc/barcode.class.php:80
 msgid "A7"
-msgstr ""
+msgstr "A7"
 
 #: inc/barcode.class.php:81
 msgid "A8"
-msgstr ""
+msgstr "A8"
 
 #: inc/barcode.class.php:82
 msgid "A9"
-msgstr ""
+msgstr "A9"
 
 #: inc/barcode.class.php:83
 msgid "A10"
-msgstr ""
+msgstr "A10"
 
 #: inc/barcode.class.php:84
 msgid "B0"
-msgstr ""
+msgstr "B0"
 
 #: inc/barcode.class.php:85
 msgid "B1"
-msgstr ""
+msgstr "B1"
 
 #: inc/barcode.class.php:86
 msgid "B2"
-msgstr ""
+msgstr "B2"
 
 #: inc/barcode.class.php:87
 msgid "B3"
-msgstr ""
+msgstr "B3"
 
 #: inc/barcode.class.php:88
 msgid "B4"
-msgstr ""
+msgstr "B4"
 
 #: inc/barcode.class.php:89
 msgid "B5"
-msgstr ""
+msgstr "B5"
 
 #: inc/barcode.class.php:90
 msgid "B6"
-msgstr ""
+msgstr "B6"
 
 #: inc/barcode.class.php:91
 msgid "B7"
-msgstr ""
+msgstr "B7"
 
 #: inc/barcode.class.php:92
 msgid "B8"
-msgstr ""
+msgstr "B8"
 
 #: inc/barcode.class.php:93
 msgid "B9"
-msgstr ""
+msgstr "B9"
 
 #: inc/barcode.class.php:94
 msgid "B10"
-msgstr ""
+msgstr "B10"
 
 #: inc/barcode.class.php:95
 msgid "C0"
-msgstr ""
+msgstr "C0"
 
 #: inc/barcode.class.php:96
 msgid "C1"
-msgstr ""
+msgstr "C1"
 
 #: inc/barcode.class.php:97
 msgid "C2"
-msgstr ""
+msgstr "C2"
 
 #: inc/barcode.class.php:98
 msgid "C3"
-msgstr ""
+msgstr "C3"
 
 #: inc/barcode.class.php:99
 msgid "C4"
-msgstr ""
+msgstr "C4"
 
 #: inc/barcode.class.php:100
 msgid "C5"
-msgstr ""
+msgstr "C5"
 
 #: inc/barcode.class.php:101
 msgid "C6"
-msgstr ""
+msgstr "C6"
 
 #: inc/barcode.class.php:102
 msgid "C7"
-msgstr ""
+msgstr "C7"
 
 #: inc/barcode.class.php:103
 msgid "C8"
-msgstr ""
+msgstr "C8"
 
 #: inc/barcode.class.php:104
 msgid "C9"
-msgstr ""
+msgstr "C9"
 
 #: inc/barcode.class.php:105
 msgid "C10"
-msgstr ""
+msgstr "C10"
 
 #: inc/barcode.class.php:106
 msgid "RA0"
-msgstr ""
+msgstr "RA0"
 
 #: inc/barcode.class.php:107
 msgid "RA1"
-msgstr ""
+msgstr "RA1"
 
 #: inc/barcode.class.php:108
 msgid "RA2"
-msgstr ""
+msgstr "RA2"
 
 #: inc/barcode.class.php:109
 msgid "RA3"
-msgstr ""
+msgstr "RA3"
 
 #: inc/barcode.class.php:110
 msgid "RA4"
-msgstr ""
+msgstr "RA4"
 
 #: inc/barcode.class.php:111
 msgid "SRA0"
-msgstr ""
+msgstr "SRA0"
 
 #: inc/barcode.class.php:112
 msgid "SRA1"
-msgstr ""
+msgstr "SRA1"
 
 #: inc/barcode.class.php:113
 msgid "SRA2"
-msgstr ""
+msgstr "SRA2"
 
 #: inc/barcode.class.php:114
 msgid "SRA3"
-msgstr ""
+msgstr "SRA3"
 
 #: inc/barcode.class.php:115
 msgid "SRA4"
-msgstr ""
+msgstr "SRA4"
 
 #: inc/barcode.class.php:116
 msgid "LETTER"
-msgstr ""
+msgstr "LETTER"
 
 #: inc/barcode.class.php:117
 msgid "LEGAL"
-msgstr ""
+msgstr "LEGAL"
 
 #: inc/barcode.class.php:118
 msgid "EXECUTIVE"
-msgstr ""
+msgstr "EXECUTIVE"
 
 #: inc/barcode.class.php:119
 msgid "FOLIO"
-msgstr ""
+msgstr "FOLIO"
 
 #: inc/barcode.class.php:128
 msgid "Portrait"
-msgstr ""
+msgstr "Portrait"
 
 #: inc/barcode.class.php:129
 msgid "Landscape"
-msgstr ""
+msgstr "Paysage"
 
 #: inc/barcode.class.php:150
 msgid "Generation"
-msgstr ""
+msgstr "Génération"
 
 #: inc/barcode.class.php:152
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
-#: inc/barcode.class.php:155 inc/barcode.class.php:186 inc/config.class.php:75
+#: inc/barcode.class.php:155 inc/barcode.class.php:190 inc/config.class.php:75
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
-#: inc/barcode.class.php:159 inc/barcode.class.php:188
+#: inc/barcode.class.php:159 inc/barcode.class.php:212
 #: inc/config.class.php:147
 msgid "Page size"
-msgstr ""
+msgstr "Format de la page"
 
-#: inc/barcode.class.php:162 inc/barcode.class.php:190
+#: inc/barcode.class.php:162 inc/barcode.class.php:218
 #: inc/config.class.php:150
 msgid "Orientation"
-msgstr ""
+msgstr "Orientation"
 
 #: inc/barcode.class.php:167
 msgid "Number fo copies"
-msgstr ""
+msgstr "Nombre de copies"
 
-#: inc/barcode.class.php:172 inc/barcode.class.php:196
-#: inc/qrcode.class.php:144
+#: inc/barcode.class.php:172 inc/barcode.class.php:237
 msgid "Create"
-msgstr ""
+msgstr "Créer"
 
-#: inc/barcode.class.php:192 inc/qrcode.class.php:133
+#: inc/barcode.class.php:224
 msgid "Not use first xx barcodes"
-msgstr ""
+msgstr "Ne pas utiliser les xx premiers codes barres"
 
-#: inc/barcode.class.php:194 inc/qrcode.class.php:139
+#: inc/barcode.class.php:230
 msgid "Display border"
-msgstr ""
+msgstr "Afficher la bordure"
 
-#: inc/barcode.class.php:222
+#: inc/barcode.class.php:263
 msgid "The generation of some bacodes produced errors."
-msgstr ""
+msgstr "La génération de certains codes barres a émit des erreurs."
 
 #: inc/config.class.php:66
 msgid "Barcode plugin configuration"
-msgstr ""
+msgstr "Configuration du plugin Barcode"
 
 #: inc/config.class.php:71
 msgid "General configuration"
-msgstr ""
+msgstr "Configuration générale"
 
 #: inc/config.class.php:83
 msgid "Empty the cache"
-msgstr ""
+msgstr "Vider le cache"
 
 #: inc/config.class.php:87
 msgid "Company logo"
-msgstr ""
+msgstr "Logo de la société"
 
 #: inc/config.class.php:154
 msgid "Margins"
-msgstr ""
+msgstr "Marge"
 
 #: inc/config.class.php:156
 msgid "Top"
-msgstr ""
+msgstr "Haut"
 
 #: inc/config.class.php:159
 msgid "Bottom"
-msgstr ""
+msgstr "Bas"
 
 #: inc/config.class.php:164
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: inc/config.class.php:167
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #: inc/config.class.php:172
 msgid "Inner horizontal"
-msgstr ""
+msgstr "Intérieure horizontal"
 
 #: inc/config.class.php:175
 msgid "Inner vertical"
-msgstr ""
+msgstr "Intérieure vertical"
 
 #: inc/config.class.php:179
 msgid "Barcodes sizes"
-msgstr ""
+msgstr "Dimmension des codes barres"
 
 #: inc/config.class.php:181
 msgid "Maximum width"
-msgstr ""
+msgstr "Longueure maximale"
 
 #: inc/config.class.php:184
 msgid "Maximum height"
-msgstr ""
+msgstr "Hauteur maximale"
 
 #: inc/config.class.php:237
 msgid "code39"
-msgstr ""
+msgstr "code39"
 
 #: inc/config.class.php:238
 msgid "code128"
-msgstr ""
+msgstr "code128"
 
 #: inc/config.class.php:239
 msgid "ean13"
-msgstr ""
+msgstr "ean13"
 
 #: inc/config.class.php:240
 msgid "int25"
-msgstr ""
+msgstr "int25"
 
 #: inc/config.class.php:241
 msgid "postnet"
-msgstr ""
+msgstr "postnet"
 
 #: inc/config.class.php:242
 msgid "upca"
-msgstr ""
+msgstr "upca"
 
 #: inc/config.class.php:243
 msgid "QRcode"
-msgstr ""
+msgstr "QRcode"
 
-#: inc/profile.class.php:108
+#: inc/profile.class.php:133
 msgid "Generate barcode pdf"
-msgstr ""
+msgstr "Générer le code barre en PDF"
