@@ -52,6 +52,29 @@ class PluginBarcodeProfile extends CommonDBTM {
    }
    
    
+   
+   function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
+      if ($item->getID() > 0
+              && $item->fields['interface'] == 'central') {
+         return self::createTabEntry(__('Barcode', 'barcode'));
+      }
+   }
+
+
+
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
+      global $CFG_GLPI;
+
+      if ($item->getID() > 0) {
+         $pfProfile = new self();
+         $pfProfile->showForm($item->getID(),
+              $CFG_GLPI['root_doc'].'/plugins/barcode/front/profile.php');
+      }
+
+      return TRUE;
+   }
+   
+   
 
    function getSearchOptions() {
 
@@ -75,12 +98,14 @@ class PluginBarcodeProfile extends CommonDBTM {
    }
 
 
+   
    //if profile deleted
    static function cleanProfiles(Profile $prof) {
       $plugprof = new self();
       $plugprof->delete(array('id'=>$prof->getField("id")));
    }
 
+   
 
    function showForm($ID, $options=array()) {
       global $DB;
@@ -127,6 +152,7 @@ class PluginBarcodeProfile extends CommonDBTM {
    }
 
 
+   
    static function changeprofile() {
 
       $tmp = new self();

@@ -295,24 +295,30 @@ function plugin_headings_barcode($item, $withtemplate=0) {
 function plugin_barcode_install() {
    global $DB;
 
-   if (!file_exists(GLPI_ROOT."/files/_plugins/barcode")) {
-      mkdir(GLPI_ROOT."/files/_plugins/barcode",0750);
+   $migration = new Migration(PLUGIN_BARCODE_VERSION);
+   
+   if (!file_exists(GLPI_PLUGIN_DOC_DIR."/barcode")) {
+      mkdir(GLPI_PLUGIN_DOC_DIR."/barcode");
    }
-   if (!TableExists("glpi_plugin_barcode_config")) {
-      $query = "CREATE TABLE `glpi_plugin_barcode_config` (
+   $migration->renameTable("glpi_plugin_barcode_config", "glpi_plugin_barcode_configs");
+   if (!TableExists("glpi_plugin_barcode_configs")) {
+      $query = "CREATE TABLE `glpi_plugin_barcode_configs` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
                   PRIMARY KEY  (`ID`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-      $DB->query($query) or die("error creating glpi_plugin_barcode_config ". $DB->error());
+      $DB->query($query) or die("error creating glpi_plugin_barcode_configs ". $DB->error());
 
-      $query = "INSERT INTO `glpi_plugin_barcode_config` 
+      $query = "INSERT INTO `glpi_plugin_barcode_configs` 
                      (`id`, `type`)
                 VALUES
                      ('1', 'code128')";
-      $DB->query($query) or die("error populate glpi_plugin_barcode_config ". $DB->error());
+      $DB->query($query) or die("error populate glpi_plugin_barcode_configs ". $DB->error());
+   }
 
-      $query = "CREATE TABLE `glpi_plugin_barcode_config_type` (
+   $migration->renameTable("glpi_plugin_barcode_config_type", "glpi_plugin_barcode_configs_types");
+   if (!TableExists("glpi_plugin_barcode_configs_types")) {
+      $query = "CREATE TABLE `glpi_plugin_barcode_configs_types` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
                   `size` varchar(20) collate utf8_unicode_ci default NULL,
@@ -328,9 +334,9 @@ function plugin_barcode_install() {
                   PRIMARY KEY  (`ID`),
                   UNIQUE  (`type`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-      $DB->query($query) or die("error creating glpi_plugin_barcode_config_type ". $DB->error());
+      $DB->query($query) or die("error creating glpi_plugin_barcode_configs_types ". $DB->error());
 
-      $query = "INSERT INTO `glpi_plugin_barcode_config_type`
+      $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
                      `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
@@ -352,10 +358,27 @@ function plugin_barcode_install() {
                      '25', '30', '110', '70'),
                      ('upca', 'A4', 'Portrait',
                      '30', '30', '30', '30',
+                     '25', '30', '110', '70'),
+                     ('QRcode', 'A4', 'Portrait',
+                     '30', '30', '30', '30',
                      '25', '30', '110', '70')";
-      $DB->query($query) or die("error populate glpi_plugin_barcode_config_type ". $DB->error());
+      $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
+   }
+   
+   if (countElementsInTable("glpi_plugin_barcode_configs_types",
+                            "`type`='QRcode'") == 0) {
+      $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
+                     (`type`, `size`, `orientation`,
+                     `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
+                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
+                VALUES
+                     ('QRcode', 'A4', 'Portrait',
+                     '30', '30', '30', '30',
+                     '25', '30', '110', '70')";
+      $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
+   }
 
-
+   if (!TableExists("glpi_plugin_barcode_profiles")) {
       $query = "CREATE TABLE `glpi_plugin_barcode_profiles` (
               `id` int(11) NOT NULL AUTO_INCREMENT,
               `profile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -383,13 +406,13 @@ function plugin_barcode_install() {
 function plugin_barcode_uninstall() {
    global $DB;
 
-   if (TableExists("glpi_plugin_barcode_config")) {
-      $query = "DROP TABLE `glpi_plugin_barcode_config`";
-      $DB->query($query) or die("error deleting glpi_plugin_barcode_config");
+   if (TableExists("glpi_plugin_barcode_configs")) {
+      $query = "DROP TABLE `glpi_plugin_barcode_configs`";
+      $DB->query($query) or die("error deleting glpi_plugin_barcode_configs");
    }
-   if (TableExists("glpi_plugin_barcode_config_type")) {
-      $query = "DROP TABLE `glpi_plugin_barcode_config_type`";
-      $DB->query($query) or die("error deleting glpi_plugin_barcode_config_type");
+   if (TableExists("glpi_plugin_barcode_configs_types")) {
+      $query = "DROP TABLE `glpi_plugin_barcode_configs_types`";
+      $DB->query($query) or die("error deleting glpi_plugin_barcode_configs_types");
    }
    if (TableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";

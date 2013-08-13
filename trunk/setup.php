@@ -39,6 +39,8 @@
    ------------------------------------------------------------------------
  */
 
+define ("PLUGIN_BARCODE_VERSION", "0.84+1.0");
+
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS,$LANG,$CFG_GLPI;
@@ -96,7 +98,7 @@ function plugin_version_barcode() {
 
    return array('name'           => 'Barcode',
                 'shortname'      => 'barcode',
-                'version'        => '0.84+1.0',
+                'version'        => PLUGIN_BARCODE_VERSION,
                 'license'        => 'AGPLv3+',
                 'author'         => '<a href="<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
                    Jean Marc GRISARD & Vincent MAZZONI',

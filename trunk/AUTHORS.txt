@@ -8,5 +8,7 @@
 
 - Vincent MAZZONI (v.mazzoni at siprossii.com) : version 2.0 for GLPI 0.78
 
+- David Durieux (d.durieux@siprossii.com) : version 0.84+1.0 for GLPI 0.84
+
 
 **********************************************************************

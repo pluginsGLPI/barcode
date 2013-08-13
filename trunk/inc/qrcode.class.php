@@ -57,23 +57,42 @@ class PluginBarcodeQRcode {
       $item = new $itemtype();
       $item->getFromDB($items_id);
       $a_content = array();
+      $have_content = FALSE;
       if ($data['serialnumber']) {
          if ($item->fields['serial'] != '') {
-            $a_content[] = 'Serial Number = '.$item->fields['serial'];
+            $have_content = TRUE;
          }
+         $a_content[] = 'Serial Number = '.$item->fields['serial'];
       }
       if ($data['inventorynumber']) {
          if ($item->fields['otherserial'] != '') {
-            $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
+            $have_content = TRUE;
          }
+         $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
       }
       if ($data['id']) {
          if ($item->fields['id'] != '') {
-            $a_content[] = 'ID = '.$item->fields['id'];
+            $have_content = TRUE;
          }
+         $a_content[] = 'ID = '.$item->fields['id'];
+      }
+      if ($data['uuid']) {
+         if ($item->fields['uuid'] != '') {
+            $have_content = TRUE;
+         }
+         $a_content[] = 'UUID = '.$item->fields['uuid'];
+      }      
+      if ($data['name']) {
+         if ($item->fields['name'] != '') {
+            $have_content = TRUE;
+         }
+         $a_content[] = 'Name = '.$item->fields['name'];
       }
       if ($data['url']) {
-         $a_content[] = $CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
+         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
+      }      
+      if ($data['url']) {
+         $a_content[] = 'QRcode date = '.date('Y-m-d');
       }      
       
       if (count($a_content) > 0) {
@@ -100,7 +119,8 @@ class PluginBarcodeQRcode {
    function showFormMassiveAction() {
       
       echo '<input type="hidden" name="type" value="QRcode" />';
-      echo '<center><table>';
+      echo '<center>';
+      echo '<table>';
       echo '<tr>';
       echo '<td>';
       echo __('Serial number')." : </td><td>";
@@ -120,28 +140,33 @@ class PluginBarcodeQRcode {
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
+      echo '<td>';
+      echo __('UUID')." : </td><td>";
+      Dropdown::showYesNo("uuid", 1); 
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
+      echo '<td>';
+      echo __('Name')." : </td><td>";
+      Dropdown::showYesNo("name", 1);
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
       echo '<td>';     
-      echo __('URL of web page of the device')." : </td><td>";
+      echo __('Web page of the device')." : </td><td>";
       Dropdown::showYesNo("url", 1);
+      echo '</td>';
+      echo '</tr>';
+      echo '<tr>';
+      echo '<td>';
+      echo __('Date QRcode')." (".date('Y-m-d').") : </td><td>";
+      Dropdown::showYesNo("qrcodedate", 1);
       echo '</td>';
       echo '</tr>';
       echo '</table>';
       echo '<br/>';
-      echo '<table>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Not use first xx barcodes', 'barcode')." : </td><td>";
-      Dropdown::showNumber("eliminate"); 
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Display border', 'barcode')." : </td><td>";
-      Dropdown::showYesNo("border", 1);
-      echo '</td>';
-      echo '</tr>';
-      echo '</table></center>';
-      echo "<br/><input type='submit' value='".__('Create', 'barcode')."' class='submit'>";
+      
+      PluginBarcodeBarcode::commonShowMassiveAction();
    }
    
 }
