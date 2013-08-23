@@ -164,7 +164,7 @@ class PluginBarcodeBarcode {
             echo "</td>";
          echo "</tr>";
          echo "<tr class='tab_bg_1'>";
-            echo "<td>".__('Number fo copies', 'barcode')."</td>";
+            echo "<td>".__('Number of copies', 'barcode')."</td>";
             echo "<td><input type='text' size='20' name='nb' value='1'></td>";
             echo "<td colspan='2'></td>";
          echo "</tr>";
