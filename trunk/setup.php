@@ -100,7 +100,7 @@ function plugin_version_barcode() {
                 'shortname'      => 'barcode',
                 'version'        => PLUGIN_BARCODE_VERSION,
                 'license'        => 'AGPLv3+',
-                'author'         => '<a href="<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
+                'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
                    Jean Marc GRISARD & Vincent MAZZONI',
                 'homepage'       => 'https://forge.indepnet.net/projects/show/barscode',
                 'minGlpiVersion' => '0.84');// For compatibility / no install in version < minGlpiVersion
