@@ -181,13 +181,18 @@ class PluginBarcodeBarcode {
    
    
 
-   function showFormMassiveAction() {
+   function showFormMassiveAction(MassiveAction $ma) {
 
       $pbConfig = new PluginBarcodeConfig();
       
       echo '<center>';
       echo '<strong>';
-      echo __('It will generate only elements have defined field:', 'barcode').' '.__('Inventory number');
+      echo __('It will generate only elements have defined field:', 'barcode').' ';
+      if (key($ma->items) == 'Ticket') {
+         echo __('Ticket number', 'barcode');
+      } else {
+         echo __('Inventory number');
+      }      
       echo '</strong>';
       echo '<table>';
       echo '<tr>';
@@ -436,7 +441,7 @@ class PluginBarcodeBarcode {
       switch ($ma->getAction()) {
          case 'Generate':
             $barcode = new self();
-            $barcode->showFormMassiveAction();
+            $barcode->showFormMassiveAction($ma);
             return true;
             
       }
@@ -461,9 +466,14 @@ class PluginBarcodeBarcode {
             }
             foreach ($ids as $key) {
                $item->getFromDB($key);
-               if ($item->isField('otherserial')) {
-                  $codes[] = $item->getField('otherserial');
+               if (key($ma->items) == 'Ticket') {
+                  $codes[] = $item->getField('id');
+               } else {
+                  if ($item->isField('otherserial')) {
+                     $codes[] = $item->getField('otherserial');
+                  }
                }
+               
             }
             if (count($codes) > 0) {
                $params['codes']  = $codes;
