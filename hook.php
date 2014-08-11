@@ -379,23 +379,31 @@ function plugin_barcode_install() {
    }
 
    if (!TableExists("glpi_plugin_barcode_profiles")) {
-      $query = "CREATE TABLE `glpi_plugin_barcode_profiles` (
-              `id` int(11) NOT NULL AUTO_INCREMENT,
-              `profile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-              `generate` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-              `config` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-               PRIMARY KEY  (`id`)
-            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-      $DB->query($query) or die("error populate glpi_plugin_barcode_profiles ". $DB->error());
+      include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
+      include_once GLPI_ROOT.'/plugins/barcode/inc/config.class.php';
+      PluginBarcodeProfile::initProfile();
+      
+//      $query = "CREATE TABLE `glpi_plugin_barcode_profiles` (
+//              `id` int(11) NOT NULL AUTO_INCREMENT,
+//              `profile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+//              `generate` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+//              `config` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+//               PRIMARY KEY  (`id`)
+//            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+//      $DB->query($query) or die("error populate glpi_plugin_barcode_profiles ". $DB->error());
+   } else {
+       // Migrate to glpi core profiles
+       
+       
    }
 
    // Give right to current Profile
-   include_once (GLPI_ROOT . '/plugins/barcode/inc/profile.class.php');
-   $prof =  new PluginBarcodeProfile();
-   $prof->add(array('id'      => $_SESSION['glpiactiveprofile']['id'],
-                    'profile' => $_SESSION['glpiactiveprofile']['name'],
-                    'generate'=> 1,
-                    'config'  => 1));
+//   include_once (GLPI_ROOT . '/plugins/barcode/inc/profile.class.php');
+//   $prof =  new PluginBarcodeProfile();
+//   $prof->add(array('id'      => $_SESSION['glpiactiveprofile']['id'],
+//                    'profile' => $_SESSION['glpiactiveprofile']['name'],
+//                    'generate'=> 1,
+//                    'config'  => 1));
 
    return true;
 }
@@ -414,10 +422,10 @@ function plugin_barcode_uninstall() {
       $query = "DROP TABLE `glpi_plugin_barcode_configs_types`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs_types");
    }
-   if (TableExists("glpi_plugin_barcode_profiles")) {
-      $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
-      $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
-   }
+   
+   include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
+   PluginBarcodeProfile::removeRights();
+
    return true;
 }
 ?>
