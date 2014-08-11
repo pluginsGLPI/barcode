@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "0.84+1.0");
+define ("PLUGIN_BARCODE_VERSION", "0.85+1.0");
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
@@ -103,7 +103,7 @@ function plugin_version_barcode() {
                 'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
                    Jean Marc GRISARD & Vincent MAZZONI',
                 'homepage'       => 'https://forge.indepnet.net/projects/show/barscode',
-                'minGlpiVersion' => '0.84');// For compatibility / no install in version < minGlpiVersion
+                'minGlpiVersion' => '0.85');// For compatibility / no install in version < minGlpiVersion
 }
 
 
@@ -111,8 +111,8 @@ function plugin_version_barcode() {
 function plugin_barcode_check_prerequisites() {
    
 
-   if (version_compare(GLPI_VERSION,'0.84','lt') || version_compare(GLPI_VERSION,'0.85','ge')) {
-      echo __('GLPI version not compatible need 0.84.x', 'barcode');
+   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.86','ge')) {
+      echo __('GLPI version not compatible need 0.85.x', 'barcode');
       return false;
    }
    return true;
