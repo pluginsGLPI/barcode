@@ -49,6 +49,7 @@ function plugin_barcode_MassiveActions($type) {
 		case 'Networking' :
 		case 'Printer' :
 		case 'Peripheral' :
+		case 'Phone' :
          return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
                       "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
 
@@ -56,85 +57,6 @@ function plugin_barcode_MassiveActions($type) {
          return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
    }
    return array();
-}
-
-
-
-// Define headings added by the plugin
-function plugin_get_headings_barcode($item, $withtemplate) {
-
-   switch (get_class($item)) {
-      case 'Computer' :
-      case 'Monitor' :
-		case 'Networking' :
-		case 'Printer' :
-		case 'Peripheral' :
-         // new object / template case
-         if ($withtemplate) {
-            return array();
-            // Non template case / editing an existing object
-         } else {
-            return array(1 => __('Barcode', 'barcode'));
-         }
-
-      case 'Profile':
-         if ($item->fields['interface']!='helpdesk') {
-            return array(1 => __('Barcode', 'barcode'));
-         }
-         break;
-    }
-   return false;
-}
-
-
-
-// Define headings actions added by the plugin
-function plugin_headings_actions_barcode($item) {
-
-   switch (get_class($item)) {
-      case 'Computer' :
-      case 'Monitor' :
-		case 'Networking' :
-		case 'Printer' :
-		case 'Peripheral' :
-         return array(1 => "plugin_headings_barcode");
-
-      case 'Profile' :
-         if ($item->getField('interface')!='helpdesk') {
-            return array(1 => "plugin_headings_barcode");
-         }
-         break;
-   }
-   return false;
-}
-
-
-
-// Example of an action heading
-function plugin_headings_barcode($item, $withtemplate=0) {
-   global $CFG_GLPI;
-
-   if (!$withtemplate) {
-      echo "<div class='center'>";
-      switch (get_class($item)) {
-
-      case 'Profile' :
-         $prof =  new PluginBarcodeProfile();
-         $ID = $item->getField('id');
-         if (!$prof->GetfromDB($ID)) {
-            $prof->createProfile($item);
-         }
-         $prof->showForm($ID,
-                         array('target' => $CFG_GLPI['root_doc']."/plugins/barcode/front/profile.php"));
-         break;
-
-         default :
-            $barcode = new PluginBarcodeBarcode();
-            $barcode->showForm(get_class($item), $item->getField('id'));
-            break;
-      }
-      echo "</div>";
-   }
 }
 
 
@@ -226,33 +148,13 @@ function plugin_barcode_install() {
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
-   if (!TableExists("glpi_plugin_barcode_profiles")) {
-      include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
-      include_once GLPI_ROOT.'/plugins/barcode/inc/config.class.php';
-      PluginBarcodeProfile::initProfile();
-      
-//      $query = "CREATE TABLE `glpi_plugin_barcode_profiles` (
-//              `id` int(11) NOT NULL AUTO_INCREMENT,
-//              `profile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-//              `generate` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-//              `config` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-//               PRIMARY KEY  (`id`)
-//            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-//      $DB->query($query) or die("error populate glpi_plugin_barcode_profiles ". $DB->error());
-   } else {
-       // Migrate to glpi core profiles
-       
-       
+   include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
+   include_once GLPI_ROOT.'/plugins/barcode/inc/config.class.php';
+   PluginBarcodeProfile::initProfile();
+   if (TableExists("glpi_plugin_barcode_profiles")) {
+      $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
+      $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
-
-   // Give right to current Profile
-//   include_once (GLPI_ROOT . '/plugins/barcode/inc/profile.class.php');
-//   $prof =  new PluginBarcodeProfile();
-//   $prof->add(array('id'      => $_SESSION['glpiactiveprofile']['id'],
-//                    'profile' => $_SESSION['glpiactiveprofile']['name'],
-//                    'generate'=> 1,
-//                    'config'  => 1));
-
    return true;
 }
 
@@ -269,6 +171,10 @@ function plugin_barcode_uninstall() {
    if (TableExists("glpi_plugin_barcode_configs_types")) {
       $query = "DROP TABLE `glpi_plugin_barcode_configs_types`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs_types");
+   }
+   if (TableExists("glpi_plugin_barcode_profiles")) {
+      $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
+      $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
    
    include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
