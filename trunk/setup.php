@@ -54,8 +54,6 @@ function plugin_init_barcode() {
 
    Plugin::registerClass('PluginBarcode');
 
-   $PLUGIN_HOOKS['change_profile']['barcode'] = array('PluginBarcodeProfile','changeprofile');
-
    // Display a menu entry ?
    if ((isset($_SESSION["glpi_plugin_barcode_profile"])
            && $_SESSION["glpi_plugin_barcode_profile"]["generate"])
@@ -83,7 +81,7 @@ function plugin_init_barcode() {
    }
 
    // Config page
-   if (Session::haveRight('config','w')) {
+   if (Session::haveRight('config', UPDATE)) {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
 
@@ -126,9 +124,6 @@ function plugin_barcode_check_config($verbose=false) {
 
    if (true) { // Your configuration check
       return true;
-   }
-   if ($verbose) {
-      echo $LANG['plugins'][2];
    }
    return false;
 }

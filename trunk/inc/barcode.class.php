@@ -49,6 +49,9 @@ if (!defined('GLPI_ROOT')) {
 class PluginBarcodeBarcode {
    private $docsPath;
 
+   static $rightname = 'plugin_barcode_barcode';
+
+   
    /**
 	 * Constructor
 	**/

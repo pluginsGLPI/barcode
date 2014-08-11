@@ -41,7 +41,7 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("profile","r");
+Session::checkRight("profile", READ);
 
 // Mainly usefull if not actived
 Plugin::load('barcode',true);
@@ -49,7 +49,7 @@ Plugin::load('barcode',true);
 $prof = new PluginBarcodeProfile();
 
 if (isset($_POST["update_user_profile"])) {
-   Session::checkRight("profile","w");
+   Session::checkRight("profile", UPDATE);
    $prof->update($_POST);
 Html::back();
 }

@@ -44,7 +44,7 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("config","w");
+Session::checkRight("config", UPDATE);
 
 // To be available when plugin is not activated
 Plugin::load('barcode');
