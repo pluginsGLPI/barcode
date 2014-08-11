@@ -124,43 +124,43 @@ class PluginBarcodeQRcode {
       echo '<tr>';
       echo '<td>';
       echo __('Serial number')." : </td><td>";
-      Dropdown::showYesNo("serialnumber", 1);
+      Dropdown::showYesNo("serialnumber", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Inventory number')." : </td><td>";
-      Dropdown::showYesNo("inventorynumber", 1); 
+      Dropdown::showYesNo("inventorynumber", 1, -1, array('width' => '100')); 
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('ID')." : </td><td>";
-      Dropdown::showYesNo("id", 1); 
+      Dropdown::showYesNo("id", 1, -1, array('width' => '100')); 
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('UUID')." : </td><td>";
-      Dropdown::showYesNo("uuid", 1); 
+      Dropdown::showYesNo("uuid", 1, -1, array('width' => '100')); 
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Name')." : </td><td>";
-      Dropdown::showYesNo("name", 1);
+      Dropdown::showYesNo("name", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';     
       echo __('Web page of the device')." : </td><td>";
-      Dropdown::showYesNo("url", 1);
+      Dropdown::showYesNo("url", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Date QRcode')." (".date('Y-m-d').") : </td><td>";
-      Dropdown::showYesNo("qrcodedate", 1);
+      Dropdown::showYesNo("qrcodedate", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -168,6 +168,86 @@ class PluginBarcodeQRcode {
       
       PluginBarcodeBarcode::commonShowMassiveAction();
    }
+
+   
+   
+   function getSpecificMassiveActions($checkitem=NULL) {
+      $actions = parent::getSpecificMassiveActions($checkitem);
+      return $actions;
+   }
+   
+   
+   
+   /**
+    * @since version 0.85
+    *
+    * @see CommonDBTM::showMassiveActionsSubForm()
+   **/
+   static function showMassiveActionsSubForm(MassiveAction $ma) {
+      global $CFG_GLPI;
+
+      switch ($ma->getAction()) {
+         case 'Generate':
+            $pbQRcode = new self();
+            $pbQRcode->showFormMassiveAction();
+            return true;
+    }
+      return parent::showMassiveActionsSubForm($ma);
+   }
+
+   
+   
+   static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
+      global $CFG_GLPI;
+
+      switch ($ma->getAction()) {
+         case 'Generate' :
+            $pbQRcode = new PluginBarcodeQRcode();
+            $rand = mt_rand();
+            $number = 0;     
+            $codes = array();
+            if ($ma->POST['eliminate'] > 0) {
+               for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
+                  $codes[] = '';
+               }
+            }
+            if ($ma->POST['type'] == 'QRcode') {
+               foreach ($ids as $key) {
+                  $filename = $pbQRcode->generateQRcode($item->getType(), $key, $rand, $number, $ma->POST);
+                  if ($filename) {
+                     $codes[] = $filename;
+                     $number++;
+                  }
+               }
+            } else {    
+               foreach ($ids as $key) {
+                  $item->getFromDB($key);
+                  if ($item->isField('otherserial')) {
+                     $codes[] = $item->getField('otherserial');
+                  }
+               }
+            }
+            if (count($codes) > 0) {
+               $params['codes']  = $codes;
+               $params['type']   = $ma->POST['type'];
+               $params['size']   = $ma->POST['size'];
+               $params['border'] = $ma->POST['border'];
+               $params['orientation'] = $ma->POST['orientation'];
+               $barcode = new PluginBarcodeBarcode();
+               $file = $barcode->printPDF($params);
+               $filePath = explode('/', $file);
+               $filename = $filePath[count($filePath)-1];
+
+               $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
+               Session::addMessageAfterRedirect($msg);
+               $pbQRcode->cleanQRcodefiles($rand, $number);
+            }
+            return;
+         
+      }
+      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+   }
+
    
 }
 
