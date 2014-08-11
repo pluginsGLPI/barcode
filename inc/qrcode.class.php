@@ -242,6 +242,7 @@ class PluginBarcodeQRcode {
                Session::addMessageAfterRedirect($msg);
                $pbQRcode->cleanQRcodefiles($rand, $number);
             }
+            $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
             return;
          
       }
