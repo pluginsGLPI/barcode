@@ -49,9 +49,8 @@ function plugin_init_barcode() {
    
    // Params : plugin name - string type - ID - Array of attributes
    Plugin::registerClass('PluginBarcodeDropdown');
-
-   Plugin::registerClass('PluginBarcodeProfile');
-
+   Plugin::registerClass('PluginBarcodeProfile',
+              array('addtabon' => array('Profile')));
    Plugin::registerClass('PluginBarcode');
 
    // Display a menu entry ?
