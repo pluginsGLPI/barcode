@@ -6,10 +6,10 @@
 # David Durieux <d.durieux@siprossii.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: GLPI_barcode\n"
+"Project-Id-Version: GLPI Project - plugin barcode\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-13 10:03+0200\n"
-"PO-Revision-Date: 2013-08-13 08:24+0000\n"
+"PO-Revision-Date: 2013-11-20 11:40+0000\n"
 "Last-Translator: David Durieux <d.durieux@siprossii.com>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/glpi_barcode/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
