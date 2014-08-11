@@ -81,25 +81,10 @@ class PluginBarcodeProfile extends Profile {
       $profile = new Profile();
       $profile->getFromDB($profiles_id);
 
-      $rights = $this->getRightsGeneral();
+      $rights = $this->getAllRights();
       $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
                                                       'default_class' => 'tab_bg_2',
-                                                      'title'         => __('General', 'fusioninventory')));
-
-      $rights = $this->getRightsRules();
-      $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
-                                                      'default_class' => 'tab_bg_2',
-                                                      'title'         => _n('Rule', 'Rules', 2)));
-
-      $rights = $this->getRightsInventory();
-      $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
-                                                      'default_class' => 'tab_bg_2',
-                                                      'title'         => __('Inventory', 'fusioninventory')));
-
-      $rights = $this->getRightsDeploy();
-      $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
-                                                      'default_class' => 'tab_bg_2',
-                                                      'title'         => __('Software deployment', 'fusioninventory')));
+                                                      'title'         => __('Barcode', 'barcode')));
       if ($canedit
           && $closeform) {
          echo "<div class='center'>";
