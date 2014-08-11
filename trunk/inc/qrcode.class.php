@@ -91,7 +91,7 @@ class PluginBarcodeQRcode {
       if ($data['url']) {
          $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
       }      
-      if ($data['url']) {
+      if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
       }      
       
