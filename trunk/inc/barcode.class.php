@@ -120,7 +120,7 @@ class PluginBarcodeBarcode {
                                     'LEGAL'     => __('LEGAL', 'barcode'),
                                     'EXECUTIVE' => __('EXECUTIVE', 'barcode'),
                                     'FOLIO'     => __('FOLIO', 'barcode')),
-                              (is_null($p_size)?array():array('value' => $p_size)));
+                              (is_null($p_size)?array('width' => '100'):array('value' => $p_size, 'width' => '100')));
    }
    
    
@@ -130,7 +130,7 @@ class PluginBarcodeBarcode {
       Dropdown::showFromArray("orientation",
                               array('Portrait'  => __('Portrait', 'barcode'),
                                     'Landscape' => __('Landscape', 'barcode')),
-                              (is_null($p_orientation)?array():array('value' => $p_orientation)));
+                              (is_null($p_orientation)?array('width' => '100'):array('value' => $p_orientation, 'width' => '100')));
    }
 
    
@@ -186,12 +186,15 @@ class PluginBarcodeBarcode {
       $pbConfig = new PluginBarcodeConfig();
       
       echo '<center>';
+      echo '<strong>';
+      echo __('It will generate only elements have defined field:', 'barcode').' '.__('Inventory number');
+      echo '</strong>';
       echo '<table>';
       echo '<tr>';
       echo '<td>';
       $config = $pbConfig->getConfigType();
 		echo __('Type', 'barcode')." : </td><td>";
-		$pbConfig->showTypeSelect($config['type']);
+		$pbConfig->showTypeSelect($config['type'], array('QRcode' => 'QRcode'));
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -225,13 +228,13 @@ class PluginBarcodeBarcode {
       echo '<tr>';
       echo '<td>';
       echo __('Not use first xx barcodes', 'barcode')." : </td><td>";
-      Dropdown::showNumber("eliminate"); 
+      Dropdown::showNumber("eliminate", array('width' => '100')); 
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Display border', 'barcode')." : </td><td>";
-      Dropdown::showYesNo("border", 1);
+      Dropdown::showYesNo("border", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -285,10 +288,10 @@ class PluginBarcodeBarcode {
       // x is horizontal axis and y is vertical
       // x=0 and y=0 in bottom left hand corner
       $config = $pbConfig->getConfigType($type);
-      require_once(GLPI_ROOT."/lib/ezpdf/class.ezpdf.php");
+      require_once(GLPI_ROOT."/plugins/barcode/lib/ezpdf/class.ezpdf.php");
 
       $pdf= new Cezpdf($size, $orientation);
-      $pdf->selectFont(GLPI_ROOT."/lib/ezpdf/fonts/Helvetica.afm");
+      $pdf->selectFont(GLPI_ROOT."/plugins/barcode/lib/ezpdf/fonts/Helvetica.afm");
       $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
       $width   = $config['maxCodeWidth'];
       $height  = $config['maxCodeHeight'];
@@ -357,7 +360,6 @@ class PluginBarcodeBarcode {
                }
 
                $image = imagecreatefrompng($imgFile);               
-
                if ($imgWidth < $width) {
                   $pdf->addImage($image, 
                                  $x + (($width - $imgWidth) / 2), 
@@ -413,6 +415,77 @@ class PluginBarcodeBarcode {
       }
       return true;
    }
+   
+   
+
+   function getSpecificMassiveActions($checkitem=NULL) {
+      $actions = parent::getSpecificMassiveActions($checkitem);
+      return $actions;
+   }
+   
+   
+   
+   /**
+    * @since version 0.85
+    *
+    * @see CommonDBTM::showMassiveActionsSubForm()
+   **/
+   static function showMassiveActionsSubForm(MassiveAction $ma) {
+      global $CFG_GLPI;
+
+      switch ($ma->getAction()) {
+         case 'Generate':
+            $barcode = new self();
+            $barcode->showFormMassiveAction();
+            return true;
+            
+      }
+       return parent::showMassiveActionsSubForm($ma);
+   }
+
+   
+   
+   static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
+      global $CFG_GLPI;
+
+      switch ($ma->getAction()) {
+         case 'Generate' :
+            $pbQRcode = new PluginBarcodeQRcode();
+            $rand = mt_rand();
+            $number = 0;     
+            $codes = array();
+            if ($ma->POST['eliminate'] > 0) {
+               for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
+                  $codes[] = '';
+               }
+            }
+            foreach ($ids as $key) {
+               $item->getFromDB($key);
+               if ($item->isField('otherserial')) {
+                  $codes[] = $item->getField('otherserial');
+               }
+            }
+            if (count($codes) > 0) {
+               $params['codes']  = $codes;
+               $params['type']   = $ma->POST['type'];
+               $params['size']   = $ma->POST['size'];
+               $params['border'] = $ma->POST['border'];
+               $params['orientation'] = $ma->POST['orientation'];
+               $barcode = new PluginBarcodeBarcode();
+               $file = $barcode->printPDF($params);
+               $filePath = explode('/', $file);
+               $filename = $filePath[count($filePath)-1];
+
+               $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
+               Session::addMessageAfterRedirect($msg);
+               $pbQRcode->cleanQRcodefiles($rand, $number);
+            }
+            return;
+         
+      }
+      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+   }
+
 }
 
 ?>

@@ -233,8 +233,16 @@ class PluginBarcodeConfig extends CommonDBTM {
 
    
    
-   function showTypeSelect($p_type=NULL) {
+   function showTypeSelect($p_type=NULL, $used=array()) {
 
+      
+      $options = array(
+          'width' => '100',
+          'used'  => $used
+      );
+      if (!is_null($p_type)) {
+         $options['value'] = $p_type;
+      }
       Dropdown::showFromArray("type",
                               array('Code39'    => __('code39', 'barcode'),
                                     'code128'   => __('code128', 'barcode'),
@@ -243,7 +251,8 @@ class PluginBarcodeConfig extends CommonDBTM {
                                     'postnet'   => __('postnet', 'barcode'),
                                     'upca'      => __('upca', 'barcode'),
                                     'QRcode'    => __('QRcode', 'barcode')),
-                              (is_null($p_type)?array():array('value' => $p_type)));
+                              $options
+                              );
    }
    
    

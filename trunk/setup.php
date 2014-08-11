@@ -55,11 +55,9 @@ function plugin_init_barcode() {
    Plugin::registerClass('PluginBarcode');
 
    // Display a menu entry ?
-   if ((isset($_SESSION["glpi_plugin_barcode_profile"])
-           && $_SESSION["glpi_plugin_barcode_profile"]["generate"])
-        OR (isset($_SESSION["glpi_plugin_barcode_profile"])
-           && $_SESSION["glpi_plugin_barcode_profile"]["config"])) {  // Right set in change_profile hook
-
+   
+   if (Session::haveRight('plugin_barcode_barcode', CREATE)
+           || Session::haveRight('plugin_barcode_config', UPDATE)) {
       $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
 
       // Onglets management

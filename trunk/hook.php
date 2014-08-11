@@ -49,8 +49,8 @@ function plugin_barcode_MassiveActions($type) {
 		case 'Networking' :
 		case 'Printer' :
 		case 'Peripheral' :
-         return array("plugin_barcode_barcode" => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
-                      "plugin_barcode_qrcode"  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
+         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
+                      "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
 
       case 'Profile' :
          return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
@@ -62,26 +62,8 @@ function plugin_barcode_MassiveActions($type) {
 // How to display specific actions ?
 // options contain at least itemtype and and action
 function plugin_barcode_MassiveActionsDisplay($options=array()) {
-
+   
    switch ($options['itemtype']) {
-      case 'Computer' :
-      case 'Monitor' :
-		case 'Networking' :
-		case 'Printer' :
-		case 'Peripheral' :
-         switch ($options['action']) {
-            case "plugin_barcode_barcode" :
-               $barcode = new PluginBarcodeBarcode();
-               $barcode->showFormMassiveAction();
-            break;
-         
-            case "plugin_barcode_qrcode" :
-               $pbQRcode = new PluginBarcodeQRcode();
-               $pbQRcode->showFormMassiveAction();
-            break;
-         }
-         break;
-
       case 'Profile' :
          switch ($options['action']) {
             case "plugin_barcode_allow":
@@ -182,6 +164,7 @@ function plugin_barcode_MassiveActionsProcess($data) {
 // How to display specific update fields ?
 // options must contain at least itemtype and options array
 function plugin_barcode_MassiveActionsFieldsDisplay($options=array()) {
+
    $table = $options['options']['table'];
    $field = $options['options']['field'];
    $linkfield = $options['options']['linkfield'];
