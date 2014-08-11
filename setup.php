@@ -59,10 +59,6 @@ function plugin_init_barcode() {
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
       $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
 
-      // Onglets management
-      $PLUGIN_HOOKS['headings']['barcode']        = 'plugin_get_headings_barcode';
-      $PLUGIN_HOOKS['headings_action']['barcode'] = 'plugin_headings_actions_barcode';
-
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
@@ -71,8 +67,6 @@ function plugin_init_barcode() {
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = '/plugins/barcode/front/barcode.php';
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = '/plugins/barcode/front/barcode.form.php';
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = '/plugins/barcode/index.php';
-      //$PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']["<img  src='".$CFG_GLPI["root_doc"]."/pics/menu_showall.png' title='".$LANG['plugin_barcode']["test"]."' alt='".$LANG['plugin_barcode']["test"]."'>"] = '/plugins/barcode/index.php';
-      //$PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links'][$LANG['plugin_barcode']["test"]] = '/plugins/barcode/index.php';
 
       $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
    }
