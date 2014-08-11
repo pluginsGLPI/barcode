@@ -52,6 +52,9 @@ function plugin_barcode_MassiveActions($type) {
 		case 'Phone' :
          return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
                       "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
+         
+		case 'Ticket' :
+         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'));
 
       case 'Profile' :
          return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
