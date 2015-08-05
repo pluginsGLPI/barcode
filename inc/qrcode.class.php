@@ -76,11 +76,13 @@ class PluginBarcodeQRcode {
          }
          $a_content[] = 'ID = '.$item->fields['id'];
       }
-      if ($data['uuid']) {
-         if ($item->fields['uuid'] != '') {
-            $have_content = TRUE;
+      if (isset($data['uuid']) && $data['uuid']) {
+         if (isset($item->fields['uuid'])) {
+            if ($item->fields['uuid'] != '') {
+               $have_content = TRUE;
+            }
+            $a_content[] = 'UUID = '.$item->fields['uuid'];
          }
-         $a_content[] = 'UUID = '.$item->fields['uuid'];
       }      
       if ($data['name']) {
          if ($item->fields['name'] != '') {
