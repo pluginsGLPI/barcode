@@ -4,14 +4,15 @@
 # 
 # Translators:
 # David Durieux <d.durieux@siprossii.com>, 2013
+# Le Rohellec Benoit <blerohellec@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - plugin barcode\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-13 10:03+0200\n"
-"PO-Revision-Date: 2013-11-20 11:40+0000\n"
-"Last-Translator: David Durieux <d.durieux@siprossii.com>\n"
-"Language-Team: French (France) (http://www.transifex.com/projects/p/glpi_barcode/language/fr_FR/)\n"
+"PO-Revision-Date: 2015-08-05 08:54+0000\n"
+"Last-Translator: Le Rohellec Benoit <blerohellec@hotmail.com>\n"
+"Language-Team: French (France) (http://www.transifex.com/ddurieux/glpi_barcode/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -287,7 +288,7 @@ msgstr "Afficher la bordure"
 
 #: inc/barcode.class.php:263
 msgid "The generation of some bacodes produced errors."
-msgstr "La génération de certains codes barres a émit des erreurs."
+msgstr "La génération de certains codes barres a émis des erreurs."
 
 #: inc/config.class.php:66
 msgid "Barcode plugin configuration"
@@ -335,11 +336,11 @@ msgstr "Intérieure vertical"
 
 #: inc/config.class.php:179
 msgid "Barcodes sizes"
-msgstr "Dimmension des codes barres"
+msgstr "Dimension des codes barres"
 
 #: inc/config.class.php:181
 msgid "Maximum width"
-msgstr "Longueure maximale"
+msgstr "Longueur maximale"
 
 #: inc/config.class.php:184
 msgid "Maximum height"
