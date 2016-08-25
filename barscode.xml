@@ -21,6 +21,14 @@
    </authors>
    <versions>
        <version>
+          <num>0.90+1.0</num>
+          <compatibility>0.90</compatibility>
+      </version>
+       <version>
+          <num>0.85+1.0</num>
+          <compatibility>0.85</compatibility>
+      </version>
+       <version>
           <num>0.84+1.0</num>
           <compatibility>0.84</compatibility>
       </version>
@@ -48,6 +56,12 @@
    <langs>
       <lang>en_GB</lang>
       <lang>fr_FR</lang>
+      <lang>de_DE</lang>
+      <lang>es_AR</lang>
+      <lang>es_ES</lang>
+      <lang>pt_BR</lang>
+      <lang>sl_SI</lang>
+      <lang>tr_TR</lang>
     </langs>
    <license><![CDATA[AGPL v3+]]></license>
       <tags>
