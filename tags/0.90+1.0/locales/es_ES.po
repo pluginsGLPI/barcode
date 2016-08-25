@@ -1,0 +1,378 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Le Rohellec Benoit <blerohellec@hotmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: GLPI Project - plugin barcode\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-13 10:03+0200\n"
+"PO-Revision-Date: 2015-08-05 12:05+0000\n"
+"Last-Translator: Le Rohellec Benoit <blerohellec@hotmail.com>\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/ddurieux/glpi_barcode/language/es_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: hook.php:52 hook.php:53 hook.php:56 hook.php:229 hook.php:234
+#: front/config.php:52 inc/profile.class.php:59 inc/profile.class.php:130
+msgid "Barcode"
+msgstr "Barcode"
+
+#: hook.php:52
+msgid "Print barcodes"
+msgstr "Imprimir barcodes"
+
+#: hook.php:53
+msgid "Print QRcodes"
+msgstr "Imprimir QRcodes"
+
+#: hook.php:151 front/barcode.form.php:56
+msgid "Generated file"
+msgstr "Fichero creado"
+
+#: setup.php:115
+msgid "GLPI version not compatible need 0.84.x"
+msgstr "La versión de GLPI no es compatible. Se requiere la 0.84.x"
+
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr "El caché ya esta vacío."
+
+#: inc/barcode.class.php:71
+msgid "4A0"
+msgstr "4A0"
+
+#: inc/barcode.class.php:72
+msgid "2A0"
+msgstr "2A0"
+
+#: inc/barcode.class.php:73
+msgid "A0"
+msgstr "A0"
+
+#: inc/barcode.class.php:74
+msgid "A1"
+msgstr "A1"
+
+#: inc/barcode.class.php:75
+msgid "A2"
+msgstr "A2"
+
+#: inc/barcode.class.php:76
+msgid "A3"
+msgstr "A3"
+
+#: inc/barcode.class.php:77
+msgid "A4"
+msgstr "A4"
+
+#: inc/barcode.class.php:78
+msgid "A5"
+msgstr "A5"
+
+#: inc/barcode.class.php:79
+msgid "A6"
+msgstr "A6"
+
+#: inc/barcode.class.php:80
+msgid "A7"
+msgstr "A7"
+
+#: inc/barcode.class.php:81
+msgid "A8"
+msgstr "A8"
+
+#: inc/barcode.class.php:82
+msgid "A9"
+msgstr "A9"
+
+#: inc/barcode.class.php:83
+msgid "A10"
+msgstr "A10"
+
+#: inc/barcode.class.php:84
+msgid "B0"
+msgstr "B0"
+
+#: inc/barcode.class.php:85
+msgid "B1"
+msgstr "B1"
+
+#: inc/barcode.class.php:86
+msgid "B2"
+msgstr "B2"
+
+#: inc/barcode.class.php:87
+msgid "B3"
+msgstr "B3"
+
+#: inc/barcode.class.php:88
+msgid "B4"
+msgstr "B4"
+
+#: inc/barcode.class.php:89
+msgid "B5"
+msgstr "B5"
+
+#: inc/barcode.class.php:90
+msgid "B6"
+msgstr "B6"
+
+#: inc/barcode.class.php:91
+msgid "B7"
+msgstr "B7"
+
+#: inc/barcode.class.php:92
+msgid "B8"
+msgstr "B8"
+
+#: inc/barcode.class.php:93
+msgid "B9"
+msgstr "B9"
+
+#: inc/barcode.class.php:94
+msgid "B10"
+msgstr "B10"
+
+#: inc/barcode.class.php:95
+msgid "C0"
+msgstr "C0"
+
+#: inc/barcode.class.php:96
+msgid "C1"
+msgstr "C1"
+
+#: inc/barcode.class.php:97
+msgid "C2"
+msgstr "C2"
+
+#: inc/barcode.class.php:98
+msgid "C3"
+msgstr "C3"
+
+#: inc/barcode.class.php:99
+msgid "C4"
+msgstr "C4"
+
+#: inc/barcode.class.php:100
+msgid "C5"
+msgstr "C5"
+
+#: inc/barcode.class.php:101
+msgid "C6"
+msgstr "C6"
+
+#: inc/barcode.class.php:102
+msgid "C7"
+msgstr "C7"
+
+#: inc/barcode.class.php:103
+msgid "C8"
+msgstr "C8"
+
+#: inc/barcode.class.php:104
+msgid "C9"
+msgstr "C9"
+
+#: inc/barcode.class.php:105
+msgid "C10"
+msgstr "C10"
+
+#: inc/barcode.class.php:106
+msgid "RA0"
+msgstr "RA0"
+
+#: inc/barcode.class.php:107
+msgid "RA1"
+msgstr "RA1"
+
+#: inc/barcode.class.php:108
+msgid "RA2"
+msgstr "RA2"
+
+#: inc/barcode.class.php:109
+msgid "RA3"
+msgstr "RA3"
+
+#: inc/barcode.class.php:110
+msgid "RA4"
+msgstr "RA4"
+
+#: inc/barcode.class.php:111
+msgid "SRA0"
+msgstr "SRA0"
+
+#: inc/barcode.class.php:112
+msgid "SRA1"
+msgstr "SRA1"
+
+#: inc/barcode.class.php:113
+msgid "SRA2"
+msgstr "SRA2"
+
+#: inc/barcode.class.php:114
+msgid "SRA3"
+msgstr "SRA3"
+
+#: inc/barcode.class.php:115
+msgid "SRA4"
+msgstr "SRA4"
+
+#: inc/barcode.class.php:116
+msgid "LETTER"
+msgstr "LETTER"
+
+#: inc/barcode.class.php:117
+msgid "LEGAL"
+msgstr "LEGAL"
+
+#: inc/barcode.class.php:118
+msgid "EXECUTIVE"
+msgstr "EXECUTIVE"
+
+#: inc/barcode.class.php:119
+msgid "FOLIO"
+msgstr "FOLIO"
+
+#: inc/barcode.class.php:128
+msgid "Portrait"
+msgstr "Vertical"
+
+#: inc/barcode.class.php:129
+msgid "Landscape"
+msgstr "Apaisado"
+
+#: inc/barcode.class.php:150
+msgid "Generation"
+msgstr "Generación"
+
+#: inc/barcode.class.php:152
+msgid "Code"
+msgstr "Código"
+
+#: inc/barcode.class.php:155 inc/barcode.class.php:190 inc/config.class.php:75
+msgid "Type"
+msgstr "Tipo"
+
+#: inc/barcode.class.php:159 inc/barcode.class.php:212
+#: inc/config.class.php:147
+msgid "Page size"
+msgstr "Tamaño de la página"
+
+#: inc/barcode.class.php:162 inc/barcode.class.php:218
+#: inc/config.class.php:150
+msgid "Orientation"
+msgstr "Orientación"
+
+#: inc/barcode.class.php:167
+msgid "Number fo copies"
+msgstr "Número de copias"
+
+#: inc/barcode.class.php:172 inc/barcode.class.php:237
+msgid "Create"
+msgstr "Crear"
+
+#: inc/barcode.class.php:224
+msgid "Not use first xx barcodes"
+msgstr "No utilizar los primeros xx barcodes"
+
+#: inc/barcode.class.php:230
+msgid "Display border"
+msgstr "Muestra el borde"
+
+#: inc/barcode.class.php:263
+msgid "The generation of some bacodes produced errors."
+msgstr "La generación de unos barcodes se terminó con errores"
+
+#: inc/config.class.php:66
+msgid "Barcode plugin configuration"
+msgstr "Configuración del complemento Barcode"
+
+#: inc/config.class.php:71
+msgid "General configuration"
+msgstr "Configuración general"
+
+#: inc/config.class.php:83
+msgid "Empty the cache"
+msgstr "Vaciar el caché"
+
+#: inc/config.class.php:87
+msgid "Company logo"
+msgstr "Logo de la organización"
+
+#: inc/config.class.php:154
+msgid "Margins"
+msgstr "Margenes"
+
+#: inc/config.class.php:156
+msgid "Top"
+msgstr "Arriba"
+
+#: inc/config.class.php:159
+msgid "Bottom"
+msgstr "Abajo"
+
+#: inc/config.class.php:164
+msgid "Left"
+msgstr "Izquierda"
+
+#: inc/config.class.php:167
+msgid "Right"
+msgstr "Derecha"
+
+#: inc/config.class.php:172
+msgid "Inner horizontal"
+msgstr "Interior horizontal"
+
+#: inc/config.class.php:175
+msgid "Inner vertical"
+msgstr "Interior vertical"
+
+#: inc/config.class.php:179
+msgid "Barcodes sizes"
+msgstr "Tamaño de los barcodes"
+
+#: inc/config.class.php:181
+msgid "Maximum width"
+msgstr "Anchura máxima"
+
+#: inc/config.class.php:184
+msgid "Maximum height"
+msgstr "Altura máxima"
+
+#: inc/config.class.php:237
+msgid "code39"
+msgstr "code39"
+
+#: inc/config.class.php:238
+msgid "code128"
+msgstr "code128"
+
+#: inc/config.class.php:239
+msgid "ean13"
+msgstr "ean13"
+
+#: inc/config.class.php:240
+msgid "int25"
+msgstr "int25"
+
+#: inc/config.class.php:241
+msgid "postnet"
+msgstr "postnet"
+
+#: inc/config.class.php:242
+msgid "upca"
+msgstr "upca"
+
+#: inc/config.class.php:243
+msgid "QRcode"
+msgstr "QRcode"
+
+#: inc/profile.class.php:133
+msgid "Generate barcode pdf"
+msgstr "Crear pdf de barcode"
