@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -42,8 +42,8 @@
 class PluginBarcodeProfile extends Profile {
 
    static $rightname = "config";
-   
-   
+
+
    function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
       if ($item->getID() > 0
               && $item->fields['interface'] == 'central') {
@@ -59,8 +59,8 @@ class PluginBarcodeProfile extends Profile {
       return TRUE;
    }
 
-   
-   
+
+
     /**
     * Show profile form
     *
@@ -95,8 +95,8 @@ class PluginBarcodeProfile extends Profile {
       }
       echo "</div>";
    }
-   
-   
+
+
 
    static function uninstallProfile() {
       $pfProfile = new self();
@@ -122,8 +122,8 @@ class PluginBarcodeProfile extends Profile {
       return $a_rights;
    }
 
-   
-   
+
+
    static function addDefaultProfileInfos($profiles_id, $rights) {
       $profileRight = new ProfileRight();
       foreach ($rights as $right => $value) {
@@ -141,7 +141,7 @@ class PluginBarcodeProfile extends Profile {
    }
 
    /**
-    * @param $ID  integer
+    * @param $profiles_id  integer
     */
    static function createFirstAccess($profiles_id) {
       include_once(GLPI_ROOT."/plugins/barcode/inc/profile.class.php");
@@ -163,7 +163,6 @@ class PluginBarcodeProfile extends Profile {
    }
 
    static function migrateProfiles() {
-      global $DB;
       //Get all rights from the old table
       $profiles = getAllDatasFromTable(getTableForItemType(__CLASS__));
 
@@ -201,6 +200,8 @@ class PluginBarcodeProfile extends Profile {
       }
    }
 
+
+
    /**
    * Init profiles during installation :
    * - add rights in profile table for the current user's profile
@@ -233,7 +234,7 @@ class PluginBarcodeProfile extends Profile {
                } else {
                   $rights = $profile->getRightsFor($info['itemtype']);
                }
-               foreach ($rights as $right => $label) {
+               foreach (array_keys($rights) as $right) {
                   $dataprofile['_'.$info['field']][$right] = 1;
                   $_SESSION['glpiactiveprofile'][$data['field']] = $right;
                }

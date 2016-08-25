@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -51,7 +51,7 @@ class PluginBarcodeBarcode {
 
    static $rightname = 'plugin_barcode_barcode';
 
-   
+
    /**
 	 * Constructor
 	**/
@@ -59,14 +59,14 @@ class PluginBarcodeBarcode {
       $this->docsPath = GLPI_PLUGIN_DOC_DIR.'/barcode/';
    }
 
-   
-   
+
+
    function getCodeTypes() {
       $types = array('Code39', 'code128', 'ean13', 'int25', 'postnet', 'upca', 'QRcode');
       return $types;
    }
-   
-   
+
+
 
    function showSizeSelect($p_size=NULL) { //TODO : utiliser fonction du coeur
 
@@ -122,8 +122,8 @@ class PluginBarcodeBarcode {
                                     'FOLIO'     => __('FOLIO', 'barcode')),
                               (is_null($p_size)?array('width' => '100'):array('value' => $p_size, 'width' => '100')));
    }
-   
-   
+
+
 
    function showOrientationSelect($p_orientation=NULL) { //TODO : utiliser fonction du coeur
 
@@ -133,8 +133,8 @@ class PluginBarcodeBarcode {
                               (is_null($p_orientation)?array('width' => '100'):array('value' => $p_orientation, 'width' => '100')));
    }
 
-   
-   
+
+
    function showForm($p_type, $p_ID) {
       global $CFG_GLPI;
 
@@ -178,13 +178,13 @@ class PluginBarcodeBarcode {
 		echo "</div>";
 		Html::closeForm();
    }
-   
-   
+
+
 
    function showFormMassiveAction(MassiveAction $ma) {
 
       $pbConfig = new PluginBarcodeConfig();
-      
+
       echo '<center>';
       echo '<strong>';
       echo __('It will generate only elements have defined field:', 'barcode').' ';
@@ -192,7 +192,7 @@ class PluginBarcodeBarcode {
          echo __('Ticket number', 'barcode');
       } else {
          echo __('Inventory number');
-      }      
+      }
       echo '</strong>';
       echo '<table>';
       echo '<tr>';
@@ -204,14 +204,14 @@ class PluginBarcodeBarcode {
       echo '</tr>';
       echo '</table>';
       echo '<br/>';
-      
+
       PluginBarcodeBarcode::commonShowMassiveAction();
    }
-   
-   
-   
+
+
+
    static function commonShowMassiveAction() {
-      
+
       $pbBarcode = new PluginBarcodeBarcode();
       $pbConfig = new PluginBarcodeConfig();
 
@@ -233,7 +233,7 @@ class PluginBarcodeBarcode {
       echo '<tr>';
       echo '<td>';
       echo __('Not use first xx barcodes', 'barcode')." : </td><td>";
-      Dropdown::showNumber("eliminate", array('width' => '100')); 
+      Dropdown::showNumber("eliminate", array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
@@ -244,14 +244,14 @@ class PluginBarcodeBarcode {
       echo '</tr>';
       echo '</table>';
       echo '</center>';
-      
+
       echo "<br/><input type='submit' value='".__('Create', 'barcode')."' class='submit'>";
    }
 
-   
-   
+
+
    function printPDF($p_params) {
-      
+
       $pbConfig = new PluginBarcodeConfig();
 
       // create barcodes
@@ -302,7 +302,7 @@ class PluginBarcodeBarcode {
       $height  = $config['maxCodeHeight'];
       $marginH = $config['marginHorizontal'];
       $marginV = $config['marginVertical'];
-      
+
       $heightimage = $height;
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
@@ -315,7 +315,7 @@ class PluginBarcodeBarcode {
             $ratio = (100 * $heightLogomax ) / $logoHeight;
             $logoHeight = $heightLogomax;
             $logoWidth = $logoWidth * ($ratio / 100);
-         } 
+         }
          if ($logoWidth > $width) {
             $ratio = (100 * $width ) / $logoWidth;
             $logoWidth = $width;
@@ -324,8 +324,8 @@ class PluginBarcodeBarcode {
          $heightyposText = $height - $logoHeight;
          $heightimage = $heightyposText;
       }
-      
-      
+
+
       $first=true;
       foreach ($codes as $code) {
          if ($first) {
@@ -364,27 +364,27 @@ class PluginBarcodeBarcode {
                   $imgWidth  = $imgWidth * ($ratio / 100);
                }
 
-               $image = imagecreatefrompng($imgFile);               
+               $image = imagecreatefrompng($imgFile);
                if ($imgWidth < $width) {
-                  $pdf->addImage($image, 
-                                 $x + (($width - $imgWidth) / 2), 
-                                 $y, 
-                                 $imgWidth, 
+                  $pdf->addImage($image,
+                                 $x + (($width - $imgWidth) / 2),
+                                 $y,
+                                 $imgWidth,
                                  $imgHeight);
                } else {
-                  $pdf->addImage($image, 
-                                 $x, 
-                                 $y, 
-                                 $imgWidth, 
+                  $pdf->addImage($image,
+                                 $x,
+                                 $y,
+                                 $imgWidth,
                                  $imgHeight);
                }
 
                if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
                   $logoimg = imagecreatefrompng(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
-                  $pdf->addImage($logoimg, 
-                                 $x + (($width - $logoWidth) / 2), 
-                                 $y + $heightyposText, 
-                                 $logoWidth, 
+                  $pdf->addImage($logoimg,
+                                 $x + (($width - $logoWidth) / 2),
+                                 $y + $heightyposText,
+                                 $logoWidth,
                                  $logoHeight);
                }
                if ($p_params['border']) {
@@ -401,8 +401,8 @@ class PluginBarcodeBarcode {
       return '/files/_plugins/barcode/'.$pdfFile;
    }
 
-   
-   
+
+
    function create($p_code, $p_type, $p_ext) {
       require_once(GLPI_ROOT.'/plugins/barcode/lib/Image_Barcode/Barcode.php');
       require_once(GLPI_ROOT.'/plugins/barcode/inc/functions_debug.php');
@@ -416,48 +416,49 @@ class PluginBarcodeBarcode {
          ob_end_clean();
          plugin_barcode_reenableusemode();
          file_put_contents($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext, $img);
-         if (!$resImg) return false;
+         if (!$resImg) {
+            return false;
+         }
       }
       return true;
    }
-   
-   
+
+
 
    function getSpecificMassiveActions($checkitem=NULL) {
       $actions = parent::getSpecificMassiveActions($checkitem);
       return $actions;
    }
-   
-   
-   
+
+
+
    /**
     * @since version 0.85
     *
     * @see CommonDBTM::showMassiveActionsSubForm()
    **/
    static function showMassiveActionsSubForm(MassiveAction $ma) {
-      global $CFG_GLPI;
-
       switch ($ma->getAction()) {
          case 'Generate':
             $barcode = new self();
             $barcode->showFormMassiveAction($ma);
             return true;
-            
+
       }
        return parent::showMassiveActionsSubForm($ma);
    }
 
-   
-   
+
+
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
       global $CFG_GLPI;
 
       switch ($ma->getAction()) {
+
          case 'Generate' :
             $pbQRcode = new PluginBarcodeQRcode();
             $rand = mt_rand();
-            $number = 0;     
+            $number = 0;
             $codes = array();
             if ($ma->POST['eliminate'] > 0) {
                for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
@@ -473,7 +474,6 @@ class PluginBarcodeBarcode {
                      $codes[] = $item->getField('otherserial');
                   }
                }
-               
             }
             if (count($codes) > 0) {
                $params['codes']  = $codes;
@@ -492,7 +492,7 @@ class PluginBarcodeBarcode {
             }
             $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
             return;
-         
+
       }
       parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
    }
