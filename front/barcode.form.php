@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -41,10 +41,18 @@
 
 include ('../../../inc/includes.php');
 
-if(!isset($_POST["length"])) $_POST["length"] = "";
-if(!isset($_POST["prefixe"])) $_POST["prefixe"] = "";
-if(!isset($_POST["size"])) $_POST["size"] = "";
-if(!isset($_POST["format"])) $_POST["format"] = "";
+if(!isset($_POST["length"])) {
+   $_POST["length"] = "";
+}
+if(!isset($_POST["prefixe"])) {
+   $_POST["prefixe"] = "";
+}
+if(!isset($_POST["size"])) {
+   $_POST["size"] = "";
+}
+if(!isset($_POST["format"])) {
+   $_POST["format"] = "";
+}
 
 $barcode = new PluginBarcodeBarcode();
 

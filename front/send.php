@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -75,7 +75,9 @@ if (isset($_GET['file'])) {
       } else {
          // Pour que les \x00 ne devienne pas \0
          $mc = Toolbox::get_magic_quotes_runtime();
-         if ($mc) @set_magic_quotes_runtime(0);
+         if ($mc) {
+            @set_magic_quotes_runtime(0);
+         }
          $fsize=filesize($file);
 
          if ($fsize){
@@ -84,7 +86,9 @@ if (isset($_GET['file'])) {
             echo 'error';
          }
 
-         if ($mc) @set_magic_quotes_runtime($mc);
+         if ($mc) {
+            @set_magic_quotes_runtime($mc);
+         }
       }
    }
 }

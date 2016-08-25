@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -46,14 +46,14 @@ if (!defined('GLPI_ROOT')) {
 class PluginBarcodeQRcode {
 
    function __construct() {
-      require_once(GLPI_ROOT.'/plugins/barcode/lib/phpqrcode/qrlib.php'); 
+      require_once(GLPI_ROOT.'/plugins/barcode/lib/phpqrcode/qrlib.php');
    }
-   
-   
-   
+
+
+
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
       global $CFG_GLPI;
-      
+
       $item = new $itemtype();
       $item->getFromDB($items_id);
       $a_content = array();
@@ -83,7 +83,7 @@ class PluginBarcodeQRcode {
             }
             $a_content[] = 'UUID = '.$item->fields['uuid'];
          }
-      }      
+      }
       if ($data['name']) {
          if ($item->fields['name'] != '') {
             $have_content = TRUE;
@@ -92,34 +92,34 @@ class PluginBarcodeQRcode {
       }
       if ($data['url']) {
          $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
-      }      
+      }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
-      }      
-      
+      }
+
       if (count($a_content) > 0) {
          $codeContents = implode("\n", $a_content);
-         QRcode::png($codeContents, 
+         QRcode::png($codeContents,
                      GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$number.'.png',
-                     QR_ECLEVEL_L, 
+                     QR_ECLEVEL_L,
                      4);
          return GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$number.'.png';
       }
       return false;
    }
-   
-   
-   
-   function cleanQRcodefiles($rand, $number) {      
+
+
+
+   function cleanQRcodefiles($rand, $number) {
       for ($i = 0; $i < $number; $i++) {
          unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$i.'.png');
-      }      
+      }
    }
-   
-   
-   
+
+
+
    function showFormMassiveAction() {
-      
+
       echo '<input type="hidden" name="type" value="QRcode" />';
       echo '<center>';
       echo '<table>';
@@ -132,19 +132,19 @@ class PluginBarcodeQRcode {
       echo '<tr>';
       echo '<td>';
       echo __('Inventory number')." : </td><td>";
-      Dropdown::showYesNo("inventorynumber", 1, -1, array('width' => '100')); 
+      Dropdown::showYesNo("inventorynumber", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('ID')." : </td><td>";
-      Dropdown::showYesNo("id", 1, -1, array('width' => '100')); 
+      Dropdown::showYesNo("id", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('UUID')." : </td><td>";
-      Dropdown::showYesNo("uuid", 1, -1, array('width' => '100')); 
+      Dropdown::showYesNo("uuid", 1, -1, array('width' => '100'));
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
@@ -154,7 +154,7 @@ class PluginBarcodeQRcode {
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
-      echo '<td>';     
+      echo '<td>';
       echo __('Web page of the device')." : </td><td>";
       Dropdown::showYesNo("url", 1, -1, array('width' => '100'));
       echo '</td>';
@@ -167,46 +167,48 @@ class PluginBarcodeQRcode {
       echo '</tr>';
       echo '</table>';
       echo '<br/>';
-      
+
       PluginBarcodeBarcode::commonShowMassiveAction();
    }
 
-   
-   
+
+
    function getSpecificMassiveActions($checkitem=NULL) {
       $actions = parent::getSpecificMassiveActions($checkitem);
       return $actions;
    }
-   
-   
-   
+
+
+
    /**
     * @since version 0.85
     *
     * @see CommonDBTM::showMassiveActionsSubForm()
    **/
    static function showMassiveActionsSubForm(MassiveAction $ma) {
-      global $CFG_GLPI;
 
       switch ($ma->getAction()) {
+
          case 'Generate':
             $pbQRcode = new self();
             $pbQRcode->showFormMassiveAction();
             return true;
+
     }
       return parent::showMassiveActionsSubForm($ma);
    }
 
-   
-   
+
+
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
       global $CFG_GLPI;
 
       switch ($ma->getAction()) {
+
          case 'Generate' :
             $pbQRcode = new PluginBarcodeQRcode();
             $rand = mt_rand();
-            $number = 0;     
+            $number = 0;
             $codes = array();
             if ($ma->POST['eliminate'] > 0) {
                for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
@@ -221,7 +223,7 @@ class PluginBarcodeQRcode {
                      $number++;
                   }
                }
-            } else {    
+            } else {
                foreach ($ids as $key) {
                   $item->getFromDB($key);
                   if ($item->isField('otherserial')) {
@@ -246,12 +248,12 @@ class PluginBarcodeQRcode {
             }
             $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
             return;
-         
+
       }
       parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
    }
 
-   
+
 }
 
 ?>

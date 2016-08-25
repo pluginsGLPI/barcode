@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2014 by the Barcode plugin Development Team.
+   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
 
    https://forge.indepnet.net/projects/barscode
    ------------------------------------------------------------------------
@@ -30,7 +30,7 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2014 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://forge.indepnet.net/projects/barscode
@@ -43,10 +43,10 @@ define ("PLUGIN_BARCODE_VERSION", "0.85+1.0");
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
-   global $PLUGIN_HOOKS,$LANG,$CFG_GLPI;
+   global $PLUGIN_HOOKS;
 
    $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
-   
+
    // Params : plugin name - string type - ID - Array of attributes
    Plugin::registerClass('PluginBarcodeDropdown');
    Plugin::registerClass('PluginBarcodeProfile',
@@ -54,7 +54,7 @@ function plugin_init_barcode() {
    Plugin::registerClass('PluginBarcode');
 
    // Display a menu entry ?
-   
+
    if (Session::haveRight('plugin_barcode_barcode', CREATE)
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
       $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
@@ -78,13 +78,11 @@ function plugin_init_barcode() {
 
    //redirect appel http://localhost/glpi/index.php?redirect=plugin_example_2 (ID 2 du form)
    $PLUGIN_HOOKS['redirect_page']['barcode'] = 'barcode.form.php';
-
 }
 
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_barcode() {
-
    return array('name'           => 'Barcode',
                 'shortname'      => 'barcode',
                 'version'        => PLUGIN_BARCODE_VERSION,
@@ -98,10 +96,8 @@ function plugin_version_barcode() {
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_barcode_check_prerequisites() {
-   
-
-   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.86','ge')) {
-      echo __('GLPI version not compatible need 0.85.x', 'barcode');
+   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.91','ge')) {
+      echo __('GLPI version not compatible need 0.85.x or 0.90.x', 'barcode');
       return false;
    }
    return true;
@@ -111,8 +107,6 @@ function plugin_barcode_check_prerequisites() {
 // Check configuration process for plugin : need to return true if succeeded
 // Can display a message only if failure and $verbose is true
 function plugin_barcode_check_config($verbose=false) {
-   global $LANG;
-
    if (true) { // Your configuration check
       return true;
    }
