@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "0.85+1.0");
+define ("PLUGIN_BARCODE_VERSION", "0.90+1.0");
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {

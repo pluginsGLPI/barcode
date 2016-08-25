@@ -46,12 +46,12 @@ if (!defined('GLPI_ROOT')) {
 class PluginBarcodeConfig extends CommonDBTM {
 
    static $rightname = 'plugin_barcode_config';
-   
+
    function __construct() {
 		$this->table = "glpi_plugin_barcode_config";
 	}
-   
-   
+
+
 
    function showForm($p_type=NULL) {
       global $CFG_GLPI;
@@ -64,15 +64,15 @@ class PluginBarcodeConfig extends CommonDBTM {
                    enctype='multipart/form-data'>";
 
 		echo "<div align='center'>";
-		echo "<table class='tab_cadre' width='550'>";
+		echo "<table class='tab_cadre_fixe'>";
 		echo "<tr><th colspan='4'>".__('Barcode plugin configuration', 'barcode')."</th></tr>";
 		echo "</table><br>";
 
-		echo "<table class='tab_cadre' width='550'>";
+		echo "<table class='tab_cadre_fixe'>";
 		echo "<tr class='tab_bg_1'>";
       echo "<th colspan='4'>".__('General configuration', 'barcode')."</th>";
       echo "</tr>";
-      
+
 		echo "<tr class='tab_bg_1'>";
       echo "<td>".__('Type', 'barcode')."</td>";
       echo "<td>";
@@ -80,7 +80,7 @@ class PluginBarcodeConfig extends CommonDBTM {
       echo "</td>";
       echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
 		echo "</tr>";
- 
+
 		echo "<tr class='tab_bg_1'>";
       echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Empty the cache', 'barcode')."' class='submit' name='dropCache'></td>";
       echo "</tr>";
@@ -97,12 +97,12 @@ class PluginBarcodeConfig extends CommonDBTM {
          echo "</td>";
          echo "</tr>";
       }
-      
+
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='2' align='center'><input type='file' name='logo' value='' /></td>";
       echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
       echo "</tr>";
-      
+
 		echo "</table>";
 		echo "</div>";
 		Html::closeForm();
@@ -113,8 +113,8 @@ class PluginBarcodeConfig extends CommonDBTM {
       }
    }
 
-   
-   
+
+
    function getConfig() {
       $pbconf = new PluginBarcodeConfig();
       if ($pbconf->getFromDB(1)) {
@@ -125,11 +125,11 @@ class PluginBarcodeConfig extends CommonDBTM {
       return $type;
    }
 
-   
-   
+
+
    function showFormConfigType($p_type=NULL) {
       global $CFG_GLPI;
-      
+
       $pbBarcode = new PluginBarcodeBarcode();
 
       if (is_null($p_type)) {
@@ -142,7 +142,7 @@ class PluginBarcodeConfig extends CommonDBTM {
                   action='".$CFG_GLPI['root_doc']."/plugins/barcode/front/config_type.form.php'>";
       echo "<input type='hidden' name='type' value='".$type."'>";
 		echo "<div align='center'>";
-		echo "<table class='tab_cadre' >";
+		echo "<table class='tab_cadre_fixe' >";
 
 		echo "<tr><th colspan='4'>".$type."</th></tr>";
          echo "<tr class='tab_bg_1'>";
@@ -194,8 +194,8 @@ class PluginBarcodeConfig extends CommonDBTM {
 		Html::closeForm();
    }
 
-   
-   
+
+
    function getConfigType($p_type=NULL) {
       if (is_null($p_type)) {
          $p_type=$this->getConfig();
@@ -231,11 +231,11 @@ class PluginBarcodeConfig extends CommonDBTM {
       return $config;
    }
 
-   
-   
+
+
    function showTypeSelect($p_type=NULL, $used=array()) {
 
-      
+
       $options = array(
           'width' => '100',
           'used'  => $used
@@ -254,19 +254,19 @@ class PluginBarcodeConfig extends CommonDBTM {
                               $options
                               );
    }
-   
-   
-   
+
+
+
    /**
-    * Configure QRcode to display: 
+    * Configure QRcode to display:
     *  ¤ GLPI URL of device
     *  ¤ Serial number
     *  ¤ inventory number
     */
    function showQRcodeConfig() {
-      
-      
-      
+
+
+
    }
 }
 
