@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-   <name>Barscode</name>
-   <key>barscode</key>
+   <name>Barcode</name>
+   <key>barcode</key>
    <state>stable</state>
    <logo>https://github.com/pluginsGLPI/barcode/blob/master/barscode.png?raw=true</logo>
    <description>
