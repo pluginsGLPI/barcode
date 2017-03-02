@@ -40,7 +40,7 @@
  */
 
 if (!defined('GLPI_ROOT')) {
-	die("Sorry. You can't access directly to this file");
+    die("Sorry. You can't access directly to this file");
 }
 
 class PluginBarcodeConfig extends CommonDBTM {
@@ -48,8 +48,8 @@ class PluginBarcodeConfig extends CommonDBTM {
    static $rightname = 'plugin_barcode_config';
 
    function __construct() {
-		$this->table = "glpi_plugin_barcode_config";
-	}
+        $this->table = "glpi_plugin_barcode_config";
+   }
 
 
 
@@ -63,25 +63,25 @@ class PluginBarcodeConfig extends CommonDBTM {
                   action='".$CFG_GLPI['root_doc']."/plugins/barcode/front/config.form.php'
                    enctype='multipart/form-data'>";
 
-		echo "<div align='center'>";
-		echo "<table class='tab_cadre_fixe'>";
-		echo "<tr><th colspan='4'>".__('Barcode plugin configuration', 'barcode')."</th></tr>";
-		echo "</table><br>";
+        echo "<div align='center'>";
+        echo "<table class='tab_cadre_fixe'>";
+        echo "<tr><th colspan='4'>".__('Barcode plugin configuration', 'barcode')."</th></tr>";
+        echo "</table><br>";
 
-		echo "<table class='tab_cadre_fixe'>";
-		echo "<tr class='tab_bg_1'>";
+        echo "<table class='tab_cadre_fixe'>";
+        echo "<tr class='tab_bg_1'>";
       echo "<th colspan='4'>".__('General configuration', 'barcode')."</th>";
       echo "</tr>";
 
-		echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
       echo "<td>".__('Type', 'barcode')."</td>";
       echo "<td>";
       $this->showTypeSelect($defaultType);
       echo "</td>";
       echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
-		echo "</tr>";
+        echo "</tr>";
 
-		echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
       echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Empty the cache', 'barcode')."' class='submit' name='dropCache'></td>";
       echo "</tr>";
 
@@ -103,11 +103,11 @@ class PluginBarcodeConfig extends CommonDBTM {
       echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
       echo "</tr>";
 
-		echo "</table>";
-		echo "</div>";
-		Html::closeForm();
+        echo "</table>";
+        echo "</div>";
+        Html::closeForm();
       $types = $pbBarcode->getCodeTypes();
-      foreach($types as $type) {
+      foreach ($types as $type) {
          echo '<br>';
          $this->showFormConfigType($type);
       }
@@ -137,14 +137,14 @@ class PluginBarcodeConfig extends CommonDBTM {
       } else {
          $type = $p_type;
       }
-		$config = $this->getConfigType($type);
+        $config = $this->getConfigType($type);
       echo "<form name='form' method='post'
                   action='".$CFG_GLPI['root_doc']."/plugins/barcode/front/config_type.form.php'>";
       echo "<input type='hidden' name='type' value='".$type."'>";
-		echo "<div align='center'>";
-		echo "<table class='tab_cadre_fixe' >";
+        echo "<div align='center'>";
+        echo "<table class='tab_cadre_fixe' >";
 
-		echo "<tr><th colspan='4'>".$type."</th></tr>";
+        echo "<tr><th colspan='4'>".$type."</th></tr>";
          echo "<tr class='tab_bg_1'>";
             echo "<td>".__('Page size', 'barcode')."</td><td>";
             $pbBarcode->showSizeSelect($config['size']);
@@ -188,10 +188,10 @@ class PluginBarcodeConfig extends CommonDBTM {
             echo "</td>";
          echo "</tr>";
 
-		echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Save')."' class='submit'></td></tr>";
-		echo "</table>";
-		echo "</div>";
-		Html::closeForm();
+        echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Save')."' class='submit'></td></tr>";
+        echo "</table>";
+        echo "</div>";
+        Html::closeForm();
    }
 
 
@@ -235,7 +235,6 @@ class PluginBarcodeConfig extends CommonDBTM {
 
    function showTypeSelect($p_type=NULL, $used=array()) {
 
-
       $options = array(
           'width' => '100',
           'used'  => $used
@@ -265,9 +264,6 @@ class PluginBarcodeConfig extends CommonDBTM {
     */
    function showQRcodeConfig() {
 
-
-
    }
 }
 
-?>

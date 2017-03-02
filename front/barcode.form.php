@@ -41,16 +41,16 @@
 
 include ('../../../inc/includes.php');
 
-if(!isset($_POST["length"])) {
+if (!isset($_POST["length"])) {
    $_POST["length"] = "";
 }
-if(!isset($_POST["prefixe"])) {
+if (!isset($_POST["prefixe"])) {
    $_POST["prefixe"] = "";
 }
-if(!isset($_POST["size"])) {
+if (!isset($_POST["size"])) {
    $_POST["size"] = "";
 }
-if(!isset($_POST["format"])) {
+if (!isset($_POST["format"])) {
    $_POST["format"] = "";
 }
 
@@ -65,4 +65,3 @@ $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='
 Session::addMessageAfterRedirect($msg);
 
 Html::back();
-?>

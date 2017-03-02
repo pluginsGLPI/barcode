@@ -46,18 +46,18 @@ function plugin_barcode_MassiveActions($type) {
       // New action for core and other plugin types : name = plugin_PLUGINNAME_actionname
       case 'Computer' :
       case 'Monitor' :
-		case 'Networking' :
-		case 'Printer' :
-		case 'Peripheral' :
-		case 'Phone' :
+      case 'Networking' :
+      case 'Printer' :
+      case 'Peripheral' :
+      case 'Phone' :
          return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
                       "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
-         
-		case 'Ticket' :
+
+      case 'Ticket' :
          return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'));
 
-//      case 'Profile' :
-//         return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
+      //      case 'Profile' :
+      //         return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
    }
    return array();
 }
@@ -69,7 +69,7 @@ function plugin_barcode_install() {
    global $DB;
 
    $migration = new Migration(PLUGIN_BARCODE_VERSION);
-   
+
    if (!file_exists(GLPI_PLUGIN_DOC_DIR."/barcode")) {
       mkdir(GLPI_PLUGIN_DOC_DIR."/barcode");
    }
@@ -137,7 +137,7 @@ function plugin_barcode_install() {
                      '25', '30', '110', '100')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
-   
+
    if (countElementsInTable("glpi_plugin_barcode_configs_types",
                             "`type`='QRcode'") == 0) {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
@@ -179,10 +179,9 @@ function plugin_barcode_uninstall() {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
-   
+
    include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
    PluginBarcodeProfile::removeRights();
 
    return true;
 }
-?>

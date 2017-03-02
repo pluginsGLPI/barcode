@@ -40,7 +40,7 @@
  */
 
 if (!defined('GLPI_ROOT')) {
-	die("Sorry. You can't access directly to this file");
+    die("Sorry. You can't access directly to this file");
 }
 
 class PluginBarcodeQRcode {
@@ -194,7 +194,7 @@ class PluginBarcodeQRcode {
             $pbQRcode->showFormMassiveAction();
             return true;
 
-    }
+      }
       return parent::showMassiveActionsSubForm($ma);
    }
 
@@ -256,4 +256,3 @@ class PluginBarcodeQRcode {
 
 }
 
-?>

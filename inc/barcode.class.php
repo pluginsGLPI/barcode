@@ -40,7 +40,7 @@
  */
 
 if (!defined('GLPI_ROOT')) {
-	die("Sorry. You can't access directly to this file");
+    die("Sorry. You can't access directly to this file");
 }
 
 /**
@@ -53,8 +53,8 @@ class PluginBarcodeBarcode {
 
 
    /**
-	 * Constructor
-	**/
+     * Constructor
+    **/
    function __construct() {
       $this->docsPath = GLPI_PLUGIN_DOC_DIR.'/barcode/';
    }
@@ -68,7 +68,8 @@ class PluginBarcodeBarcode {
 
 
 
-   function showSizeSelect($p_size=NULL) { //TODO : utiliser fonction du coeur
+   function showSizeSelect($p_size=NULL) {
+      //TODO : utiliser fonction du coeur
 
       Dropdown::showFromArray("size",
                               array('4A0'       => __('4A0', 'barcode'),
@@ -125,7 +126,8 @@ class PluginBarcodeBarcode {
 
 
 
-   function showOrientationSelect($p_orientation=NULL) { //TODO : utiliser fonction du coeur
+   function showOrientationSelect($p_orientation=NULL) {
+      //TODO : utiliser fonction du coeur
 
       Dropdown::showFromArray("orientation",
                               array('Portrait'  => __('Portrait', 'barcode'),
@@ -148,8 +150,8 @@ class PluginBarcodeBarcode {
       }
       echo "<form name='form' method='post'
                   action='".$CFG_GLPI['root_doc']."/plugins/barcode/front/barcode.form.php'>";
-		echo "<div align='center'>";
-		echo "<table class='tab_cadre'>";
+        echo "<div align='center'>";
+        echo "<table class='tab_cadre'>";
          echo "<tr><th colspan='4'>".__('Generation', 'barcode')."</th></tr>";
          echo "<tr class='tab_bg_1'>";
             echo "<td>".__('Code', 'barcode')."</td><td>";
@@ -174,9 +176,9 @@ class PluginBarcodeBarcode {
          echo "<tr><td class='tab_bg_1' colspan='4' align='center'>
                    <input type='submit' value='".__('Create', 'barcode')."'
                           class='submit'></td></tr>";
-		echo "</table>";
-		echo "</div>";
-		Html::closeForm();
+        echo "</table>";
+        echo "</div>";
+        Html::closeForm();
    }
 
 
@@ -198,8 +200,8 @@ class PluginBarcodeBarcode {
       echo '<tr>';
       echo '<td>';
       $config = $pbConfig->getConfigType();
-		echo __('Type', 'barcode')." : </td><td>";
-		$pbConfig->showTypeSelect($config['type'], array('QRcode' => 'QRcode'));
+        echo __('Type', 'barcode')." : </td><td>";
+        $pbConfig->showTypeSelect($config['type'], array('QRcode' => 'QRcode'));
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -220,14 +222,14 @@ class PluginBarcodeBarcode {
       echo '<table>';
       echo '<tr>';
       echo '<td>';
-		echo "<br/>".__('Page size', 'barcode')." : </td><td>";
-		$pbBarcode->showSizeSelect($config['size']);
+        echo "<br/>".__('Page size', 'barcode')." : </td><td>";
+        $pbBarcode->showSizeSelect($config['size']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
-		echo "<br/>".__('Orientation', 'barcode')." : </td><td>";
-		$pbBarcode->showOrientationSelect($config['orientation']);
+        echo "<br/>".__('Orientation', 'barcode')." : </td><td>";
+        $pbBarcode->showOrientationSelect($config['orientation']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
@@ -266,7 +268,7 @@ class PluginBarcodeBarcode {
          if (isset($p_params['code'])) {
             if (isset($p_params['nb']) AND $p_params['nb']>1) {
                $this->create($p_params['code'], $type, $ext);
-               for ($i=1 ; $i<=$p_params['nb'] ; $i++) {
+               for ($i=1; $i<=$p_params['nb']; $i++) {
                   $codes[] = $p_params['code'];
                }
             } else {
@@ -275,7 +277,7 @@ class PluginBarcodeBarcode {
                }
                $codes[] = $p_params['code'];
             }
-         } elseif (isset($p_params['codes'])) {
+         } else if (isset($p_params['codes'])) {
             $codes = $p_params['codes'];
             foreach ($codes as $code) {
                if ($code != '') {
@@ -284,7 +286,7 @@ class PluginBarcodeBarcode {
             }
          } else {
             // TODO : erreur ?
-   //         print_r($p_params);
+            //         print_r($p_params);
             return 0;
          }
       }
@@ -324,7 +326,6 @@ class PluginBarcodeBarcode {
          $heightyposText = $height - $logoHeight;
          $heightimage = $heightyposText;
       }
-
 
       $first=true;
       foreach ($codes as $code) {
@@ -499,4 +500,3 @@ class PluginBarcodeBarcode {
 
 }
 
-?>

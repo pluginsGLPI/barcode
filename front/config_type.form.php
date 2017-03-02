@@ -54,4 +54,3 @@ if (isset($_POST['type'])) {
    }
 }
 Html::back();
-?>

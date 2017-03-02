@@ -244,4 +244,3 @@ class PluginBarcodeProfile extends Profile {
       }
    }
 }
-?>
