@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "0.90+1.0");
+define ("PLUGIN_BARCODE_VERSION", "0.90+2.0");
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
@@ -96,8 +96,8 @@ function plugin_version_barcode() {
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_barcode_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '0.85', 'lt') || version_compare(GLPI_VERSION, '0.91', 'ge')) {
-      echo __('GLPI version not compatible need 0.85.x or 0.90.x', 'barcode');
+   if (version_compare(GLPI_VERSION, '0.85', 'lt') || version_compare(GLPI_VERSION, '9.2', 'ge')) {
+      echo __('GLPI 0.85or higher required', 'barcode');
       return false;
    }
    return true;
@@ -112,5 +112,3 @@ function plugin_barcode_check_config($verbose=false) {
    }
    return false;
 }
-
-
