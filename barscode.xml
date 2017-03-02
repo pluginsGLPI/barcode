@@ -3,7 +3,7 @@
    <name>Barscode</name>
    <key>barscode</key>
    <state>stable</state>
-   <logo>https://forge.indepnet.net/svn/barscode/barscode.png</logo>
+   <logo>https://github.com/pluginsGLPI/barcode/blob/master/barscode.png?raw=true</logo>
    <description>
       <short>
          <fr><![CDATA[Ce plugin vous permet de générer des codes barre]]></fr>
@@ -14,8 +14,8 @@
          <en><![CDATA[This plugin allow you to generate and export in PDF bars code and QRcode]]></en>
        </long>
    </description>
-   <homepage>https://forge.indepnet.net/projects/barscode</homepage>
-   <download>https://forge.indepnet.net/projects/barscode/files</download>
+   <homepage>https://github.com/pluginsGLPI/barcode</homepage>
+   <download>https://github.com/pluginsGLPI/barcode/releases</download>
    <authors>
       <author>David DURIEUX</author>
    </authors>
