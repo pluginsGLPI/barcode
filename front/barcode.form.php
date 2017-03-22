@@ -54,13 +54,11 @@ if (!isset($_POST["format"])) {
    $_POST["format"] = "";
 }
 
-$barcode = new PluginBarcodeBarcode();
-
-$file = $barcode->printPDF($_POST);
-
+$barcode  = new PluginBarcodeBarcode();
+$file     = $barcode->printPDF($_POST);
 $filePath = explode('/', $file);
 $filename = $filePath[count($filePath)-1];
-// TODO : recup GLPI_ROOT de la page d'origine via SESSION ?
+
 $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
 Session::addMessageAfterRedirect($msg);
 

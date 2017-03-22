@@ -72,7 +72,7 @@ class PluginBarcodeProfile extends Profile {
    function showForm($profiles_id=0, $openform=TRUE, $closeform=TRUE) {
 
       echo "<div class='firstbloc'>";
-      if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
+      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))
           && $openform) {
          $profile = new Profile();
          echo "<form method='post' action='".$profile->getFormURL()."'>";
@@ -82,9 +82,10 @@ class PluginBarcodeProfile extends Profile {
       $profile->getFromDB($profiles_id);
 
       $rights = $this->getAllRights();
-      $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
-                                                      'default_class' => 'tab_bg_2',
-                                                      'title'         => __('Barcode', 'barcode')));
+      $profile->displayRightsChoiceMatrix($rights, ['canedit'       => $canedit,
+                                                    'default_class' => 'tab_bg_2',
+                                                    'title'         => __('Barcode', 'barcode')
+                                                   ]);
       if ($canedit
           && $closeform) {
          echo "<div class='center'>";

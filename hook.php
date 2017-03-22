@@ -50,16 +50,16 @@ function plugin_barcode_MassiveActions($type) {
       case 'Printer' :
       case 'Peripheral' :
       case 'Phone' :
-         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
-                      "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
+         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                    => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
+                 "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                    => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode']);
 
       case 'Ticket' :
-         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'));
-
-      //      case 'Profile' :
-      //         return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
+         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                   => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode')];
    }
-   return array();
+   return [];
 }
 
 
@@ -82,7 +82,7 @@ function plugin_barcode_install() {
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
       $DB->query($query) or die("error creating glpi_plugin_barcode_configs ". $DB->error());
 
-      $query = "INSERT INTO `glpi_plugin_barcode_configs` 
+      $query = "INSERT INTO `glpi_plugin_barcode_configs`
                      (`id`, `type`)
                 VALUES
                      ('1', 'code128')";

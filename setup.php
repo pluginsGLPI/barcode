@@ -47,17 +47,16 @@ function plugin_init_barcode() {
 
    $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
 
-   // Params : plugin name - string type - ID - Array of attributes
    Plugin::registerClass('PluginBarcodeDropdown');
-   Plugin::registerClass('PluginBarcodeProfile',
-              array('addtabon' => array('Profile')));
+   Plugin::registerClass('PluginBarcodeProfile', ['addtabon' => ['Profile']]);
    Plugin::registerClass('PluginBarcode');
 
    // Display a menu entry ?
 
    if (Session::haveRight('plugin_barcode_barcode', CREATE)
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
-      $PLUGIN_HOOKS['pre_item_purge']['barcode'] = array('Profile' => array('PluginBarcodeProfile','cleanProfiles'));
+      $PLUGIN_HOOKS['pre_item_purge']['barcode']
+         = ['Profile' => ['PluginBarcodeProfile','cleanProfiles']];
 
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
@@ -76,39 +75,33 @@ function plugin_init_barcode() {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
 
-   //redirect appel http://localhost/glpi/index.php?redirect=plugin_example_2 (ID 2 du form)
+   //Redirect code
+   //http://localhost/glpi/index.php?redirect=plugin_barcode_2 to form ID 2
    $PLUGIN_HOOKS['redirect_page']['barcode'] = 'barcode.form.php';
 }
 
-
-// Get the name and the version of the plugin - Needed
 function plugin_version_barcode() {
-   return array('name'           => 'Barcode',
-                'shortname'      => 'barcode',
-                'version'        => PLUGIN_BARCODE_VERSION,
-                'license'        => 'AGPLv3+',
-                'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
-                   Jean Marc GRISARD & Vincent MAZZONI',
-                'homepage'       => 'https://forge.indepnet.net/projects/barscode',
-                'minGlpiVersion' => '0.85');// For compatibility / no install in version < minGlpiVersion
+   return ['name'           => 'Barcode',
+           'shortname'      => 'barcode',
+           'version'        => PLUGIN_BARCODE_VERSION,
+           'license'        => 'AGPLv3+',
+           'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
+                                Jean Marc GRISARD & Vincent MAZZONI',
+           'homepage'       => 'https://forge.indepnet.net/projects/barscode',
+           'minGlpiVersion' => '0.85'
+          ];
 }
 
 
-// Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_barcode_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '0.85', 'lt') || version_compare(GLPI_VERSION, '9.2', 'ge')) {
-      echo __('GLPI 0.85or higher required', 'barcode');
+   if (version_compare(GLPI_VERSION, '0.85', 'lt')
+      || version_compare(GLPI_VERSION, '9.2', 'ge')) {
+      echo __('GLPI 0.85 or higher required', 'barcode');
       return false;
    }
    return true;
 }
 
-
-// Check configuration process for plugin : need to return true if succeeded
-// Can display a message only if failure and $verbose is true
 function plugin_barcode_check_config($verbose=false) {
-   if (true) { // Your configuration check
-      return true;
-   }
-   return false;
+   return true;
 }
