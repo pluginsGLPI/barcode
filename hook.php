@@ -53,11 +53,13 @@ function plugin_barcode_MassiveActions($type) {
          return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
                     => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
                  "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
-                    => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode']);
+                    => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode')
+                ];
 
       case 'Ticket' :
          return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
-                   => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode')];
+                   => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode')
+                ];
    }
    return [];
 }

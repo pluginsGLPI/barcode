@@ -245,8 +245,8 @@ class PluginBarcodeConfig extends CommonDBTM {
                                'int25'     => __('int25', 'barcode'),
                                'postnet'   => __('postnet', 'barcode'),
                                'upca'      => __('upca', 'barcode'),
-                               'QRcode'    => __('QRcode', 'barcode')),
+                               'QRcode'    => __('QRcode', 'barcode')],
                                $options
-                              ];
+                            );
    }
 }

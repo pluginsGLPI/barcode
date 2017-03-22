@@ -122,7 +122,7 @@ class PluginBarcodeBarcode {
                                'LETTER'    => __('LETTER', 'barcode'),
                                'LEGAL'     => __('LEGAL', 'barcode'),
                                'EXECUTIVE' => __('EXECUTIVE', 'barcode'),
-                               'FOLIO'     => __('FOLIO', 'barcode']),
+                               'FOLIO'     => __('FOLIO', 'barcode')],
                               (is_null($p_size)?['width' => '100']:['value' => $p_size, 'width' => '100']));
    }
 
