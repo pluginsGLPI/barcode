@@ -76,7 +76,7 @@ function plugin_barcode_install() {
       mkdir(GLPI_PLUGIN_DOC_DIR."/barcode");
    }
    $migration->renameTable("glpi_plugin_barcode_config", "glpi_plugin_barcode_configs");
-   if (!TableExists("glpi_plugin_barcode_configs")) {
+   if (!$DB->tableExists("glpi_plugin_barcode_configs")) {
       $query = "CREATE TABLE `glpi_plugin_barcode_configs` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
@@ -92,7 +92,7 @@ function plugin_barcode_install() {
    }
 
    $migration->renameTable("glpi_plugin_barcode_config_type", "glpi_plugin_barcode_configs_types");
-   if (!TableExists("glpi_plugin_barcode_configs_types")) {
+   if (!$DB->tableExists("glpi_plugin_barcode_configs_types")) {
       $query = "CREATE TABLE `glpi_plugin_barcode_configs_types` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
@@ -156,7 +156,7 @@ function plugin_barcode_install() {
    include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
    include_once GLPI_ROOT.'/plugins/barcode/inc/config.class.php';
    PluginBarcodeProfile::initProfile();
-   if (TableExists("glpi_plugin_barcode_profiles")) {
+   if ($DB->tableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
@@ -169,15 +169,15 @@ function plugin_barcode_install() {
 function plugin_barcode_uninstall() {
    global $DB;
 
-   if (TableExists("glpi_plugin_barcode_configs")) {
+   if ($DB->tableExists("glpi_plugin_barcode_configs")) {
       $query = "DROP TABLE `glpi_plugin_barcode_configs`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs");
    }
-   if (TableExists("glpi_plugin_barcode_configs_types")) {
+   if ($DB->tableExists("glpi_plugin_barcode_configs_types")) {
       $query = "DROP TABLE `glpi_plugin_barcode_configs_types`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs_types");
    }
-   if (TableExists("glpi_plugin_barcode_profiles")) {
+   if ($DB->tableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
