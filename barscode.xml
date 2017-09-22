@@ -20,6 +20,10 @@
       <author>David DURIEUX</author>
    </authors>
    <versions>
+      <version>
+         <num>2.1.0</num>
+         <compatibility>9.2</compatibility>
+      </version>
        <version>
           <num>0.90+1.0</num>
           <compatibility>0.90</compatibility>

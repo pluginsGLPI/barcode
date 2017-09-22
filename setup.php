@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "0.90+2.0");
+define ("PLUGIN_BARCODE_VERSION", "2.1.0");
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
@@ -81,27 +81,34 @@ function plugin_init_barcode() {
 }
 
 function plugin_version_barcode() {
-   return ['name'           => 'Barcode',
-           'shortname'      => 'barcode',
-           'version'        => PLUGIN_BARCODE_VERSION,
-           'license'        => 'AGPLv3+',
-           'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
-                                Jean Marc GRISARD & Vincent MAZZONI',
-           'homepage'       => 'https://forge.indepnet.net/projects/barscode',
-           'minGlpiVersion' => '0.85'
-          ];
+   return [
+      'name'           => 'Barcode',
+      'shortname'      => 'barcode',
+      'version'        => PLUGIN_BARCODE_VERSION,
+      'license'        => 'AGPLv3+',
+      'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
+                           Jean Marc GRISARD & Vincent MAZZONI',
+      'homepage'       => 'https://forge.indepnet.net/projects/barscode',
+      'requirements'   => [
+         'glpi' => [
+            'min' => '9.2',
+            'dev' => true
+         ]
+      ]
+   ];
 }
 
 
 function plugin_barcode_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '0.85', 'lt')
-      || version_compare(GLPI_VERSION, '9.2', 'ge')) {
-      echo __('GLPI 0.85 or higher required', 'barcode');
+   $version = rtrim(GLPI_VERSION, '-dev');
+   if (version_compare($version, '9.2', 'lt')) {
+      echo "This plugin requires GLPI 9.2";
       return false;
    }
+
    return true;
 }
 
-function plugin_barcode_check_config($verbose=false) {
+function plugin_barcode_check_config($verbose = false) {
    return true;
 }
