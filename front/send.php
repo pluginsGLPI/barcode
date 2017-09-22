@@ -41,8 +41,8 @@
 
 include ('../../../inc/includes.php');
 
-if (!defined("GLPI_PLUGIN_DOC_DIR")){
-	define("GLPI_PLUGIN_DOC_DIR",GLPI_ROOT . "/files/_plugins");
+if (!defined("GLPI_PLUGIN_DOC_DIR")) {
+    define("GLPI_PLUGIN_DOC_DIR", GLPI_ROOT . "/files/_plugins");
 }
 $docDir = GLPI_PLUGIN_DOC_DIR.'/barcode';
 
@@ -50,14 +50,14 @@ if (isset($_GET['file'])) {
    $filename = $_GET['file'];
 
    // Security test : document in $docDir
-   if (strstr($filename,"../") || strstr($filename,"..\\")){
+   if (strstr($filename, "../") || strstr($filename, "..\\")) {
       echo "Security attack !!!";
       Toolbox::logDebug("[Plugin barcode][security][sendfile] ".
                $_SESSION["glpiname"]." try to get a non standard file : ".$filename);
    }
 
    $file = $docDir.'/'.$filename;
-   if (!file_exists($file)){
+   if (!file_exists($file)) {
       echo "Error file $filename does not exist"; //TODO : traduire
    } else {
       // Now send the file with header() magic
@@ -68,29 +68,18 @@ if (isset($_GET['file'])) {
       header("Content-disposition: filename=\"$filename\"");
       header("Content-type: application/pdf");
 
-      $f=fopen($file,"r");
+      $f=fopen($file, "r");
 
-      if (!$f){
+      if (!$f) {
          echo "Error opening file $filename";
       } else {
-         // Pour que les \x00 ne devienne pas \0
-         $mc = Toolbox::get_magic_quotes_runtime();
-         if ($mc) {
-            @set_magic_quotes_runtime(0);
-         }
          $fsize=filesize($file);
 
-         if ($fsize){
+         if ($fsize) {
             echo fread($f, filesize($file));
          } else {
             echo 'error';
          }
-
-         if ($mc) {
-            @set_magic_quotes_runtime($mc);
-         }
       }
    }
 }
-
-?>

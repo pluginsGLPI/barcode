@@ -40,7 +40,7 @@
  */
 
 if (!defined('GLPI_ROOT')) {
-	die("Sorry. You can't access directly to this file");
+    die("Sorry. You can't access directly to this file");
 }
 
 class PluginBarcodeQRcode {
@@ -49,44 +49,42 @@ class PluginBarcodeQRcode {
       require_once(GLPI_ROOT.'/plugins/barcode/lib/phpqrcode/qrlib.php');
    }
 
-
-
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
       global $CFG_GLPI;
 
       $item = new $itemtype();
       $item->getFromDB($items_id);
       $a_content = array();
-      $have_content = FALSE;
+      $have_content = false;
       if ($data['serialnumber']) {
          if ($item->fields['serial'] != '') {
-            $have_content = TRUE;
+            $have_content = true;
          }
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
       }
       if ($data['inventorynumber']) {
          if ($item->fields['otherserial'] != '') {
-            $have_content = TRUE;
+            $have_content = true;
          }
          $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
       }
       if ($data['id']) {
          if ($item->fields['id'] != '') {
-            $have_content = TRUE;
+            $have_content = true;
          }
          $a_content[] = 'ID = '.$item->fields['id'];
       }
       if (isset($data['uuid']) && $data['uuid']) {
          if (isset($item->fields['uuid'])) {
             if ($item->fields['uuid'] != '') {
-               $have_content = TRUE;
+               $have_content = true;
             }
             $a_content[] = 'UUID = '.$item->fields['uuid'];
          }
       }
       if ($data['name']) {
          if ($item->fields['name'] != '') {
-            $have_content = TRUE;
+            $have_content = true;
          }
          $a_content[] = 'Name = '.$item->fields['name'];
       }
@@ -126,43 +124,43 @@ class PluginBarcodeQRcode {
       echo '<tr>';
       echo '<td>';
       echo __('Serial number')." : </td><td>";
-      Dropdown::showYesNo("serialnumber", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Inventory number')." : </td><td>";
-      Dropdown::showYesNo("inventorynumber", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("inventorynumber", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('ID')." : </td><td>";
-      Dropdown::showYesNo("id", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("id", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('UUID')." : </td><td>";
-      Dropdown::showYesNo("uuid", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("uuid", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Name')." : </td><td>";
-      Dropdown::showYesNo("name", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("name", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Web page of the device')." : </td><td>";
-      Dropdown::showYesNo("url", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '<tr>';
       echo '<td>';
       echo __('Date QRcode')." (".date('Y-m-d').") : </td><td>";
-      Dropdown::showYesNo("qrcodedate", 1, -1, array('width' => '100'));
+      Dropdown::showYesNo("qrcodedate", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -194,7 +192,7 @@ class PluginBarcodeQRcode {
             $pbQRcode->showFormMassiveAction();
             return true;
 
-    }
+      }
       return parent::showMassiveActionsSubForm($ma);
    }
 
@@ -207,9 +205,9 @@ class PluginBarcodeQRcode {
 
          case 'Generate' :
             $pbQRcode = new PluginBarcodeQRcode();
-            $rand = mt_rand();
-            $number = 0;
-            $codes = array();
+            $rand     = mt_rand();
+            $number   = 0;
+            $codes    = [];
             if ($ma->POST['eliminate'] > 0) {
                for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
                   $codes[] = '';
@@ -232,15 +230,15 @@ class PluginBarcodeQRcode {
                }
             }
             if (count($codes) > 0) {
-               $params['codes']  = $codes;
-               $params['type']   = $ma->POST['type'];
-               $params['size']   = $ma->POST['size'];
-               $params['border'] = $ma->POST['border'];
+               $params['codes']       = $codes;
+               $params['type']        = $ma->POST['type'];
+               $params['size']        = $ma->POST['size'];
+               $params['border']      = $ma->POST['border'];
                $params['orientation'] = $ma->POST['orientation'];
-               $barcode = new PluginBarcodeBarcode();
-               $file = $barcode->printPDF($params);
-               $filePath = explode('/', $file);
-               $filename = $filePath[count($filePath)-1];
+               $barcode               = new PluginBarcodeBarcode();
+               $file                  = $barcode->printPDF($params);
+               $filePath              = explode('/', $file);
+               $filename              = $filePath[count($filePath)-1];
 
                $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
                Session::addMessageAfterRedirect($msg);
@@ -255,5 +253,3 @@ class PluginBarcodeQRcode {
 
 
 }
-
-?>

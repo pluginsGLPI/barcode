@@ -48,7 +48,7 @@ if (!$CFG_GLPI["use_public_faq"]) {
 $doc = new Document;
 
 if (isset($_GET["file"])) { // for other file
-   $splitter = explode("/",$_GET["file"]);
+   $splitter = explode("/", $_GET["file"]);
    if (count($splitter) == 2) {
       $send = false;
 
@@ -57,13 +57,12 @@ if (isset($_GET["file"])) { // for other file
       }
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"])) {
-         Toolbox::sendFile(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"],$splitter[1]);
+         Toolbox::sendFile(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"], $splitter[1]);
       } else {
-         Html::displayErrorAndDie(__('Unauthorized access to this file'),true);
+         Html::displayErrorAndDie(__('Unauthorized access to this file'), true);
       }
    } else {
-      Html::displayErrorAndDie(__('Invalid Filename'),true);
+      Html::displayErrorAndDie(__('Invalid Filename'), true);
    }
 }
 
-?>

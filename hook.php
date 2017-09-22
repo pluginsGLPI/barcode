@@ -46,20 +46,22 @@ function plugin_barcode_MassiveActions($type) {
       // New action for core and other plugin types : name = plugin_PLUGINNAME_actionname
       case 'Computer' :
       case 'Monitor' :
-		case 'Networking' :
-		case 'Printer' :
-		case 'Peripheral' :
-		case 'Phone' :
-         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
-                      "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'  => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode'));
-         
-		case 'Ticket' :
-         return array("PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate' => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'));
+      case 'Networking' :
+      case 'Printer' :
+      case 'Peripheral' :
+      case 'Phone' :
+         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                    => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
+                 "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                    => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode')
+                ];
 
-//      case 'Profile' :
-//         return array("plugin_barcode_allow" => __('Barcode', 'barcode'));
+      case 'Ticket' :
+         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
+                   => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode')
+                ];
    }
-   return array();
+   return [];
 }
 
 
@@ -69,12 +71,12 @@ function plugin_barcode_install() {
    global $DB;
 
    $migration = new Migration(PLUGIN_BARCODE_VERSION);
-   
+
    if (!file_exists(GLPI_PLUGIN_DOC_DIR."/barcode")) {
       mkdir(GLPI_PLUGIN_DOC_DIR."/barcode");
    }
    $migration->renameTable("glpi_plugin_barcode_config", "glpi_plugin_barcode_configs");
-   if (!TableExists("glpi_plugin_barcode_configs")) {
+   if (!$DB->tableExists("glpi_plugin_barcode_configs")) {
       $query = "CREATE TABLE `glpi_plugin_barcode_configs` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
@@ -82,7 +84,7 @@ function plugin_barcode_install() {
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
       $DB->query($query) or die("error creating glpi_plugin_barcode_configs ". $DB->error());
 
-      $query = "INSERT INTO `glpi_plugin_barcode_configs` 
+      $query = "INSERT INTO `glpi_plugin_barcode_configs`
                      (`id`, `type`)
                 VALUES
                      ('1', 'code128')";
@@ -90,7 +92,7 @@ function plugin_barcode_install() {
    }
 
    $migration->renameTable("glpi_plugin_barcode_config_type", "glpi_plugin_barcode_configs_types");
-   if (!TableExists("glpi_plugin_barcode_configs_types")) {
+   if (!$DB->tableExists("glpi_plugin_barcode_configs_types")) {
       $query = "CREATE TABLE `glpi_plugin_barcode_configs_types` (
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
@@ -137,7 +139,7 @@ function plugin_barcode_install() {
                      '25', '30', '110', '100')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
-   
+
    if (countElementsInTable("glpi_plugin_barcode_configs_types",
                             "`type`='QRcode'") == 0) {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
@@ -154,7 +156,7 @@ function plugin_barcode_install() {
    include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
    include_once GLPI_ROOT.'/plugins/barcode/inc/config.class.php';
    PluginBarcodeProfile::initProfile();
-   if (TableExists("glpi_plugin_barcode_profiles")) {
+   if ($DB->tableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
@@ -167,22 +169,21 @@ function plugin_barcode_install() {
 function plugin_barcode_uninstall() {
    global $DB;
 
-   if (TableExists("glpi_plugin_barcode_configs")) {
+   if ($DB->tableExists("glpi_plugin_barcode_configs")) {
       $query = "DROP TABLE `glpi_plugin_barcode_configs`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs");
    }
-   if (TableExists("glpi_plugin_barcode_configs_types")) {
+   if ($DB->tableExists("glpi_plugin_barcode_configs_types")) {
       $query = "DROP TABLE `glpi_plugin_barcode_configs_types`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_configs_types");
    }
-   if (TableExists("glpi_plugin_barcode_profiles")) {
+   if ($DB->tableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
       $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
-   
+
    include_once GLPI_ROOT.'/plugins/barcode/inc/profile.class.php';
    PluginBarcodeProfile::removeRights();
 
    return true;
 }
-?>

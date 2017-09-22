@@ -59,7 +59,7 @@ if (isset($_POST['dropCache'])) {
       @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
    }
    // Move
-   rename($_FILES['logo']['tmp_name'],GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+   rename($_FILES['logo']['tmp_name'], GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
 
 } else if (isset($_POST['type'])) {
    $pbconf = new PluginBarcodeConfig();
@@ -67,4 +67,3 @@ if (isset($_POST['dropCache'])) {
    $pbconf->update($_POST);
 }
 Html::back();
-?>

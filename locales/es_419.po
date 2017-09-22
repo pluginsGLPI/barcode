@@ -10,34 +10,35 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-02 16:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: Alexander Salas Bastidas <alexander.salas@gmail.com>, 2017\n"
+"Language-Team: Spanish (Latin America) (https://www.transifex.com/pluginsGLPI/teams/73419/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Language: es_419\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: front/barcode.form.php:64 inc/barcode.class.php:490
 #: inc/qrcode.class.php:245
 msgid "Generated file"
-msgstr "Generated file"
+msgstr "Archivo generado"
 
 #: front/config.php:52 hook.php:53 hook.php:54 hook.php:57
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
-msgstr "Barcode"
+msgstr "Código de Barra"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr "The cache has been emptied."
+msgstr "Se ha limpiado la cache"
 
 #: hook.php:53 hook.php:57
 msgid "Print barcodes"
-msgstr "Print barcodes"
+msgstr "Imprimir Código de Barra"
 
 #: hook.php:54
 msgid "Print QRcodes"
-msgstr "Print QRcodes"
+msgstr "Imprimir Código QR"
 
 #: inc/barcode.class.php:75
 msgid "4A0"
@@ -221,15 +222,15 @@ msgstr "SRA4"
 
 #: inc/barcode.class.php:120
 msgid "LETTER"
-msgstr "LETTER"
+msgstr "Carta"
 
 #: inc/barcode.class.php:121
 msgid "LEGAL"
-msgstr "LEGAL"
+msgstr "Oficio"
 
 #: inc/barcode.class.php:122
 msgid "EXECUTIVE"
-msgstr "EXECUTIVE"
+msgstr "Ejecutivo"
 
 #: inc/barcode.class.php:123
 msgid "FOLIO"
@@ -237,117 +238,117 @@ msgstr "FOLIO"
 
 #: inc/barcode.class.php:133
 msgid "Portrait"
-msgstr "Portrait"
+msgstr "Vertical "
 
 #: inc/barcode.class.php:134
 msgid "Landscape"
-msgstr "Landscape"
+msgstr "Horizontal"
 
 #: inc/barcode.class.php:155
 msgid "Generation"
-msgstr "Generation"
+msgstr "Archivo Generado"
 
 #: inc/barcode.class.php:157
 msgid "Code"
-msgstr "Code"
+msgstr "Código"
 
 #: inc/barcode.class.php:160 inc/barcode.class.php:203 inc/config.class.php:77
 msgid "Type"
-msgstr "Type"
+msgstr "Tipo"
 
 #: inc/barcode.class.php:164 inc/barcode.class.php:225
 #: inc/config.class.php:149
 msgid "Page size"
-msgstr "Page size"
+msgstr "Tamaño de página"
 
 #: inc/barcode.class.php:167 inc/barcode.class.php:231
 #: inc/config.class.php:152
 msgid "Orientation"
-msgstr "Orientation"
+msgstr "Orientación"
 
 #: inc/barcode.class.php:172
 msgid "Number of copies"
-msgstr "Number of copies"
+msgstr "Número de copias"
 
 #: inc/barcode.class.php:177 inc/barcode.class.php:250
 msgid "Create"
-msgstr "Create"
+msgstr "Crear"
 
 #: inc/barcode.class.php:192
 msgid "It will generate only elements have defined field:"
-msgstr "It will generate only elements have defined field:"
+msgstr "Unicamente se generara elementos para que tenga campo definido"
 
 #: inc/barcode.class.php:194
 msgid "Ticket number"
-msgstr "Ticket number"
+msgstr "Número de boleta"
 
 #: inc/barcode.class.php:237
 msgid "Not use first xx barcodes"
-msgstr "Not use first xx barcodes"
+msgstr "No utilizar código de barras xx primero"
 
 #: inc/barcode.class.php:243
 msgid "Display border"
-msgstr "Display border"
+msgstr "Mostrar borde"
 
 #: inc/barcode.class.php:276
 msgid "The generation of some bacodes produced errors."
-msgstr "The generation of some bacodes produced errors."
+msgstr "Se produjeron errores en la generación de código de barras"
 
 #: inc/config.class.php:68
 msgid "Barcode plugin configuration"
-msgstr "Barcode plugin configuration"
+msgstr "Configuración de plugin Barcode"
 
 #: inc/config.class.php:73
 msgid "General configuration"
-msgstr "General configuration"
+msgstr "Configuración General"
 
 #: inc/config.class.php:85
 msgid "Empty the cache"
-msgstr "Empty the cache"
+msgstr "La cache esta vacia"
 
 #: inc/config.class.php:89
 msgid "Company logo"
-msgstr "Company logo"
+msgstr "Logo de la empresa"
 
 #: inc/config.class.php:156
 msgid "Margins"
-msgstr "Margins"
+msgstr "Margenes"
 
 #: inc/config.class.php:158
 msgid "Top"
-msgstr "Top"
+msgstr "Principio"
 
 #: inc/config.class.php:161
 msgid "Bottom"
-msgstr "Bottom"
+msgstr "Final"
 
 #: inc/config.class.php:166
 msgid "Left"
-msgstr "Left"
+msgstr "Izquierda"
 
 #: inc/config.class.php:169
 msgid "Right"
-msgstr "Right"
+msgstr "Derecha"
 
 #: inc/config.class.php:174
 msgid "Inner horizontal"
-msgstr "Inner horizontal"
+msgstr "Margen interno horizontal"
 
 #: inc/config.class.php:177
 msgid "Inner vertical"
-msgstr "Inner vertical"
+msgstr "Margen interno vertical"
 
 #: inc/config.class.php:181
 msgid "Barcodes sizes"
-msgstr "Barcodes sizes"
+msgstr "Medidas de código de barras"
 
 #: inc/config.class.php:183
 msgid "Maximum width"
-msgstr "Maximum width"
+msgstr "anchura maxima"
 
 #: inc/config.class.php:186
 msgid "Maximum height"
-msgstr "Maximum height"
+msgstr "Altura maxima"
 
 #: inc/config.class.php:246
 msgid "code39"
@@ -379,12 +380,12 @@ msgstr "QRcode"
 
 #: inc/profile.class.php:114
 msgid "Manage configuration"
-msgstr "Manage configuration"
+msgstr "Administrar configuración"
 
 #: inc/profile.class.php:118
 msgid "Generation of barcode"
-msgstr "Generation of barcode"
+msgstr "Generación de código de barras"
 
 #: setup.php:100
 msgid "GLPI version not compatible need 0.85.x or 0.90.x"
-msgstr "GLPI version not compatible need 0.85.x or 0.90.x"
+msgstr "Versión GLPI no compatible necesita 0.85.x o 0.90.x"

@@ -54,4 +54,3 @@ $pbConfig = new PluginBarcodeConfig();
 $pbConfig->showForm('');
 
 Html::footer();
-?>

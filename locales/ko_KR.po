@@ -10,34 +10,35 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-02 16:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: SeongHyeon Cho <jaymz9634@gmail.com>, 2017\n"
+"Language-Team: Korean (Korea) (https://www.transifex.com/pluginsGLPI/teams/73419/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: front/barcode.form.php:64 inc/barcode.class.php:490
 #: inc/qrcode.class.php:245
 msgid "Generated file"
-msgstr "Generated file"
+msgstr "생성된 파일"
 
 #: front/config.php:52 hook.php:53 hook.php:54 hook.php:57
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
-msgstr "Barcode"
+msgstr "바코드"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr "The cache has been emptied."
+msgstr "캐시를 비웠습니다."
 
 #: hook.php:53 hook.php:57
 msgid "Print barcodes"
-msgstr "Print barcodes"
+msgstr "바코드 출력"
 
 #: hook.php:54
 msgid "Print QRcodes"
-msgstr "Print QRcodes"
+msgstr "QR코드 출력"
 
 #: inc/barcode.class.php:75
 msgid "4A0"
@@ -237,117 +238,117 @@ msgstr "FOLIO"
 
 #: inc/barcode.class.php:133
 msgid "Portrait"
-msgstr "Portrait"
+msgstr "세로방향"
 
 #: inc/barcode.class.php:134
 msgid "Landscape"
-msgstr "Landscape"
+msgstr "가로방향"
 
 #: inc/barcode.class.php:155
 msgid "Generation"
-msgstr "Generation"
+msgstr "생성"
 
 #: inc/barcode.class.php:157
 msgid "Code"
-msgstr "Code"
+msgstr "코드"
 
 #: inc/barcode.class.php:160 inc/barcode.class.php:203 inc/config.class.php:77
 msgid "Type"
-msgstr "Type"
+msgstr "유형"
 
 #: inc/barcode.class.php:164 inc/barcode.class.php:225
 #: inc/config.class.php:149
 msgid "Page size"
-msgstr "Page size"
+msgstr "페이지 크기"
 
 #: inc/barcode.class.php:167 inc/barcode.class.php:231
 #: inc/config.class.php:152
 msgid "Orientation"
-msgstr "Orientation"
+msgstr "방향"
 
 #: inc/barcode.class.php:172
 msgid "Number of copies"
-msgstr "Number of copies"
+msgstr "사본 수"
 
 #: inc/barcode.class.php:177 inc/barcode.class.php:250
 msgid "Create"
-msgstr "Create"
+msgstr "생성"
 
 #: inc/barcode.class.php:192
 msgid "It will generate only elements have defined field:"
-msgstr "It will generate only elements have defined field:"
+msgstr "요소를 정의한 필드만 생성합니다:"
 
 #: inc/barcode.class.php:194
 msgid "Ticket number"
-msgstr "Ticket number"
+msgstr "티켓 수"
 
 #: inc/barcode.class.php:237
 msgid "Not use first xx barcodes"
-msgstr "Not use first xx barcodes"
+msgstr "첫 번째 xx 바코드 사용 안 함"
 
 #: inc/barcode.class.php:243
 msgid "Display border"
-msgstr "Display border"
+msgstr "테두리 표시"
 
 #: inc/barcode.class.php:276
 msgid "The generation of some bacodes produced errors."
-msgstr "The generation of some bacodes produced errors."
+msgstr "몇몇 바코드들의 생성시 오류 발생."
 
 #: inc/config.class.php:68
 msgid "Barcode plugin configuration"
-msgstr "Barcode plugin configuration"
+msgstr "바코드 플러그인 구성"
 
 #: inc/config.class.php:73
 msgid "General configuration"
-msgstr "General configuration"
+msgstr "일반 구성"
 
 #: inc/config.class.php:85
 msgid "Empty the cache"
-msgstr "Empty the cache"
+msgstr "캐시 비우기"
 
 #: inc/config.class.php:89
 msgid "Company logo"
-msgstr "Company logo"
+msgstr "회사 로고"
 
 #: inc/config.class.php:156
 msgid "Margins"
-msgstr "Margins"
+msgstr "여백"
 
 #: inc/config.class.php:158
 msgid "Top"
-msgstr "Top"
+msgstr "상단"
 
 #: inc/config.class.php:161
 msgid "Bottom"
-msgstr "Bottom"
+msgstr "하단"
 
 #: inc/config.class.php:166
 msgid "Left"
-msgstr "Left"
+msgstr "좌측"
 
 #: inc/config.class.php:169
 msgid "Right"
-msgstr "Right"
+msgstr "우측"
 
 #: inc/config.class.php:174
 msgid "Inner horizontal"
-msgstr "Inner horizontal"
+msgstr "내부 가로"
 
 #: inc/config.class.php:177
 msgid "Inner vertical"
-msgstr "Inner vertical"
+msgstr "내부 세로"
 
 #: inc/config.class.php:181
 msgid "Barcodes sizes"
-msgstr "Barcodes sizes"
+msgstr "바코드 크기"
 
 #: inc/config.class.php:183
 msgid "Maximum width"
-msgstr "Maximum width"
+msgstr "최대 폭"
 
 #: inc/config.class.php:186
 msgid "Maximum height"
-msgstr "Maximum height"
+msgstr "최대 높이"
 
 #: inc/config.class.php:246
 msgid "code39"
@@ -367,7 +368,7 @@ msgstr "int25"
 
 #: inc/config.class.php:250
 msgid "postnet"
-msgstr "postnet"
+msgstr "포스트넷"
 
 #: inc/config.class.php:251
 msgid "upca"
@@ -375,16 +376,16 @@ msgstr "upca"
 
 #: inc/config.class.php:252
 msgid "QRcode"
-msgstr "QRcode"
+msgstr "QR코드"
 
 #: inc/profile.class.php:114
 msgid "Manage configuration"
-msgstr "Manage configuration"
+msgstr "관리 구성"
 
 #: inc/profile.class.php:118
 msgid "Generation of barcode"
-msgstr "Generation of barcode"
+msgstr "바코드 생성"
 
 #: setup.php:100
 msgid "GLPI version not compatible need 0.85.x or 0.90.x"
-msgstr "GLPI version not compatible need 0.85.x or 0.90.x"
+msgstr "GLPI 버전이 요구되는 0.85.x 또는 0.90.x과 호환되지 않습니다"
