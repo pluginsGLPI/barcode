@@ -221,30 +221,38 @@ class PluginBarcodeBarcode {
       $config    = $pbConfig->getConfigType();
 
       echo '<table>';
+
       echo '<tr>';
       echo '<td>';
       echo "<br/>".__('Page size', 'barcode')." : </td><td>";
          $pbBarcode->showSizeSelect($config['size']);
       echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo "<br/>".__('Orientation', 'barcode')." : </td><td>";
-         $pbBarcode->showOrientationSelect($config['orientation']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
       echo '<td>';
       echo __('Not use first xx barcodes', 'barcode')." : </td><td>";
       Dropdown::showNumber("eliminate", ['width' => '100']);
       echo '</td>';
       echo '</tr>';
+
       echo '<tr>';
+      echo '<td>';
+      echo "<br/>".__('Orientation', 'barcode')." : </td><td>";
+         $pbBarcode->showOrientationSelect($config['orientation']);
+      echo '</td>';
       echo '<td>';
       echo __('Display border', 'barcode')." : </td><td>";
       Dropdown::showYesNo("border", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
+
+      echo '<tr>';
+      echo '<td>&nbsp;</td>';
+      echo '<td>&nbsp;</td>';
+      echo '<td>';
+      echo __('Display labels', 'barcode')." : </td><td>";
+      Dropdown::showYesNo("displaylabels", 0, -1, ['width' => '100']);
+      echo '</td>';
+      echo '</tr>';
+
       echo '</table>';
       echo '</center>';
 
@@ -265,24 +273,29 @@ class PluginBarcodeBarcode {
       $size        = $p_params['size'];
       $orientation = $p_params['orientation'];
       $codes       = [];
+      $displayDataCollection = [];
 
       if ($type == 'QRcode') {
          $codes = $p_params['codes'];
+         $displayDataCollection = $p_params['displayData'];
       } else {
          if (isset($p_params['code'])) {
             if (isset($p_params['nb']) AND $p_params['nb']>1) {
                $this->create($p_params['code'], $type, $ext);
                for ($i=1; $i<=$p_params['nb']; $i++) {
                   $codes[] = $p_params['code'];
+               $displayDataCollection = $p_params['displayData'];
                }
             } else {
                if (!$this->create($p_params['code'], $type, $ext)) {
                   Session::addMessageAfterRedirect(__('The generation of some bacodes produced errors.', 'barcode'));
                }
                $codes[] = $p_params['code'];
+               $displayDataCollection = $p_params['displayData'];
             }
          } else if (isset($p_params['codes'])) {
             $codes = $p_params['codes'];
+            $displayDataCollection = $p_params['displayData'];
             foreach ($codes as $code) {
                if ($code != '') {
                   $this->create($code, $type, $ext);
@@ -308,6 +321,8 @@ class PluginBarcodeBarcode {
       $height  = $config['maxCodeHeight'];
       $marginH = $config['marginHorizontal'];
       $marginV = $config['marginVertical'];
+      $txtSize    = $config['txtSize'];
+      $txtSpacing = $config['txtSpacing'];
 
       $heightimage = $height;
 
@@ -332,7 +347,10 @@ class PluginBarcodeBarcode {
       }
 
       $first=true;
-      foreach ($codes as $code) {
+      for ($ia = 0; $ia <= count($codes); $ia++) {
+         $code = $codes[$ia];
+         $displayData = $displayDataCollection[$ia];
+
          if ($first) {
             $x = $pdf->ez['leftMargin'];
             $y = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
@@ -392,9 +410,24 @@ class PluginBarcodeBarcode {
                                  $logoWidth,
                                  $logoHeight);
                }
-               if ($p_params['border']) {
-                  $pdf->Rectangle($x, $y, $width, $height);
+
+               $txtHeight = 0;
+               for ($i = 0; $i <= count($displayData); $i++) {
+                   $pdf->addTextWrap(
+                       $x,
+                       $y - ($txtSpacing + $txtHeight),
+                       $width,
+                       $txtSize,
+                       $displayData[$i],
+                       center);
+                   $txtHeight =+ $txtSpacing/2 + $txtSize;
                }
+
+               if ($p_params['border']) {
+                   $pdf->Rectangle($x, $y - ($txtHeight + $txtSpacing*2),
+                       $width, $height + ($txtHeight + $txtSpacing*2));
+               }
+
             }
          }
          $x += $width + $marginH;
@@ -486,6 +519,7 @@ class PluginBarcodeBarcode {
                $params['size']        = $ma->POST['size'];
                $params['border']      = $ma->POST['border'];
                $params['orientation'] = $ma->POST['orientation'];
+               $params['displaylabels'] = $ma->POST['displaylabels'];
 
                $barcode  = new PluginBarcodeBarcode();
                $file     = $barcode->printPDF($params);

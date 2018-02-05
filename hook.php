@@ -106,6 +106,8 @@ function plugin_barcode_install() {
                   `marginVertical` int(11) NULL,
                   `maxCodeWidth` int(11) NULL,
                   `maxCodeHeight` int(11) NULL,
+                  `txtSize` int(11) NULL,
+                  `txtSpacing` int(11) NULL,
                   PRIMARY KEY  (`ID`),
                   UNIQUE  (`type`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
@@ -114,7 +116,8 @@ function plugin_barcode_install() {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
-                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
+                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`,
+                     `txtSize`, `txtSpacing`)
                 VALUES
                      ('Code39', 'A4', 'Portrait',
                      '30', '30', '30', '30',
@@ -136,7 +139,8 @@ function plugin_barcode_install() {
                      '25', '30', '110', '70'),
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '100')";
+                     '25', '30', '110', '100',
+                     '8', '3')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
@@ -145,11 +149,13 @@ function plugin_barcode_install() {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
-                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
+                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`,
+                     `txtSize`, `txtSpacing`)
                 VALUES
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '100')";
+                     '25', '30', '110', '100',
+                     '8', '3')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
