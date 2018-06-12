@@ -144,6 +144,15 @@ function plugin_barcode_install() {
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
+   if ($DB->tableExists("glpi_plugin_barcode_configs_types")
+      && !$DB->fieldExists("glpi_plugin_barcode_configs_types", "txtSize")
+      && !$DB->fieldExists("glpi_plugin_barcode_configs_types", "txtSpacing")
+      ) {
+      $migration->addField("glpi_plugin_barcode_configs_types", "txtSize", "integer");
+      $migration->addField("glpi_plugin_barcode_configs_types", "txtSpacing", "integer");
+      $migration->executeMigration();
+   }
+
    if (countElementsInTable("glpi_plugin_barcode_configs_types",
                             "`type`='QRcode'") == 0) {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
