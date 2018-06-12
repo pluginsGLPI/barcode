@@ -63,11 +63,11 @@ class PluginBarcodeQRcode {
          }
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
          if ($data['displayserialnumber']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'S/N: ';
-             }
-             $b_content[] = $label.$item->fields['serial'];
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'S/N: ';
+            }
+            $b_content[] = $label.$item->fields['serial'];
          }
       }
       if ($data['inventorynumber']) {
@@ -76,11 +76,11 @@ class PluginBarcodeQRcode {
          }
          $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
          if ($data['displayinventorynumber']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'Inventory: ';
-             }
-             $b_content[] = $label.$item->fields['otherserial'];
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'Inventory: ';
+            }
+            $b_content[] = $label.$item->fields['otherserial'];
          }
       }
       if ($data['id']) {
@@ -89,11 +89,11 @@ class PluginBarcodeQRcode {
          }
          $a_content[] = 'ID = '.$item->fields['id'];
          if ($data['displayid']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'ID: ';
-             }
-             $b_content[] = $label.$item->fields['id'];
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'ID: ';
+            }
+            $b_content[] = $label.$item->fields['id'];
          }
       }
       if (isset($data['uuid']) && $data['uuid']) {
@@ -102,13 +102,13 @@ class PluginBarcodeQRcode {
                $have_content = true;
             }
             $a_content[] = 'UUID = '.$item->fields['uuid'];
-             if ($data['displayuuid']) {
-                 $label = '';
-                 if ($data['displaylabels']) {
-                     $label = 'UUID: ';
-                 }
-                 $b_content[] = $label.$item->fields['uuid'];
-             }
+            if ($data['displayuuid']) {
+               $label = '';
+               if ($data['displaylabels']) {
+                  $label = 'UUID: ';
+               }
+               $b_content[] = $label.$item->fields['uuid'];
+            }
          }
       }
       if ($data['name']) {
@@ -117,31 +117,31 @@ class PluginBarcodeQRcode {
          }
          $a_content[] = 'Name = '.$item->fields['name'];
          if ($data['displayname']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'Name: ';
-             }
-             $b_content[] = $label.$item->fields['name'];
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'Name: ';
+            }
+            $b_content[] = $label.$item->fields['name'];
          }
       }
       if ($data['url']) {
          $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
          if ($data['displayurl']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'URL: ';
-             }
-             $b_content[] = $label.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'URL: ';
+            }
+            $b_content[] = $label.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
          }
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
          if ($data['displayqrcodedate']) {
-             $label = '';
-             if ($data['displaylabels']) {
-                 $label = 'Date: ';
-             }
-             $b_content[] = $label.date('Y-m-d');
+            $label = '';
+            if ($data['displaylabels']) {
+               $label = 'Date: ';
+            }
+            $b_content[] = $label.date('Y-m-d');
          }
       }
 

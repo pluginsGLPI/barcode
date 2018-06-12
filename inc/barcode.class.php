@@ -284,7 +284,7 @@ class PluginBarcodeBarcode {
                $this->create($p_params['code'], $type, $ext);
                for ($i=1; $i<=$p_params['nb']; $i++) {
                   $codes[] = $p_params['code'];
-               $displayDataCollection = $p_params['displayData'];
+                  $displayDataCollection = $p_params['displayData'];
                }
             } else {
                if (!$this->create($p_params['code'], $type, $ext)) {
