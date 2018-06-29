@@ -54,7 +54,7 @@ class PluginBarcodeQRcode {
 
       $item = new $itemtype();
       $item->getFromDB($items_id);
-      $a_content = array();
+      $a_content = [];
       $have_content = false;
       if ($data['serialnumber']) {
          if ($item->fields['serial'] != '') {
@@ -171,7 +171,7 @@ class PluginBarcodeQRcode {
 
 
 
-   function getSpecificMassiveActions($checkitem=NULL) {
+   function getSpecificMassiveActions($checkitem = null) {
       $actions = parent::getSpecificMassiveActions($checkitem);
       return $actions;
    }
