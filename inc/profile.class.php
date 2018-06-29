@@ -44,7 +44,7 @@ class PluginBarcodeProfile extends Profile {
    static $rightname = "config";
 
 
-   function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
+   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
       if ($item->getID() > 0
               && $item->fields['interface'] == 'central') {
          return self::createTabEntry(__('Barcode', 'barcode'));
@@ -53,10 +53,10 @@ class PluginBarcodeProfile extends Profile {
 
 
 
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
       $pfProfile = new self();
       $pfProfile->showForm($item->getID());
-      return TRUE;
+      return true;
    }
 
 
@@ -69,7 +69,7 @@ class PluginBarcodeProfile extends Profile {
     *
     * @return nothing
     **/
-   function showForm($profiles_id=0, $openform=TRUE, $closeform=TRUE) {
+   function showForm($profiles_id = 0, $openform = true, $closeform = true) {
 
       echo "<div class='firstbloc'>";
       if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))
@@ -89,8 +89,8 @@ class PluginBarcodeProfile extends Profile {
       if ($canedit
           && $closeform) {
          echo "<div class='center'>";
-         echo Html::hidden('id', array('value' => $profiles_id));
-         echo Html::submit(_sx('button', 'Save'), array('name' => 'update'));
+         echo Html::hidden('id', ['value' => $profiles_id]);
+         echo Html::submit(_sx('button', 'Save'), ['name' => 'update']);
          echo "</div>\n";
          Html::closeForm();
       }
@@ -103,23 +103,23 @@ class PluginBarcodeProfile extends Profile {
       $pfProfile = new self();
       $a_rights = $pfProfile->getAllRights();
       foreach ($a_rights as $data) {
-         ProfileRight::deleteProfileRights(array($data['field']));
+         ProfileRight::deleteProfileRights([$data['field']]);
       }
    }
 
 
 
    function getAllRights() {
-      $a_rights = array(
-          array('rights'    => array(UPDATE  => __('Update')),
+      $a_rights = [
+          ['rights'    => [UPDATE  => __('Update')],
                 'label'     => __('Manage configuration', 'barcode'),
                 'field'     => 'plugin_barcode_config'
-          ),
-          array('rights'    => array(CREATE  => __('Create')),
+          ],
+          ['rights'    => [CREATE  => __('Create')],
                 'label'     => __('Generation of barcode', 'barcode'),
                 'field'     => 'plugin_barcode_barcode'
-          )
-      );
+          ]
+      ];
       return $a_rights;
    }
 
@@ -149,7 +149,7 @@ class PluginBarcodeProfile extends Profile {
       $profile = new self();
       foreach ($profile->getAllRights() as $right) {
          self::addDefaultProfileInfos($profiles_id,
-                                      array($right['field'] => ALLSTANDARDRIGHT));
+                                      [$right['field'] => ALLSTANDARDRIGHT]);
       }
    }
 
@@ -159,7 +159,7 @@ class PluginBarcodeProfile extends Profile {
          if (isset($_SESSION['glpiactiveprofile'][$right['field']])) {
             unset($_SESSION['glpiactiveprofile'][$right['field']]);
          }
-         ProfileRight::deleteProfileRights(array($right['field']));
+         ProfileRight::deleteProfileRights([$right['field']]);
       }
    }
 
@@ -189,12 +189,12 @@ class PluginBarcodeProfile extends Profile {
             //There's one new right corresponding to the old one
             if (!is_array($oldrights[$profile['type']])) {
                self::addDefaultProfileInfos($profile['profiles_id'],
-                                            array($oldrights[$profile['type']] => $value));
+                                            [$oldrights[$profile['type']] => $value]);
             } else {
                //One old right has been splitted into serveral new ones
                foreach ($oldrights[$profile['type']] as $newtype) {
                   self::addDefaultProfileInfos($profile['profiles_id'],
-                                               array($newtype => $value));
+                                               [$newtype => $value]);
                }
             }
          }
@@ -215,14 +215,14 @@ class PluginBarcodeProfile extends Profile {
 
       foreach ($a_rights as $data) {
          if (countElementsInTable("glpi_profilerights", "`name` = '".$data['field']."'") == 0) {
-            ProfileRight::addProfileRights(array($data['field']));
+            ProfileRight::addProfileRights([$data['field']]);
             $_SESSION['glpiactiveprofile'][$data['field']] = 0;
          }
       }
 
       // Add all rights to current profile of the user
       if (isset($_SESSION['glpiactiveprofile'])) {
-         $dataprofile       = array();
+         $dataprofile       = [];
          $dataprofile['id'] = $_SESSION['glpiactiveprofile']['id'];
          $profile->getFromDB($_SESSION['glpiactiveprofile']['id']);
          foreach ($a_rights as $info) {

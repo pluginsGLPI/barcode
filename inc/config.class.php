@@ -53,7 +53,7 @@ class PluginBarcodeConfig extends CommonDBTM {
 
 
 
-   function showForm($p_type=NULL) {
+   function showForm($p_type = null) {
       global $CFG_GLPI;
 
       $pbBarcode   = new PluginBarcodeBarcode();
@@ -124,7 +124,7 @@ class PluginBarcodeConfig extends CommonDBTM {
 
 
 
-   function showFormConfigType($p_type=NULL) {
+   function showFormConfigType($p_type = null) {
       global $CFG_GLPI;
 
       $pbBarcode = new PluginBarcodeBarcode();
@@ -192,7 +192,7 @@ class PluginBarcodeConfig extends CommonDBTM {
       Html::closeForm();
    }
 
-   function getConfigType($p_type=NULL) {
+   function getConfigType($p_type = null) {
       if (is_null($p_type)) {
          $p_type=$this->getConfig();
       }
@@ -229,7 +229,7 @@ class PluginBarcodeConfig extends CommonDBTM {
 
 
 
-   function showTypeSelect($p_type=NULL, $used=array()) {
+   function showTypeSelect($p_type = null, $used = []) {
 
       $options = [
                   'width' => '100',
