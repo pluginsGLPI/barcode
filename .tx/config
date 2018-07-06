@@ -4,4 +4,5 @@ host = https://www.transifex.com
 [glpi_barcode.plugin-09010]
 file_filter = locales/<lang>.po
 source_file = locales/barcode.pot
-source_lang = en
+source_lang = en_GB
+type = PO

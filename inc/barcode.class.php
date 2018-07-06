@@ -277,7 +277,7 @@ class PluginBarcodeBarcode {
                }
             } else {
                if (!$this->create($p_params['code'], $type, $ext)) {
-                  Session::addMessageAfterRedirect(__('The generation of some bacodes produced errors.', 'barcode'));
+                  Session::addMessageAfterRedirect(__('The generation of some barcodes produced errors.', 'barcode'));
                }
                $codes[] = $p_params['code'];
             }
