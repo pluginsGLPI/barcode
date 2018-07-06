@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-02 16:09+0100\n"
+"POT-Creation-Date: 2018-07-06 07:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Alexander Salas Bastidas <alexander.salas@gmail.com>, 2017\n"
+"Last-Translator: Cédric Anne, 2018\n"
 "Language-Team: Spanish (Latin America) (https://www.transifex.com/pluginsGLPI/teams/73419/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
@@ -18,374 +18,370 @@ msgstr ""
 "Language: es_419\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: front/barcode.form.php:64 inc/barcode.class.php:490
-#: inc/qrcode.class.php:245
-msgid "Generated file"
-msgstr "Archivo generado"
-
-#: front/config.php:52 hook.php:53 hook.php:54 hook.php:57
-#: inc/profile.class.php:50 inc/profile.class.php:87
-msgid "Barcode"
-msgstr "Código de Barra"
-
 #: front/config.form.php:56
 msgid "The cache has been emptied."
 msgstr "Se ha limpiado la cache"
 
-#: hook.php:53 hook.php:57
+#: front/barcode.form.php:62 inc/barcode.class.php:496
+#: inc/qrcode.class.php:243
+msgid "Generated file"
+msgstr "Archivo generado"
+
+#: front/config.php:52 hook.php:54 hook.php:56 hook.php:61
+#: inc/profile.class.php:50 inc/profile.class.php:87
+msgid "Barcode"
+msgstr "Código de Barra"
+
+#: hook.php:54 hook.php:61
 msgid "Print barcodes"
 msgstr "Imprimir Código de Barra"
 
-#: hook.php:54
+#: hook.php:56
 msgid "Print QRcodes"
 msgstr "Imprimir Código QR"
 
-#: inc/barcode.class.php:75
-msgid "4A0"
-msgstr "4A0"
-
-#: inc/barcode.class.php:76
-msgid "2A0"
-msgstr "2A0"
-
-#: inc/barcode.class.php:77
-msgid "A0"
-msgstr "A0"
-
-#: inc/barcode.class.php:78
-msgid "A1"
-msgstr "A1"
-
-#: inc/barcode.class.php:79
-msgid "A2"
-msgstr "A2"
-
-#: inc/barcode.class.php:80
-msgid "A3"
-msgstr "A3"
-
-#: inc/barcode.class.php:81
-msgid "A4"
-msgstr "A4"
-
-#: inc/barcode.class.php:82
-msgid "A5"
-msgstr "A5"
-
-#: inc/barcode.class.php:83
-msgid "A6"
-msgstr "A6"
-
-#: inc/barcode.class.php:84
-msgid "A7"
-msgstr "A7"
-
-#: inc/barcode.class.php:85
-msgid "A8"
-msgstr "A8"
-
-#: inc/barcode.class.php:86
-msgid "A9"
-msgstr "A9"
-
-#: inc/barcode.class.php:87
-msgid "A10"
-msgstr "A10"
-
-#: inc/barcode.class.php:88
-msgid "B0"
-msgstr "B0"
-
-#: inc/barcode.class.php:89
-msgid "B1"
-msgstr "B1"
-
-#: inc/barcode.class.php:90
-msgid "B2"
-msgstr "B2"
-
-#: inc/barcode.class.php:91
-msgid "B3"
-msgstr "B3"
-
-#: inc/barcode.class.php:92
-msgid "B4"
-msgstr "B4"
-
-#: inc/barcode.class.php:93
-msgid "B5"
-msgstr "B5"
-
-#: inc/barcode.class.php:94
-msgid "B6"
-msgstr "B6"
-
-#: inc/barcode.class.php:95
-msgid "B7"
-msgstr "B7"
-
-#: inc/barcode.class.php:96
-msgid "B8"
-msgstr "B8"
-
-#: inc/barcode.class.php:97
-msgid "B9"
-msgstr "B9"
-
-#: inc/barcode.class.php:98
-msgid "B10"
-msgstr "B10"
-
-#: inc/barcode.class.php:99
-msgid "C0"
-msgstr "C0"
-
-#: inc/barcode.class.php:100
-msgid "C1"
-msgstr "C1"
-
-#: inc/barcode.class.php:101
-msgid "C2"
-msgstr "C2"
-
-#: inc/barcode.class.php:102
-msgid "C3"
-msgstr "C3"
-
-#: inc/barcode.class.php:103
-msgid "C4"
-msgstr "C4"
-
-#: inc/barcode.class.php:104
-msgid "C5"
-msgstr "C5"
-
-#: inc/barcode.class.php:105
-msgid "C6"
-msgstr "C6"
-
-#: inc/barcode.class.php:106
-msgid "C7"
-msgstr "C7"
-
-#: inc/barcode.class.php:107
-msgid "C8"
-msgstr "C8"
-
-#: inc/barcode.class.php:108
-msgid "C9"
-msgstr "C9"
-
-#: inc/barcode.class.php:109
-msgid "C10"
-msgstr "C10"
-
-#: inc/barcode.class.php:110
-msgid "RA0"
-msgstr "RA0"
-
-#: inc/barcode.class.php:111
-msgid "RA1"
-msgstr "RA1"
-
-#: inc/barcode.class.php:112
-msgid "RA2"
-msgstr "RA2"
-
-#: inc/barcode.class.php:113
-msgid "RA3"
-msgstr "RA3"
-
-#: inc/barcode.class.php:114
-msgid "RA4"
-msgstr "RA4"
-
-#: inc/barcode.class.php:115
-msgid "SRA0"
-msgstr "SRA0"
-
-#: inc/barcode.class.php:116
-msgid "SRA1"
-msgstr "SRA1"
-
-#: inc/barcode.class.php:117
-msgid "SRA2"
-msgstr "SRA2"
-
-#: inc/barcode.class.php:118
-msgid "SRA3"
-msgstr "SRA3"
-
-#: inc/barcode.class.php:119
-msgid "SRA4"
-msgstr "SRA4"
-
-#: inc/barcode.class.php:120
-msgid "LETTER"
-msgstr "Carta"
-
-#: inc/barcode.class.php:121
-msgid "LEGAL"
-msgstr "Oficio"
-
-#: inc/barcode.class.php:122
-msgid "EXECUTIVE"
-msgstr "Ejecutivo"
-
-#: inc/barcode.class.php:123
-msgid "FOLIO"
-msgstr "FOLIO"
-
-#: inc/barcode.class.php:133
-msgid "Portrait"
-msgstr "Vertical "
-
-#: inc/barcode.class.php:134
-msgid "Landscape"
-msgstr "Horizontal"
-
-#: inc/barcode.class.php:155
-msgid "Generation"
-msgstr "Archivo Generado"
-
-#: inc/barcode.class.php:157
-msgid "Code"
-msgstr "Código"
-
-#: inc/barcode.class.php:160 inc/barcode.class.php:203 inc/config.class.php:77
-msgid "Type"
-msgstr "Tipo"
-
-#: inc/barcode.class.php:164 inc/barcode.class.php:225
-#: inc/config.class.php:149
-msgid "Page size"
-msgstr "Tamaño de página"
-
-#: inc/barcode.class.php:167 inc/barcode.class.php:231
-#: inc/config.class.php:152
-msgid "Orientation"
-msgstr "Orientación"
-
-#: inc/barcode.class.php:172
-msgid "Number of copies"
-msgstr "Número de copias"
-
-#: inc/barcode.class.php:177 inc/barcode.class.php:250
-msgid "Create"
-msgstr "Crear"
-
-#: inc/barcode.class.php:192
-msgid "It will generate only elements have defined field:"
-msgstr "Unicamente se generara elementos para que tenga campo definido"
-
-#: inc/barcode.class.php:194
-msgid "Ticket number"
-msgstr "Número de boleta"
-
-#: inc/barcode.class.php:237
-msgid "Not use first xx barcodes"
-msgstr "No utilizar código de barras xx primero"
-
-#: inc/barcode.class.php:243
-msgid "Display border"
-msgstr "Mostrar borde"
-
-#: inc/barcode.class.php:276
-msgid "The generation of some bacodes produced errors."
-msgstr "Se produjeron errores en la generación de código de barras"
-
-#: inc/config.class.php:68
-msgid "Barcode plugin configuration"
-msgstr "Configuración de plugin Barcode"
-
-#: inc/config.class.php:73
-msgid "General configuration"
-msgstr "Configuración General"
-
-#: inc/config.class.php:85
-msgid "Empty the cache"
-msgstr "La cache esta vacia"
-
-#: inc/config.class.php:89
-msgid "Company logo"
-msgstr "Logo de la empresa"
-
-#: inc/config.class.php:156
-msgid "Margins"
-msgstr "Margenes"
-
-#: inc/config.class.php:158
-msgid "Top"
-msgstr "Principio"
-
-#: inc/config.class.php:161
-msgid "Bottom"
-msgstr "Final"
-
-#: inc/config.class.php:166
-msgid "Left"
-msgstr "Izquierda"
-
-#: inc/config.class.php:169
-msgid "Right"
-msgstr "Derecha"
-
-#: inc/config.class.php:174
-msgid "Inner horizontal"
-msgstr "Margen interno horizontal"
-
-#: inc/config.class.php:177
-msgid "Inner vertical"
-msgstr "Margen interno vertical"
-
-#: inc/config.class.php:181
-msgid "Barcodes sizes"
-msgstr "Medidas de código de barras"
-
-#: inc/config.class.php:183
-msgid "Maximum width"
-msgstr "anchura maxima"
-
-#: inc/config.class.php:186
-msgid "Maximum height"
-msgstr "Altura maxima"
-
-#: inc/config.class.php:246
-msgid "code39"
-msgstr "code39"
-
-#: inc/config.class.php:247
-msgid "code128"
-msgstr "code128"
-
-#: inc/config.class.php:248
-msgid "ean13"
-msgstr "ean13"
-
-#: inc/config.class.php:249
-msgid "int25"
-msgstr "int25"
-
-#: inc/config.class.php:250
-msgid "postnet"
-msgstr "postnet"
-
-#: inc/config.class.php:251
-msgid "upca"
-msgstr "upca"
-
-#: inc/config.class.php:252
-msgid "QRcode"
-msgstr "QRcode"
-
-#: inc/profile.class.php:114
+#: inc/profile.class.php:115
 msgid "Manage configuration"
 msgstr "Administrar configuración"
 
-#: inc/profile.class.php:118
+#: inc/profile.class.php:119
 msgid "Generation of barcode"
 msgstr "Generación de código de barras"
 
-#: setup.php:100
-msgid "GLPI version not compatible need 0.85.x or 0.90.x"
-msgstr "Versión GLPI no compatible necesita 0.85.x o 0.90.x"
+#: inc/config.class.php:67
+msgid "Barcode plugin configuration"
+msgstr "Configuración de plugin Barcode"
+
+#: inc/config.class.php:72
+msgid "General configuration"
+msgstr "Configuración General"
+
+#: inc/config.class.php:76 inc/barcode.class.php:162 inc/barcode.class.php:205
+msgid "Type"
+msgstr "Tipo"
+
+#: inc/config.class.php:84
+msgid "Empty the cache"
+msgstr "La cache esta vacia"
+
+#: inc/config.class.php:88
+msgid "Company logo"
+msgstr "Logo de la empresa"
+
+#: inc/config.class.php:147 inc/barcode.class.php:166
+#: inc/barcode.class.php:226
+msgid "Page size"
+msgstr "Tamaño de página"
+
+#: inc/config.class.php:150 inc/barcode.class.php:169
+#: inc/barcode.class.php:232
+msgid "Orientation"
+msgstr "Orientación"
+
+#: inc/config.class.php:154
+msgid "Margins"
+msgstr "Margenes"
+
+#: inc/config.class.php:156
+msgid "Top"
+msgstr "Principio"
+
+#: inc/config.class.php:159
+msgid "Bottom"
+msgstr "Final"
+
+#: inc/config.class.php:164
+msgid "Left"
+msgstr "Izquierda"
+
+#: inc/config.class.php:167
+msgid "Right"
+msgstr "Derecha"
+
+#: inc/config.class.php:172
+msgid "Inner horizontal"
+msgstr "Margen interno horizontal"
+
+#: inc/config.class.php:175
+msgid "Inner vertical"
+msgstr "Margen interno vertical"
+
+#: inc/config.class.php:179
+msgid "Barcodes sizes"
+msgstr "Medidas de código de barras"
+
+#: inc/config.class.php:181
+msgid "Maximum width"
+msgstr "anchura maxima"
+
+#: inc/config.class.php:184
+msgid "Maximum height"
+msgstr "Altura maxima"
+
+#: inc/config.class.php:242
+msgid "code39"
+msgstr "code39"
+
+#: inc/config.class.php:243
+msgid "code128"
+msgstr "code128"
+
+#: inc/config.class.php:244
+msgid "ean13"
+msgstr "ean13"
+
+#: inc/config.class.php:245
+msgid "int25"
+msgstr "int25"
+
+#: inc/config.class.php:246
+msgid "postnet"
+msgstr "postnet"
+
+#: inc/config.class.php:247
+msgid "upca"
+msgstr "upca"
+
+#: inc/config.class.php:248
+msgid "QRcode"
+msgstr "QRcode"
+
+#: inc/barcode.class.php:77
+msgid "4A0"
+msgstr "4A0"
+
+#: inc/barcode.class.php:78
+msgid "2A0"
+msgstr "2A0"
+
+#: inc/barcode.class.php:79
+msgid "A0"
+msgstr "A0"
+
+#: inc/barcode.class.php:80
+msgid "A1"
+msgstr "A1"
+
+#: inc/barcode.class.php:81
+msgid "A2"
+msgstr "A2"
+
+#: inc/barcode.class.php:82
+msgid "A3"
+msgstr "A3"
+
+#: inc/barcode.class.php:83
+msgid "A4"
+msgstr "A4"
+
+#: inc/barcode.class.php:84
+msgid "A5"
+msgstr "A5"
+
+#: inc/barcode.class.php:85
+msgid "A6"
+msgstr "A6"
+
+#: inc/barcode.class.php:86
+msgid "A7"
+msgstr "A7"
+
+#: inc/barcode.class.php:87
+msgid "A8"
+msgstr "A8"
+
+#: inc/barcode.class.php:88
+msgid "A9"
+msgstr "A9"
+
+#: inc/barcode.class.php:89
+msgid "A10"
+msgstr "A10"
+
+#: inc/barcode.class.php:90
+msgid "B0"
+msgstr "B0"
+
+#: inc/barcode.class.php:91
+msgid "B1"
+msgstr "B1"
+
+#: inc/barcode.class.php:92
+msgid "B2"
+msgstr "B2"
+
+#: inc/barcode.class.php:93
+msgid "B3"
+msgstr "B3"
+
+#: inc/barcode.class.php:94
+msgid "B4"
+msgstr "B4"
+
+#: inc/barcode.class.php:95
+msgid "B5"
+msgstr "B5"
+
+#: inc/barcode.class.php:96
+msgid "B6"
+msgstr "B6"
+
+#: inc/barcode.class.php:97
+msgid "B7"
+msgstr "B7"
+
+#: inc/barcode.class.php:98
+msgid "B8"
+msgstr "B8"
+
+#: inc/barcode.class.php:99
+msgid "B9"
+msgstr "B9"
+
+#: inc/barcode.class.php:100
+msgid "B10"
+msgstr "B10"
+
+#: inc/barcode.class.php:101
+msgid "C0"
+msgstr "C0"
+
+#: inc/barcode.class.php:102
+msgid "C1"
+msgstr "C1"
+
+#: inc/barcode.class.php:103
+msgid "C2"
+msgstr "C2"
+
+#: inc/barcode.class.php:104
+msgid "C3"
+msgstr "C3"
+
+#: inc/barcode.class.php:105
+msgid "C4"
+msgstr "C4"
+
+#: inc/barcode.class.php:106
+msgid "C5"
+msgstr "C5"
+
+#: inc/barcode.class.php:107
+msgid "C6"
+msgstr "C6"
+
+#: inc/barcode.class.php:108
+msgid "C7"
+msgstr "C7"
+
+#: inc/barcode.class.php:109
+msgid "C8"
+msgstr "C8"
+
+#: inc/barcode.class.php:110
+msgid "C9"
+msgstr "C9"
+
+#: inc/barcode.class.php:111
+msgid "C10"
+msgstr "C10"
+
+#: inc/barcode.class.php:112
+msgid "RA0"
+msgstr "RA0"
+
+#: inc/barcode.class.php:113
+msgid "RA1"
+msgstr "RA1"
+
+#: inc/barcode.class.php:114
+msgid "RA2"
+msgstr "RA2"
+
+#: inc/barcode.class.php:115
+msgid "RA3"
+msgstr "RA3"
+
+#: inc/barcode.class.php:116
+msgid "RA4"
+msgstr "RA4"
+
+#: inc/barcode.class.php:117
+msgid "SRA0"
+msgstr "SRA0"
+
+#: inc/barcode.class.php:118
+msgid "SRA1"
+msgstr "SRA1"
+
+#: inc/barcode.class.php:119
+msgid "SRA2"
+msgstr "SRA2"
+
+#: inc/barcode.class.php:120
+msgid "SRA3"
+msgstr "SRA3"
+
+#: inc/barcode.class.php:121
+msgid "SRA4"
+msgstr "SRA4"
+
+#: inc/barcode.class.php:122
+msgid "LETTER"
+msgstr "Carta"
+
+#: inc/barcode.class.php:123
+msgid "LEGAL"
+msgstr "Oficio"
+
+#: inc/barcode.class.php:124
+msgid "EXECUTIVE"
+msgstr "Ejecutivo"
+
+#: inc/barcode.class.php:125
+msgid "FOLIO"
+msgstr "FOLIO"
+
+#: inc/barcode.class.php:135
+msgid "Portrait"
+msgstr "Vertical "
+
+#: inc/barcode.class.php:136
+msgid "Landscape"
+msgstr "Horizontal"
+
+#: inc/barcode.class.php:157
+msgid "Generation"
+msgstr "Archivo Generado"
+
+#: inc/barcode.class.php:159
+msgid "Code"
+msgstr "Código"
+
+#: inc/barcode.class.php:174
+msgid "Number of copies"
+msgstr "Número de copias"
+
+#: inc/barcode.class.php:179 inc/barcode.class.php:253
+msgid "Create"
+msgstr "Crear"
+
+#: inc/barcode.class.php:194
+msgid "It will generate only elements have defined field:"
+msgstr "Unicamente se generara elementos para que tenga campo definido"
+
+#: inc/barcode.class.php:196
+msgid "Ticket number"
+msgstr "Número de boleta"
+
+#: inc/barcode.class.php:238
+msgid "Not use first xx barcodes"
+msgstr "No utilizar código de barras xx primero"
+
+#: inc/barcode.class.php:244
+msgid "Display border"
+msgstr "Mostrar borde"
+
+#: inc/barcode.class.php:280
+msgid "The generation of some barcodes produced errors."
+msgstr "Se produjeron errores en la generación de código de barras"

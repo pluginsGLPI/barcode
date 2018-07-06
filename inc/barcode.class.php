@@ -70,7 +70,7 @@ class PluginBarcodeBarcode {
 
 
 
-   function showSizeSelect($p_size=NULL) {
+   function showSizeSelect($p_size = null) {
       //TODO : utiliser fonction du coeur
 
       Dropdown::showFromArray("size",
@@ -128,13 +128,13 @@ class PluginBarcodeBarcode {
 
 
 
-   function showOrientationSelect($p_orientation=NULL) {
+   function showOrientationSelect($p_orientation = null) {
       //TODO : utiliser fonction du coeur
 
       Dropdown::showFromArray("orientation",
-                              array('Portrait'  => __('Portrait', 'barcode'),
-                                    'Landscape' => __('Landscape', 'barcode')),
-                              (is_null($p_orientation)?array('width' => '100'):array('value' => $p_orientation, 'width' => '100')));
+                              ['Portrait'  => __('Portrait', 'barcode'),
+                                    'Landscape' => __('Landscape', 'barcode')],
+                              (is_null($p_orientation)?['width' => '100']:['value' => $p_orientation, 'width' => '100']));
    }
 
 
@@ -203,7 +203,7 @@ class PluginBarcodeBarcode {
       echo '<td>';
       $config = $pbConfig->getConfigType();
         echo __('Type', 'barcode')." : </td><td>";
-        $pbConfig->showTypeSelect($config['type'], array('QRcode' => 'QRcode'));
+        $pbConfig->showTypeSelect($config['type'], ['QRcode' => 'QRcode']);
       echo '</td>';
       echo '</tr>';
       echo '</table>';
@@ -277,7 +277,7 @@ class PluginBarcodeBarcode {
                }
             } else {
                if (!$this->create($p_params['code'], $type, $ext)) {
-                  Session::addMessageAfterRedirect(__('The generation of some bacodes produced errors.', 'barcode'));
+                  Session::addMessageAfterRedirect(__('The generation of some barcodes produced errors.', 'barcode'));
                }
                $codes[] = $p_params['code'];
             }
@@ -430,7 +430,7 @@ class PluginBarcodeBarcode {
 
 
 
-   function getSpecificMassiveActions($checkitem=NULL) {
+   function getSpecificMassiveActions($checkitem = null) {
       $actions = parent::getSpecificMassiveActions($checkitem);
       return $actions;
    }
