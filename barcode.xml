@@ -8,10 +8,12 @@
       <short>
          <fr><![CDATA[Ce plugin vous permet de générer des codes barre]]></fr>
          <en><![CDATA[This plugin allow you to generate bars code]]></en>
+         <cs><![CDATA[Tento zásuvný modul umožňuje vytvářet čárové kódy]]></cs>
       </short>
       <long>
          <fr><![CDATA[Ce plugin vous permet de générer et d'export en PDF des codes barre et QRcode]]></fr>
          <en><![CDATA[This plugin allow you to generate and export in PDF bars code and QRcode]]></en>
+         <cs><![CDATA[Tento zásuvný modul umožňuje vytvářet a exportovat do PDF čárové a QR kódy]]></cs>
        </long>
    </description>
    <homepage>https://github.com/pluginsGLPI/barcode</homepage>
@@ -62,6 +64,7 @@
       </version>
      </versions>
    <langs>
+      <lang>cs_CZ</lang>
       <lang>en_GB</lang>
       <lang>fr_FR</lang>
       <lang>de_DE</lang>
@@ -85,5 +88,11 @@
             <tag>QRcode</tag>
             <tag>data</tag>
          </en>
+         <cs>
+            <tag>export</tag>
+            <tag>čárovýkód</tag>
+            <tag>QRkód</tag>
+            <tag>data</tag>
+         </cs>
    </tags>
 </root>
