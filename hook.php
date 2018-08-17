@@ -140,8 +140,7 @@ function plugin_barcode_install() {
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
-   if (countElementsInTable("glpi_plugin_barcode_configs_types",
-                            "`type`='QRcode'") == 0) {
+   if (!countElementsInTable("glpi_plugin_barcode_configs_types", ['type' => 'QRcode'])) {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
