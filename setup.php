@@ -41,6 +41,11 @@
 
 define ("PLUGIN_BARCODE_VERSION", "2.1.1");
 
+// Minimal GLPI version, inclusive
+define('PLUGIN_BARCODE_MIN_GLPI', '9.2');
+// Maximum GLPI version, exclusive
+define('PLUGIN_BARCODE_MAX_GLPI', '9.4');
+
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS;
@@ -81,6 +86,7 @@ function plugin_init_barcode() {
 }
 
 function plugin_version_barcode() {
+
    return [
       'name'           => 'Barcode',
       'shortname'      => 'barcode',
@@ -91,8 +97,8 @@ function plugin_version_barcode() {
       'homepage'       => 'https://forge.indepnet.net/projects/barscode',
       'requirements'   => [
          'glpi' => [
-            'min' => '9.2',
-            'dev' => true
+            'min' => PLUGIN_BARCODE_MIN_GLPI,
+            'max' => PLUGIN_BARCODE_MAX_GLPI,
          ]
       ]
    ];
@@ -100,10 +106,23 @@ function plugin_version_barcode() {
 
 
 function plugin_barcode_check_prerequisites() {
-   $version = rtrim(GLPI_VERSION, '-dev');
-   if (version_compare($version, '9.2', 'lt')) {
-      echo "This plugin requires GLPI 9.2";
-      return false;
+
+   //Version check is not done by core in GLPI < 9.2 but has to be delegated to core in GLPI >= 9.2.
+   $version = preg_replace('/^((\d+\.?)+).*$/', '$1', GLPI_VERSION);
+   if (version_compare($version, '9.2', '<')) {
+      $matchMinGlpiReq = version_compare($version, PLUGIN_BARCODE_MIN_GLPI, '>=');
+      $matchMaxGlpiReq = version_compare($version, PLUGIN_BARCODE_MAX_GLPI, '<');
+
+      if (!$matchMinGlpiReq || !$matchMaxGlpiReq) {
+         echo vsprintf(
+            'This plugin requires GLPI >= %1$s and < %2$s.',
+            [
+               PLUGIN_BARCODE_MIN_GLPI,
+               PLUGIN_BARCODE_MAX_GLPI,
+            ]
+         );
+         return false;
+      }
    }
 
    return true;
