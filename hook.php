@@ -81,7 +81,7 @@ function plugin_barcode_install() {
                   `id` int(11) NOT NULL auto_increment,
                   `type` varchar(20) collate utf8_unicode_ci default NULL,
                   PRIMARY KEY  (`ID`)
-               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+               ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
       $DB->query($query) or die("error creating glpi_plugin_barcode_configs ". $DB->error());
 
       $query = "INSERT INTO `glpi_plugin_barcode_configs`
@@ -108,7 +108,7 @@ function plugin_barcode_install() {
                   `maxCodeHeight` int(11) NULL,
                   PRIMARY KEY  (`ID`),
                   UNIQUE  (`type`)
-               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+               ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
       $DB->query($query) or die("error creating glpi_plugin_barcode_configs_types ". $DB->error());
 
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
