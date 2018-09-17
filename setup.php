@@ -50,6 +50,8 @@ define('PLUGIN_BARCODE_MAX_GLPI', '9.4');
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS;
 
+   require_once(__DIR__ . '/vendor/autoload.php');
+
    $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
 
    Plugin::registerClass('PluginBarcodeDropdown');

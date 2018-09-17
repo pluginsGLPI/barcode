@@ -1,0 +1,12 @@
+--- Image/Barcode.php
++++ Image/Barcode.php
+@@ -77,7 +77,7 @@
+             return PEAR::raiseError("Unable to find draw method in '$classname' class");
+         }
+ 
+-        @$obj =& new $classname();
++        @$obj = new $classname();
+     
+ 	if (isset($obj->_barcodeheight)) $obj->_barcodeheight = $height;
+ 	if (isset($obj->_barwidth)) $obj->_barwidth = $barwidth;
+
