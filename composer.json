@@ -1,10 +1,68 @@
 {
+    "require": {
+        "deltalab/phpqrcode": "^1.1",
+        "pear/image_barcode": "^1.1",
+        "pear/pear": "^1.9",
+        "rospdf/pdf-php": "^0.12",
+        "cweagans/composer-patches": "^1.6"
+    },
     "require-dev": {
         "glpi-project/tools": "^0.1"
     },
     "config": {
         "platform": {
             "php": "5.6"
+        }
+    },
+    "autoload": {
+        "files": [
+            "inc/functions_debug.php"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "deltalab/phpqrcode",
+                "version": "1.1.4",
+                "dist":{
+                    "url": "https://sourceforge.net/projects/phpqrcode/files/releases/phpqrcode-2010100721_1.1.4.zip/download",
+                    "type": "zip",
+                    "reference": "1.1.4"
+                },
+                "autoload": {
+                    "classmap": [
+                        "phpqrcode.php"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "pear/image_barcode",
+                "version": "1.1.2",
+                "dist":{
+                    "url": "https://github.com/pear/Image_Barcode/archive/1.1.2.zip",
+                    "type": "zip",
+                    "reference": "1.1.2"
+                },
+                "autoload": {
+                    "psr-0": {
+                        "Image": "./"
+                    }
+                },
+                "include-path": [
+                    "./"
+                ]
+            }
+        }
+    ],
+    "extra": {
+        "patches": {
+            "pear/image_barcode": {
+                "Fix error due to assignation as reference from new operation": "./patch/fix-pear-image-barcode.patch"
+            }
         }
     }
 }
