@@ -301,6 +301,7 @@ class PluginBarcodeBarcode {
       $config = $pbConfig->getConfigType($type);
 
       $pdf= new Cezpdf($size, $orientation);
+      $pdf->tempPath = GLPI_TMP_DIR;
       $pdf->selectFont(GLPI_ROOT."/plugins/barcode/lib/ezpdf/fonts/Helvetica.afm");
       $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
       $width   = $config['maxCodeWidth'];
