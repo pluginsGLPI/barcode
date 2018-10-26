@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.2.0");
+define ("PLUGIN_BARCODE_VERSION", "2.2.1");
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_BARCODE_MIN_GLPI', '9.2');
@@ -49,6 +49,8 @@ define('PLUGIN_BARCODE_MAX_GLPI', '9.4');
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS;
+
+   require_once(__DIR__ . '/vendor/autoload.php');
 
    $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
 

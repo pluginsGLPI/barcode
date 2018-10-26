@@ -45,10 +45,6 @@ if (!defined('GLPI_ROOT')) {
 
 class PluginBarcodeQRcode {
 
-   function __construct() {
-      require_once(GLPI_ROOT.'/plugins/barcode/lib/phpqrcode/qrlib.php');
-   }
-
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
       global $CFG_GLPI;
 

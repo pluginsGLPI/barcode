@@ -299,9 +299,9 @@ class PluginBarcodeBarcode {
       // x is horizontal axis and y is vertical
       // x=0 and y=0 in bottom left hand corner
       $config = $pbConfig->getConfigType($type);
-      require_once(GLPI_ROOT."/plugins/barcode/lib/ezpdf/class.ezpdf.php");
 
       $pdf= new Cezpdf($size, $orientation);
+      $pdf->tempPath = GLPI_TMP_DIR;
       $pdf->selectFont(GLPI_ROOT."/plugins/barcode/lib/ezpdf/fonts/Helvetica.afm");
       $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
       $width   = $config['maxCodeWidth'];
@@ -409,8 +409,6 @@ class PluginBarcodeBarcode {
 
 
    function create($p_code, $p_type, $p_ext) {
-      require_once(GLPI_ROOT.'/plugins/barcode/lib/Image_Barcode/Barcode.php');
-      require_once(GLPI_ROOT.'/plugins/barcode/inc/functions_debug.php');
       //TODO : filtre sur le type
       if (!file_exists($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext)) {
          plugin_barcode_disableDebug();
