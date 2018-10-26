@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-06 07:47+0000\n"
+"POT-Creation-Date: 2018-10-26 11:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cédric Anne, 2018\n"
 "Language-Team: English (United States) (https://www.transifex.com/pluginsGLPI/teams/73419/en_US/)\n"
@@ -22,8 +22,8 @@ msgstr ""
 msgid "The cache has been emptied."
 msgstr "The cache has been emptied."
 
-#: front/barcode.form.php:62 inc/barcode.class.php:496
-#: inc/qrcode.class.php:243
+#: front/barcode.form.php:62 inc/barcode.class.php:494
+#: inc/qrcode.class.php:239
 msgid "Generated file"
 msgstr "Generated file"
 
