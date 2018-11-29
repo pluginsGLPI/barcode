@@ -116,6 +116,8 @@ function plugin_barcode_install() {
                   `marginVertical` int(11) NULL,
                   `maxCodeWidth` int(11) NULL,
                   `maxCodeHeight` int(11) NULL,
+                  `txtSize` int(11) NULL,
+                  `txtSpacing` int(11) NULL,
                   PRIMARY KEY  (`ID`),
                   UNIQUE  (`type`)
                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
@@ -124,41 +126,58 @@ function plugin_barcode_install() {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
-                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
+                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`, `txtSize`, `txtSpacing`)
                 VALUES
                      ('Code39', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '128', '50'),
+                     '25', '30', '128', '50',
+                     '8','3'),
                      ('code128', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70'),
+                     '25', '30', '110', '70',
+                     '8','3'),
                      ('ean13', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70'),
+                     '25', '30', '110', '70',
+                     '8','3'),
                      ('int25', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70'),
+                     '25', '30', '110', '70',
+                     '8','3'),
                      ('postnet', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70'),
+                     '25', '30', '110', '70',
+                     '8','3'),
                      ('upca', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '70'),
+                     '25', '30', '110', '70',
+                     '8','3'),
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '100')";
+                     '25', '30', '110', '100',
+                     '8','3')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
+   }
+
+   if ($DB->tableExists("glpi_plugin_barcode_configs_types")
+      && !$DB->fieldExists("glpi_plugin_barcode_configs_types", "txtSize")
+      && !$DB->fieldExists("glpi_plugin_barcode_configs_types", "txtSpacing")
+      ) {
+      $migration->addField("glpi_plugin_barcode_configs_types", "txtSize", "integer");
+      $migration->addField("glpi_plugin_barcode_configs_types", "txtSpacing", "integer");
+      $migration->executeMigration();
    }
 
    if (!countElementsInTable("glpi_plugin_barcode_configs_types", ['type' => 'QRcode'])) {
       $query = "INSERT INTO `glpi_plugin_barcode_configs_types`
                      (`type`, `size`, `orientation`,
                      `marginTop`, `marginBottom`, `marginLeft`, `marginRight`,
-                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`)
+                     `marginHorizontal`, `marginVertical`, `maxCodeWidth`, `maxCodeHeight`,`txtSize`, `txtSpacing`)
                 VALUES
                      ('QRcode', 'A4', 'Portrait',
                      '30', '30', '30', '30',
-                     '25', '30', '110', '100')";
+                     '25', '30', '110', '100',
+                     '8','3')";
       $DB->query($query) or die("error populate glpi_plugin_barcode_configs_types ". $DB->error());
    }
 
