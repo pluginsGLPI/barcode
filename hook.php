@@ -41,9 +41,19 @@
 
 // Define actions :
 function plugin_barcode_MassiveActions($type) {
-
+   $plugin = new Plugin();
+   if ($plugin->isActivated("genericobject")) {
+      foreach (PluginGenericobjectType::getTypes() as $tmp => $value) {
+         $itemtype = $value['itemtype'];
+         if ($itemtype==$type) {
+            $type='PluginGenericobject';
+            break;
+         }
+      }
+   }
    switch ($type) {
       // New action for core and other plugin types : name = plugin_PLUGINNAME_actionname
+      case 'PluginGenericobject':
       case 'Computer' :
       case 'Monitor' :
       case 'Networking' :
