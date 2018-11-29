@@ -186,6 +186,16 @@ class PluginBarcodeConfig extends CommonDBTM {
       echo "</td>";
       echo "</tr>";
 
+      echo "<tr><th colspan='4'>".__('Text display options', 'barcode')."</th></tr>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Text size', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='txtSize' value='".$config['txtSize']."'>";
+      echo "</td>";
+      echo "<td>".__('Text spacing between lines', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='txtSpacing' value='".$config['txtSpacing']."'>";
+      echo "</td>";
+      echo "</tr>";
+
       echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Save')."' class='submit'></td></tr>";
       echo "</table>";
       echo "</div>";
@@ -211,6 +221,8 @@ class PluginBarcodeConfig extends CommonDBTM {
          $config['marginVertical']     = $pbcconf->fields['marginVertical'];
          $config['maxCodeWidth']       = $pbcconf->fields['maxCodeWidth'];
          $config['maxCodeHeight']      = $pbcconf->fields['maxCodeHeight'];
+         $config['txtSize']            = $pbcconf->fields['txtSize'];
+         $config['txtSpacing']         = $pbcconf->fields['txtSpacing'];
       } else {
          $config['type']               = 'code128';
          $config['size']               = 'A4';
@@ -223,6 +235,8 @@ class PluginBarcodeConfig extends CommonDBTM {
          $config['marginVertical']     = 30;
          $config['maxCodeWidth']       = 110;
          $config['maxCodeHeight']      = 70;
+         $config['txtSize']            = 8;
+         $config['txtSpacing']         = 3;
       }
       return $config;
    }
