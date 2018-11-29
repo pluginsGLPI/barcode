@@ -85,20 +85,7 @@ class PluginBarcodeQRcode {
          $a_content[] = 'Name = '.$item->fields['name'];
       }
       if ($data['url']) {
-         $normal=true;
-         $plugin = new Plugin();
-         if ($plugin->isActivated("genericobject")) {
-            foreach (PluginGenericobjectType::getTypes() as $tmp => $value) {
-               if ($value['itemtype']==$itemtype) {
-                  $a_content[] = 'URL = '.$CFG_GLPI["url_base"]."/plugins/genericobject/front/object.form.php?itemtype=".$itemtype."&id=".$items_id;
-                  $normal=false;
-                  break;
-               }
-            }
-         }
-         if ($normal) {
-            $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
-         }
+         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id);
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
