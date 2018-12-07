@@ -197,7 +197,7 @@ class PluginBarcodeConfig extends CommonDBTM {
          $p_type=$this->getConfig();
       }
       $pbcconf = new PluginBarcodeConfig_Type();
-      if ($res=array_keys($pbcconf->find("`type`='$p_type'"))) {
+      if ($res = array_keys($pbcconf->find(['type' => $p_type]))) {
          $id = $res[0];
          $pbcconf->getFromDB($id);
          $config['type']               = $pbcconf->fields['type'];
