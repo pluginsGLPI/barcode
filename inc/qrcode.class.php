@@ -56,7 +56,7 @@ class PluginBarcodeQRcode {
       if ($data['serialnumber'] && $item->fields['serial'] != '') {
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
       }
-      if ($data['inventorynumber'] && $item->fields['inventorynumber'] != '') {
+      if ($data['inventorynumber'] && $item->fields['otherserial'] != '') {
          $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
       }
       if ($data['id'] && $item->fields['id'] != '') {
