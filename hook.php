@@ -62,7 +62,6 @@ function plugin_barcode_MassiveActions($itemtype) {
       $actions[$generate_barcode_action] = $generate_barcode_label;
    }
 
-
    /** @var CommonDBTM $item */
    $item = new $itemtype();
    $item->getEmpty();
