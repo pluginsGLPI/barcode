@@ -167,7 +167,7 @@ class PluginBarcodeQRcode {
       if (!$no_form_page) {
          echo '<tr>';
          echo '<td>';
-         echo __('Web page of the device')." : </td><td>";
+         echo __('Web page of the item')." : </td><td>";
          Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
          echo '</td>';
          echo '</tr>';
