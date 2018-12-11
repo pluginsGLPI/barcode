@@ -48,44 +48,28 @@ class PluginBarcodeQRcode {
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
       global $CFG_GLPI;
 
+      /** @var CommonDBTM $item */
       $item = new $itemtype();
       $item->getFromDB($items_id);
+
       $a_content = [];
-      $have_content = false;
-      if ($data['serialnumber']) {
-         if ($item->fields['serial'] != '') {
-            $have_content = true;
-         }
+      if ($data['serialnumber'] && $item->fields['serial'] != '') {
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
       }
-      if ($data['inventorynumber']) {
-         if ($item->fields['otherserial'] != '') {
-            $have_content = true;
-         }
+      if ($data['inventorynumber'] && $item->fields['inventorynumber'] != '') {
          $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
       }
-      if ($data['id']) {
-         if ($item->fields['id'] != '') {
-            $have_content = true;
-         }
+      if ($data['id'] && $item->fields['id'] != '') {
          $a_content[] = 'ID = '.$item->fields['id'];
       }
-      if (isset($data['uuid']) && $data['uuid']) {
-         if (isset($item->fields['uuid'])) {
-            if ($item->fields['uuid'] != '') {
-               $have_content = true;
-            }
-            $a_content[] = 'UUID = '.$item->fields['uuid'];
-         }
+      if ($data['uuid'] && $item->fields['uuid'] != '') {
+         $a_content[] = 'UUID = '.$item->fields['uuid'];
       }
-      if ($data['name']) {
-         if ($item->fields['name'] != '') {
-            $have_content = true;
-         }
+      if ($data['name'] && $item->fields['name'] != '') {
          $a_content[] = 'Name = '.$item->fields['name'];
       }
-      if ($data['url']) {
-         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
+      if ($data['url'] && !$item->no_form_page) {
+         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id);
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
