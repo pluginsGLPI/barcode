@@ -57,8 +57,8 @@ function plugin_barcode_MassiveActions($itemtype) {
       $generate_qrcode_action => $generate_qrcode_label,
    ];
 
-   if (Ticket::class === $itemtype) {
-      // Ticket specific case, barcode is generated based on ticket ID
+   if (is_a($itemtype, CommonITILObject::class, true)) {
+      // CommonITILObject specific case, barcode is generated based on ticket ID
       $actions[$generate_barcode_action] = $generate_barcode_label;
    }
 

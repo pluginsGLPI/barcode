@@ -470,12 +470,10 @@ class PluginBarcodeBarcode {
             }
             foreach ($ids as $key) {
                $item->getFromDB($key);
-               if (key($ma->items) == 'Ticket') {
+               if (key($ma->items) == 'CommonITILObject') {
                   $codes[] = $item->getField('id');
-               } else {
-                  if ($item->isField('otherserial')) {
-                     $codes[] = $item->getField('otherserial');
-                  }
+               } else if ($item->isField('otherserial')) {
+                  $codes[] = $item->getField('otherserial');
                }
             }
             if (count($codes) > 0) {
