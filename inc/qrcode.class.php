@@ -111,54 +111,93 @@ class PluginBarcodeQRcode {
    }
 
 
+   function showFormMassiveAction(MassiveAction $ma) {
 
-   function showFormMassiveAction() {
+      $fields       = [];
+      $no_form_page = true;
+
+      $itemtype = $ma->getItemtype(false);
+      if (is_a($itemtype, CommonDBTM::class, true)) {
+         /** @var CommonDBTM $item */
+         $item = new $itemtype();
+         $item->getEmpty();
+         $fields = array_keys($item->fields);
+         $no_form_page = $item->no_form_page;
+      }
 
       echo '<input type="hidden" name="type" value="QRcode" />';
       echo '<center>';
       echo '<table>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Serial number')." : </td><td>";
-      Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Inventory number')." : </td><td>";
-      Dropdown::showYesNo("inventorynumber", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
+
+      if (in_array('serial', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Serial number')." : </td><td>";
+         Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('serialnumber', ['value' => 0]);
+      }
+
+      if (in_array('otherserial', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Inventory number')." : </td><td>";
+         Dropdown::showYesNo("inventorynumber", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('inventorynumber', ['value' => 0]);
+      }
+
       echo '<tr>';
       echo '<td>';
       echo __('ID')." : </td><td>";
       Dropdown::showYesNo("id", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('UUID')." : </td><td>";
-      Dropdown::showYesNo("uuid", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Name')." : </td><td>";
-      Dropdown::showYesNo("name", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Web page of the device')." : </td><td>";
-      Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
+
+      if (in_array('uuid', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('UUID')." : </td><td>";
+         Dropdown::showYesNo("uuid", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('uuid', ['value' => 0]);
+      }
+
+      if (in_array('name', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Name')." : </td><td>";
+         Dropdown::showYesNo("name", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('name', ['value' => 0]);
+      }
+
+      if (!$no_form_page) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Web page of the device')." : </td><td>";
+         Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('url', ['value' => 0]);
+      }
+
       echo '<tr>';
       echo '<td>';
       echo __('Date QRcode')." (".date('Y-m-d').") : </td><td>";
       Dropdown::showYesNo("qrcodedate", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
+
       echo '</table>';
       echo '<br/>';
 
@@ -185,7 +224,7 @@ class PluginBarcodeQRcode {
 
          case 'Generate':
             $pbQRcode = new self();
-            $pbQRcode->showFormMassiveAction();
+            $pbQRcode->showFormMassiveAction($ma);
             return true;
 
       }
