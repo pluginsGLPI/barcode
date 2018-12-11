@@ -40,28 +40,39 @@
  */
 
 // Define actions :
-function plugin_barcode_MassiveActions($type) {
+function plugin_barcode_MassiveActions($itemtype) {
 
-   switch ($type) {
-      // New action for core and other plugin types : name = plugin_PLUGINNAME_actionname
-      case 'Computer' :
-      case 'Monitor' :
-      case 'Networking' :
-      case 'Printer' :
-      case 'Peripheral' :
-      case 'Phone' :
-         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
-                    => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode'),
-                 "PluginBarcodeQRcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
-                    => __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode')
-                ];
+   $generate_barcode_action = 'PluginBarcodeBarcode' . MassiveAction::CLASS_ACTION_SEPARATOR . 'Generate';
+   $generate_barcode_label  = __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode');
 
-      case 'Ticket' :
-         return ["PluginBarcodeBarcode".MassiveAction::CLASS_ACTION_SEPARATOR.'Generate'
-                   => __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode')
-                ];
+   $generate_qrcode_action  = 'PluginBarcodeQRcode' . MassiveAction::CLASS_ACTION_SEPARATOR . 'Generate';
+   $generate_qrcode_label   = __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode');
+
+   if (Ticket::class === $itemtype) {
+      return [
+         $generate_barcode_action => $generate_barcode_label
+      ];
    }
-   return [];
+
+   if (!is_a($itemtype, CommonDBTM::class, true)) {
+      return [];
+   }
+
+   $actions = [
+      // QR code is always available as it contains ID field value
+      $generate_qrcode_action => $generate_qrcode_label,
+   ];
+
+   /** @var CommonDBTM $item */
+   $item = new $itemtype();
+   $item->getEmpty();
+
+   if (array_key_exists('otherserial', $item->fields)) {
+      // Barcode is based on otherserial field value
+      $actions[$generate_barcode_action] = $generate_barcode_label;
+   }
+
+   return $actions;
 }
 
 
