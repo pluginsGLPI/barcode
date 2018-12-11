@@ -48,12 +48,6 @@ function plugin_barcode_MassiveActions($itemtype) {
    $generate_qrcode_action  = 'PluginBarcodeQRcode' . MassiveAction::CLASS_ACTION_SEPARATOR . 'Generate';
    $generate_qrcode_label   = __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode');
 
-   if (Ticket::class === $itemtype) {
-      return [
-         $generate_barcode_action => $generate_barcode_label
-      ];
-   }
-
    if (!is_a($itemtype, CommonDBTM::class, true)) {
       return [];
    }
@@ -62,6 +56,12 @@ function plugin_barcode_MassiveActions($itemtype) {
       // QR code is always available as it contains ID field value
       $generate_qrcode_action => $generate_qrcode_label,
    ];
+
+   if (Ticket::class === $itemtype) {
+      // Ticket specific case, barcode is generated based on ticket ID
+      $actions[$generate_barcode_action] = $generate_barcode_label;
+   }
+
 
    /** @var CommonDBTM $item */
    $item = new $itemtype();
