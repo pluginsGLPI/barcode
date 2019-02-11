@@ -48,44 +48,28 @@ class PluginBarcodeQRcode {
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
       global $CFG_GLPI;
 
+      /** @var CommonDBTM $item */
       $item = new $itemtype();
       $item->getFromDB($items_id);
+
       $a_content = [];
-      $have_content = false;
-      if ($data['serialnumber']) {
-         if ($item->fields['serial'] != '') {
-            $have_content = true;
-         }
+      if ($data['serialnumber'] && $item->fields['serial'] != '') {
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
       }
-      if ($data['inventorynumber']) {
-         if ($item->fields['otherserial'] != '') {
-            $have_content = true;
-         }
+      if ($data['inventorynumber'] && $item->fields['otherserial'] != '') {
          $a_content[] = 'Inventory Number = '.$item->fields['otherserial'];
       }
-      if ($data['id']) {
-         if ($item->fields['id'] != '') {
-            $have_content = true;
-         }
+      if ($data['id'] && $item->fields['id'] != '') {
          $a_content[] = 'ID = '.$item->fields['id'];
       }
-      if (isset($data['uuid']) && $data['uuid']) {
-         if (isset($item->fields['uuid'])) {
-            if ($item->fields['uuid'] != '') {
-               $have_content = true;
-            }
-            $a_content[] = 'UUID = '.$item->fields['uuid'];
-         }
+      if ($data['uuid'] && $item->fields['uuid'] != '') {
+         $a_content[] = 'UUID = '.$item->fields['uuid'];
       }
-      if ($data['name']) {
-         if ($item->fields['name'] != '') {
-            $have_content = true;
-         }
+      if ($data['name'] && $item->fields['name'] != '') {
          $a_content[] = 'Name = '.$item->fields['name'];
       }
-      if ($data['url']) {
-         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].Toolbox::getItemTypeFormURL($itemtype, false)."?id=".$items_id;
+      if ($data['url'] && !$item->no_form_page) {
+         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id);
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
@@ -111,54 +95,93 @@ class PluginBarcodeQRcode {
    }
 
 
+   function showFormMassiveAction(MassiveAction $ma) {
 
-   function showFormMassiveAction() {
+      $fields       = [];
+      $no_form_page = true;
+
+      $itemtype = $ma->getItemtype(false);
+      if (is_a($itemtype, CommonDBTM::class, true)) {
+         /** @var CommonDBTM $item */
+         $item = new $itemtype();
+         $item->getEmpty();
+         $fields = array_keys($item->fields);
+         $no_form_page = $item->no_form_page;
+      }
 
       echo '<input type="hidden" name="type" value="QRcode" />';
       echo '<center>';
       echo '<table>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Serial number')." : </td><td>";
-      Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Inventory number')." : </td><td>";
-      Dropdown::showYesNo("inventorynumber", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
+
+      if (in_array('serial', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Serial number')." : </td><td>";
+         Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('serialnumber', ['value' => 0]);
+      }
+
+      if (in_array('otherserial', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Inventory number')." : </td><td>";
+         Dropdown::showYesNo("inventorynumber", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('inventorynumber', ['value' => 0]);
+      }
+
       echo '<tr>';
       echo '<td>';
       echo __('ID')." : </td><td>";
       Dropdown::showYesNo("id", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('UUID')." : </td><td>";
-      Dropdown::showYesNo("uuid", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Name')." : </td><td>";
-      Dropdown::showYesNo("name", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
-      echo '<tr>';
-      echo '<td>';
-      echo __('Web page of the device')." : </td><td>";
-      Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
-      echo '</td>';
-      echo '</tr>';
+
+      if (in_array('uuid', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('UUID')." : </td><td>";
+         Dropdown::showYesNo("uuid", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('uuid', ['value' => 0]);
+      }
+
+      if (in_array('name', $fields)) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Name')." : </td><td>";
+         Dropdown::showYesNo("name", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('name', ['value' => 0]);
+      }
+
+      if (!$no_form_page) {
+         echo '<tr>';
+         echo '<td>';
+         echo __('Web page of the item')." : </td><td>";
+         Dropdown::showYesNo("url", 1, -1, ['width' => '100']);
+         echo '</td>';
+         echo '</tr>';
+      } else {
+         echo Html::hidden('url', ['value' => 0]);
+      }
+
       echo '<tr>';
       echo '<td>';
       echo __('Date QRcode')." (".date('Y-m-d').") : </td><td>";
       Dropdown::showYesNo("qrcodedate", 1, -1, ['width' => '100']);
       echo '</td>';
       echo '</tr>';
+
       echo '</table>';
       echo '<br/>';
 
@@ -185,7 +208,7 @@ class PluginBarcodeQRcode {
 
          case 'Generate':
             $pbQRcode = new self();
-            $pbQRcode->showFormMassiveAction();
+            $pbQRcode->showFormMassiveAction($ma);
             return true;
 
       }
