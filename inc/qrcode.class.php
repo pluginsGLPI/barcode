@@ -51,7 +51,9 @@ class PluginBarcodeQRcode {
       /** @var CommonDBTM $item */
       $item = new $itemtype();
       $item->getFromDB($items_id);
-
+      $itemByInvNumber = $item->fields['otherserial'];
+      $URLById= 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($items_id);
+      $URLByInvNumber = 'URL = ' . $CFG_GLPI['url_base'] . '/plugins/barcode/front/checkItemByInv.php?inventoryNumber='. $itemByInvNumber . '&itemtype=' . $itemtype;
       $a_content = [];
       if ($data['serialnumber'] && $item->fields['serial'] != '') {
          $a_content[] = 'Serial Number = '.$item->fields['serial'];
@@ -69,7 +71,11 @@ class PluginBarcodeQRcode {
          $a_content[] = 'Name = '.$item->fields['name'];
       }
       if ($data['url'] && !$item->no_form_page) {
-         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id);
+         if($data['inventorynumberURL']) {
+            $a_content[] = $URLByInvNumber;
+         } else {
+         $a_content[] = $URLById;
+         }
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
@@ -163,6 +169,12 @@ class PluginBarcodeQRcode {
       } else {
          echo Html::hidden('name', ['value' => 0]);
       }
+      echo '<tr>';
+      echo '<td>';
+      echo __('URL by inventory number') . " : </td><td>";
+      Dropdown::showYesNo("inventorynumberURL", 1, -1, ['width' => '100']);
+      echo '</td>';
+      echo '</tr>';
 
       if (!$no_form_page) {
          echo '<tr>';
@@ -233,6 +245,11 @@ class PluginBarcodeQRcode {
                }
             }
             if ($ma->POST['type'] == 'QRcode') {
+               if($item->isField('inventotynumberURL')) {
+                  $URLtype = 'inventoryURL';
+               } else {
+                  $URLtype = 'idURL';
+               }
                foreach ($ids as $key) {
                   $filename = $pbQRcode->generateQRcode($item->getType(), $key, $rand, $number, $ma->POST);
                   if ($filename) {
