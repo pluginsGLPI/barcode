@@ -39,7 +39,7 @@ $itemtype = $_GET['itemtype'];
 $item = new $itemtype();
 $itemInventoryNumber[] = $_GET['inventoryNumber'];
 foreach ($itemInventoryNumber as $key => $value) {
-  $item = $item->getFromDBByCrit(['otherserial' => $value]);
- Html::redirect($itemtype::getFormURLWithID($item));
+   $item = $item->getFromDBByCrit(['otherserial' => $value]);
+   Html::redirect($itemtype::getFormURLWithID($item));
 };
 Html::footer();
