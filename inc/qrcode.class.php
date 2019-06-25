@@ -126,7 +126,7 @@ class PluginBarcodeQRcode {
          }
       }
       if ($data['url']  && !$item->no_form_page) {
-         if($data['inventorynumberURL']) {
+         if ($data['inventorynumberURL']) {
             $a_content[] = $URLByInvNumber;
          } else {
             $a_content[] = $URLById;
@@ -136,7 +136,7 @@ class PluginBarcodeQRcode {
             if ($data['displaylabels']) {
                $label = __('Item URL').': ';
             }
-            if($data['inventorynumberURL']) {
+            if ($data['inventorynumberURL']) {
                $b_content[] = $label.$URLByInvNumber;
             } else {
                $b_content[] = $label.$URLById;
@@ -371,7 +371,7 @@ class PluginBarcodeQRcode {
                }
             }
             if ($ma->POST['type'] == 'QRcode') {
-               if($item->isField('inventotynumberURL')) {
+               if ($item->isField('inventotynumberURL')) {
                   $URLtype = 'inventoryURL';
                } else {
                   $URLtype = 'idURL';
