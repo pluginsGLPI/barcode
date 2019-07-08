@@ -69,7 +69,7 @@ class PluginBarcodeQRcode {
          $a_content[] = 'Name = '.$item->fields['name'];
       }
       if ($data['url'] && !$item->no_form_page) {
-         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id);
+         $a_content[] = 'URL = '.$CFG_GLPI["url_base"].$itemtype::getFormURLWithID($items_id, false);
       }
       if ($data['qrcodedate']) {
          $a_content[] = 'QRcode date = '.date('Y-m-d');
