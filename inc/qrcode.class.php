@@ -329,8 +329,7 @@ class PluginBarcodeQRcode {
 
 
    function getSpecificMassiveActions($checkitem = null) {
-      $actions = parent::getSpecificMassiveActions($checkitem);
-      return $actions;
+      return [];
    }
 
 
@@ -350,7 +349,7 @@ class PluginBarcodeQRcode {
             return true;
 
       }
-      return parent::showMassiveActionsSubForm($ma);
+      return false;
    }
 
 
@@ -415,7 +414,7 @@ class PluginBarcodeQRcode {
             return;
 
       }
-      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+      return;
    }
 
 

@@ -451,8 +451,7 @@ class PluginBarcodeBarcode {
 
 
    function getSpecificMassiveActions($checkitem = null) {
-      $actions = parent::getSpecificMassiveActions($checkitem);
-      return $actions;
+      return [];
    }
 
 
@@ -470,7 +469,7 @@ class PluginBarcodeBarcode {
             return true;
 
       }
-       return parent::showMassiveActionsSubForm($ma);
+      return false;
    }
 
 
@@ -521,7 +520,7 @@ class PluginBarcodeBarcode {
             return;
 
       }
-      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+      return;
    }
 
 }
