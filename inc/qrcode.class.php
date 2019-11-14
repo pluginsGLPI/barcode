@@ -53,7 +53,7 @@ class PluginBarcodeQRcode {
       $item->getFromDB($items_id);
       $itemByInvNumber = $item->fields['otherserial'];
       $URLById= 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($items_id, false);
-      $URLByInvNumber = 'URL = ' . $CFG_GLPI['url_base'] . '/plugins/barcode/front/checkItemByInv.php?inventoryNumber='. $itemByInvNumber . '&itemtype=' . $itemtype;
+      $URLByInvNumber = 'URL = ' . Plugin::getWebDir('barcode', true, true) . '/front/checkItemByInv.php?inventoryNumber='. $itemByInvNumber . '&itemtype=' . $itemtype;
       $a_content = [];
 
       $b_content = [];
@@ -406,7 +406,7 @@ class PluginBarcodeQRcode {
                $filePath              = explode('/', $file);
                $filename              = $filePath[count($filePath)-1];
 
-               $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
+               $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
                Session::addMessageAfterRedirect($msg);
                $pbQRcode->cleanQRcodefiles($rand, $number);
             }

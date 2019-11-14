@@ -151,7 +151,7 @@ class PluginBarcodeBarcode {
          $code = '';
       }
       echo "<form name='form' method='post'
-                  action='".$CFG_GLPI['root_doc']."/plugins/barcode/front/barcode.form.php'>";
+                  action='".Plugin::getWebDir('barcode')."/front/barcode.form.php'>";
         echo "<div align='center'>";
         echo "<table class='tab_cadre'>";
          echo "<tr><th colspan='4'>".__('Generation', 'barcode')."</th></tr>";
@@ -308,7 +308,7 @@ class PluginBarcodeBarcode {
 
       $pdf= new Cezpdf($size, $orientation);
       $pdf->tempPath = GLPI_TMP_DIR;
-      $pdf->selectFont(GLPI_ROOT."/plugins/barcode/lib/ezpdf/fonts/Helvetica.afm");
+      $pdf->selectFont(Plugin::getPhpDir('barcode')."/lib/ezpdf/fonts/Helvetica.afm");
       $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
       $width   = $config['maxCodeWidth'];
       $height  = $config['maxCodeHeight'];
@@ -510,7 +510,7 @@ class PluginBarcodeBarcode {
                $filePath = explode('/', $file);
                $filename = $filePath[count($filePath)-1];
 
-               $msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)
+               $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)
                   ."'>".__('Generated file', 'barcode')."</a>";
 
                Session::addMessageAfterRedirect($msg);

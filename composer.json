@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^7.2",
         "deltalab/phpqrcode": "^1.1",
         "pear/image_barcode": "^1.1",
         "pear/pear": "^1.9",
@@ -10,9 +11,11 @@
         "glpi-project/tools": "^0.1"
     },
     "config": {
+        "optimize-autoloader": true,
         "platform": {
-            "php": "5.6"
-        }
+            "php": "7.2.0"
+        },
+        "sort-packages": true
     },
     "autoload": {
         "files": [

@@ -59,7 +59,7 @@ $file     = $barcode->printPDF($_POST);
 $filePath = explode('/', $file);
 $filename = $filePath[count($filePath)-1];
 
-$msg = "<a href='".$CFG_GLPI['root_doc'].'/plugins/barcode/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
+$msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
 Session::addMessageAfterRedirect($msg);
 
 Html::back();
