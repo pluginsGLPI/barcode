@@ -39,12 +39,12 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.4.1");
+define ("PLUGIN_BARCODE_VERSION", "2.5.0");
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_BARCODE_MIN_GLPI', '9.4');
+define('PLUGIN_BARCODE_MIN_GLPI', '9.5');
 // Maximum GLPI version, exclusive
-define('PLUGIN_BARCODE_MAX_GLPI', '9.5');
+define('PLUGIN_BARCODE_MAX_GLPI', '9.6');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
@@ -68,11 +68,12 @@ function plugin_init_barcode() {
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
+      $web_dir = '/' . Plugin::getWebDir('barcode', false);
       $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['title'] = "Search";
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page'] = '/plugins/barcode/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = '/plugins/barcode/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = '/plugins/barcode/front/barcode.form.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = '/plugins/barcode/index.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page'] = $web_dir . '/front/barcode.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = $web_dir. '/front/barcode.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = $web_dir. '/front/barcode.form.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = $web_dir. '/index.php';
 
       $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
    }
@@ -104,32 +105,4 @@ function plugin_version_barcode() {
          ]
       ]
    ];
-}
-
-
-function plugin_barcode_check_prerequisites() {
-
-   //Version check is not done by core in GLPI < 9.2 but has to be delegated to core in GLPI >= 9.2.
-   $version = preg_replace('/^((\d+\.?)+).*$/', '$1', GLPI_VERSION);
-   if (version_compare($version, '9.2', '<')) {
-      $matchMinGlpiReq = version_compare($version, PLUGIN_BARCODE_MIN_GLPI, '>=');
-      $matchMaxGlpiReq = version_compare($version, PLUGIN_BARCODE_MAX_GLPI, '<');
-
-      if (!$matchMinGlpiReq || !$matchMaxGlpiReq) {
-         echo vsprintf(
-            'This plugin requires GLPI >= %1$s and < %2$s.',
-            [
-               PLUGIN_BARCODE_MIN_GLPI,
-               PLUGIN_BARCODE_MAX_GLPI,
-            ]
-         );
-         return false;
-      }
-   }
-
-   return true;
-}
-
-function plugin_barcode_check_config($verbose = false) {
-   return true;
 }

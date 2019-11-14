@@ -145,7 +145,7 @@ class PluginBarcodeProfile extends Profile {
     * @param $profiles_id  integer
     */
    static function createFirstAccess($profiles_id) {
-      include_once(GLPI_ROOT."/plugins/barcode/inc/profile.class.php");
+      include_once(Plugin::getPhpDir('barcode')."/inc/profile.class.php");
       $profile = new self();
       foreach ($profile->getAllRights() as $right) {
          self::addDefaultProfileInfos($profiles_id,
@@ -165,7 +165,7 @@ class PluginBarcodeProfile extends Profile {
 
    static function migrateProfiles() {
       //Get all rights from the old table
-      $profiles = getAllDatasFromTable(getTableForItemType(__CLASS__));
+      $profiles = getAllDataFromTable(getTableForItemType(__CLASS__));
 
       //Load mapping of old rights to their new equivalent
       $oldrights = self::getOldRightsMappings();
