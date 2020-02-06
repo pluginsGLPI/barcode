@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-08 14:41+0000\n"
+"POT-Creation-Date: 2020-02-06 14:58+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Pierfrancesco Passerini <p.passerini@gmail.com>, 2018\n"
 "Language-Team: Italian (Italy) (https://www.transifex.com/pluginsGLPI/teams/73419/it_IT/)\n"
@@ -21,10 +21,149 @@ msgstr ""
 "Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: inc/qrcode.class.php:410 inc/barcode.class.php:518
-#: front/barcode.form.php:62
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr "La cache è stata svuotata."
+
+#: front/checkItemByInv.php:37 front/config.php:52 hook.php:46 hook.php:49
+#: inc/profile.class.php:50 inc/profile.class.php:87
+msgid "Barcode"
+msgstr "Codice a barre"
+
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:409
 msgid "Generated file"
 msgstr "File creato"
+
+#: hook.php:46
+msgid "Print barcodes"
+msgstr "Stampa codici a barre"
+
+#: hook.php:49
+msgid "Print QRcodes"
+msgstr "Stampa codici QR"
+
+#: inc/profile.class.php:115
+msgid "Manage configuration"
+msgstr "Gestisci configurazione"
+
+#: inc/profile.class.php:119
+msgid "Generation of barcode"
+msgstr "Creazione del codici a barre"
+
+#: inc/config.class.php:67
+msgid "Barcode plugin configuration"
+msgstr "Configurazione plugin Barcode"
+
+#: inc/config.class.php:72
+msgid "General configuration"
+msgstr "Configurazione generale"
+
+#: inc/config.class.php:76 inc/barcode.class.php:162 inc/barcode.class.php:205
+msgid "Type"
+msgstr "Tipo"
+
+#: inc/config.class.php:84
+msgid "Empty the cache"
+msgstr "Svuota la cache"
+
+#: inc/config.class.php:88
+msgid "Company logo"
+msgstr "Logo della società"
+
+#: inc/config.class.php:147 inc/barcode.class.php:166
+#: inc/barcode.class.php:226
+msgid "Page size"
+msgstr "Formato pagina"
+
+#: inc/config.class.php:150 inc/barcode.class.php:169
+#: inc/barcode.class.php:236
+msgid "Orientation"
+msgstr "Orientamento"
+
+#: inc/config.class.php:154
+msgid "Margins"
+msgstr "Margini"
+
+#: inc/config.class.php:156
+msgid "Top"
+msgstr "Superiore"
+
+#: inc/config.class.php:159
+msgid "Bottom"
+msgstr "Inferiore"
+
+#: inc/config.class.php:164
+msgid "Left"
+msgstr "Sinistra"
+
+#: inc/config.class.php:167
+msgid "Right"
+msgstr "Destra"
+
+#: inc/config.class.php:172
+msgid "Inner horizontal"
+msgstr "Interno orizzontale"
+
+#: inc/config.class.php:175
+msgid "Inner vertical"
+msgstr "Interno verticale"
+
+#: inc/config.class.php:179
+msgid "Barcodes sizes"
+msgstr "Grandezza del codice a barre"
+
+#: inc/config.class.php:181
+msgid "Maximum width"
+msgstr "Larghezza massima"
+
+#: inc/config.class.php:184
+msgid "Maximum height"
+msgstr "Altezza massima"
+
+#: inc/config.class.php:190
+msgid "URL"
+msgstr ""
+
+#: inc/config.class.php:198
+msgid "Text display options"
+msgstr ""
+
+#: inc/config.class.php:200
+msgid "Text size"
+msgstr ""
+
+#: inc/config.class.php:203
+msgid "Text spacing between lines"
+msgstr ""
+
+#: inc/config.class.php:265
+msgid "code39"
+msgstr "Code 39"
+
+#: inc/config.class.php:266
+msgid "code128"
+msgstr "Code 128"
+
+#: inc/config.class.php:267
+msgid "ean13"
+msgstr "EAN 13"
+
+#: inc/config.class.php:268
+msgid "int25"
+msgstr "int25"
+
+#: inc/config.class.php:269
+msgid "postnet"
+msgstr "POSTNET"
+
+#: inc/config.class.php:270
+msgid "upca"
+msgstr "UPC-A"
+
+#: inc/config.class.php:271
+msgid "QRcode"
+msgstr "QR code"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
@@ -238,20 +377,6 @@ msgstr "Creazione"
 msgid "Code"
 msgstr "Codice"
 
-#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
-msgid "Type"
-msgstr "Tipo"
-
-#: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:147
-msgid "Page size"
-msgstr "Formato pagina"
-
-#: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:150
-msgid "Orientation"
-msgstr "Orientamento"
-
 #: inc/barcode.class.php:174
 msgid "Number of copies"
 msgstr "Numero di copie"
@@ -280,131 +405,6 @@ msgstr "Mostra i bordi"
 msgid "Display labels"
 msgstr ""
 
-#: inc/barcode.class.php:287
+#: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "La generazione di alcuni codici a barre ha restituito degli errori."
-
-#: inc/profile.class.php:50 inc/profile.class.php:87 front/config.php:52
-#: front/checkItemByInv.php:37 hook.php:46 hook.php:49
-msgid "Barcode"
-msgstr "Codice a barre"
-
-#: inc/profile.class.php:115
-msgid "Manage configuration"
-msgstr "Gestisci configurazione"
-
-#: inc/profile.class.php:119
-msgid "Generation of barcode"
-msgstr "Creazione del codici a barre"
-
-#: inc/config.class.php:67
-msgid "Barcode plugin configuration"
-msgstr "Configurazione plugin Barcode"
-
-#: inc/config.class.php:72
-msgid "General configuration"
-msgstr "Configurazione generale"
-
-#: inc/config.class.php:84
-msgid "Empty the cache"
-msgstr "Svuota la cache"
-
-#: inc/config.class.php:88
-msgid "Company logo"
-msgstr "Logo della società"
-
-#: inc/config.class.php:154
-msgid "Margins"
-msgstr "Margini"
-
-#: inc/config.class.php:156
-msgid "Top"
-msgstr "Superiore"
-
-#: inc/config.class.php:159
-msgid "Bottom"
-msgstr "Inferiore"
-
-#: inc/config.class.php:164
-msgid "Left"
-msgstr "Sinistra"
-
-#: inc/config.class.php:167
-msgid "Right"
-msgstr "Destra"
-
-#: inc/config.class.php:172
-msgid "Inner horizontal"
-msgstr "Interno orizzontale"
-
-#: inc/config.class.php:175
-msgid "Inner vertical"
-msgstr "Interno verticale"
-
-#: inc/config.class.php:179
-msgid "Barcodes sizes"
-msgstr "Grandezza del codice a barre"
-
-#: inc/config.class.php:181
-msgid "Maximum width"
-msgstr "Larghezza massima"
-
-#: inc/config.class.php:184
-msgid "Maximum height"
-msgstr "Altezza massima"
-
-#: inc/config.class.php:190
-msgid "URL"
-msgstr ""
-
-#: inc/config.class.php:198
-msgid "Text display options"
-msgstr ""
-
-#: inc/config.class.php:200
-msgid "Text size"
-msgstr ""
-
-#: inc/config.class.php:203
-msgid "Text spacing between lines"
-msgstr ""
-
-#: inc/config.class.php:265
-msgid "code39"
-msgstr "Code 39"
-
-#: inc/config.class.php:266
-msgid "code128"
-msgstr "Code 128"
-
-#: inc/config.class.php:267
-msgid "ean13"
-msgstr "EAN 13"
-
-#: inc/config.class.php:268
-msgid "int25"
-msgstr "int25"
-
-#: inc/config.class.php:269
-msgid "postnet"
-msgstr "POSTNET"
-
-#: inc/config.class.php:270
-msgid "upca"
-msgstr "UPC-A"
-
-#: inc/config.class.php:271
-msgid "QRcode"
-msgstr "QR code"
-
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr "La cache è stata svuotata."
-
-#: hook.php:46
-msgid "Print barcodes"
-msgstr "Stampa codici a barre"
-
-#: hook.php:49
-msgid "Print QRcodes"
-msgstr "Stampa codici QR"
