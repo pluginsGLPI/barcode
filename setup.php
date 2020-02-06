@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.4.0");
+define ("PLUGIN_BARCODE_VERSION", "2.4.1");
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_BARCODE_MIN_GLPI', '9.4');
