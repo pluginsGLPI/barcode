@@ -4,9 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Johan Cwiklinski <jcwiklinski@teclib.com>, 2017
-# Alexander Salas Bastidas <alexander.salas@gmail.com>, 2017
-# Cédric Anne, 2018
+# Teguh Umar <teguh.umar@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,113 +13,113 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-06 14:58+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
-"Last-Translator: Cédric Anne, 2018\n"
-"Language-Team: Turkish (Turkey) (https://www.transifex.com/pluginsGLPI/teams/73419/tr_TR/)\n"
+"Last-Translator: Teguh Umar <teguh.umar@gmail.com>, 2019\n"
+"Language-Team: Indonesian (Indonesia) (https://www.transifex.com/pluginsGLPI/teams/73419/id_ID/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr_TR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: id_ID\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr "Önbellek temizlendi"
+msgstr "Cache sudah dikosongkan."
 
 #: front/checkItemByInv.php:37 front/config.php:52 hook.php:46 hook.php:49
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
-msgstr "Barkod"
+msgstr "Barcode"
 
 #: front/barcode.form.php:62 inc/barcode.class.php:514
 #: inc/qrcode.class.php:409
 msgid "Generated file"
-msgstr "Oluşturulan dosya"
+msgstr "File yang dihasilkan"
 
 #: hook.php:46
 msgid "Print barcodes"
-msgstr "Barkodları yazdırın"
+msgstr "Cetak barcode"
 
 #: hook.php:49
 msgid "Print QRcodes"
-msgstr "QR kodlarını yazdırın"
+msgstr "Cetak CodeQR"
 
 #: inc/profile.class.php:115
 msgid "Manage configuration"
-msgstr "Yapılandırmasını yönetmek"
+msgstr "Kelola konfigurasi"
 
 #: inc/profile.class.php:119
 msgid "Generation of barcode"
-msgstr "Barkod nesil"
+msgstr "Pembuatan barcode"
 
 #: inc/config.class.php:67
 msgid "Barcode plugin configuration"
-msgstr "Barkod uygulama eki ayarları"
+msgstr "Konfigurasi plugin barcode"
 
 #: inc/config.class.php:72
 msgid "General configuration"
-msgstr "Genel ayarlar"
+msgstr "Konfigurasi umum"
 
 #: inc/config.class.php:76 inc/barcode.class.php:162 inc/barcode.class.php:205
 msgid "Type"
-msgstr "Tip"
+msgstr "tipe"
 
 #: inc/config.class.php:84
 msgid "Empty the cache"
-msgstr "Önbelleği temizleyin"
+msgstr "Kosongkan cache"
 
 #: inc/config.class.php:88
 msgid "Company logo"
-msgstr "Kurum logosu"
+msgstr "Logo perusahaan"
 
 #: inc/config.class.php:147 inc/barcode.class.php:166
 #: inc/barcode.class.php:226
 msgid "Page size"
-msgstr "Sayfa boyutu"
+msgstr "Ukuran halaman"
 
 #: inc/config.class.php:150 inc/barcode.class.php:169
 #: inc/barcode.class.php:236
 msgid "Orientation"
-msgstr "Sayfa yönü"
+msgstr "orientasi"
 
 #: inc/config.class.php:154
 msgid "Margins"
-msgstr "Kenar boşlukları"
+msgstr "Margin"
 
 #: inc/config.class.php:156
 msgid "Top"
-msgstr "Üst"
+msgstr "Atas"
 
 #: inc/config.class.php:159
 msgid "Bottom"
-msgstr "Alt"
+msgstr "Bawah"
 
 #: inc/config.class.php:164
 msgid "Left"
-msgstr "Sol"
+msgstr "Kiri"
 
 #: inc/config.class.php:167
 msgid "Right"
-msgstr "Sağ"
+msgstr "Kanan"
 
 #: inc/config.class.php:172
 msgid "Inner horizontal"
-msgstr "Yatay iç"
+msgstr "Horisontal dalam"
 
 #: inc/config.class.php:175
 msgid "Inner vertical"
-msgstr "Dikey iç"
+msgstr "Vertikal dalam"
 
 #: inc/config.class.php:179
 msgid "Barcodes sizes"
-msgstr "Barkod boyutları"
+msgstr "Ukuran barcode"
 
 #: inc/config.class.php:181
 msgid "Maximum width"
-msgstr "En fazla genişlik"
+msgstr "Lebar maksimum"
 
 #: inc/config.class.php:184
 msgid "Maximum height"
-msgstr "En fazla yükseklik"
+msgstr "Tinggi maksimum"
 
 #: inc/config.class.php:190
 msgid "URL"
@@ -365,43 +363,43 @@ msgstr "FOLIO"
 
 #: inc/barcode.class.php:135
 msgid "Portrait"
-msgstr "Dikey"
+msgstr "Portrait"
 
 #: inc/barcode.class.php:136
 msgid "Landscape"
-msgstr "Yatay"
+msgstr "Landscape"
 
 #: inc/barcode.class.php:157
 msgid "Generation"
-msgstr "Oluşturulma"
+msgstr "Generasi"
 
 #: inc/barcode.class.php:159
 msgid "Code"
-msgstr "Kod"
+msgstr "Kode"
 
 #: inc/barcode.class.php:174
 msgid "Number of copies"
-msgstr "Kopya sayısı"
+msgstr "Jumlah salinan"
 
 #: inc/barcode.class.php:179 inc/barcode.class.php:257
 msgid "Create"
-msgstr "Oluşturun"
+msgstr "Buat"
 
 #: inc/barcode.class.php:194
 msgid "It will generate only elements have defined field:"
-msgstr "Sadece öğeleri alan tanımladığınız oluşturur:"
+msgstr "Hanya akan menghasilkan elemen yang telah didefinisikan:"
 
 #: inc/barcode.class.php:196
 msgid "Ticket number"
-msgstr "Bilet numarası"
+msgstr "Nomer tiket"
 
 #: inc/barcode.class.php:230
 msgid "Not use first xx barcodes"
-msgstr "İlk xx barkod kullanılmasın"
+msgstr "barcode awal xx tidak digunakan"
 
 #: inc/barcode.class.php:240
 msgid "Display border"
-msgstr "Kenarlık görüntülensin"
+msgstr "Tampilan barcode"
 
 #: inc/barcode.class.php:248
 msgid "Display labels"
@@ -409,4 +407,4 @@ msgstr ""
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
-msgstr "Bazı barkodlar üretilirken hata oluştu."
+msgstr "Ada beberapa kesalahan dalam hasil barcode."

@@ -1,14 +1,14 @@
 # English translations for PACKAGE package.
-# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2018.
+# Automatically generated, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-26 11:36+0000\n"
-"PO-Revision-Date: 2018-10-26 11:36+0000\n"
+"POT-Creation-Date: 2020-02-06 14:58+0000\n"
+"PO-Revision-Date: 2020-02-06 14:58+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -21,20 +21,20 @@ msgstr ""
 msgid "The cache has been emptied."
 msgstr "The cache has been emptied."
 
-#: front/barcode.form.php:62 inc/barcode.class.php:494 inc/qrcode.class.php:239
-msgid "Generated file"
-msgstr "Generated file"
-
-#: front/config.php:52 hook.php:54 hook.php:56 hook.php:61
+#: front/checkItemByInv.php:37 front/config.php:52 hook.php:46 hook.php:49
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
 msgstr "Barcode"
 
-#: hook.php:54 hook.php:61
+#: front/barcode.form.php:62 inc/barcode.class.php:514 inc/qrcode.class.php:409
+msgid "Generated file"
+msgstr "Generated file"
+
+#: hook.php:46
 msgid "Print barcodes"
 msgstr "Print barcodes"
 
-#: hook.php:56
+#: hook.php:49
 msgid "Print QRcodes"
 msgstr "Print QRcodes"
 
@@ -70,7 +70,7 @@ msgstr "Company logo"
 msgid "Page size"
 msgstr "Page size"
 
-#: inc/config.class.php:150 inc/barcode.class.php:169 inc/barcode.class.php:232
+#: inc/config.class.php:150 inc/barcode.class.php:169 inc/barcode.class.php:236
 msgid "Orientation"
 msgstr "Orientation"
 
@@ -114,31 +114,47 @@ msgstr "Maximum width"
 msgid "Maximum height"
 msgstr "Maximum height"
 
-#: inc/config.class.php:242
+#: inc/config.class.php:190
+msgid "URL"
+msgstr "URL"
+
+#: inc/config.class.php:198
+msgid "Text display options"
+msgstr "Text display options"
+
+#: inc/config.class.php:200
+msgid "Text size"
+msgstr "Text size"
+
+#: inc/config.class.php:203
+msgid "Text spacing between lines"
+msgstr "Text spacing between lines"
+
+#: inc/config.class.php:265
 msgid "code39"
 msgstr "code39"
 
-#: inc/config.class.php:243
+#: inc/config.class.php:266
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:244
+#: inc/config.class.php:267
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:245
+#: inc/config.class.php:268
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:246
+#: inc/config.class.php:269
 msgid "postnet"
 msgstr "postnet"
 
-#: inc/config.class.php:247
+#: inc/config.class.php:270
 msgid "upca"
 msgstr "upca"
 
-#: inc/config.class.php:248
+#: inc/config.class.php:271
 msgid "QRcode"
 msgstr "QRcode"
 
@@ -358,7 +374,7 @@ msgstr "Code"
 msgid "Number of copies"
 msgstr "Number of copies"
 
-#: inc/barcode.class.php:179 inc/barcode.class.php:253
+#: inc/barcode.class.php:179 inc/barcode.class.php:257
 msgid "Create"
 msgstr "Create"
 
@@ -370,14 +386,18 @@ msgstr "It will generate only elements have defined field:"
 msgid "Ticket number"
 msgstr "Ticket number"
 
-#: inc/barcode.class.php:238
+#: inc/barcode.class.php:230
 msgid "Not use first xx barcodes"
 msgstr "Not use first xx barcodes"
 
-#: inc/barcode.class.php:244
+#: inc/barcode.class.php:240
 msgid "Display border"
 msgstr "Display border"
 
-#: inc/barcode.class.php:280
+#: inc/barcode.class.php:248
+msgid "Display labels"
+msgstr "Display labels"
+
+#: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "The generation of some barcodes produced errors."

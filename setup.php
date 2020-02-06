@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.4.0");
+define ("PLUGIN_BARCODE_VERSION", "2.4.1");
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_BARCODE_MIN_GLPI', '9.4');
@@ -96,7 +96,7 @@ function plugin_version_barcode() {
       'license'        => 'AGPLv3+',
       'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
                            Jean Marc GRISARD & Vincent MAZZONI',
-      'homepage'       => 'https://forge.indepnet.net/projects/barscode',
+      'homepage'       => 'https://github.com/pluginsGLPI/barcode',
       'requirements'   => [
          'glpi' => [
             'min' => PLUGIN_BARCODE_MIN_GLPI,

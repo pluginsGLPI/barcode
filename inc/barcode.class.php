@@ -269,29 +269,26 @@ class PluginBarcodeBarcode {
       $size        = $p_params['size'];
       $orientation = $p_params['orientation'];
       $codes       = [];
-      $displayDataCollection=[];
+
+      $displayDataCollection = $p_params['displayData'] ?? [];
 
       if ($type == 'QRcode') {
          $codes = $p_params['codes'];
-         $displayDataCollection = $p_params['displayData'];
       } else {
          if (isset($p_params['code'])) {
             if (isset($p_params['nb']) AND $p_params['nb']>1) {
                $this->create($p_params['code'], $type, $ext);
                for ($i=1; $i<=$p_params['nb']; $i++) {
                   $codes[] = $p_params['code'];
-                  $displayDataCollection = $p_params['displayData'];
                }
             } else {
                if (!$this->create($p_params['code'], $type, $ext)) {
                   Session::addMessageAfterRedirect(__('The generation of some barcodes produced errors.', 'barcode'));
                }
                $codes[] = $p_params['code'];
-               $displayDataCollection = $p_params['displayData'];
             }
          } else if (isset($p_params['codes'])) {
             $codes = $p_params['codes'];
-            $displayDataCollection = $p_params['displayData'];
             foreach ($codes as $code) {
                if ($code != '') {
                   $this->create($code, $type, $ext);
@@ -345,7 +342,7 @@ class PluginBarcodeBarcode {
       $first=true;
       for ($ia = 0; $ia < count($codes); $ia++) {
          $code = $codes[$ia];
-         $displayData = $displayDataCollection[$ia];
+         $displayData = $displayDataCollection[$ia] ?? [];
          if ($first) {
             $x = $pdf->ez['leftMargin'];
             $y = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
@@ -454,8 +451,7 @@ class PluginBarcodeBarcode {
 
 
    function getSpecificMassiveActions($checkitem = null) {
-      $actions = parent::getSpecificMassiveActions($checkitem);
-      return $actions;
+      return [];
    }
 
 
@@ -473,7 +469,7 @@ class PluginBarcodeBarcode {
             return true;
 
       }
-       return parent::showMassiveActionsSubForm($ma);
+      return false;
    }
 
 
@@ -524,7 +520,7 @@ class PluginBarcodeBarcode {
             return;
 
       }
-      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+      return;
    }
 
 }

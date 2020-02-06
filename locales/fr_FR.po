@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-26 11:36+0000\n"
+"POT-Creation-Date: 2020-02-06 14:58+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Cédric Anne, 2018\n"
 "Language-Team: French (France) (https://www.transifex.com/pluginsGLPI/teams/73419/fr_FR/)\n"
@@ -27,21 +27,21 @@ msgstr ""
 msgid "The cache has been emptied."
 msgstr "Le cache a été vidé."
 
-#: front/barcode.form.php:62 inc/barcode.class.php:494
-#: inc/qrcode.class.php:239
-msgid "Generated file"
-msgstr "Fichier généré"
-
-#: front/config.php:52 hook.php:54 hook.php:56 hook.php:61
+#: front/checkItemByInv.php:37 front/config.php:52 hook.php:46 hook.php:49
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
 msgstr "Barcode"
 
-#: hook.php:54 hook.php:61
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:409
+msgid "Generated file"
+msgstr "Fichier généré"
+
+#: hook.php:46
 msgid "Print barcodes"
 msgstr "Imprimer des codes barres"
 
-#: hook.php:56
+#: hook.php:49
 msgid "Print QRcodes"
 msgstr "Imprimer des QRcode"
 
@@ -79,7 +79,7 @@ msgid "Page size"
 msgstr "Format de la page"
 
 #: inc/config.class.php:150 inc/barcode.class.php:169
-#: inc/barcode.class.php:232
+#: inc/barcode.class.php:236
 msgid "Orientation"
 msgstr "Orientation"
 
@@ -123,31 +123,47 @@ msgstr "Longueur maximale"
 msgid "Maximum height"
 msgstr "Hauteur maximale"
 
-#: inc/config.class.php:242
+#: inc/config.class.php:190
+msgid "URL"
+msgstr ""
+
+#: inc/config.class.php:198
+msgid "Text display options"
+msgstr ""
+
+#: inc/config.class.php:200
+msgid "Text size"
+msgstr ""
+
+#: inc/config.class.php:203
+msgid "Text spacing between lines"
+msgstr ""
+
+#: inc/config.class.php:265
 msgid "code39"
 msgstr "code39"
 
-#: inc/config.class.php:243
+#: inc/config.class.php:266
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:244
+#: inc/config.class.php:267
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:245
+#: inc/config.class.php:268
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:246
+#: inc/config.class.php:269
 msgid "postnet"
 msgstr "postnet"
 
-#: inc/config.class.php:247
+#: inc/config.class.php:270
 msgid "upca"
 msgstr "upca"
 
-#: inc/config.class.php:248
+#: inc/config.class.php:271
 msgid "QRcode"
 msgstr "QRcode"
 
@@ -367,7 +383,7 @@ msgstr "Code"
 msgid "Number of copies"
 msgstr "Nombre d’exemplaires"
 
-#: inc/barcode.class.php:179 inc/barcode.class.php:253
+#: inc/barcode.class.php:179 inc/barcode.class.php:257
 msgid "Create"
 msgstr "Créer"
 
@@ -379,14 +395,18 @@ msgstr "Il produira seulement éléments ont défini le champ :"
 msgid "Ticket number"
 msgstr "Numéro du billet"
 
-#: inc/barcode.class.php:238
+#: inc/barcode.class.php:230
 msgid "Not use first xx barcodes"
 msgstr "Ne pas utiliser les xx premiers codes barres"
 
-#: inc/barcode.class.php:244
+#: inc/barcode.class.php:240
 msgid "Display border"
 msgstr "Afficher la bordure"
 
-#: inc/barcode.class.php:280
+#: inc/barcode.class.php:248
+msgid "Display labels"
+msgstr ""
+
+#: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "La génération de certains codes barres a émis des erreurs."

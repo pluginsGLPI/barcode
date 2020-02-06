@@ -52,7 +52,7 @@ class PluginBarcodeQRcode {
       $item = new $itemtype();
       $item->getFromDB($items_id);
       $itemByInvNumber = $item->fields['otherserial'];
-      $URLById= 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($items_id);
+      $URLById= 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($items_id, false);
       $URLByInvNumber = 'URL = ' . $CFG_GLPI['url_base'] . '/plugins/barcode/front/checkItemByInv.php?inventoryNumber='. $itemByInvNumber . '&itemtype=' . $itemtype;
       $a_content = [];
 
@@ -329,8 +329,7 @@ class PluginBarcodeQRcode {
 
 
    function getSpecificMassiveActions($checkitem = null) {
-      $actions = parent::getSpecificMassiveActions($checkitem);
-      return $actions;
+      return [];
    }
 
 
@@ -350,7 +349,7 @@ class PluginBarcodeQRcode {
             return true;
 
       }
-      return parent::showMassiveActionsSubForm($ma);
+      return false;
    }
 
 
@@ -415,7 +414,7 @@ class PluginBarcodeQRcode {
             return;
 
       }
-      parent::processMassiveActionsForOneItemtype($ma, $item, $ids);
+      return;
    }
 
 
