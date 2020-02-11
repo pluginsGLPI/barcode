@@ -390,20 +390,20 @@
         },
         {
             "name": "rospdf/pdf-php",
-            "version": "0.12.58",
+            "version": "0.12.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rospdf/pdf-php.git",
-                "reference": "5aa9b288999d107725e676fc53dbd1e211370bc0"
+                "reference": "61e48d6301ded75775897f285d5c90def0c3be04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rospdf/pdf-php/zipball/5aa9b288999d107725e676fc53dbd1e211370bc0",
-                "reference": "5aa9b288999d107725e676fc53dbd1e211370bc0",
+                "url": "https://api.github.com/repos/rospdf/pdf-php/zipball/61e48d6301ded75775897f285d5c90def0c3be04",
+                "reference": "61e48d6301ded75775897f285d5c90def0c3be04",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.38",
@@ -455,7 +455,7 @@
             ],
             "description": "The R&OS Pdf class supports the creation of PDF documents without any adiditional modules or extensions.",
             "homepage": "https://github.com/rospdf/pdf-php",
-            "time": "2019-10-16T08:43:43+00:00"
+            "time": "2020-02-10T17:50:04+00:00"
         }
     ],
     "packages-dev": [
@@ -1015,6 +1015,7 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
+            "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
