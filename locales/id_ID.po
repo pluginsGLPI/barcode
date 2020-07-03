@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 14:58+0000\n"
+"POT-Creation-Date: 2020-07-03 13:18+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Teguh Umar <teguh.umar@gmail.com>, 2019\n"
 "Language-Team: Indonesian (Indonesia) (https://www.transifex.com/pluginsGLPI/teams/73419/id_ID/)\n"
@@ -21,19 +21,10 @@ msgstr ""
 "Language: id_ID\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr "Cache sudah dikosongkan."
-
-#: front/checkItemByInv.php:37 front/config.php:52 hook.php:46 hook.php:49
+#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
 msgstr "Barcode"
-
-#: front/barcode.form.php:62 inc/barcode.class.php:514
-#: inc/qrcode.class.php:409
-msgid "Generated file"
-msgstr "File yang dihasilkan"
 
 #: hook.php:46
 msgid "Print barcodes"
@@ -43,6 +34,15 @@ msgstr "Cetak barcode"
 msgid "Print QRcodes"
 msgstr "Cetak CodeQR"
 
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:409
+msgid "Generated file"
+msgstr "File yang dihasilkan"
+
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr "Cache sudah dikosongkan."
+
 #: inc/profile.class.php:115
 msgid "Manage configuration"
 msgstr "Kelola konfigurasi"
@@ -50,120 +50,6 @@ msgstr "Kelola konfigurasi"
 #: inc/profile.class.php:119
 msgid "Generation of barcode"
 msgstr "Pembuatan barcode"
-
-#: inc/config.class.php:67
-msgid "Barcode plugin configuration"
-msgstr "Konfigurasi plugin barcode"
-
-#: inc/config.class.php:72
-msgid "General configuration"
-msgstr "Konfigurasi umum"
-
-#: inc/config.class.php:76 inc/barcode.class.php:162 inc/barcode.class.php:205
-msgid "Type"
-msgstr "tipe"
-
-#: inc/config.class.php:84
-msgid "Empty the cache"
-msgstr "Kosongkan cache"
-
-#: inc/config.class.php:88
-msgid "Company logo"
-msgstr "Logo perusahaan"
-
-#: inc/config.class.php:147 inc/barcode.class.php:166
-#: inc/barcode.class.php:226
-msgid "Page size"
-msgstr "Ukuran halaman"
-
-#: inc/config.class.php:150 inc/barcode.class.php:169
-#: inc/barcode.class.php:236
-msgid "Orientation"
-msgstr "orientasi"
-
-#: inc/config.class.php:154
-msgid "Margins"
-msgstr "Margin"
-
-#: inc/config.class.php:156
-msgid "Top"
-msgstr "Atas"
-
-#: inc/config.class.php:159
-msgid "Bottom"
-msgstr "Bawah"
-
-#: inc/config.class.php:164
-msgid "Left"
-msgstr "Kiri"
-
-#: inc/config.class.php:167
-msgid "Right"
-msgstr "Kanan"
-
-#: inc/config.class.php:172
-msgid "Inner horizontal"
-msgstr "Horisontal dalam"
-
-#: inc/config.class.php:175
-msgid "Inner vertical"
-msgstr "Vertikal dalam"
-
-#: inc/config.class.php:179
-msgid "Barcodes sizes"
-msgstr "Ukuran barcode"
-
-#: inc/config.class.php:181
-msgid "Maximum width"
-msgstr "Lebar maksimum"
-
-#: inc/config.class.php:184
-msgid "Maximum height"
-msgstr "Tinggi maksimum"
-
-#: inc/config.class.php:190
-msgid "URL"
-msgstr ""
-
-#: inc/config.class.php:198
-msgid "Text display options"
-msgstr ""
-
-#: inc/config.class.php:200
-msgid "Text size"
-msgstr ""
-
-#: inc/config.class.php:203
-msgid "Text spacing between lines"
-msgstr ""
-
-#: inc/config.class.php:265
-msgid "code39"
-msgstr "code39"
-
-#: inc/config.class.php:266
-msgid "code128"
-msgstr "code128"
-
-#: inc/config.class.php:267
-msgid "ean13"
-msgstr "ean13"
-
-#: inc/config.class.php:268
-msgid "int25"
-msgstr "int25"
-
-#: inc/config.class.php:269
-msgid "postnet"
-msgstr "postnet"
-
-#: inc/config.class.php:270
-msgid "upca"
-msgstr "upca"
-
-#: inc/config.class.php:271
-msgid "QRcode"
-msgstr "QRcode"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
@@ -377,6 +263,20 @@ msgstr "Generasi"
 msgid "Code"
 msgstr "Kode"
 
+#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
+msgid "Type"
+msgstr "tipe"
+
+#: inc/barcode.class.php:166 inc/barcode.class.php:226
+#: inc/config.class.php:147
+msgid "Page size"
+msgstr "Ukuran halaman"
+
+#: inc/barcode.class.php:169 inc/barcode.class.php:236
+#: inc/config.class.php:150
+msgid "Orientation"
+msgstr "orientasi"
+
 #: inc/barcode.class.php:174
 msgid "Number of copies"
 msgstr "Jumlah salinan"
@@ -408,3 +308,103 @@ msgstr ""
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "Ada beberapa kesalahan dalam hasil barcode."
+
+#: inc/config.class.php:67
+msgid "Barcode plugin configuration"
+msgstr "Konfigurasi plugin barcode"
+
+#: inc/config.class.php:72
+msgid "General configuration"
+msgstr "Konfigurasi umum"
+
+#: inc/config.class.php:84
+msgid "Empty the cache"
+msgstr "Kosongkan cache"
+
+#: inc/config.class.php:88
+msgid "Company logo"
+msgstr "Logo perusahaan"
+
+#: inc/config.class.php:154
+msgid "Margins"
+msgstr "Margin"
+
+#: inc/config.class.php:156
+msgid "Top"
+msgstr "Atas"
+
+#: inc/config.class.php:159
+msgid "Bottom"
+msgstr "Bawah"
+
+#: inc/config.class.php:164
+msgid "Left"
+msgstr "Kiri"
+
+#: inc/config.class.php:167
+msgid "Right"
+msgstr "Kanan"
+
+#: inc/config.class.php:172
+msgid "Inner horizontal"
+msgstr "Horisontal dalam"
+
+#: inc/config.class.php:175
+msgid "Inner vertical"
+msgstr "Vertikal dalam"
+
+#: inc/config.class.php:179
+msgid "Barcodes sizes"
+msgstr "Ukuran barcode"
+
+#: inc/config.class.php:181
+msgid "Maximum width"
+msgstr "Lebar maksimum"
+
+#: inc/config.class.php:184
+msgid "Maximum height"
+msgstr "Tinggi maksimum"
+
+#: inc/config.class.php:190
+msgid "URL"
+msgstr ""
+
+#: inc/config.class.php:198
+msgid "Text display options"
+msgstr ""
+
+#: inc/config.class.php:200
+msgid "Text size"
+msgstr ""
+
+#: inc/config.class.php:203
+msgid "Text spacing between lines"
+msgstr ""
+
+#: inc/config.class.php:265
+msgid "code39"
+msgstr "code39"
+
+#: inc/config.class.php:266
+msgid "code128"
+msgstr "code128"
+
+#: inc/config.class.php:267
+msgid "ean13"
+msgstr "ean13"
+
+#: inc/config.class.php:268
+msgid "int25"
+msgstr "int25"
+
+#: inc/config.class.php:269
+msgid "postnet"
+msgstr "postnet"
+
+#: inc/config.class.php:270
+msgid "upca"
+msgstr "upca"
+
+#: inc/config.class.php:271
+msgid "QRcode"
+msgstr "QRcode"
