@@ -2,402 +2,409 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# milotype <mail@milotype.de>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-03 13:18+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2017-03-02 15:37+0000\n"
+"Last-Translator: milotype <mail@milotype.de>, 2020\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/pluginsGLPI/teams/73419/hr_HR/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
-msgstr ""
+msgstr "Barkod"
 
 #: hook.php:46
 msgid "Print barcodes"
-msgstr ""
+msgstr "Ispiši barkodove"
 
 #: hook.php:49
 msgid "Print QRcodes"
-msgstr ""
+msgstr "Ispiši QR kodove"
 
-#: front/barcode.form.php:62 inc/barcode.class.php:514 inc/qrcode.class.php:409
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:409
 msgid "Generated file"
-msgstr ""
+msgstr "Generirana datoteka"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr ""
+msgstr "Predmemorija je ispražnjena."
 
 #: inc/profile.class.php:115
 msgid "Manage configuration"
-msgstr ""
+msgstr "Upravljaj konfiguracijom"
 
 #: inc/profile.class.php:119
 msgid "Generation of barcode"
-msgstr ""
+msgstr "Generiranje barkoda"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
-msgstr ""
+msgstr "4A0"
 
 #: inc/barcode.class.php:78
 msgid "2A0"
-msgstr ""
+msgstr "2A0"
 
 #: inc/barcode.class.php:79
 msgid "A0"
-msgstr ""
+msgstr "A0"
 
 #: inc/barcode.class.php:80
 msgid "A1"
-msgstr ""
+msgstr "A1"
 
 #: inc/barcode.class.php:81
 msgid "A2"
-msgstr ""
+msgstr "A2"
 
 #: inc/barcode.class.php:82
 msgid "A3"
-msgstr ""
+msgstr "A3"
 
 #: inc/barcode.class.php:83
 msgid "A4"
-msgstr ""
+msgstr "A4"
 
 #: inc/barcode.class.php:84
 msgid "A5"
-msgstr ""
+msgstr "A5"
 
 #: inc/barcode.class.php:85
 msgid "A6"
-msgstr ""
+msgstr "A6"
 
 #: inc/barcode.class.php:86
 msgid "A7"
-msgstr ""
+msgstr "A7"
 
 #: inc/barcode.class.php:87
 msgid "A8"
-msgstr ""
+msgstr "A8"
 
 #: inc/barcode.class.php:88
 msgid "A9"
-msgstr ""
+msgstr "A9"
 
 #: inc/barcode.class.php:89
 msgid "A10"
-msgstr ""
+msgstr "A10"
 
 #: inc/barcode.class.php:90
 msgid "B0"
-msgstr ""
+msgstr "B0"
 
 #: inc/barcode.class.php:91
 msgid "B1"
-msgstr ""
+msgstr "B1"
 
 #: inc/barcode.class.php:92
 msgid "B2"
-msgstr ""
+msgstr "B2"
 
 #: inc/barcode.class.php:93
 msgid "B3"
-msgstr ""
+msgstr "B3"
 
 #: inc/barcode.class.php:94
 msgid "B4"
-msgstr ""
+msgstr "B4"
 
 #: inc/barcode.class.php:95
 msgid "B5"
-msgstr ""
+msgstr "B5"
 
 #: inc/barcode.class.php:96
 msgid "B6"
-msgstr ""
+msgstr "B6"
 
 #: inc/barcode.class.php:97
 msgid "B7"
-msgstr ""
+msgstr "B7"
 
 #: inc/barcode.class.php:98
 msgid "B8"
-msgstr ""
+msgstr "B8"
 
 #: inc/barcode.class.php:99
 msgid "B9"
-msgstr ""
+msgstr "B9"
 
 #: inc/barcode.class.php:100
 msgid "B10"
-msgstr ""
+msgstr "B10"
 
 #: inc/barcode.class.php:101
 msgid "C0"
-msgstr ""
+msgstr "C0"
 
 #: inc/barcode.class.php:102
 msgid "C1"
-msgstr ""
+msgstr "C1"
 
 #: inc/barcode.class.php:103
 msgid "C2"
-msgstr ""
+msgstr "C2"
 
 #: inc/barcode.class.php:104
 msgid "C3"
-msgstr ""
+msgstr "C3"
 
 #: inc/barcode.class.php:105
 msgid "C4"
-msgstr ""
+msgstr "C4"
 
 #: inc/barcode.class.php:106
 msgid "C5"
-msgstr ""
+msgstr "C5"
 
 #: inc/barcode.class.php:107
 msgid "C6"
-msgstr ""
+msgstr "C6"
 
 #: inc/barcode.class.php:108
 msgid "C7"
-msgstr ""
+msgstr "C7"
 
 #: inc/barcode.class.php:109
 msgid "C8"
-msgstr ""
+msgstr "C8"
 
 #: inc/barcode.class.php:110
 msgid "C9"
-msgstr ""
+msgstr "C9"
 
 #: inc/barcode.class.php:111
 msgid "C10"
-msgstr ""
+msgstr "C10"
 
 #: inc/barcode.class.php:112
 msgid "RA0"
-msgstr ""
+msgstr "RA0"
 
 #: inc/barcode.class.php:113
 msgid "RA1"
-msgstr ""
+msgstr "RA1"
 
 #: inc/barcode.class.php:114
 msgid "RA2"
-msgstr ""
+msgstr "RA2"
 
 #: inc/barcode.class.php:115
 msgid "RA3"
-msgstr ""
+msgstr "RA3"
 
 #: inc/barcode.class.php:116
 msgid "RA4"
-msgstr ""
+msgstr "RA4"
 
 #: inc/barcode.class.php:117
 msgid "SRA0"
-msgstr ""
+msgstr "SRA0"
 
 #: inc/barcode.class.php:118
 msgid "SRA1"
-msgstr ""
+msgstr "SRA1"
 
 #: inc/barcode.class.php:119
 msgid "SRA2"
-msgstr ""
+msgstr "SRA2"
 
 #: inc/barcode.class.php:120
 msgid "SRA3"
-msgstr ""
+msgstr "SRA3"
 
 #: inc/barcode.class.php:121
 msgid "SRA4"
-msgstr ""
+msgstr "SRA4"
 
 #: inc/barcode.class.php:122
 msgid "LETTER"
-msgstr ""
+msgstr "LETTER"
 
 #: inc/barcode.class.php:123
 msgid "LEGAL"
-msgstr ""
+msgstr "LEGAL"
 
 #: inc/barcode.class.php:124
 msgid "EXECUTIVE"
-msgstr ""
+msgstr "EXECUTIVE"
 
 #: inc/barcode.class.php:125
 msgid "FOLIO"
-msgstr ""
+msgstr "FOLIO"
 
 #: inc/barcode.class.php:135
 msgid "Portrait"
-msgstr ""
+msgstr "Uspravno"
 
 #: inc/barcode.class.php:136
 msgid "Landscape"
-msgstr ""
+msgstr "Položeno"
 
 #: inc/barcode.class.php:157
 msgid "Generation"
-msgstr ""
+msgstr "Generiranje"
 
 #: inc/barcode.class.php:159
 msgid "Code"
-msgstr ""
+msgstr "Kôd"
 
 #: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
 msgid "Type"
-msgstr ""
+msgstr "Vrsta"
 
-#: inc/barcode.class.php:166 inc/barcode.class.php:226 inc/config.class.php:147
+#: inc/barcode.class.php:166 inc/barcode.class.php:226
+#: inc/config.class.php:147
 msgid "Page size"
-msgstr ""
+msgstr "Veličina stranice"
 
-#: inc/barcode.class.php:169 inc/barcode.class.php:236 inc/config.class.php:150
+#: inc/barcode.class.php:169 inc/barcode.class.php:236
+#: inc/config.class.php:150
 msgid "Orientation"
-msgstr ""
+msgstr "Položaj"
 
 #: inc/barcode.class.php:174
 msgid "Number of copies"
-msgstr ""
+msgstr "Broj kopija"
 
 #: inc/barcode.class.php:179 inc/barcode.class.php:257
 msgid "Create"
-msgstr ""
+msgstr "Stvori"
 
 #: inc/barcode.class.php:194
 msgid "It will generate only elements have defined field:"
-msgstr ""
+msgstr "Generirat će samo elemente s definiranim poljem:"
 
 #: inc/barcode.class.php:196
 msgid "Ticket number"
-msgstr ""
+msgstr "Broj naloga"
 
 #: inc/barcode.class.php:230
 msgid "Not use first xx barcodes"
-msgstr ""
+msgstr "Ne koristi prvih xx barkodova"
 
 #: inc/barcode.class.php:240
 msgid "Display border"
-msgstr ""
+msgstr "Prikaži rub"
 
 #: inc/barcode.class.php:248
 msgid "Display labels"
-msgstr ""
+msgstr "Prikaži oznake"
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
-msgstr ""
+msgstr "Generiranje nekih barkodova stvorilo je greške."
 
 #: inc/config.class.php:67
 msgid "Barcode plugin configuration"
-msgstr ""
+msgstr "Konfiguracija dodatka „Barkod”"
 
 #: inc/config.class.php:72
 msgid "General configuration"
-msgstr ""
+msgstr "Opća konfiguracija"
 
 #: inc/config.class.php:84
 msgid "Empty the cache"
-msgstr ""
+msgstr "Isprazni predmemoriju"
 
 #: inc/config.class.php:88
 msgid "Company logo"
-msgstr ""
+msgstr "Logotip poduzeća"
 
 #: inc/config.class.php:154
 msgid "Margins"
-msgstr ""
+msgstr "Margine"
 
 #: inc/config.class.php:156
 msgid "Top"
-msgstr ""
+msgstr "Gore"
 
 #: inc/config.class.php:159
 msgid "Bottom"
-msgstr ""
+msgstr "Dolje"
 
 #: inc/config.class.php:164
 msgid "Left"
-msgstr ""
+msgstr "Lijevo"
 
 #: inc/config.class.php:167
 msgid "Right"
-msgstr ""
+msgstr "Desno"
 
 #: inc/config.class.php:172
 msgid "Inner horizontal"
-msgstr ""
+msgstr "Unutarnje vodoravno"
 
 #: inc/config.class.php:175
 msgid "Inner vertical"
-msgstr ""
+msgstr "Unutarnje okomito"
 
 #: inc/config.class.php:179
 msgid "Barcodes sizes"
-msgstr ""
+msgstr "Veličine barkodova"
 
 #: inc/config.class.php:181
 msgid "Maximum width"
-msgstr ""
+msgstr "Maksimalna širina"
 
 #: inc/config.class.php:184
 msgid "Maximum height"
-msgstr ""
+msgstr "Maksimalna visina"
 
 #: inc/config.class.php:190
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: inc/config.class.php:198
 msgid "Text display options"
-msgstr ""
+msgstr "Opcije za prikaz teksta"
 
 #: inc/config.class.php:200
 msgid "Text size"
-msgstr ""
+msgstr "Veličina teksta"
 
 #: inc/config.class.php:203
 msgid "Text spacing between lines"
-msgstr ""
+msgstr "Razmak između redaka"
 
 #: inc/config.class.php:265
 msgid "code39"
-msgstr ""
+msgstr "kôd 39"
 
 #: inc/config.class.php:266
 msgid "code128"
-msgstr ""
+msgstr "kôd 128"
 
 #: inc/config.class.php:267
 msgid "ean13"
-msgstr ""
+msgstr "ean 13"
 
 #: inc/config.class.php:268
 msgid "int25"
-msgstr ""
+msgstr "int 25"
 
 #: inc/config.class.php:269
 msgid "postnet"
-msgstr ""
+msgstr "postnet"
 
 #: inc/config.class.php:270
 msgid "upca"
-msgstr ""
+msgstr "upca"
 
 #: inc/config.class.php:271
 msgid "QRcode"
-msgstr ""
+msgstr "QR kôd"
