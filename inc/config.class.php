@@ -189,8 +189,8 @@ class PluginBarcodeConfig extends CommonDBTM {
       echo "<tr class='tab_bg_1'>";
       echo "<td>" . __('URL', 'barcode') . "</td><td>";
       echo "<select> URL:";
-      echo "<option value='id'>Par ID</option>";
-      echo "<option value='serial'>Par numéro de série</option>";
+      echo "<option value='id'>".__('By ID', 'barcode')."</option>";
+      echo "<option value='serial'>".__('By serial number', 'barcode')."</option>";
       echo "</select>";
       echo "</td>";
       echo "</tr>";
