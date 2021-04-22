@@ -67,16 +67,16 @@
         },
         {
             "name": "pear/archive_tar",
-            "version": "1.4.9",
+            "version": "1.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Archive_Tar.git",
-                "reference": "c5b00053770e1d72128252c62c2c1a12c26639f0"
+                "reference": "2b87b41178cc6d4ad3cba678a46a1cae49786011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/c5b00053770e1d72128252c62c2c1a12c26639f0",
-                "reference": "c5b00053770e1d72128252c62c2c1a12c26639f0",
+                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/2b87b41178cc6d4ad3cba678a46a1cae49786011",
+                "reference": "2b87b41178cc6d4ad3cba678a46a1cae49786011",
                 "shasum": ""
             },
             "require": {
@@ -129,7 +129,17 @@
                 "archive",
                 "tar"
             ],
-            "time": "2019-12-04T10:17:28+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/mrook",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/michielrook",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-16T10:50:50+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -187,11 +197,6 @@
                 "reference": "1.1.2"
             },
             "type": "library",
-            "extra": {
-                "patches_applied": {
-                    "Fix error due to assignation as reference from new operation": "./patch/fix-pear-image-barcode.patch"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Image": "./"
@@ -199,7 +204,12 @@
             },
             "include-path": [
                 "./"
-            ]
+            ],
+            "extra": {
+                "patches_applied": {
+                    "Fix error due to assignation as reference from new operation": "./patch/fix-pear-image-barcode.patch"
+                }
+            }
         },
         {
             "name": "pear/pear",
@@ -1226,7 +1236,7 @@
             "time": "2017-05-10T09:20:27+00:00"
         },
         {
-            "name": "natxet/CssMin",
+            "name": "natxet/cssmin",
             "version": "v3.0.6",
             "source": {
                 "type": "git",
@@ -1312,6 +1322,7 @@
                 "javascript",
                 "minification"
             ],
+            "abandoned": true,
             "time": "2015-03-25T10:11:08+00:00"
         },
         {
