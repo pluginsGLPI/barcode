@@ -40,7 +40,7 @@ $item = new $itemtype();
 $itemInventoryNumber[] = $_GET['inventoryNumber'];
 foreach ($itemInventoryNumber as $key => $value) {
    if ($item->getFromDBByCrit(['otherserial' => $value])) {
-      Html::redirect($item->getFormURLWithID($item->getField('id')));
+      Html::redirect($item->getFormURLWithID($item->getID()));
    } else {
       Html::displayErrorAndDie(__('No item found'), true);
    }
