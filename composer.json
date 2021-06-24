@@ -1,11 +1,11 @@
 {
     "require": {
         "php": "^7.2",
+        "cweagans/composer-patches": "^1.7",
         "deltalab/phpqrcode": "^1.1",
         "pear/image_barcode": "^1.1",
         "pear/pear": "^1.9",
-        "rospdf/pdf-php": "^0.12",
-        "cweagans/composer-patches": "^1.6"
+        "rospdf/pdf-php": "^0.12"
     },
     "require-dev": {
         "glpi-project/tools": "^0.1"
