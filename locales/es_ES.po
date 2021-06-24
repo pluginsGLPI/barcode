@@ -6,16 +6,16 @@
 # Translators:
 # Johan Cwiklinski <jcwiklinski@teclib.com>, 2017
 # Alexander Salas Bastidas <alexander.salas@gmail.com>, 2017
-# Cédric Anne, 2018
+# Javier García, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-03 13:18+0000\n"
+"POT-Creation-Date: 2021-06-24 06:41+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
-"Last-Translator: Cédric Anne, 2018\n"
+"Last-Translator: Javier García, 2021\n"
 "Language-Team: Spanish (Spain) (https://www.transifex.com/pluginsGLPI/teams/73419/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,24 +26,24 @@ msgstr ""
 #: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
 #: inc/profile.class.php:50 inc/profile.class.php:87
 msgid "Barcode"
-msgstr "Barcode"
+msgstr "Código de barras"
 
 #: hook.php:46
 msgid "Print barcodes"
-msgstr "Imprimir barcodes"
+msgstr "Imprimir códigos de barras"
 
 #: hook.php:49
 msgid "Print QRcodes"
-msgstr "Imprimir QRcodes"
+msgstr "Imprimir códigos QR"
 
 #: front/barcode.form.php:62 inc/barcode.class.php:514
 #: inc/qrcode.class.php:409
 msgid "Generated file"
-msgstr "Fichero creado"
+msgstr "Archivo creado"
 
 #: front/config.form.php:56
 msgid "The cache has been emptied."
-msgstr "El caché ya esta vacío."
+msgstr "La caché se ha vaciado."
 
 #: inc/profile.class.php:115
 msgid "Manage configuration"
@@ -289,15 +289,15 @@ msgstr "Crear"
 
 #: inc/barcode.class.php:194
 msgid "It will generate only elements have defined field:"
-msgstr "Se generará sólo elementos han definido el campo:"
+msgstr "Generará solo elementos con campo definido"
 
 #: inc/barcode.class.php:196
 msgid "Ticket number"
-msgstr "Número de ficha"
+msgstr "Número de ticket"
 
 #: inc/barcode.class.php:230
 msgid "Not use first xx barcodes"
-msgstr "No utilizar los primeros xx barcodes"
+msgstr "No utilice los primeros xx códigos de barras"
 
 #: inc/barcode.class.php:240
 msgid "Display border"
@@ -305,15 +305,15 @@ msgstr "Muestra el borde"
 
 #: inc/barcode.class.php:248
 msgid "Display labels"
-msgstr ""
+msgstr "Mostrar etiquetas"
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
-msgstr "La generación de unos barcodes se terminó con errores"
+msgstr "La generación de algunos barcodes terminó con errores"
 
 #: inc/config.class.php:67
 msgid "Barcode plugin configuration"
-msgstr "Configuración del complemento Barcode"
+msgstr "Configuración del complemento Código de barras"
 
 #: inc/config.class.php:72
 msgid "General configuration"
@@ -321,7 +321,7 @@ msgstr "Configuración general"
 
 #: inc/config.class.php:84
 msgid "Empty the cache"
-msgstr "Vaciar el caché"
+msgstr "Vaciar la caché"
 
 #: inc/config.class.php:88
 msgid "Company logo"
@@ -333,11 +333,11 @@ msgstr "Margenes"
 
 #: inc/config.class.php:156
 msgid "Top"
-msgstr "Arriba"
+msgstr "Superior"
 
 #: inc/config.class.php:159
 msgid "Bottom"
-msgstr "Abajo"
+msgstr "Inferior"
 
 #: inc/config.class.php:164
 msgid "Left"
@@ -369,19 +369,19 @@ msgstr "Altura máxima"
 
 #: inc/config.class.php:190
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: inc/config.class.php:198
 msgid "Text display options"
-msgstr ""
+msgstr "Mostrar opciones de texto"
 
 #: inc/config.class.php:200
 msgid "Text size"
-msgstr ""
+msgstr "Tamaño del texto"
 
 #: inc/config.class.php:203
 msgid "Text spacing between lines"
-msgstr ""
+msgstr "Interlineado"
 
 #: inc/config.class.php:265
 msgid "code39"
@@ -409,4 +409,4 @@ msgstr "upca"
 
 #: inc/config.class.php:271
 msgid "QRcode"
-msgstr "QRcode"
+msgstr "Código QR"
