@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 06:41+0000\n"
+"POT-Creation-Date: 2021-06-25 12:33+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Open Redmine <in_dow@hotmail.com>, 2019\n"
 "Language-Team: Japanese (Japan) (https://www.transifex.com/pluginsGLPI/teams/73419/ja_JP/)\n"
@@ -367,6 +367,14 @@ msgstr ""
 
 #: inc/config.class.php:190
 msgid "URL"
+msgstr ""
+
+#: inc/config.class.php:192
+msgid "By ID"
+msgstr ""
+
+#: inc/config.class.php:193
+msgid "By serial number"
 msgstr ""
 
 #: inc/config.class.php:198

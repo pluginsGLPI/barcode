@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 06:41+0000\n"
-"PO-Revision-Date: 2021-06-24 06:41+0000\n"
+"POT-Creation-Date: 2021-06-25 12:33+0000\n"
+"PO-Revision-Date: 2021-06-25 12:33+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -361,6 +361,14 @@ msgstr "Maximum height"
 #: inc/config.class.php:190
 msgid "URL"
 msgstr "URL"
+
+#: inc/config.class.php:192
+msgid "By ID"
+msgstr "By ID"
+
+#: inc/config.class.php:193
+msgid "By serial number"
+msgstr "By serial number"
 
 #: inc/config.class.php:198
 msgid "Text display options"
