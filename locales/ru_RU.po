@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 06:41+0000\n"
+"POT-Creation-Date: 2021-06-25 12:33+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Ильшат Сайдуллин <xxkennyx@gmail.com>, 2020\n"
 "Language-Team: Russian (Russia) (https://www.transifex.com/pluginsGLPI/teams/73419/ru_RU/)\n"
@@ -371,6 +371,14 @@ msgstr "Максимальная высота"
 #: inc/config.class.php:190
 msgid "URL"
 msgstr "URL"
+
+#: inc/config.class.php:192
+msgid "By ID"
+msgstr ""
+
+#: inc/config.class.php:193
+msgid "By serial number"
+msgstr ""
 
 #: inc/config.class.php:198
 msgid "Text display options"
