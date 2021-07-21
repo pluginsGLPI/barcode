@@ -95,6 +95,10 @@ class PluginBarcodeConfig extends CommonDBTM {
                width='300'/>";
          echo "</td>";
          echo "</tr>";
+
+         echo "<tr class='tab_bg_1'>";
+         echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Delete the logo', 'barcode')."' class='submit' name='dropLogo'></td>";
+         echo "</tr>";
       }
 
       echo "<tr class='tab_bg_1'>";

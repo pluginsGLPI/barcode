@@ -54,6 +54,13 @@ if (isset($_POST['dropCache'])) {
       }
    }
    Session::addMessageAfterRedirect(__('The cache has been emptied.', 'barcode'));
+} else if (isset($_POST['dropLogo'])) {
+   if (is_dir(GLPI_PLUGIN_DOC_DIR.'/barcode')) {
+      if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
+         unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+      }
+   }
+   Session::addMessageAfterRedirect(__('The logo has been removed.', 'barcode'));
 } else if (!empty($_FILES['logo']['name'])) {
    if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
       @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
