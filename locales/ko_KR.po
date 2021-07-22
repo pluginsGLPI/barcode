@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-25 12:33+0000\n"
+"POT-Creation-Date: 2021-07-22 10:08+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Han Seonghyeon <mirsw@mirtec.com>, 2021\n"
 "Language-Team: Korean (Korea) (https://www.transifex.com/pluginsGLPI/teams/73419/ko_KR/)\n"
@@ -44,6 +44,10 @@ msgstr "생성된 파일"
 #: front/config.form.php:56
 msgid "The cache has been emptied."
 msgstr "캐시를 비웠습니다."
+
+#: front/config.form.php:61
+msgid "The logo has been removed."
+msgstr ""
 
 #: inc/profile.class.php:115
 msgid "Manage configuration"
@@ -270,12 +274,12 @@ msgid "Type"
 msgstr "유형"
 
 #: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:147
+#: inc/config.class.php:151
 msgid "Page size"
 msgstr "페이지 크기"
 
 #: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:150
+#: inc/config.class.php:154
 msgid "Orientation"
 msgstr "방향"
 
@@ -327,94 +331,98 @@ msgstr "캐시 비우기"
 msgid "Company logo"
 msgstr "회사 로고"
 
-#: inc/config.class.php:154
+#: inc/config.class.php:100
+msgid "Delete the logo"
+msgstr ""
+
+#: inc/config.class.php:158
 msgid "Margins"
 msgstr "여백"
 
-#: inc/config.class.php:156
+#: inc/config.class.php:160
 msgid "Top"
 msgstr "상단"
 
-#: inc/config.class.php:159
+#: inc/config.class.php:163
 msgid "Bottom"
 msgstr "하단"
 
-#: inc/config.class.php:164
+#: inc/config.class.php:168
 msgid "Left"
 msgstr "좌측"
 
-#: inc/config.class.php:167
+#: inc/config.class.php:171
 msgid "Right"
 msgstr "우측"
 
-#: inc/config.class.php:172
+#: inc/config.class.php:176
 msgid "Inner horizontal"
 msgstr "내부 가로"
 
-#: inc/config.class.php:175
+#: inc/config.class.php:179
 msgid "Inner vertical"
 msgstr "내부 세로"
 
-#: inc/config.class.php:179
+#: inc/config.class.php:183
 msgid "Barcodes sizes"
 msgstr "바코드 크기"
 
-#: inc/config.class.php:181
+#: inc/config.class.php:185
 msgid "Maximum width"
 msgstr "최대 폭"
 
-#: inc/config.class.php:184
+#: inc/config.class.php:188
 msgid "Maximum height"
 msgstr "최대 높이"
 
-#: inc/config.class.php:190
+#: inc/config.class.php:194
 msgid "URL"
 msgstr ""
 
-#: inc/config.class.php:192
+#: inc/config.class.php:196
 msgid "By ID"
 msgstr ""
 
-#: inc/config.class.php:193
+#: inc/config.class.php:197
 msgid "By serial number"
 msgstr ""
 
-#: inc/config.class.php:198
+#: inc/config.class.php:202
 msgid "Text display options"
 msgstr "문자 표시 옵션"
 
-#: inc/config.class.php:200
+#: inc/config.class.php:204
 msgid "Text size"
 msgstr "문자 사이즈"
 
-#: inc/config.class.php:203
+#: inc/config.class.php:207
 msgid "Text spacing between lines"
 msgstr ""
 
-#: inc/config.class.php:265
+#: inc/config.class.php:269
 msgid "code39"
 msgstr "code39"
 
-#: inc/config.class.php:266
+#: inc/config.class.php:270
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:267
+#: inc/config.class.php:271
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:268
+#: inc/config.class.php:272
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:269
+#: inc/config.class.php:273
 msgid "postnet"
 msgstr "포스트넷"
 
-#: inc/config.class.php:270
+#: inc/config.class.php:274
 msgid "upca"
 msgstr "upca"
 
-#: inc/config.class.php:271
+#: inc/config.class.php:275
 msgid "QRcode"
 msgstr "QR코드"

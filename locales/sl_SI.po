@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-25 12:33+0000\n"
+"POT-Creation-Date: 2021-07-22 10:08+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Cédric Anne, 2018\n"
 "Language-Team: Slovenian (Slovenia) (https://www.transifex.com/pluginsGLPI/teams/73419/sl_SI/)\n"
@@ -43,6 +43,10 @@ msgstr "Ustvarjene datoteke"
 #: front/config.form.php:56
 msgid "The cache has been emptied."
 msgstr "Cache je bila izpraznjena."
+
+#: front/config.form.php:61
+msgid "The logo has been removed."
+msgstr ""
 
 #: inc/profile.class.php:115
 msgid "Manage configuration"
@@ -269,12 +273,12 @@ msgid "Type"
 msgstr "Vrsta"
 
 #: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:147
+#: inc/config.class.php:151
 msgid "Page size"
 msgstr "Velikost strani"
 
 #: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:150
+#: inc/config.class.php:154
 msgid "Orientation"
 msgstr "Usmerjenost"
 
@@ -326,94 +330,98 @@ msgstr "Izpraznitev zaèasnega pomnilnika"
 msgid "Company logo"
 msgstr "Logotip podjetja"
 
-#: inc/config.class.php:154
+#: inc/config.class.php:100
+msgid "Delete the logo"
+msgstr ""
+
+#: inc/config.class.php:158
 msgid "Margins"
 msgstr "Robovi"
 
-#: inc/config.class.php:156
+#: inc/config.class.php:160
 msgid "Top"
 msgstr "Vrh"
 
-#: inc/config.class.php:159
+#: inc/config.class.php:163
 msgid "Bottom"
 msgstr "Dno"
 
-#: inc/config.class.php:164
+#: inc/config.class.php:168
 msgid "Left"
 msgstr "Levo"
 
-#: inc/config.class.php:167
+#: inc/config.class.php:171
 msgid "Right"
 msgstr "Pravico"
 
-#: inc/config.class.php:172
+#: inc/config.class.php:176
 msgid "Inner horizontal"
 msgstr "Notranje vodoravne"
 
-#: inc/config.class.php:175
+#: inc/config.class.php:179
 msgid "Inner vertical"
 msgstr "Notranje navpično"
 
-#: inc/config.class.php:179
+#: inc/config.class.php:183
 msgid "Barcodes sizes"
 msgstr "Velikosti črtne kode"
 
-#: inc/config.class.php:181
+#: inc/config.class.php:185
 msgid "Maximum width"
 msgstr "Največja širina"
 
-#: inc/config.class.php:184
+#: inc/config.class.php:188
 msgid "Maximum height"
 msgstr "Največja višina"
 
-#: inc/config.class.php:190
+#: inc/config.class.php:194
 msgid "URL"
 msgstr ""
 
-#: inc/config.class.php:192
+#: inc/config.class.php:196
 msgid "By ID"
 msgstr ""
 
-#: inc/config.class.php:193
+#: inc/config.class.php:197
 msgid "By serial number"
 msgstr ""
 
-#: inc/config.class.php:198
+#: inc/config.class.php:202
 msgid "Text display options"
 msgstr ""
 
-#: inc/config.class.php:200
+#: inc/config.class.php:204
 msgid "Text size"
 msgstr ""
 
-#: inc/config.class.php:203
+#: inc/config.class.php:207
 msgid "Text spacing between lines"
 msgstr ""
 
-#: inc/config.class.php:265
+#: inc/config.class.php:269
 msgid "code39"
 msgstr "code39"
 
-#: inc/config.class.php:266
+#: inc/config.class.php:270
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:267
+#: inc/config.class.php:271
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:268
+#: inc/config.class.php:272
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:269
+#: inc/config.class.php:273
 msgid "postnet"
 msgstr "POSTNET"
 
-#: inc/config.class.php:270
+#: inc/config.class.php:274
 msgid "upca"
 msgstr "upca"
 
-#: inc/config.class.php:271
+#: inc/config.class.php:275
 msgid "QRcode"
 msgstr "QRcode"
