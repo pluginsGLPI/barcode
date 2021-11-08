@@ -54,6 +54,7 @@ if (isset($_GET['file'])) {
       echo "Security attack !!!";
       Toolbox::logDebug("[Plugin barcode][security][sendfile] ".
                $_SESSION["glpiname"]." try to get a non standard file : ".$filename);
+      exit;
    }
 
    $file = $docDir.'/'.$filename;
