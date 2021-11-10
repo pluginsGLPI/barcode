@@ -53,7 +53,7 @@ class PluginBarcodeConfig extends CommonDBTM {
 
 
 
-   function showForm($p_type = null) {
+   function showForm($ID, array $options = []) {
       global $CFG_GLPI;
 
       $pbBarcode   = new PluginBarcodeBarcode();
