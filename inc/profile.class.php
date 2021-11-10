@@ -69,27 +69,25 @@ class PluginBarcodeProfile extends Profile {
     *
     * @return nothing
     **/
-   function showForm($profiles_id = 0, $openform = true, $closeform = true) {
+   function showForm($ID, array $options = []) {
 
       echo "<div class='firstbloc'>";
-      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))
-          && $openform) {
+      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))) {
          $profile = new Profile();
          echo "<form method='post' action='".$profile->getFormURL()."'>";
       }
 
       $profile = new Profile();
-      $profile->getFromDB($profiles_id);
+      $profile->getFromDB($ID);
 
       $rights = $this->getAllRights();
       $profile->displayRightsChoiceMatrix($rights, ['canedit'       => $canedit,
                                                     'default_class' => 'tab_bg_2',
                                                     'title'         => __('Barcode', 'barcode')
                                                    ]);
-      if ($canedit
-          && $closeform) {
+      if ($canedit) {
          echo "<div class='center'>";
-         echo Html::hidden('id', ['value' => $profiles_id]);
+         echo Html::hidden('id', ['value' => $ID]);
          echo Html::submit(_sx('button', 'Save'), ['name' => 'update']);
          echo "</div>\n";
          Html::closeForm();

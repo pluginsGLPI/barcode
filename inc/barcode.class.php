@@ -434,13 +434,12 @@ class PluginBarcodeBarcode {
    function create($p_code, $p_type, $p_ext) {
       //TODO : filtre sur le type
       if (!file_exists($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext)) {
-         plugin_barcode_disableDebug();
          ob_start();
          $barcode = new Image_Barcode();
-         $resImg  = imagepng($barcode->draw($p_code, $p_type, $p_ext, false));
-         $img     = ob_get_contents();
-         ob_end_clean();
-         plugin_barcode_reenableusemode();
+         $resImg  = @imagepng(
+            @$barcode->draw($p_code, $p_type, $p_ext, false)
+         );
+         $img     = ob_get_clean();
          file_put_contents($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext, $img);
          if (!$resImg) {
             return false;
