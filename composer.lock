@@ -220,16 +220,16 @@
         },
         {
             "name": "pear/pear",
-            "version": "v1.10.12",
+            "version": "v1.10.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core.git",
-                "reference": "6162562db95379bcfa906b569ecd0c85d4ee7364"
+                "reference": "edb8e0cf49755b1c0528c46edaa0238c63cc4d47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core/zipball/6162562db95379bcfa906b569ecd0c85d4ee7364",
-                "reference": "6162562db95379bcfa906b569ecd0c85d4ee7364",
+                "url": "https://api.github.com/repos/pear/pear-core/zipball/edb8e0cf49755b1c0528c46edaa0238c63cc4d47",
+                "reference": "edb8e0cf49755b1c0528c46edaa0238c63cc4d47",
                 "shasum": ""
             },
             "require": {
@@ -315,7 +315,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR",
                 "source": "https://github.com/pear/PEAR"
             },
-            "time": "2020-04-19T18:01:13+00:00"
+            "time": "2021-08-10T22:24:49+00:00"
         },
         {
             "name": "pear/structures_graph",
@@ -1293,5 +1293,5 @@
     "platform-overrides": {
         "php": "7.2.0"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
