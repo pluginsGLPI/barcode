@@ -15,7 +15,10 @@
         "platform": {
             "php": "7.4.0"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
     },
     "repositories": [
         {
