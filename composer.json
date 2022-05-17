@@ -62,7 +62,7 @@
     "extra": {
         "patches": {
             "pear/image_barcode": {
-                "Fix error due to assignation as reference from new operation": "./patch/fix-pear-image-barcode.patch"
+                "Fix PHP 7.x / 8.x compatibility": "./patch/fix-pear-image-barcode.patch"
             }
         }
     }
