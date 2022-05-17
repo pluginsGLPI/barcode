@@ -47,12 +47,6 @@ class PluginBarcodeConfig extends CommonDBTM {
 
    static $rightname = 'plugin_barcode_config';
 
-   function __construct() {
-      $this->table = "glpi_plugin_barcode_config";
-   }
-
-
-
    function showForm($ID, array $options = []) {
       global $CFG_GLPI;
 
