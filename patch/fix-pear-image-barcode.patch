@@ -9,4 +9,137 @@
      
  	if (isset($obj->_barcodeheight)) $obj->_barcodeheight = $height;
  	if (isset($obj->_barwidth)) $obj->_barwidth = $barwidth;
-
+--- Image/Barcode/code128.php
++++ Image/Barcode/code128.php
+@@ -42,9 +42,7 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+ 
+-require_once "Image/Barcode.php";
+-
+-class Image_Barcode_code128 extends Image_Barcode
++class Image_Barcode_code128
+ {
+     var $_type = 'code128';
+     var $_barcodeheight = 60;
+--- Image/Barcode/Code39.php
++++ Image/Barcode/Code39.php
+@@ -25,8 +25,6 @@
+  */
+ 
+ 
+-require_once "Image/Barcode.php";
+-
+ 
+ if (!function_exists('str_split')) {
+     require_once 'PHP/Compat.php';
+@@ -47,7 +45,7 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  * @since      Image_Barcode 0.5
+  */
+-class Image_Barcode_Code39 extends Image_Barcode
++class Image_Barcode_Code39
+ {
+     /**
+      * Barcode type
+--- Image/Barcode/ean13.php
++++ Image/Barcode/ean13.php
+@@ -23,8 +23,6 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+ 
+-require_once 'Image/Barcode.php';
+-
+ /**
+  * Image_Barcode_ean13 class
+  *
+@@ -39,7 +37,7 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  * @since      Image_Barcode 0.4
+  */
+-class Image_Barcode_ean13 extends Image_Barcode
++class Image_Barcode_ean13
+ {
+     /**
+      * Barcode type
+--- Image/Barcode/ean8.php
++++ Image/Barcode/ean8.php
+@@ -24,8 +24,6 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+ 
+-require_once 'Image/Barcode.php';
+-
+ /**
+  * Image_Barcode_ean8 class
+  *
+@@ -40,7 +28,7 @@
+  * @version    Release: @package_version@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+-class Image_Barcode_ean8 extends Image_Barcode
++class Image_Barcode_ean8
+ {
+     /**
+      * Barcode type
+--- Image/Barcode/int25.php
++++ Image/Barcode/int25.php
+@@ -23,9 +23,6 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+ 
+-require_once "PEAR.php";
+-require_once "Image/Barcode.php";
+-
+ 
+ /**
+  * Image_Barcode_int25 class
+@@ -40,7 +37,7 @@
+  * @version    Release: @package_version@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+-class Image_Barcode_int25 extends Image_Barcode
++class Image_Barcode_int25
+ {
+     /**
+      * Barcode type
+--- Image/Barcode/postnet.php
++++ Image/Barcode/postnet.php
+@@ -36,8 +36,6 @@
+   *  density:        22 bars/inch    = 8.66 bars/cm
+   */
+ 
+-require_once 'Image/Barcode.php';
+-
+ 
+ /**
+  * Image_Barcode_postnet class
+@@ -52,7 +50,7 @@
+  * @version    CVS: $Id$
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+-class Image_Barcode_postnet extends Image_Barcode
++class Image_Barcode_postnet
+ {
+     /**
+      * Barcode type
+--- Image/Barcode/upca.php
++++ Image/Barcode/upca.php
+@@ -24,8 +24,6 @@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+ 
+-require_once 'Image/Barcode.php';
+-
+ /**
+  * Image_Barcode_upca class
+  *
+@@ -47,7 +45,7 @@
+  * @version    Release: @package_version@
+  * @link       http://pear.php.net/package/Image_Barcode
+  */
+-class Image_Barcode_upca extends Image_Barcode
++class Image_Barcode_upca
+ {
+     /**
+      * Barcode type
