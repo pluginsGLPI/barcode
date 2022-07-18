@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Cédric Anne, 2018
-# liAnGjiA <liangjia@qq.com>, 2020
+# liAnGjiA <liangjia@qq.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-22 10:08+0000\n"
+"POT-Creation-Date: 2022-07-18 07:08+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
-"Last-Translator: liAnGjiA <liangjia@qq.com>, 2020\n"
+"Last-Translator: liAnGjiA <liangjia@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/pluginsGLPI/teams/73419/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,47 +22,13 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
-#: inc/profile.class.php:50 inc/profile.class.php:87
-msgid "Barcode"
-msgstr "条码"
-
-#: hook.php:46
-msgid "Print barcodes"
-msgstr "条码打印"
-
-#: hook.php:49
-msgid "Print QRcodes"
-msgstr "二维码打印"
-
-#: front/barcode.form.php:62 inc/barcode.class.php:514
-#: inc/qrcode.class.php:409
-msgid "Generated file"
-msgstr "生成文件"
-
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr " 缓存已被清空。 "
-
-#: front/config.form.php:61
-msgid "The logo has been removed."
-msgstr ""
-
-#: inc/profile.class.php:115
-msgid "Manage configuration"
-msgstr "管理配置"
-
-#: inc/profile.class.php:119
-msgid "Generation of barcode"
-msgstr "生成条码"
+#: inc/barcode.class.php:78
+msgid "2A0"
+msgstr "2A0"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
 msgstr "4A0"
-
-#: inc/barcode.class.php:78
-msgid "2A0"
-msgstr "2A0"
 
 #: inc/barcode.class.php:79
 msgid "A0"
@@ -71,6 +37,10 @@ msgstr "A0"
 #: inc/barcode.class.php:80
 msgid "A1"
 msgstr "A1"
+
+#: inc/barcode.class.php:89
+msgid "A10"
+msgstr "A10"
 
 #: inc/barcode.class.php:81
 msgid "A2"
@@ -104,10 +74,6 @@ msgstr "A8"
 msgid "A9"
 msgstr "A9"
 
-#: inc/barcode.class.php:89
-msgid "A10"
-msgstr "A10"
-
 #: inc/barcode.class.php:90
 msgid "B0"
 msgstr "B0"
@@ -115,6 +81,10 @@ msgstr "B0"
 #: inc/barcode.class.php:91
 msgid "B1"
 msgstr "B1"
+
+#: inc/barcode.class.php:100
+msgid "B10"
+msgstr "B10"
 
 #: inc/barcode.class.php:92
 msgid "B2"
@@ -148,9 +118,30 @@ msgstr "B8"
 msgid "B9"
 msgstr "B9"
 
-#: inc/barcode.class.php:100
-msgid "B10"
-msgstr "B10"
+#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
+#: inc/profile.class.php:50 inc/profile.class.php:86
+msgid "Barcode"
+msgstr "条码"
+
+#: inc/config.class.php:61
+msgid "Barcode plugin configuration"
+msgstr "条码插件配置"
+
+#: inc/config.class.php:177
+msgid "Barcodes sizes"
+msgstr "条码大小"
+
+#: inc/config.class.php:157
+msgid "Bottom"
+msgstr "按钮"
+
+#: inc/config.class.php:190
+msgid "By ID"
+msgstr "按 ID"
+
+#: inc/config.class.php:191
+msgid "By serial number"
+msgstr "按SN序列号"
 
 #: inc/barcode.class.php:101
 msgid "C0"
@@ -159,6 +150,10 @@ msgstr "C0"
 #: inc/barcode.class.php:102
 msgid "C1"
 msgstr "C1"
+
+#: inc/barcode.class.php:111
+msgid "C10"
+msgstr "C10"
 
 #: inc/barcode.class.php:103
 msgid "C2"
@@ -192,9 +187,136 @@ msgstr "C8"
 msgid "C9"
 msgstr "C9"
 
-#: inc/barcode.class.php:111
-msgid "C10"
-msgstr "C10"
+#: inc/barcode.class.php:159
+msgid "Code"
+msgstr "Code"
+
+#: inc/config.class.php:82
+msgid "Company logo"
+msgstr "公司LOGO"
+
+#: inc/barcode.class.php:179 inc/barcode.class.php:257
+msgid "Create"
+msgstr "创建"
+
+#: inc/config.class.php:94
+msgid "Delete the logo"
+msgstr "删除LOGO"
+
+#: inc/barcode.class.php:240
+msgid "Display border"
+msgstr "边框可见"
+
+#: inc/barcode.class.php:248
+msgid "Display labels"
+msgstr "显示表格"
+
+#: inc/barcode.class.php:124
+msgid "EXECUTIVE"
+msgstr "EXECUTIVE"
+
+#: inc/config.class.php:78
+msgid "Empty the cache"
+msgstr "清空缓存"
+
+#: inc/barcode.class.php:125
+msgid "FOLIO"
+msgstr "FOLIO"
+
+#: inc/config.class.php:66
+msgid "General configuration"
+msgstr "一般设置"
+
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:411
+msgid "Generated file"
+msgstr "生成文件"
+
+#: inc/barcode.class.php:157
+msgid "Generation"
+msgstr "生成"
+
+#: inc/profile.class.php:117
+msgid "Generation of barcode"
+msgstr "生成条码"
+
+#: inc/config.class.php:170
+msgid "Inner horizontal"
+msgstr "横向"
+
+#: inc/config.class.php:173
+msgid "Inner vertical"
+msgstr "纵向"
+
+#: inc/barcode.class.php:194
+msgid "It will generate only elements have defined field:"
+msgstr "它只生成具有定义字段的元素："
+
+#: inc/barcode.class.php:123
+msgid "LEGAL"
+msgstr "LEGAL"
+
+#: inc/barcode.class.php:122
+msgid "LETTER"
+msgstr "LETTER"
+
+#: inc/barcode.class.php:136
+msgid "Landscape"
+msgstr "横向"
+
+#: inc/config.class.php:162
+msgid "Left"
+msgstr "左边"
+
+#: inc/profile.class.php:113
+msgid "Manage configuration"
+msgstr "管理配置"
+
+#: inc/config.class.php:152
+msgid "Margins"
+msgstr "边框"
+
+#: inc/config.class.php:182
+msgid "Maximum height"
+msgstr "最大高度"
+
+#: inc/config.class.php:179
+msgid "Maximum width"
+msgstr "最大宽度"
+
+#: inc/barcode.class.php:230
+msgid "Not use first xx barcodes"
+msgstr "条码首字符不使用 xx"
+
+#: inc/barcode.class.php:174
+msgid "Number of copies"
+msgstr "副本数量"
+
+#: inc/barcode.class.php:169 inc/barcode.class.php:236
+#: inc/config.class.php:148
+msgid "Orientation"
+msgstr "方向"
+
+#: inc/barcode.class.php:166 inc/barcode.class.php:226
+#: inc/config.class.php:145
+msgid "Page size"
+msgstr "纸张大小"
+
+#: inc/barcode.class.php:135
+msgid "Portrait"
+msgstr "竖向"
+
+#: hook.php:49
+msgid "Print QRcodes"
+msgstr "二维码打印"
+
+#: hook.php:46
+msgid "Print barcodes"
+msgstr "条码打印"
+
+#: inc/config.class.php:269
+msgid "QRcode"
+msgstr "二维码"
 
 #: inc/barcode.class.php:112
 msgid "RA0"
@@ -216,6 +338,10 @@ msgstr "RA3"
 msgid "RA4"
 msgstr "RA4"
 
+#: inc/config.class.php:165
+msgid "Right"
+msgstr "右边"
+
 #: inc/barcode.class.php:117
 msgid "SRA0"
 msgstr "SRA0"
@@ -236,192 +362,66 @@ msgstr "SRA3"
 msgid "SRA4"
 msgstr "SRA4"
 
-#: inc/barcode.class.php:122
-msgid "LETTER"
-msgstr "LETTER"
+#: inc/config.class.php:196
+msgid "Text display options"
+msgstr "文本显示选项"
 
-#: inc/barcode.class.php:123
-msgid "LEGAL"
-msgstr "LEGAL"
+#: inc/config.class.php:198
+msgid "Text size"
+msgstr "文本大小"
 
-#: inc/barcode.class.php:124
-msgid "EXECUTIVE"
-msgstr "EXECUTIVE"
+#: inc/config.class.php:201
+msgid "Text spacing between lines"
+msgstr "文本间距"
 
-#: inc/barcode.class.php:125
-msgid "FOLIO"
-msgstr "FOLIO"
-
-#: inc/barcode.class.php:135
-msgid "Portrait"
-msgstr "竖向"
-
-#: inc/barcode.class.php:136
-msgid "Landscape"
-msgstr "横向"
-
-#: inc/barcode.class.php:157
-msgid "Generation"
-msgstr "生成"
-
-#: inc/barcode.class.php:159
-msgid "Code"
-msgstr "Code"
-
-#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
-msgid "Type"
-msgstr "类型"
-
-#: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:151
-msgid "Page size"
-msgstr "纸张大小"
-
-#: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:154
-msgid "Orientation"
-msgstr "方向"
-
-#: inc/barcode.class.php:174
-msgid "Number of copies"
-msgstr "副本数量"
-
-#: inc/barcode.class.php:179 inc/barcode.class.php:257
-msgid "Create"
-msgstr "创建"
-
-#: inc/barcode.class.php:194
-msgid "It will generate only elements have defined field:"
-msgstr "它只生成具有定义字段的元素："
-
-#: inc/barcode.class.php:196
-msgid "Ticket number"
-msgstr "工单号码"
-
-#: inc/barcode.class.php:230
-msgid "Not use first xx barcodes"
-msgstr "条码首字符不使用 xx"
-
-#: inc/barcode.class.php:240
-msgid "Display border"
-msgstr "边框可见"
-
-#: inc/barcode.class.php:248
-msgid "Display labels"
-msgstr ""
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr " 缓存已被清空。 "
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "部分产品条码生成错误。"
 
-#: inc/config.class.php:67
-msgid "Barcode plugin configuration"
-msgstr "条码插件配置"
+#: front/config.form.php:61
+msgid "The logo has been removed."
+msgstr "LOGO已被移除。"
 
-#: inc/config.class.php:72
-msgid "General configuration"
-msgstr "一般设置"
+#: inc/barcode.class.php:196
+msgid "Ticket number"
+msgstr "工单号码"
 
-#: inc/config.class.php:84
-msgid "Empty the cache"
-msgstr "清空缓存"
-
-#: inc/config.class.php:88
-msgid "Company logo"
-msgstr "公司LOGO"
-
-#: inc/config.class.php:100
-msgid "Delete the logo"
-msgstr ""
-
-#: inc/config.class.php:158
-msgid "Margins"
-msgstr "边框"
-
-#: inc/config.class.php:160
+#: inc/config.class.php:154
 msgid "Top"
 msgstr "上部"
 
-#: inc/config.class.php:163
-msgid "Bottom"
-msgstr "按钮"
-
-#: inc/config.class.php:168
-msgid "Left"
-msgstr "左边"
-
-#: inc/config.class.php:171
-msgid "Right"
-msgstr "右边"
-
-#: inc/config.class.php:176
-msgid "Inner horizontal"
-msgstr "横向"
-
-#: inc/config.class.php:179
-msgid "Inner vertical"
-msgstr "纵向"
-
-#: inc/config.class.php:183
-msgid "Barcodes sizes"
-msgstr "条码大小"
-
-#: inc/config.class.php:185
-msgid "Maximum width"
-msgstr "最大宽度"
+#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:70
+msgid "Type"
+msgstr "类型"
 
 #: inc/config.class.php:188
-msgid "Maximum height"
-msgstr "最大高度"
-
-#: inc/config.class.php:194
 msgid "URL"
-msgstr ""
+msgstr "URL链接"
 
-#: inc/config.class.php:196
-msgid "By ID"
-msgstr ""
-
-#: inc/config.class.php:197
-msgid "By serial number"
-msgstr ""
-
-#: inc/config.class.php:202
-msgid "Text display options"
-msgstr ""
-
-#: inc/config.class.php:204
-msgid "Text size"
-msgstr ""
-
-#: inc/config.class.php:207
-msgid "Text spacing between lines"
-msgstr ""
-
-#: inc/config.class.php:269
-msgid "code39"
-msgstr "code39"
-
-#: inc/config.class.php:270
+#: inc/config.class.php:264
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:271
+#: inc/config.class.php:263
+msgid "code39"
+msgstr "code39"
+
+#: inc/config.class.php:265
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:272
+#: inc/config.class.php:266
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:273
+#: inc/config.class.php:267
 msgid "postnet"
 msgstr "postnet"
 
-#: inc/config.class.php:274
+#: inc/config.class.php:268
 msgid "upca"
 msgstr "upca"
-
-#: inc/config.class.php:275
-msgid "QRcode"
-msgstr "二维码"

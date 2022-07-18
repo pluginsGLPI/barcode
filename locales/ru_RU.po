@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-22 10:08+0000\n"
+"POT-Creation-Date: 2022-07-18 07:08+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
 "Last-Translator: Alexander Litvin <litvinag@gmail.com>, 2021\n"
 "Language-Team: Russian (Russia) (https://www.transifex.com/pluginsGLPI/teams/73419/ru_RU/)\n"
@@ -25,47 +25,13 @@ msgstr ""
 "Language: ru_RU\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
-#: inc/profile.class.php:50 inc/profile.class.php:87
-msgid "Barcode"
-msgstr "Штрих-код"
-
-#: hook.php:46
-msgid "Print barcodes"
-msgstr "Печать штрих-кодов"
-
-#: hook.php:49
-msgid "Print QRcodes"
-msgstr "Печать QR-кодов"
-
-#: front/barcode.form.php:62 inc/barcode.class.php:514
-#: inc/qrcode.class.php:409
-msgid "Generated file"
-msgstr "Сгенерированный файл"
-
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr "Кэш был очищен."
-
-#: front/config.form.php:61
-msgid "The logo has been removed."
-msgstr "Логотип удален"
-
-#: inc/profile.class.php:115
-msgid "Manage configuration"
-msgstr "Управление конфигурацией"
-
-#: inc/profile.class.php:119
-msgid "Generation of barcode"
-msgstr "Генерация штрихкодов"
+#: inc/barcode.class.php:78
+msgid "2A0"
+msgstr "2A0"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
 msgstr "4A0"
-
-#: inc/barcode.class.php:78
-msgid "2A0"
-msgstr "2A0"
 
 #: inc/barcode.class.php:79
 msgid "A0"
@@ -74,6 +40,10 @@ msgstr "A0"
 #: inc/barcode.class.php:80
 msgid "A1"
 msgstr "А1"
+
+#: inc/barcode.class.php:89
+msgid "A10"
+msgstr "A10"
 
 #: inc/barcode.class.php:81
 msgid "A2"
@@ -107,10 +77,6 @@ msgstr "A8"
 msgid "A9"
 msgstr "A9"
 
-#: inc/barcode.class.php:89
-msgid "A10"
-msgstr "A10"
-
 #: inc/barcode.class.php:90
 msgid "B0"
 msgstr "B0"
@@ -118,6 +84,10 @@ msgstr "B0"
 #: inc/barcode.class.php:91
 msgid "B1"
 msgstr "B1"
+
+#: inc/barcode.class.php:100
+msgid "B10"
+msgstr "B10"
 
 #: inc/barcode.class.php:92
 msgid "B2"
@@ -151,9 +121,30 @@ msgstr "B8"
 msgid "B9"
 msgstr "B9"
 
-#: inc/barcode.class.php:100
-msgid "B10"
-msgstr "B10"
+#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
+#: inc/profile.class.php:50 inc/profile.class.php:86
+msgid "Barcode"
+msgstr "Штрих-код"
+
+#: inc/config.class.php:61
+msgid "Barcode plugin configuration"
+msgstr "Настройки плагина штрих-кода"
+
+#: inc/config.class.php:177
+msgid "Barcodes sizes"
+msgstr "Размеры штрих-кода"
+
+#: inc/config.class.php:157
+msgid "Bottom"
+msgstr "Снизу"
+
+#: inc/config.class.php:190
+msgid "By ID"
+msgstr "По ID"
+
+#: inc/config.class.php:191
+msgid "By serial number"
+msgstr "По серийному номеру"
 
 #: inc/barcode.class.php:101
 msgid "C0"
@@ -162,6 +153,10 @@ msgstr "C0"
 #: inc/barcode.class.php:102
 msgid "C1"
 msgstr "C1"
+
+#: inc/barcode.class.php:111
+msgid "C10"
+msgstr "C10"
 
 #: inc/barcode.class.php:103
 msgid "C2"
@@ -195,9 +190,136 @@ msgstr "C8"
 msgid "C9"
 msgstr "C9"
 
-#: inc/barcode.class.php:111
-msgid "C10"
-msgstr "C10"
+#: inc/barcode.class.php:159
+msgid "Code"
+msgstr "Код"
+
+#: inc/config.class.php:82
+msgid "Company logo"
+msgstr "Логотип компании"
+
+#: inc/barcode.class.php:179 inc/barcode.class.php:257
+msgid "Create"
+msgstr "Создать"
+
+#: inc/config.class.php:94
+msgid "Delete the logo"
+msgstr "Удалить логотип"
+
+#: inc/barcode.class.php:240
+msgid "Display border"
+msgstr "Отображение границы"
+
+#: inc/barcode.class.php:248
+msgid "Display labels"
+msgstr "Отображение этикеток"
+
+#: inc/barcode.class.php:124
+msgid "EXECUTIVE"
+msgstr "ИСПОЛНИТЕЛЬНЫЕ"
+
+#: inc/config.class.php:78
+msgid "Empty the cache"
+msgstr "Очистить кэш"
+
+#: inc/barcode.class.php:125
+msgid "FOLIO"
+msgstr "ФОЛИО"
+
+#: inc/config.class.php:66
+msgid "General configuration"
+msgstr "Общие настройки"
+
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:411
+msgid "Generated file"
+msgstr "Сгенерированный файл"
+
+#: inc/barcode.class.php:157
+msgid "Generation"
+msgstr "Генерирование"
+
+#: inc/profile.class.php:117
+msgid "Generation of barcode"
+msgstr "Генерация штрихкодов"
+
+#: inc/config.class.php:170
+msgid "Inner horizontal"
+msgstr "Внутренние горизонтальные"
+
+#: inc/config.class.php:173
+msgid "Inner vertical"
+msgstr "Внутренние вертикальные"
+
+#: inc/barcode.class.php:194
+msgid "It will generate only elements have defined field:"
+msgstr "Генерирование элементов только определенного поля:"
+
+#: inc/barcode.class.php:123
+msgid "LEGAL"
+msgstr "ЮРИДИЧЕСКИЕ"
+
+#: inc/barcode.class.php:122
+msgid "LETTER"
+msgstr "ПИСЬМО"
+
+#: inc/barcode.class.php:136
+msgid "Landscape"
+msgstr "Альбомная"
+
+#: inc/config.class.php:162
+msgid "Left"
+msgstr "Слева"
+
+#: inc/profile.class.php:113
+msgid "Manage configuration"
+msgstr "Управление конфигурацией"
+
+#: inc/config.class.php:152
+msgid "Margins"
+msgstr "Поля"
+
+#: inc/config.class.php:182
+msgid "Maximum height"
+msgstr "Максимальная высота"
+
+#: inc/config.class.php:179
+msgid "Maximum width"
+msgstr "Максимальная ширина"
+
+#: inc/barcode.class.php:230
+msgid "Not use first xx barcodes"
+msgstr "Не использовать первые xx штрих-кодов"
+
+#: inc/barcode.class.php:174
+msgid "Number of copies"
+msgstr "Количество копий"
+
+#: inc/barcode.class.php:169 inc/barcode.class.php:236
+#: inc/config.class.php:148
+msgid "Orientation"
+msgstr "Ориентация"
+
+#: inc/barcode.class.php:166 inc/barcode.class.php:226
+#: inc/config.class.php:145
+msgid "Page size"
+msgstr "Размер страницы"
+
+#: inc/barcode.class.php:135
+msgid "Portrait"
+msgstr "Портретная"
+
+#: hook.php:49
+msgid "Print QRcodes"
+msgstr "Печать QR-кодов"
+
+#: hook.php:46
+msgid "Print barcodes"
+msgstr "Печать штрих-кодов"
+
+#: inc/config.class.php:269
+msgid "QRcode"
+msgstr "QRcode"
 
 #: inc/barcode.class.php:112
 msgid "RA0"
@@ -219,6 +341,10 @@ msgstr "RA3"
 msgid "RA4"
 msgstr "RA4"
 
+#: inc/config.class.php:165
+msgid "Right"
+msgstr "Справа"
+
 #: inc/barcode.class.php:117
 msgid "SRA0"
 msgstr "SRA0"
@@ -239,192 +365,66 @@ msgstr "SRA3"
 msgid "SRA4"
 msgstr "SRA4"
 
-#: inc/barcode.class.php:122
-msgid "LETTER"
-msgstr "ПИСЬМО"
+#: inc/config.class.php:196
+msgid "Text display options"
+msgstr "Настройки отображения текста"
 
-#: inc/barcode.class.php:123
-msgid "LEGAL"
-msgstr "ЮРИДИЧЕСКИЕ"
+#: inc/config.class.php:198
+msgid "Text size"
+msgstr "Размер текста"
 
-#: inc/barcode.class.php:124
-msgid "EXECUTIVE"
-msgstr "ИСПОЛНИТЕЛЬНЫЕ"
+#: inc/config.class.php:201
+msgid "Text spacing between lines"
+msgstr "Межстрочный интервал"
 
-#: inc/barcode.class.php:125
-msgid "FOLIO"
-msgstr "ФОЛИО"
-
-#: inc/barcode.class.php:135
-msgid "Portrait"
-msgstr "Портретная"
-
-#: inc/barcode.class.php:136
-msgid "Landscape"
-msgstr "Альбомная"
-
-#: inc/barcode.class.php:157
-msgid "Generation"
-msgstr "Генерирование"
-
-#: inc/barcode.class.php:159
-msgid "Code"
-msgstr "Код"
-
-#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
-msgid "Type"
-msgstr "Тип"
-
-#: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:151
-msgid "Page size"
-msgstr "Размер страницы"
-
-#: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:154
-msgid "Orientation"
-msgstr "Ориентация"
-
-#: inc/barcode.class.php:174
-msgid "Number of copies"
-msgstr "Количество копий"
-
-#: inc/barcode.class.php:179 inc/barcode.class.php:257
-msgid "Create"
-msgstr "Создать"
-
-#: inc/barcode.class.php:194
-msgid "It will generate only elements have defined field:"
-msgstr "Генерирование элементов только определенного поля:"
-
-#: inc/barcode.class.php:196
-msgid "Ticket number"
-msgstr "Номер заявки"
-
-#: inc/barcode.class.php:230
-msgid "Not use first xx barcodes"
-msgstr "Не использовать первые xx штрих-кодов"
-
-#: inc/barcode.class.php:240
-msgid "Display border"
-msgstr "Отображение границы"
-
-#: inc/barcode.class.php:248
-msgid "Display labels"
-msgstr "Отображение этикеток"
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr "Кэш был очищен."
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "Генерирование некоторых штрих-кодов вызвало ошибки."
 
-#: inc/config.class.php:67
-msgid "Barcode plugin configuration"
-msgstr "Настройки плагина штрих-кода"
+#: front/config.form.php:61
+msgid "The logo has been removed."
+msgstr "Логотип удален"
 
-#: inc/config.class.php:72
-msgid "General configuration"
-msgstr "Общие настройки"
+#: inc/barcode.class.php:196
+msgid "Ticket number"
+msgstr "Номер заявки"
 
-#: inc/config.class.php:84
-msgid "Empty the cache"
-msgstr "Очистить кэш"
-
-#: inc/config.class.php:88
-msgid "Company logo"
-msgstr "Логотип компании"
-
-#: inc/config.class.php:100
-msgid "Delete the logo"
-msgstr "Удалить логотип"
-
-#: inc/config.class.php:158
-msgid "Margins"
-msgstr "Поля"
-
-#: inc/config.class.php:160
+#: inc/config.class.php:154
 msgid "Top"
 msgstr "Сверху"
 
-#: inc/config.class.php:163
-msgid "Bottom"
-msgstr "Снизу"
-
-#: inc/config.class.php:168
-msgid "Left"
-msgstr "Слева"
-
-#: inc/config.class.php:171
-msgid "Right"
-msgstr "Справа"
-
-#: inc/config.class.php:176
-msgid "Inner horizontal"
-msgstr "Внутренние горизонтальные"
-
-#: inc/config.class.php:179
-msgid "Inner vertical"
-msgstr "Внутренние вертикальные"
-
-#: inc/config.class.php:183
-msgid "Barcodes sizes"
-msgstr "Размеры штрих-кода"
-
-#: inc/config.class.php:185
-msgid "Maximum width"
-msgstr "Максимальная ширина"
+#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:70
+msgid "Type"
+msgstr "Тип"
 
 #: inc/config.class.php:188
-msgid "Maximum height"
-msgstr "Максимальная высота"
-
-#: inc/config.class.php:194
 msgid "URL"
 msgstr "URL"
 
-#: inc/config.class.php:196
-msgid "By ID"
-msgstr "По ID"
-
-#: inc/config.class.php:197
-msgid "By serial number"
-msgstr "По серийному номеру"
-
-#: inc/config.class.php:202
-msgid "Text display options"
-msgstr "Настройки отображения текста"
-
-#: inc/config.class.php:204
-msgid "Text size"
-msgstr "Размер текста"
-
-#: inc/config.class.php:207
-msgid "Text spacing between lines"
-msgstr "Межстрочный интервал"
-
-#: inc/config.class.php:269
-msgid "code39"
-msgstr "Code39"
-
-#: inc/config.class.php:270
+#: inc/config.class.php:264
 msgid "code128"
 msgstr "Code128"
 
-#: inc/config.class.php:271
+#: inc/config.class.php:263
+msgid "code39"
+msgstr "Code39"
+
+#: inc/config.class.php:265
 msgid "ean13"
 msgstr "EAN13"
 
-#: inc/config.class.php:272
+#: inc/config.class.php:266
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:273
+#: inc/config.class.php:267
 msgid "postnet"
 msgstr "POSTNET"
 
-#: inc/config.class.php:274
+#: inc/config.class.php:268
 msgid "upca"
 msgstr "UPCA"
-
-#: inc/config.class.php:275
-msgid "QRcode"
-msgstr "QRcode"

@@ -4,18 +4,18 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# SeongHyeon Cho <jaymz9634@gmail.com>, 2017
 # Cédric Anne, 2018
 # Han Seonghyeon <mirsw@mirtec.com>, 2021
+# SeongHyeon Cho <jaymz9634@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-22 10:08+0000\n"
+"POT-Creation-Date: 2022-07-18 07:08+0000\n"
 "PO-Revision-Date: 2017-03-02 15:37+0000\n"
-"Last-Translator: Han Seonghyeon <mirsw@mirtec.com>, 2021\n"
+"Last-Translator: SeongHyeon Cho <jaymz9634@gmail.com>, 2022\n"
 "Language-Team: Korean (Korea) (https://www.transifex.com/pluginsGLPI/teams/73419/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,47 +23,13 @@ msgstr ""
 "Language: ko_KR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
-#: inc/profile.class.php:50 inc/profile.class.php:87
-msgid "Barcode"
-msgstr "바코드"
-
-#: hook.php:46
-msgid "Print barcodes"
-msgstr "바코드 출력"
-
-#: hook.php:49
-msgid "Print QRcodes"
-msgstr "QR코드 출력"
-
-#: front/barcode.form.php:62 inc/barcode.class.php:514
-#: inc/qrcode.class.php:409
-msgid "Generated file"
-msgstr "생성된 파일"
-
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr "캐시를 비웠습니다."
-
-#: front/config.form.php:61
-msgid "The logo has been removed."
-msgstr ""
-
-#: inc/profile.class.php:115
-msgid "Manage configuration"
-msgstr "관리 구성"
-
-#: inc/profile.class.php:119
-msgid "Generation of barcode"
-msgstr "바코드 생성"
+#: inc/barcode.class.php:78
+msgid "2A0"
+msgstr "2A0"
 
 #: inc/barcode.class.php:77
 msgid "4A0"
 msgstr "4A0"
-
-#: inc/barcode.class.php:78
-msgid "2A0"
-msgstr "2A0"
 
 #: inc/barcode.class.php:79
 msgid "A0"
@@ -72,6 +38,10 @@ msgstr "A0"
 #: inc/barcode.class.php:80
 msgid "A1"
 msgstr "A1"
+
+#: inc/barcode.class.php:89
+msgid "A10"
+msgstr "A10"
 
 #: inc/barcode.class.php:81
 msgid "A2"
@@ -105,10 +75,6 @@ msgstr "A8"
 msgid "A9"
 msgstr "A9"
 
-#: inc/barcode.class.php:89
-msgid "A10"
-msgstr "A10"
-
 #: inc/barcode.class.php:90
 msgid "B0"
 msgstr "B0"
@@ -116,6 +82,10 @@ msgstr "B0"
 #: inc/barcode.class.php:91
 msgid "B1"
 msgstr "B1"
+
+#: inc/barcode.class.php:100
+msgid "B10"
+msgstr "B10"
 
 #: inc/barcode.class.php:92
 msgid "B2"
@@ -149,9 +119,30 @@ msgstr "B8"
 msgid "B9"
 msgstr "B9"
 
-#: inc/barcode.class.php:100
-msgid "B10"
-msgstr "B10"
+#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
+#: inc/profile.class.php:50 inc/profile.class.php:86
+msgid "Barcode"
+msgstr "바코드"
+
+#: inc/config.class.php:61
+msgid "Barcode plugin configuration"
+msgstr "바코드 플러그인 구성"
+
+#: inc/config.class.php:177
+msgid "Barcodes sizes"
+msgstr "바코드 크기"
+
+#: inc/config.class.php:157
+msgid "Bottom"
+msgstr "하단"
+
+#: inc/config.class.php:190
+msgid "By ID"
+msgstr "ID로"
+
+#: inc/config.class.php:191
+msgid "By serial number"
+msgstr "시리얼 번호로"
 
 #: inc/barcode.class.php:101
 msgid "C0"
@@ -160,6 +151,10 @@ msgstr "C0"
 #: inc/barcode.class.php:102
 msgid "C1"
 msgstr "C1"
+
+#: inc/barcode.class.php:111
+msgid "C10"
+msgstr "C10"
 
 #: inc/barcode.class.php:103
 msgid "C2"
@@ -193,9 +188,136 @@ msgstr "C8"
 msgid "C9"
 msgstr "C9"
 
-#: inc/barcode.class.php:111
-msgid "C10"
-msgstr "C10"
+#: inc/barcode.class.php:159
+msgid "Code"
+msgstr "코드"
+
+#: inc/config.class.php:82
+msgid "Company logo"
+msgstr "회사 로고"
+
+#: inc/barcode.class.php:179 inc/barcode.class.php:257
+msgid "Create"
+msgstr "생성"
+
+#: inc/config.class.php:94
+msgid "Delete the logo"
+msgstr "로고 삭제"
+
+#: inc/barcode.class.php:240
+msgid "Display border"
+msgstr "테두리 표시"
+
+#: inc/barcode.class.php:248
+msgid "Display labels"
+msgstr "라벨 표시"
+
+#: inc/barcode.class.php:124
+msgid "EXECUTIVE"
+msgstr "EXECUTIVE"
+
+#: inc/config.class.php:78
+msgid "Empty the cache"
+msgstr "캐시 비우기"
+
+#: inc/barcode.class.php:125
+msgid "FOLIO"
+msgstr "FOLIO"
+
+#: inc/config.class.php:66
+msgid "General configuration"
+msgstr "일반 구성"
+
+#: front/barcode.form.php:62 inc/barcode.class.php:514
+#: inc/qrcode.class.php:411
+msgid "Generated file"
+msgstr "생성된 파일"
+
+#: inc/barcode.class.php:157
+msgid "Generation"
+msgstr "생성"
+
+#: inc/profile.class.php:117
+msgid "Generation of barcode"
+msgstr "바코드 생성"
+
+#: inc/config.class.php:170
+msgid "Inner horizontal"
+msgstr "내부 가로"
+
+#: inc/config.class.php:173
+msgid "Inner vertical"
+msgstr "내부 세로"
+
+#: inc/barcode.class.php:194
+msgid "It will generate only elements have defined field:"
+msgstr "요소를 정의한 필드만 생성합니다:"
+
+#: inc/barcode.class.php:123
+msgid "LEGAL"
+msgstr "LEGAL"
+
+#: inc/barcode.class.php:122
+msgid "LETTER"
+msgstr "LETTER"
+
+#: inc/barcode.class.php:136
+msgid "Landscape"
+msgstr "가로방향"
+
+#: inc/config.class.php:162
+msgid "Left"
+msgstr "좌측"
+
+#: inc/profile.class.php:113
+msgid "Manage configuration"
+msgstr "관리 구성"
+
+#: inc/config.class.php:152
+msgid "Margins"
+msgstr "여백"
+
+#: inc/config.class.php:182
+msgid "Maximum height"
+msgstr "최대 높이"
+
+#: inc/config.class.php:179
+msgid "Maximum width"
+msgstr "최대 폭"
+
+#: inc/barcode.class.php:230
+msgid "Not use first xx barcodes"
+msgstr "첫 번째 xx 바코드 사용 안 함"
+
+#: inc/barcode.class.php:174
+msgid "Number of copies"
+msgstr "사본 수"
+
+#: inc/barcode.class.php:169 inc/barcode.class.php:236
+#: inc/config.class.php:148
+msgid "Orientation"
+msgstr "방향"
+
+#: inc/barcode.class.php:166 inc/barcode.class.php:226
+#: inc/config.class.php:145
+msgid "Page size"
+msgstr "페이지 크기"
+
+#: inc/barcode.class.php:135
+msgid "Portrait"
+msgstr "세로방향"
+
+#: hook.php:49
+msgid "Print QRcodes"
+msgstr "QR코드 출력"
+
+#: hook.php:46
+msgid "Print barcodes"
+msgstr "바코드 출력"
+
+#: inc/config.class.php:269
+msgid "QRcode"
+msgstr "QR코드"
 
 #: inc/barcode.class.php:112
 msgid "RA0"
@@ -217,6 +339,10 @@ msgstr "RA3"
 msgid "RA4"
 msgstr "RA4"
 
+#: inc/config.class.php:165
+msgid "Right"
+msgstr "우측"
+
 #: inc/barcode.class.php:117
 msgid "SRA0"
 msgstr "SRA0"
@@ -237,192 +363,66 @@ msgstr "SRA3"
 msgid "SRA4"
 msgstr "SRA4"
 
-#: inc/barcode.class.php:122
-msgid "LETTER"
-msgstr "LETTER"
+#: inc/config.class.php:196
+msgid "Text display options"
+msgstr "문자 표시 옵션"
 
-#: inc/barcode.class.php:123
-msgid "LEGAL"
-msgstr "LEGAL"
+#: inc/config.class.php:198
+msgid "Text size"
+msgstr "문자 사이즈"
 
-#: inc/barcode.class.php:124
-msgid "EXECUTIVE"
-msgstr "EXECUTIVE"
+#: inc/config.class.php:201
+msgid "Text spacing between lines"
+msgstr "줄 사이의 텍스트 간격"
 
-#: inc/barcode.class.php:125
-msgid "FOLIO"
-msgstr "FOLIO"
-
-#: inc/barcode.class.php:135
-msgid "Portrait"
-msgstr "세로방향"
-
-#: inc/barcode.class.php:136
-msgid "Landscape"
-msgstr "가로방향"
-
-#: inc/barcode.class.php:157
-msgid "Generation"
-msgstr "생성"
-
-#: inc/barcode.class.php:159
-msgid "Code"
-msgstr "코드"
-
-#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:76
-msgid "Type"
-msgstr "유형"
-
-#: inc/barcode.class.php:166 inc/barcode.class.php:226
-#: inc/config.class.php:151
-msgid "Page size"
-msgstr "페이지 크기"
-
-#: inc/barcode.class.php:169 inc/barcode.class.php:236
-#: inc/config.class.php:154
-msgid "Orientation"
-msgstr "방향"
-
-#: inc/barcode.class.php:174
-msgid "Number of copies"
-msgstr "사본 수"
-
-#: inc/barcode.class.php:179 inc/barcode.class.php:257
-msgid "Create"
-msgstr "생성"
-
-#: inc/barcode.class.php:194
-msgid "It will generate only elements have defined field:"
-msgstr "요소를 정의한 필드만 생성합니다:"
-
-#: inc/barcode.class.php:196
-msgid "Ticket number"
-msgstr "티켓 수"
-
-#: inc/barcode.class.php:230
-msgid "Not use first xx barcodes"
-msgstr "첫 번째 xx 바코드 사용 안 함"
-
-#: inc/barcode.class.php:240
-msgid "Display border"
-msgstr "테두리 표시"
-
-#: inc/barcode.class.php:248
-msgid "Display labels"
-msgstr "라벨 표시"
+#: front/config.form.php:56
+msgid "The cache has been emptied."
+msgstr "캐시를 비웠습니다."
 
 #: inc/barcode.class.php:286
 msgid "The generation of some barcodes produced errors."
 msgstr "몇몇 바코드들의 생성시 오류 발생."
 
-#: inc/config.class.php:67
-msgid "Barcode plugin configuration"
-msgstr "바코드 플러그인 구성"
+#: front/config.form.php:61
+msgid "The logo has been removed."
+msgstr "로고가 제거되었습니다."
 
-#: inc/config.class.php:72
-msgid "General configuration"
-msgstr "일반 구성"
+#: inc/barcode.class.php:196
+msgid "Ticket number"
+msgstr "티켓 수"
 
-#: inc/config.class.php:84
-msgid "Empty the cache"
-msgstr "캐시 비우기"
-
-#: inc/config.class.php:88
-msgid "Company logo"
-msgstr "회사 로고"
-
-#: inc/config.class.php:100
-msgid "Delete the logo"
-msgstr ""
-
-#: inc/config.class.php:158
-msgid "Margins"
-msgstr "여백"
-
-#: inc/config.class.php:160
+#: inc/config.class.php:154
 msgid "Top"
 msgstr "상단"
 
-#: inc/config.class.php:163
-msgid "Bottom"
-msgstr "하단"
-
-#: inc/config.class.php:168
-msgid "Left"
-msgstr "좌측"
-
-#: inc/config.class.php:171
-msgid "Right"
-msgstr "우측"
-
-#: inc/config.class.php:176
-msgid "Inner horizontal"
-msgstr "내부 가로"
-
-#: inc/config.class.php:179
-msgid "Inner vertical"
-msgstr "내부 세로"
-
-#: inc/config.class.php:183
-msgid "Barcodes sizes"
-msgstr "바코드 크기"
-
-#: inc/config.class.php:185
-msgid "Maximum width"
-msgstr "최대 폭"
+#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:70
+msgid "Type"
+msgstr "유형"
 
 #: inc/config.class.php:188
-msgid "Maximum height"
-msgstr "최대 높이"
-
-#: inc/config.class.php:194
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-#: inc/config.class.php:196
-msgid "By ID"
-msgstr ""
-
-#: inc/config.class.php:197
-msgid "By serial number"
-msgstr ""
-
-#: inc/config.class.php:202
-msgid "Text display options"
-msgstr "문자 표시 옵션"
-
-#: inc/config.class.php:204
-msgid "Text size"
-msgstr "문자 사이즈"
-
-#: inc/config.class.php:207
-msgid "Text spacing between lines"
-msgstr ""
-
-#: inc/config.class.php:269
-msgid "code39"
-msgstr "code39"
-
-#: inc/config.class.php:270
+#: inc/config.class.php:264
 msgid "code128"
 msgstr "code128"
 
-#: inc/config.class.php:271
+#: inc/config.class.php:263
+msgid "code39"
+msgstr "code39"
+
+#: inc/config.class.php:265
 msgid "ean13"
 msgstr "ean13"
 
-#: inc/config.class.php:272
+#: inc/config.class.php:266
 msgid "int25"
 msgstr "int25"
 
-#: inc/config.class.php:273
+#: inc/config.class.php:267
 msgid "postnet"
 msgstr "포스트넷"
 
-#: inc/config.class.php:274
+#: inc/config.class.php:268
 msgid "upca"
 msgstr "upca"
-
-#: inc/config.class.php:275
-msgid "QRcode"
-msgstr "QR코드"
