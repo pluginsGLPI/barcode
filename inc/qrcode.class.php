@@ -364,9 +364,11 @@ class PluginBarcodeQRcode {
             $rand     = mt_rand();
             $number   = 0;
             $codes    = [];
+            $displayDataCollection = [];
             if ($ma->POST['eliminate'] > 0) {
                for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
                   $codes[] = '';
+                  $displayDataCollection[] = '';
                }
             }
             if ($ma->POST['type'] == 'QRcode') {
