@@ -418,16 +418,16 @@
         },
         {
             "name": "rospdf/pdf-php",
-            "version": "0.12.65",
+            "version": "0.12.67",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rospdf/pdf-php.git",
-                "reference": "d9d468977260538ca999cbf561cae690d8330c4b"
+                "reference": "fce993f08f99305569bb238644c5c35c0db0f85a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rospdf/pdf-php/zipball/d9d468977260538ca999cbf561cae690d8330c4b",
-                "reference": "d9d468977260538ca999cbf561cae690d8330c4b",
+                "url": "https://api.github.com/repos/rospdf/pdf-php/zipball/fce993f08f99305569bb238644c5c35c0db0f85a",
+                "reference": "fce993f08f99305569bb238644c5c35c0db0f85a",
                 "shasum": ""
             },
             "require": {
@@ -486,9 +486,9 @@
             "homepage": "https://github.com/rospdf/pdf-php",
             "support": {
                 "issues": "https://github.com/rospdf/pdf-php/issues",
-                "source": "https://github.com/rospdf/pdf-php/tree/0.12.65"
+                "source": "https://github.com/rospdf/pdf-php/tree/0.12.67"
             },
-            "time": "2022-11-16T17:07:58+00:00"
+            "time": "2023-04-20T20:52:13+00:00"
         }
     ],
     "packages-dev": [
