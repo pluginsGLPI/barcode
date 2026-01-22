@@ -43,8 +43,6 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access directly to this file");
 }
 
-require_once __DIR__ . '/../vendor/deltalab/phpqrcode/phpqrcode.php';
-
 class PluginBarcodeQRcode {
 
    function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
@@ -358,67 +356,81 @@ class PluginBarcodeQRcode {
 
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
       global $CFG_GLPI;
+         try {
+            switch ($ma->getAction()) {
 
-      switch ($ma->getAction()) {
-
-         case 'Generate' :
-            $pbQRcode = new PluginBarcodeQRcode();
-            $rand     = mt_rand();
-            $number   = 0;
-            $codes    = [];
-            $displayDataCollection = [];
-            if ($ma->POST['eliminate'] > 0) {
-               for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
-                  $codes[] = '';
-                  $displayDataCollection[] = '';
-               }
-            }
-            if ($ma->POST['type'] == 'QRcode') {
-               if ($item->isField('inventotynumberURL')) {
-                  $URLtype = 'inventoryURL';
-               } else {
-                  $URLtype = 'idURL';
-               }
-               foreach ($ids as $key) {
-                  $values = $pbQRcode->generateQRcode($item->getType(), $key, $rand, $number, $ma->POST);
-                  $filename    = $values[0];
-                  $displayData = $values[1];
-                  if ($filename) {
-                     $codes[] = $filename;
-                     $displayDataCollection[] = $displayData;
-                     $number++;
+               case 'Generate' :
+                  $pbQRcode = new PluginBarcodeQRcode();
+                  $rand     = mt_rand();
+                  $number   = 0;
+                  $codes    = [];
+                  $displayDataCollection = [];
+                  if (!empty($ma->POST['eliminate']) && $ma->POST['eliminate'] > 0) {
+                     for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
+                        $codes[] = '';
+                        $displayDataCollection[] = '';
+                     }
                   }
-               }
-            } else {
-               foreach ($ids as $key) {
-                  $item->getFromDB($key);
-                  if ($item->isField('otherserial')) {
-                     $codes[] = $item->getField('otherserial');
+                  if (!empty($ma->POST['type']) && $ma->POST['type'] == 'QRcode') {
+                     if ($item->isField('inventorynumberURL')) {
+                        $URLtype = 'inventoryURL';
+                     } else {
+                        $URLtype = 'idURL';
+                     }
+                     foreach ($ids as $key) {
+                        $values = $pbQRcode->generateQRcode($item->getType(), $key, $rand, $number, $ma->POST);
+                        if ($values && is_array($values)) {
+                           $filename    = $values[0];
+                           $displayData = $values[1];
+                           if ($filename) {
+                              $codes[] = $filename;
+                              $displayDataCollection[] = $displayData;
+                              $number++;
+                           }
+                        }
+                     }
+                  } else {
+                     foreach ($ids as $key) {
+                        $item->getFromDB($key);
+                        if ($item->isField('otherserial')) {
+                           $codes[] = $item->getField('otherserial');
+                        }
+                     }
                   }
-               }
-            }
-            if (count($codes) > 0) {
-               $params['codes']       = $codes;
-               $params['displayData'] = $displayDataCollection;
-               $params['type']        = $ma->POST['type'];
-               $params['size']        = $ma->POST['size'];
-               $params['border']      = $ma->POST['border'];
-               $params['orientation'] = $ma->POST['orientation'];
-               $params['displaylabels'] = $ma->POST['displaylabels'];
-               $barcode               = new PluginBarcodeBarcode();
-               $file                  = $barcode->printPDF($params);
-               $filePath              = explode('/', $file);
-               $filename              = $filePath[count($filePath)-1];
+                  if (count($codes) > 0) {
+                     $params['codes']       = $codes;
+                     $params['displayData'] = $displayDataCollection;
+                     $params['type']        = $ma->POST['type'] ?? 'QRcode';
+                     $params['size']        = $ma->POST['size'] ?? '';
+                     $params['border']      = $ma->POST['border'] ?? 0;
+                     $params['orientation'] = $ma->POST['orientation'] ?? 'Portrait';
+                     $params['displaylabels'] = $ma->POST['displaylabels'] ?? 0;
+                     $barcode               = new PluginBarcodeBarcode();
+                     $file                  = $barcode->printPDF($params);
+                     $filePath              = explode('/', $file);
+                     $filename              = $filePath[count($filePath)-1];
 
-               $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
-               Session::addMessageAfterRedirect($msg);
-               $pbQRcode->cleanQRcodefiles($rand, $number);
+                     $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)."' target='_blank'>".__('Generated file', 'barcode')."</a>";
+                     Session::addMessageAfterRedirect($msg);
+                     $pbQRcode->cleanQRcodefiles($rand, $number);
+                  }
+                  $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
+                  return;
+
             }
-            $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
+         } catch (\Throwable $e) {
+            // Log error for debugging and return an error state to GLPI
+            error_log('Plugin Barcode massive action error: '. $e->getMessage());
+            try {
+               Session::addMessageAfterRedirect(__('Barcode plugin error: ', 'barcode').$e->getMessage());
+               $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_ERROR);
+            } catch (\Throwable $ee) {
+               // last resort: plain error_log if Session or $ma are not usable
+               error_log('Plugin Barcode throwable during error handling: '. $ee->getMessage());
+            }
             return;
-
-      }
-      return;
+         }
+         return;
    }
 
 

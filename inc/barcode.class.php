@@ -318,6 +318,118 @@ class PluginBarcodeBarcode {
       $txtSize    = $config['txtSize'];
       $txtSpacing = $config['txtSpacing'];
 
+      // If fullpage mode requested, we will render one large QR per page.
+      // Compute available printable area
+      $availableWidth = $pdf->ez['pageWidth'] - $pdf->ez['leftMargin'] - $pdf->ez['rightMargin'];
+      $availableHeight = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $pdf->ez['bottomMargin'];
+      if (!empty($p_params['fullpage'])) {
+         // Prepare logo if present
+         $logoPath = GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png';
+         $logoimg = false;
+         $logoHeight = 0;
+         $logoWidth = 0;
+         if (file_exists($logoPath)) {
+            $logoimg = $this->loadImage($logoPath);
+            $logoInfo = @getimagesize($logoPath);
+            if ($logoInfo) {
+               $logoWidth = $logoInfo[0];
+               $logoHeight = $logoInfo[1];
+               // scale logo to a small header height if too tall
+               $maxLogoH = 60; // points
+               if ($logoHeight > $maxLogoH) {
+                  $ratio = $maxLogoH / $logoHeight;
+                  $logoHeight = (int)($logoHeight * $ratio);
+                  $logoWidth = (int)($logoWidth * $ratio);
+               }
+               if ($logoWidth > $availableWidth) {
+                  $ratio = $availableWidth / $logoWidth;
+                  $logoWidth = (int)($logoWidth * $ratio);
+                  $logoHeight = (int)($logoHeight * $ratio);
+               }
+            }
+         }
+
+         // reserve space for text under the QR (2 lines max)
+         $textArea = ($txtSize + $txtSpacing) * 2 + 20;
+
+         // area available for the QR itself
+         $qrAreaH = $availableHeight - $logoHeight - $textArea;
+         $qrAreaW = $availableWidth;
+         $codeSize = (int)min($qrAreaW, $qrAreaH);
+         if ($codeSize < 50) {
+            // fallback to smaller size but avoid negative
+            $codeSize = (int)min($availableWidth, $availableHeight - 40);
+         }
+
+         // Render each code on its own page centered
+         foreach ($codes as $idx => $code) {
+            if ($idx > 0) {
+               $pdf->ezNewPage();
+            }
+            // draw logo at top center
+            if ($logoimg !== false) {
+               $lx = $pdf->ez['leftMargin'] + (($availableWidth - $logoWidth) / 2);
+               $ly = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $logoHeight;
+               $pdf->addImage($logoimg, $lx, $ly, $logoWidth, $logoHeight);
+            }
+
+            // determine image file (QR content may be a png path)
+            $imgFile = ($type == 'QRcode') ? $code : $this->docsPath.$code.'_'.$type.'.'.$ext;
+            if (!file_exists($imgFile)) {
+               continue;
+            }
+            $imgInfo = @getimagesize($imgFile);
+            if (!$imgInfo) {
+               continue;
+            }
+            $imgW = $imgInfo[0];
+            $imgH = $imgInfo[1];
+            // scale to fit codeSize while keeping ratio
+            if ($imgW > $codeSize) {
+               $ratio = $codeSize / $imgW;
+               $imgW = (int)($imgW * $ratio);
+               $imgH = (int)($imgH * $ratio);
+            }
+            if ($imgH > $codeSize) {
+               $ratio = $codeSize / $imgH;
+               $imgH = (int)($imgH * $ratio);
+               $imgW = (int)($imgW * $ratio);
+            }
+            $img = $this->loadImage($imgFile);
+            if ($img === false) {
+               continue;
+            }
+
+            $imgX = $pdf->ez['leftMargin'] + (($availableWidth - $imgW) / 2);
+            // place QR below logo and vertically centered in remaining area
+            $qrTop = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $logoHeight;
+            $qrBottom = $pdf->ez['bottomMargin'] + $textArea;
+            $spaceH = $qrTop - $qrBottom;
+            $imgY = $qrBottom + (int)(($spaceH - $imgH) / 2);
+            $pdf->addImage($img, $imgX, $imgY, $imgW, $imgH);
+
+            // add text lines under QR (centered)
+            $display = $displayDataCollection[$idx] ?? [];
+            $textY = $pdf->ez['bottomMargin'] + 10; // small padding above bottom margin
+            foreach ($display as $line) {
+               $pdf->addTextWrap($pdf->ez['leftMargin'], $textY, $availableWidth, $txtSize, $line, 'center');
+               $textY += ($txtSize + $txtSpacing);
+            }
+
+            // draw page border if requested (around available area)
+            if (!empty($p_params['border'])) {
+               // Rectangle(x, y, w, h) where y is bottom coordinate
+               $pdf->Rectangle($pdf->ez['leftMargin'], $pdf->ez['bottomMargin'], $availableWidth, $availableHeight);
+            }
+         }
+
+         // output file and return
+         $file = $pdf->ezOutput();
+         $pdfFile = $_SESSION['glpiID'].'_'.$type.'.pdf';
+         file_put_contents($this->docsPath.$pdfFile, $file);
+         return '/files/_plugins/barcode/'.$pdfFile;
+      }
+
       $heightimage = $height;
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
@@ -380,7 +492,12 @@ class PluginBarcodeBarcode {
                   $imgWidth  = $imgWidth * ($ratio / 100);
                }
 
-               $image = imagecreatefrompng($imgFile);
+               // load image (detect type: png/jpg/gif) and skip if not loadable
+               $image = $this->loadImage($imgFile);
+               if ($image === false) {
+                  error_log(sprintf('Plugin Barcode: unable to create image from %s', $imgFile));
+                  continue;
+               }
                if ($imgWidth < $width) {
                   $pdf->addImage($image,
                                  $x + (($width - $imgWidth) / 2),
@@ -395,13 +512,19 @@ class PluginBarcodeBarcode {
                                  $imgHeight);
                }
 
-               if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
-                  $logoimg = imagecreatefrompng(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
-                  $pdf->addImage($logoimg,
-                                 $x + (($width - $logoWidth) / 2),
-                                 $y + $heightyposText,
-                                 $logoWidth,
-                                 $logoHeight);
+               // try to add a logo if present, but use loadImage to avoid wrong format
+               $logoPath = GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png';
+               if (file_exists($logoPath)) {
+                  $logoimg = $this->loadImage($logoPath);
+                  if ($logoimg !== false) {
+                     $pdf->addImage($logoimg,
+                                    $x + (($width - $logoWidth) / 2),
+                                    $y + $heightyposText,
+                                    $logoWidth,
+                                    $logoHeight);
+                  } else {
+                     error_log(sprintf('Plugin Barcode: unable to load logo image %s', $logoPath));
+                  }
                }
                $txtHeight = 0;
                for ($i = 0; $i < count($displayData); $i++) {
@@ -448,6 +571,56 @@ class PluginBarcodeBarcode {
       return true;
    }
 
+      /**
+       * Load an image file into a GD image resource, detecting type and using a safe fallback.
+       * Returns GD image resource or false on failure.
+       */
+      private function loadImage($path) {
+         if (!file_exists($path)) {
+            return false;
+         }
+         $info = @getimagesize($path);
+         if ($info === false) {
+            return false;
+         }
+         $mime = $info['mime'] ?? '';
+         $img = false;
+         switch ($mime) {
+            case 'image/png':
+               if (function_exists('imagecreatefrompng')) {
+                  $img = @imagecreatefrompng($path);
+               }
+               break;
+            case 'image/jpeg':
+            case 'image/jpg':
+               if (function_exists('imagecreatefromjpeg')) {
+                  $img = @imagecreatefromjpeg($path);
+               }
+               break;
+            case 'image/gif':
+               if (function_exists('imagecreatefromgif')) {
+                  $img = @imagecreatefromgif($path);
+               }
+               break;
+            default:
+               // try generic loader
+               $data = @file_get_contents($path);
+               if ($data !== false && function_exists('imagecreatefromstring')) {
+                  $img = @imagecreatefromstring($data);
+               }
+         }
+         if ($img === false) {
+            // Try fallback to imagecreatefromstring if possible
+            if (function_exists('imagecreatefromstring')) {
+               $data = @file_get_contents($path);
+               if ($data !== false) {
+                  $img = @imagecreatefromstring($data);
+               }
+            }
+         }
+         return ($img === false) ? false : $img;
+      }
+
 
 
    function getSpecificMassiveActions($checkitem = null) {
@@ -476,51 +649,61 @@ class PluginBarcodeBarcode {
 
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
       global $CFG_GLPI;
+         try {
+            switch ($ma->getAction()) {
 
-      switch ($ma->getAction()) {
+               case 'Generate' :
+                  $pbQRcode = new PluginBarcodeQRcode();
+                  $rand     = mt_rand();
+                  $number   = 0;
+                  $codes    = [];
+                  if (!empty($ma->POST['eliminate']) && $ma->POST['eliminate'] > 0) {
+                     for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
+                        $codes[] = '';
+                     }
+                  }
+                  foreach ($ids as $key) {
+                     $item->getFromDB($key);
+                     if (key($ma->items) == 'CommonITILObject') {
+                        $codes[] = $item->getField('id');
+                     } else if ($item->isField('otherserial')) {
+                        $codes[] = $item->getField('otherserial');
+                     }
+                  }
+                  if (count($codes) > 0) {
+                     $params['codes']       = $codes;
+                     $params['type']        = $ma->POST['type'] ?? '';
+                     $params['size']        = $ma->POST['size'] ?? '';
+                     $params['border']      = $ma->POST['border'] ?? 0;
+                     $params['orientation'] = $ma->POST['orientation'] ?? 'Portrait';
+                     $params['displaylabels'] = $ma->POST['displaylabels'] ?? 0;
 
-         case 'Generate' :
-            $pbQRcode = new PluginBarcodeQRcode();
-            $rand     = mt_rand();
-            $number   = 0;
-            $codes    = [];
-            if ($ma->POST['eliminate'] > 0) {
-               for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
-                  $codes[] = '';
-               }
+                     $barcode  = new PluginBarcodeBarcode();
+                     $file     = $barcode->printPDF($params);
+                     $filePath = explode('/', $file);
+                     $filename = $filePath[count($filePath)-1];
+
+                     $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)
+                        ."'>".__('Generated file', 'barcode')."</a>";
+
+                     Session::addMessageAfterRedirect($msg);
+                     $pbQRcode->cleanQRcodefiles($rand, $number);
+                  }
+                  $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
+                  return;
+
             }
-            foreach ($ids as $key) {
-               $item->getFromDB($key);
-               if (key($ma->items) == 'CommonITILObject') {
-                  $codes[] = $item->getField('id');
-               } else if ($item->isField('otherserial')) {
-                  $codes[] = $item->getField('otherserial');
-               }
+         } catch (\Throwable $e) {
+            error_log('Plugin Barcode massive action error (barcode): '. $e->getMessage());
+            try {
+               Session::addMessageAfterRedirect(__('Barcode plugin error: ', 'barcode').$e->getMessage());
+               $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_ERROR);
+            } catch (\Throwable $ee) {
+               error_log('Plugin Barcode throwable during error handling (barcode): '. $ee->getMessage());
             }
-            if (count($codes) > 0) {
-               $params['codes']       = $codes;
-               $params['type']        = $ma->POST['type'];
-               $params['size']        = $ma->POST['size'];
-               $params['border']      = $ma->POST['border'];
-               $params['orientation'] = $ma->POST['orientation'];
-               $params['displaylabels'] = $ma->POST['displaylabels'];
-
-               $barcode  = new PluginBarcodeBarcode();
-               $file     = $barcode->printPDF($params);
-               $filePath = explode('/', $file);
-               $filename = $filePath[count($filePath)-1];
-
-               $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)
-                  ."'>".__('Generated file', 'barcode')."</a>";
-
-               Session::addMessageAfterRedirect($msg);
-               $pbQRcode->cleanQRcodefiles($rand, $number);
-            }
-            $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
             return;
-
-      }
-      return;
+         }
+         return;
    }
 
 }
