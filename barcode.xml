@@ -1,160 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-   <name>Barcode</name>
+   <n>Barcode</n>
    <key>barcode</key>
    <state>stable</state>
    <logo>https://github.com/pluginsGLPI/barcode/blob/master/barscode.png?raw=true</logo>
    <description>
       <short>
-         <fr><![CDATA[Ce plugin vous permet de générer des codes barre]]></fr>
-         <en><![CDATA[This plugin allow you to generate bars code]]></en>
-         <cs><![CDATA[Tento zásuvný modul umožňuje vytvářet čárové kódy]]></cs>
+         <fr><![CDATA[Ce plugin vous permet de générer des codes barre et QR codes (compatible GLPI 11)]]></fr>
+         <en><![CDATA[This plugin allows you to generate barcodes and QR codes (compatible with GLPI 11)]]></en>
+         <es><![CDATA[Este plugin permite generar códigos de barras y QR codes (compatible con GLPI 11)]]></es>
       </short>
       <long>
-         <fr><![CDATA[Ce plugin vous permet de générer et d'export en PDF des codes barre et QRcode]]></fr>
-         <en><![CDATA[This plugin allow you to generate and export in PDF bars code and QRcode]]></en>
-         <cs><![CDATA[Tento zásuvný modul umožňuje vytvářet a exportovat do PDF čárové a QR kódy]]></cs>
-       </long>
+         <fr><![CDATA[Ce plugin vous permet de générer et d'exporter en PDF des codes barre et QRcode depuis les actions massives GLPI 11]]></fr>
+         <en><![CDATA[This plugin allows you to generate and export to PDF barcodes and QR codes using GLPI 11 massive actions]]></en>
+         <es><![CDATA[Este plugin permite generar y exportar en PDF códigos de barras y QR codes usando las acciones masivas de GLPI 11. Migrado por Dawing S.A.S.]]></es>
+      </long>
    </description>
    <homepage>https://github.com/pluginsGLPI/barcode</homepage>
    <download>https://github.com/pluginsGLPI/barcode/releases</download>
    <authors>
       <author>David DURIEUX</author>
+      <author>Dawing S.A.S. (migración GLPI 11)</author>
    </authors>
    <versions>
       <version>
+         <num>3.0.0</num>
+         <compatibility>~11.0.0</compatibility>
+      </version>
+      <version>
          <num>2.7.1</num>
          <compatibility>~10.0.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.7.1/glpi-barcode-2.7.1.tar.bz2</download_url>
       </version>
-      <version>
-         <num>2.7.0</num>
-         <compatibility>~10.0.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.7.0/glpi-barcode-2.7.0.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.6.2</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.6.2/glpi-barcode-2.6.2.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.6.1</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.6.1/glpi-barcode-2.6.1.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.6.0</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.6.0/glpi-barcode-2.6.0.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.5.2</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.5.2/glpi-barcode-2.5.2.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.5.1</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.5.1/glpi-barcode-2.5.1.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.5.0</num>
-         <compatibility>~9.5.0</compatibility>
-         <download_url>https://github.com/pluginsGLPI/barcode/releases/download/2.5.0/glpi-barcode-2.5.0.tar.bz2</download_url>
-      </version>
-      <version>
-         <num>2.4.1</num>
-         <compatibility>9.4</compatibility>
-      </version>
-      <version>
-         <num>2.4.0</num>
-         <compatibility>9.4</compatibility>
-      </version>
-      <version>
-         <num>2.3.0</num>
-         <compatibility>9.4</compatibility>
-      </version>
-      <version>
-         <num>2.2.1</num>
-         <compatibility>9.2</compatibility>
-         <compatibility>9.3</compatibility>
-      </version>
-      <version>
-         <num>2.2.0</num>
-         <compatibility>9.2</compatibility>
-         <compatibility>9.3</compatibility>
-      </version>
-      <version>
-         <num>2.1.1</num>
-         <compatibility>9.2</compatibility>
-      </version>
-      <version>
-         <num>2.1.0</num>
-         <compatibility>9.2</compatibility>
-      </version>
-       <version>
-          <num>0.90+1.0</num>
-          <compatibility>0.90</compatibility>
-      </version>
-       <version>
-          <num>0.85+1.0</num>
-          <compatibility>0.85</compatibility>
-      </version>
-       <version>
-          <num>0.84+1.0</num>
-          <compatibility>0.84</compatibility>
-      </version>
-       <version>
-          <num>2.1.0</num>
-          <compatibility>0.80</compatibility>
-      </version>
-       <version>
-          <num>1.4</num>
-          <compatibility>0.71</compatibility>
-      </version>
-       <version>
-          <num>1.3</num>
-          <compatibility>0.70</compatibility>
-      </version>
-      <version>
-          <num>1.2</num>
-          <compatibility>0.68.1</compatibility>
-      </version>
-      <version>
-           <num>1.1</num>
-          <compatibility>0.68</compatibility>
-      </version>
-     </versions>
+   </versions>
    <langs>
       <lang>cs_CZ</lang>
-      <lang>en_GB</lang>
-      <lang>fr_FR</lang>
       <lang>de_DE</lang>
+      <lang>en_GB</lang>
       <lang>es_AR</lang>
       <lang>es_ES</lang>
+      <lang>fr_FR</lang>
       <lang>pt_BR</lang>
       <lang>sl_SI</lang>
       <lang>tr_TR</lang>
-    </langs>
+   </langs>
    <license><![CDATA[AGPL v3+]]></license>
-      <tags>
-         <fr>
-            <tag>export</tag>
-            <tag>code barre</tag>
-            <tag>QRcode</tag>
-            <tag>données</tag>
-         </fr>
-         <en>
-            <tag>export</tag>
-            <tag>barcode</tag>
-            <tag>QRcode</tag>
-            <tag>data</tag>
-         </en>
-         <cs>
-            <tag>export</tag>
-            <tag>čárovýkód</tag>
-            <tag>QRkód</tag>
-            <tag>data</tag>
-         </cs>
+   <tags>
+      <en>
+         <tag>export</tag>
+         <tag>barcode</tag>
+         <tag>QRcode</tag>
+         <tag>PDF</tag>
+      </en>
+      <es>
+         <tag>exportar</tag>
+         <tag>código de barras</tag>
+         <tag>QRcode</tag>
+         <tag>PDF</tag>
+      </es>
    </tags>
 </root>
