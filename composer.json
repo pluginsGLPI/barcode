@@ -1,6 +1,10 @@
 {
+    "name": "glpi-project/barcode",
+    "description": "GLPI Barcode plugin - migrated to GLPI 11 by Dawing S.A.S.",
+    "type": "glpi-plugin",
+    "license": "AGPL-3.0-or-later",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "cweagans/composer-patches": "^1.7",
         "deltalab/phpqrcode": "^1.1",
         "pear/image_barcode": "^1.1",
@@ -12,9 +16,6 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "platform": {
-            "php": "7.4.0"
-        },
         "sort-packages": true,
         "allow-plugins": {
             "cweagans/composer-patches": true
@@ -26,7 +27,7 @@
             "package": {
                 "name": "deltalab/phpqrcode",
                 "version": "1.1.4",
-                "dist":{
+                "dist": {
                     "url": "https://sourceforge.net/projects/phpqrcode/files/releases/phpqrcode-2010100721_1.1.4.zip/download",
                     "type": "zip",
                     "reference": "1.1.4"
@@ -43,7 +44,7 @@
             "package": {
                 "name": "pear/image_barcode",
                 "version": "1.1.2",
-                "dist":{
+                "dist": {
                     "url": "https://github.com/pear/Image_Barcode/archive/1.1.2.zip",
                     "type": "zip",
                     "reference": "1.1.2"
@@ -62,8 +63,13 @@
     "extra": {
         "patches": {
             "pear/image_barcode": {
-                "Fix PHP 7.x / 8.x compatibility": "./patch/fix-pear-image-barcode.patch"
+                "Fix PHP 8.x compatibility": "./patch/fix-pear-image-barcode.patch"
             }
         }
+    },
+    "autoload": {
+        "classmap": [
+            "inc/"
+        ]
     }
 }

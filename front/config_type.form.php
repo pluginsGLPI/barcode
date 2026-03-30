@@ -2,55 +2,49 @@
 
 /*
    ------------------------------------------------------------------------
-   Barcode
-   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
-
-   https://forge.indepnet.net/projects/barscode
+   Barcode - Plugin para GLPI - Migrado a GLPI 11.x por Dawing S.A.S.
    ------------------------------------------------------------------------
-
-   LICENSE
-
-   This file is part of barcode plugin project.
-
-   Plugin Barcode is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Affero General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   Plugin Barcode is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-   GNU Affero General Public License for more details.
-
-   You should have received a copy of the GNU Affero General Public License
-   along with Plugin Barcode. If not, see <http://www.gnu.org/licenses/>.
-
-   ------------------------------------------------------------------------
-
-   @package   Plugin Barcode
-   @author    David Durieux
-   @co-author
-   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
-   @license   AGPL License 3.0 or (at your option) any later version
-              http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://forge.indepnet.net/projects/barscode
-   @since     2009
-
+   LICENSE: AGPL License 3.0 or (at your option) any later version
    ------------------------------------------------------------------------
  */
 
-// ----------------------------------------------------------------------
-// Original Author of file: Vincent Mazzoni
-// Purpose of file:
-// ----------------------------------------------------------------------
+include('../../../inc/includes.php');
 
-include ('../../../inc/includes.php');
+Session::checkRight('plugin_barcode_config', UPDATE);
 
 if (isset($_POST['type'])) {
-   $pbcconf = new PluginBarcodeConfig_Type();
-   if ($res = array_keys($pbcconf->find(['type' => $_POST['type']]))) {
-      $_POST['id'] = $res[0];
-      $pbcconf->update($_POST);
+
+   $pbConfig = new PluginBarcodeConfig();
+   $pbcconf  = new PluginBarcodeConfig_Type();
+
+   // Buscar el registro existente del tipo
+   $results = $pbcconf->find(['type' => $_POST['type']]);
+
+   $data = [
+      'type'             => $_POST['type'],
+      'size'             => $_POST['size']             ?? 'A4',
+      'orientation'      => $_POST['orientation']      ?? 'Portrait',
+      'marginTop'        => (int)($_POST['marginTop']        ?? 30),
+      'marginBottom'     => (int)($_POST['marginBottom']     ?? 30),
+      'marginLeft'       => (int)($_POST['marginLeft']       ?? 30),
+      'marginRight'      => (int)($_POST['marginRight']      ?? 30),
+      'marginHorizontal' => (int)($_POST['marginHorizontal'] ?? 25),
+      'marginVertical'   => (int)($_POST['marginVertical']   ?? 30),
+      'maxCodeWidth'     => (int)($_POST['maxCodeWidth']     ?? 110),
+      'maxCodeHeight'    => (int)($_POST['maxCodeHeight']    ?? 70),
+      'txtSize'          => (int)($_POST['txtSize']          ?? 8),
+      'txtSpacing'       => (int)($_POST['txtSpacing']       ?? 3),
+   ];
+
+   if (!empty($results)) {
+      $id          = array_key_first($results);
+      $data['id']  = $id;
+      $pbcconf->update($data);
+   } else {
+      $pbcconf->add($data);
    }
+
+   Session::addMessageAfterRedirect(__('Configuration saved.', 'barcode'));
 }
+
 Html::back();

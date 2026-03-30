@@ -2,107 +2,111 @@
 
 /*
    ------------------------------------------------------------------------
-   Barcode
-   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
-
-   https://forge.indepnet.net/projects/barscode
+   Barcode - Plugin para GLPI
+   Migrado a GLPI 11.x por Dawing S.A.S.
+   Original: Copyright (C) 2009-2016 by the Barcode plugin Development Team.
    ------------------------------------------------------------------------
 
-   LICENSE
-
-   This file is part of barcode plugin project.
-
-   Plugin Barcode is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Affero General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   Plugin Barcode is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-   GNU Affero General Public License for more details.
-
-   You should have received a copy of the GNU Affero General Public License
-   along with Plugin Barcode. If not, see <http://www.gnu.org/licenses/>.
-
-   ------------------------------------------------------------------------
-
-   @package   Plugin Barcode
-   @author    David Durieux
-   @co-author
-   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
-   @license   AGPL License 3.0 or (at your option) any later version
-              http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://forge.indepnet.net/projects/barscode
-   @since     2009
-
+   LICENSE: AGPL License 3.0 or (at your option) any later version
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.7.1");
+define("PLUGIN_BARCODE_VERSION", "3.0.0");
 
-// Minimal GLPI version, inclusive
-define('PLUGIN_BARCODE_MIN_GLPI', '10.0.0');
-// Maximum GLPI version, exclusive
-define('PLUGIN_BARCODE_MAX_GLPI', '10.0.99');
+// Versión mínima de GLPI requerida (inclusive)
+define('PLUGIN_BARCODE_MIN_GLPI', '11.0.0');
+// Versión máxima de GLPI soportada (exclusiva)
+define('PLUGIN_BARCODE_MAX_GLPI', '11.0.99');
 
-// Init the hooks of the plugins -Needed
+/**
+ * Inicialización de los hooks del plugin - Requerido
+ */
 function plugin_init_barcode() {
    global $PLUGIN_HOOKS;
 
-   require_once(__DIR__ . '/vendor/autoload.php');
+   // Cargar el autoloader de Composer
+   if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+      require_once(__DIR__ . '/vendor/autoload.php');
+   }
 
-   $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
+   // NOTA: csrf_compliant fue deprecado en GLPI 11 - eliminado intencionalmente
 
    Plugin::registerClass('PluginBarcodeDropdown');
    Plugin::registerClass('PluginBarcodeProfile', ['addtabon' => ['Profile']]);
-   Plugin::registerClass('PluginBarcode');
-
-   // Display a menu entry ?
+   Plugin::registerClass('PluginBarcodeBarcode');
 
    if (Session::haveRight('plugin_barcode_barcode', CREATE)
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
-      $PLUGIN_HOOKS['pre_item_purge']['barcode']
-         = ['Profile' => ['PluginBarcodeProfile','cleanProfiles']];
 
-      // Massive Action definition
+      $PLUGIN_HOOKS['pre_item_purge']['barcode']
+         = ['Profile' => ['PluginBarcodeProfile', 'cleanProfiles']];
+
+      // Acción masiva habilitada
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
-      $web_dir = '/' . Plugin::getWebDir('barcode', false);
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['title'] = "Search";
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page'] = $web_dir . '/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = $web_dir. '/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = $web_dir. '/front/barcode.form.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = $web_dir. '/index.php';
+      // Ruta base del plugin (sin Plugin::getWebDir - deprecado en GLPI 11)
+      $web_dir = '/plugins/barcode';
 
-      $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['title']  = __('Search');
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page']   = $web_dir . '/front/barcode.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = $web_dir . '/front/barcode.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add']    = $web_dir . '/front/barcode.form.php';
+      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = $web_dir . '/index.php';
+
+      $PLUGIN_HOOKS['helpdesk_menu_entry']['barcode'] = true;
    }
 
-   // Config page
+   // Página de configuración
    if (Session::haveRight('config', UPDATE)) {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
 
-   //Redirect code
-   //http://localhost/glpi/index.php?redirect=plugin_barcode_2 to form ID 2
+   // Redirección por ID: /index.php?redirect=plugin_barcode_2
    $PLUGIN_HOOKS['redirect_page']['barcode'] = 'barcode.form.php';
 }
 
+/**
+ * Versión e información del plugin - Requerido
+ */
 function plugin_version_barcode() {
-
    return [
       'name'           => 'Barcode',
       'shortname'      => 'barcode',
       'version'        => PLUGIN_BARCODE_VERSION,
       'license'        => 'AGPLv3+',
-      'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
-                           Jean Marc GRISARD & Vincent MAZZONI',
+      'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &amp;
+                           Jean Marc GRISARD &amp; Vincent MAZZONI
+                           (Migrado a GLPI 11 por Dawing S.A.S.)',
       'homepage'       => 'https://github.com/pluginsGLPI/barcode',
       'requirements'   => [
          'glpi' => [
             'min' => PLUGIN_BARCODE_MIN_GLPI,
             'max' => PLUGIN_BARCODE_MAX_GLPI,
-         ]
+         ],
+         'php'  => [
+            'min' => '8.1',
+         ],
       ]
    ];
+}
+
+/**
+ * Verificación de prerequisitos antes de instalar
+ */
+function plugin_barcode_check_prerequisites() {
+   if (version_compare(GLPI_VERSION, PLUGIN_BARCODE_MIN_GLPI, 'lt')
+       || version_compare(GLPI_VERSION, PLUGIN_BARCODE_MAX_GLPI, 'gt')) {
+      if (method_exists('Plugin', 'messageIncompatible')) {
+         Plugin::messageIncompatible('core', PLUGIN_BARCODE_MIN_GLPI, PLUGIN_BARCODE_MAX_GLPI);
+      }
+      return false;
+   }
+   return true;
+}
+
+/**
+ * Verificación de configuración
+ */
+function plugin_barcode_check_config($verbose = false) {
+   return true;
 }
