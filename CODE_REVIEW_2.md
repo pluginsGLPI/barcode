@@ -213,3 +213,49 @@ Le droit `plugin_barcode_config` (UPDATE) est créé dans les profils mais **jam
 
 ### Méthode
 Les correctifs de Roo n'ont pas été exécutés : deux « fixes » sécurité appellent des méthodes absentes du cœur cible. Pour la suite, chaque correction devrait être validée sur `glpi-dev` (GLPI 12.0.1 / PHP 8.5) avec au minimum : ouverture du sous‑formulaire des deux actions de masse, génération d'un PDF et d'un ZIP, scan d'une URL par n° d'inventaire, upload/suppression du logo, purge d'un profil de test.
+
+---
+
+## 6. Statut des corrections (branche `fix/glpi12-review-2`, version 3.1.0)
+
+Toutes les corrections ont été testées sur `glpi-dev` (GLPI 12.0.1 / PHP 8.5) : actions de masse exécutées via `MassiveAction`, pages appelées en HTTP avec un compte super-admin et un compte self-service, installation neuve et mise à jour depuis 3.0.4.
+
+| Réf. | Statut | Commit |
+|---|---|---|
+| F-1 `displayErrorAndDie` | ✅ exceptions HTTP du cœur | `fix: GLPI 12 fatal errors` |
+| F-2 `sendFile` | ✅ `document.send.php` supprimé, logo servi par `send.php` | idem |
+| F-3 `$ma->items` privé | ✅ `getItemtype()` / `instanceof CommonITILObject` | idem |
+| F-4 `cleanProfiles` | ✅ hook supprimé | idem |
+| F-5 min GLPI 10 | ✅ min 11.0.0, PHP ≥ 8.2 | `chore: require GLPI 11+` |
+| S-1 droits | ✅ `plugin_barcode_config` / `plugin_barcode_barcode` vérifiés partout, `can(READ)` par élément | `security: …` |
+| S-2 chemins | ✅ type en liste blanche, validation par symbologie, cache `cache_<md5>_<type>.png` | idem |
+| S-3 téléchargements | ✅ fichiers préfixés par l'ID du propriétaire, seul lui peut les télécharger | idem |
+| S-4 upload logo | ✅ `UPLOAD_ERR_OK`, `move_uploaded_file()` | idem |
+| S-5 scan QR | ✅ connexion seule, redirection avant affichage, doublons gérés | `fix: GLPI 12 fatal errors` |
+| S-6 échappement | ✅ formulaires de config et formulaire unitaire | `security: …` |
+| B-1 ZIP cumulatif | ✅ `CREATE \| OVERWRITE` | `fix: QR code ZIP export` |
+| B-2 types de message | ✅ constantes `INFO/WARNING/ERROR` | idem |
+| B-3 `itemDone` | ✅ IDs transmis, compteurs justes | idem + `security: …` |
+| B-4 menu Outils | ✅ GET affiche le formulaire, POST génère ; entrée helpdesk fonctionnelle | `security: …` |
+| B-5 cache empoisonné | ✅ pas de fichier écrit en cas d'échec, message listant les valeurs refusées | idem |
+| B-6 tickets | ✅ code-barres de l'ID | idem |
+| B-7 options sans effet | ✅ options « Display… » et « QR Code format » retirées ; « Display labels » imprime le nom sous le code-barres | idem + `fix: QR code ZIP export` |
+| B-8 `$have_content` | ✅ supprimé | `fix: QR code ZIP export` |
+| B-9 URL non encodée | ✅ RFC 3986 | idem |
+| B-10 chemins absolus | ✅ `$CFG_GLPI['root_doc']` | `security: …` |
+| B-11 divers | ✅ | plusieurs |
+| Q-1 code mort | ✅ ~450 lignes retirées ; conversion BMP native GD, sortie identique à l'octet | `fix: QR code ZIP export` + `refactor: …` |
+| Q-2 droits | ✅ droit plugin pour la config, onglet profil aussi pour les profils helpdesk | `refactor: …` |
+| Q-3 i18n | ✅ `.pot` régénéré, 21 traductions françaises ajoutées | `chore: translations…` |
+| Q-4 `includes.php` | ✅ supprimé | `chore: require GLPI 11+` |
+| Q-5 métadonnées | ✅ composer, `barcode.xml`, README, `.travis.yml` supprimé | `chore: …` |
+| Q-6 performance | ✅ `isField()` | `perf: …` |
+| Q-7 copies du plugin | ✅ déplacées dans `/opt/glpi-dev/plugin-backups/` (hors dépôt) | — |
+| QC-1 Roo (`CommonDBTM`) | ⏸ non traité : sans impact fonctionnel | — |
+
+### Points d'attention pour le déploiement
+- **Mise à jour requise** : la version passe à 3.1.0, GLPI désactive le plugin jusqu'à ce qu'un administrateur lance la mise à jour dans *Configuration > Plugins*.
+- **Droit de configuration** : la page de configuration exige désormais le droit plugin « Gérer la configuration » et non plus le droit global `config`. Seul Super-Admin l'a par défaut ; l'attribuer aux autres profils si besoin.
+- **Contenu des QR codes inchangé**, sauf l'URL par n° d'inventaire désormais encodée (`INV%20002` au lieu de `INV 002`).
+- **Noms des fichiers téléchargés** : `barcode_qrcodes.zip` et `barcode_<type>.pdf`.
+- Les traductions autres que le français n'ont pas été mises à jour (passage par Transifex).

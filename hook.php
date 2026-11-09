@@ -65,9 +65,7 @@ function plugin_barcode_MassiveActions($itemtype) {
 
    /** @var CommonDBTM $item */
    $item = new $itemtype();
-   $item->getEmpty();
-
-   if (array_key_exists('otherserial', $item->fields)) {
+   if ($item->isField('otherserial')) {
       // Barcode is based on otherserial field value
       $actions[$generate_barcode_action] = $generate_barcode_label;
    }
