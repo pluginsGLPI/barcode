@@ -2,8 +2,8 @@
 /*
    ------------------------------------------------------------------------
    Barcode
-   Copyright (C) 2009-2016 by the Barcode plugin Development Team.
-   https://forge.indepnet.net/projects/barscode
+   Copyright (C) 2009-2026 by the Barcode plugin Development Team.
+   https://github.com/ISPF/info-glpi-barcode-ispf
    ------------------------------------------------------------------------
    LICENSE
    This file is part of barcode plugin project.
@@ -21,10 +21,10 @@
    @package   Plugin Barcode
    @author    David Durieux
    @co-author
-   @copyright Copyright (c) 2009-2016 Barcode plugin Development team
+   @copyright Copyright (c) 2009-2026 Barcode plugin Development team
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://forge.indepnet.net/projects/barscode
+   @link      https://github.com/ISPF/info-glpi-barcode-ispf
    @since     2009
    ------------------------------------------------------------------------
  */
