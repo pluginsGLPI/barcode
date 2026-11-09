@@ -181,7 +181,6 @@ class PluginBarcodeConfig extends CommonDBTM {
       echo "</td>";
       echo "<td>".__('Maximum height', 'barcode')."</td><td>";
       echo "<input type='text' size='20' name='maxCodeHeight' value='".$config['maxCodeHeight']."'>";
-      echo "<input type='text' size='20' name='maxCodeHeight' value='" . $config['maxCodeHeight'] . "'>";
       echo "</td>";
       echo "</tr>";
       echo "<tr class='tab_bg_1'>";

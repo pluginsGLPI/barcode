@@ -161,6 +161,19 @@ class PluginBarcodeProfile extends Profile {
       }
    }
 
+   /**
+    * Get mapping of old profile rights to new ones.
+    * Used during migration from legacy profile table.
+    *
+    * @return array
+    */
+   static function getOldRightsMappings() {
+      return [
+         'barcode' => 'plugin_barcode_barcode',
+         'config'  => 'plugin_barcode_config',
+      ];
+   }
+
    static function migrateProfiles() {
       //Get all rights from the old table
       $profiles = getAllDataFromTable(getTableForItemType(__CLASS__));
@@ -235,7 +248,7 @@ class PluginBarcodeProfile extends Profile {
                }
                foreach (array_keys($rights) as $right) {
                   $dataprofile['_'.$info['field']][$right] = 1;
-                  $_SESSION['glpiactiveprofile'][$data['field']] = $right;
+                  $_SESSION['glpiactiveprofile'][$info['field']] = $right;
                }
             }
          }
