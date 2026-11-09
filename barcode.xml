@@ -3,7 +3,7 @@
    <name>Barcode</name>
    <key>barcode</key>
    <state>stable</state>
-   <logo>https://github.com/pluginsGLPI/barcode/blob/master/barscode.png?raw=true</logo>
+   <logo>https://github.com/ISPF/info-glpi-barcode-ispf/blob/develop/barscode.png?raw=true</logo>
    <description>
       <short>
          <fr><![CDATA[Ce plugin vous permet de générer des codes barre]]></fr>
@@ -16,12 +16,18 @@
          <cs><![CDATA[Tento zásuvný modul umožňuje vytvářet a exportovat do PDF čárové a QR kódy]]></cs>
        </long>
    </description>
-   <homepage>https://github.com/pluginsGLPI/barcode</homepage>
-   <download>https://github.com/pluginsGLPI/barcode/releases</download>
+   <homepage>https://github.com/ISPF/info-glpi-barcode-ispf</homepage>
+   <download>https://github.com/ISPF/info-glpi-barcode-ispf/releases</download>
    <authors>
       <author>David DURIEUX</author>
+      <author>ISPF</author>
    </authors>
    <versions>
+      <version>
+         <num>3.1.0</num>
+         <compatibility>~11.0.0</compatibility>
+         <compatibility>~12.0.0</compatibility>
+      </version>
       <version>
          <num>2.7.1</num>
          <compatibility>~10.0.0</compatibility>

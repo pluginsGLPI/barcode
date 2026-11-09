@@ -10,7 +10,7 @@
 
 - David Durieux (d.durieux@siprossii.com) : version 0.84+1.0 for GLPI 0.84
 
-- Tamatoa (tamatoad@ispf.pf) : GLPI 10/11/12 compatibility, QR code ZIP export
+- Tamatoa (tamatoad@ispf.pf) : GLPI 11/12 compatibility, QR code ZIP export
 
 
 **********************************************************************

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-18 07:08+0000\n"
+"POT-Creation-Date: 2026-11-09 21:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,403 +17,274 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: inc/barcode.class.php:78
-msgid "2A0"
+#: front/checkItemByInv.php:43 front/checkItemByInv.php:52
+msgid "Invalid item type"
 msgstr ""
 
-#: inc/barcode.class.php:77
-msgid "4A0"
+#: front/checkItemByInv.php:46
+msgid "Missing inventory number"
 msgstr ""
 
-#: inc/barcode.class.php:79
-msgid "A0"
+#: front/checkItemByInv.php:57
+msgid "No item found"
 msgstr ""
 
-#: inc/barcode.class.php:80
-msgid "A1"
+#: front/checkItemByInv.php:60
+msgid "Several items share this inventory number"
 msgstr ""
 
-#: inc/barcode.class.php:89
-msgid "A10"
+#: front/config.form.php:54
+msgid "The cache has been emptied."
 msgstr ""
 
-#: inc/barcode.class.php:81
-msgid "A2"
+#: front/config.form.php:59
+msgid "The logo has been removed."
 msgstr ""
 
-#: inc/barcode.class.php:82
-msgid "A3"
+#: front/config.form.php:66
+msgid "The logo must be a PNG image."
 msgstr ""
 
-#: inc/barcode.class.php:83
-msgid "A4"
+#: front/config.form.php:68
+msgid "Unable to save the logo."
 msgstr ""
 
-#: inc/barcode.class.php:84
-msgid "A5"
-msgstr ""
-
-#: inc/barcode.class.php:85
-msgid "A6"
-msgstr ""
-
-#: inc/barcode.class.php:86
-msgid "A7"
-msgstr ""
-
-#: inc/barcode.class.php:87
-msgid "A8"
-msgstr ""
-
-#: inc/barcode.class.php:88
-msgid "A9"
-msgstr ""
-
-#: inc/barcode.class.php:90
-msgid "B0"
-msgstr ""
-
-#: inc/barcode.class.php:91
-msgid "B1"
-msgstr ""
-
-#: inc/barcode.class.php:100
-msgid "B10"
-msgstr ""
-
-#: inc/barcode.class.php:92
-msgid "B2"
-msgstr ""
-
-#: inc/barcode.class.php:93
-msgid "B3"
-msgstr ""
-
-#: inc/barcode.class.php:94
-msgid "B4"
-msgstr ""
-
-#: inc/barcode.class.php:95
-msgid "B5"
-msgstr ""
-
-#: inc/barcode.class.php:96
-msgid "B6"
-msgstr ""
-
-#: inc/barcode.class.php:97
-msgid "B7"
-msgstr ""
-
-#: inc/barcode.class.php:98
-msgid "B8"
-msgstr ""
-
-#: inc/barcode.class.php:99
-msgid "B9"
-msgstr ""
-
-#: hook.php:46 hook.php:49 front/config.php:52 front/checkItemByInv.php:37
-#: inc/profile.class.php:50 inc/profile.class.php:86
+#: front/config.php:44 hook.php:46 hook.php:49 inc/barcode.class.php:67 inc/profile.class.php:46 inc/profile.class.php:87
 msgid "Barcode"
-msgstr ""
-
-#: inc/config.class.php:61
-msgid "Barcode plugin configuration"
-msgstr ""
-
-#: inc/config.class.php:177
-msgid "Barcodes sizes"
-msgstr ""
-
-#: inc/config.class.php:157
-msgid "Bottom"
-msgstr ""
-
-#: inc/config.class.php:190
-msgid "By ID"
-msgstr ""
-
-#: inc/config.class.php:191
-msgid "By serial number"
-msgstr ""
-
-#: inc/barcode.class.php:101
-msgid "C0"
-msgstr ""
-
-#: inc/barcode.class.php:102
-msgid "C1"
-msgstr ""
-
-#: inc/barcode.class.php:111
-msgid "C10"
-msgstr ""
-
-#: inc/barcode.class.php:103
-msgid "C2"
-msgstr ""
-
-#: inc/barcode.class.php:104
-msgid "C3"
-msgstr ""
-
-#: inc/barcode.class.php:105
-msgid "C4"
-msgstr ""
-
-#: inc/barcode.class.php:106
-msgid "C5"
-msgstr ""
-
-#: inc/barcode.class.php:107
-msgid "C6"
-msgstr ""
-
-#: inc/barcode.class.php:108
-msgid "C7"
-msgstr ""
-
-#: inc/barcode.class.php:109
-msgid "C8"
-msgstr ""
-
-#: inc/barcode.class.php:110
-msgid "C9"
-msgstr ""
-
-#: inc/barcode.class.php:159
-msgid "Code"
-msgstr ""
-
-#: inc/config.class.php:82
-msgid "Company logo"
-msgstr ""
-
-#: inc/barcode.class.php:179 inc/barcode.class.php:257
-msgid "Create"
-msgstr ""
-
-#: inc/config.class.php:94
-msgid "Delete the logo"
-msgstr ""
-
-#: inc/barcode.class.php:240
-msgid "Display border"
-msgstr ""
-
-#: inc/barcode.class.php:248
-msgid "Display labels"
-msgstr ""
-
-#: inc/barcode.class.php:124
-msgid "EXECUTIVE"
-msgstr ""
-
-#: inc/config.class.php:78
-msgid "Empty the cache"
-msgstr ""
-
-#: inc/barcode.class.php:125
-msgid "FOLIO"
-msgstr ""
-
-#: inc/config.class.php:66
-msgid "General configuration"
-msgstr ""
-
-#: front/barcode.form.php:62 inc/barcode.class.php:514 inc/qrcode.class.php:411
-msgid "Generated file"
-msgstr ""
-
-#: inc/barcode.class.php:157
-msgid "Generation"
-msgstr ""
-
-#: inc/profile.class.php:117
-msgid "Generation of barcode"
-msgstr ""
-
-#: inc/config.class.php:170
-msgid "Inner horizontal"
-msgstr ""
-
-#: inc/config.class.php:173
-msgid "Inner vertical"
-msgstr ""
-
-#: inc/barcode.class.php:194
-msgid "It will generate only elements have defined field:"
-msgstr ""
-
-#: inc/barcode.class.php:123
-msgid "LEGAL"
-msgstr ""
-
-#: inc/barcode.class.php:122
-msgid "LETTER"
-msgstr ""
-
-#: inc/barcode.class.php:136
-msgid "Landscape"
-msgstr ""
-
-#: inc/config.class.php:162
-msgid "Left"
-msgstr ""
-
-#: inc/profile.class.php:113
-msgid "Manage configuration"
-msgstr ""
-
-#: inc/config.class.php:152
-msgid "Margins"
-msgstr ""
-
-#: inc/config.class.php:182
-msgid "Maximum height"
-msgstr ""
-
-#: inc/config.class.php:179
-msgid "Maximum width"
-msgstr ""
-
-#: inc/barcode.class.php:230
-msgid "Not use first xx barcodes"
-msgstr ""
-
-#: inc/barcode.class.php:174
-msgid "Number of copies"
-msgstr ""
-
-#: inc/barcode.class.php:169 inc/barcode.class.php:236 inc/config.class.php:148
-msgid "Orientation"
-msgstr ""
-
-#: inc/barcode.class.php:166 inc/barcode.class.php:226 inc/config.class.php:145
-msgid "Page size"
-msgstr ""
-
-#: inc/barcode.class.php:135
-msgid "Portrait"
-msgstr ""
-
-#: hook.php:49
-msgid "Print QRcodes"
 msgstr ""
 
 #: hook.php:46
 msgid "Print barcodes"
 msgstr ""
 
-#: inc/config.class.php:269
-msgid "QRcode"
+#: hook.php:49
+msgid "Print QRcodes"
 msgstr ""
 
-#: inc/barcode.class.php:112
-msgid "RA0"
+#: inc/barcode.class.php:161
+msgid "Portrait"
 msgstr ""
 
-#: inc/barcode.class.php:113
-msgid "RA1"
+#: inc/barcode.class.php:162
+msgid "Landscape"
 msgstr ""
 
-#: inc/barcode.class.php:114
-msgid "RA2"
+#: inc/barcode.class.php:183
+msgid "Generation"
 msgstr ""
 
-#: inc/barcode.class.php:115
-msgid "RA3"
+#: inc/barcode.class.php:185
+msgid "Code"
 msgstr ""
 
-#: inc/barcode.class.php:116
-msgid "RA4"
-msgstr ""
-
-#: inc/config.class.php:165
-msgid "Right"
-msgstr ""
-
-#: inc/barcode.class.php:117
-msgid "SRA0"
-msgstr ""
-
-#: inc/barcode.class.php:118
-msgid "SRA1"
-msgstr ""
-
-#: inc/barcode.class.php:119
-msgid "SRA2"
-msgstr ""
-
-#: inc/barcode.class.php:120
-msgid "SRA3"
-msgstr ""
-
-#: inc/barcode.class.php:121
-msgid "SRA4"
-msgstr ""
-
-#: inc/config.class.php:196
-msgid "Text display options"
-msgstr ""
-
-#: inc/config.class.php:198
-msgid "Text size"
-msgstr ""
-
-#: inc/config.class.php:201
-msgid "Text spacing between lines"
-msgstr ""
-
-#: front/config.form.php:56
-msgid "The cache has been emptied."
-msgstr ""
-
-#: inc/barcode.class.php:286
-msgid "The generation of some barcodes produced errors."
-msgstr ""
-
-#: front/config.form.php:61
-msgid "The logo has been removed."
-msgstr ""
-
-#: inc/barcode.class.php:196
-msgid "Ticket number"
-msgstr ""
-
-#: inc/config.class.php:154
-msgid "Top"
-msgstr ""
-
-#: inc/barcode.class.php:162 inc/barcode.class.php:205 inc/config.class.php:70
+#: inc/barcode.class.php:188 inc/barcode.class.php:235 inc/config.class.php:68
 msgid "Type"
 msgstr ""
 
-#: inc/config.class.php:188
-msgid "URL"
+#: inc/barcode.class.php:193 inc/barcode.class.php:256 inc/config.class.php:147
+msgid "Page size"
 msgstr ""
 
-#: inc/config.class.php:264
-msgid "code128"
+#: inc/barcode.class.php:196 inc/barcode.class.php:266 inc/config.class.php:150
+msgid "Orientation"
 msgstr ""
 
-#: inc/config.class.php:263
+#: inc/barcode.class.php:201
+msgid "Number of copies"
+msgstr ""
+
+#: inc/barcode.class.php:204 inc/barcode.class.php:270
+msgid "Display border"
+msgstr ""
+
+#: inc/barcode.class.php:209 inc/barcode.class.php:287
+msgid "Create"
+msgstr ""
+
+#: inc/barcode.class.php:224
+msgid "It will generate only elements have defined field:"
+msgstr ""
+
+#: inc/barcode.class.php:226
+msgid "Ticket number"
+msgstr ""
+
+#: inc/barcode.class.php:260
+msgid "Not use first xx barcodes"
+msgstr ""
+
+#: inc/barcode.class.php:278
+msgid "Display labels"
+msgstr ""
+
+#: inc/barcode.class.php:350
+msgid "Invalid barcode type."
+msgstr ""
+
+#: inc/barcode.class.php:372
+msgid "These values cannot be encoded as %1$s and were skipped: %2$s"
+msgstr ""
+
+#: inc/barcode.class.php:381
+msgid "No barcode was generated."
+msgstr ""
+
+#: inc/barcode.class.php:502
+msgid "Unable to write the PDF file."
+msgstr ""
+
+#: inc/barcode.class.php:636
+msgid "Generated file"
+msgstr ""
+
+#: inc/config.class.php:59
+msgid "Barcode plugin configuration"
+msgstr ""
+
+#: inc/config.class.php:64
+msgid "General configuration"
+msgstr ""
+
+#: inc/config.class.php:76
+msgid "Empty the cache"
+msgstr ""
+
+#: inc/config.class.php:80
+msgid "Company logo"
+msgstr ""
+
+#: inc/config.class.php:92
+msgid "Delete the logo"
+msgstr ""
+
+#: inc/config.class.php:154
+msgid "Margins"
+msgstr ""
+
+#: inc/config.class.php:156
+msgid "Top"
+msgstr ""
+
+#: inc/config.class.php:159
+msgid "Bottom"
+msgstr ""
+
+#: inc/config.class.php:164
+msgid "Left"
+msgstr ""
+
+#: inc/config.class.php:167
+msgid "Right"
+msgstr ""
+
+#: inc/config.class.php:172
+msgid "Inner horizontal"
+msgstr ""
+
+#: inc/config.class.php:175
+msgid "Inner vertical"
+msgstr ""
+
+#: inc/config.class.php:179
+msgid "Barcodes sizes"
+msgstr ""
+
+#: inc/config.class.php:181
+msgid "Maximum width"
+msgstr ""
+
+#: inc/config.class.php:184
+msgid "Maximum height"
+msgstr ""
+
+#: inc/config.class.php:189
+msgid "Text display options"
+msgstr ""
+
+#: inc/config.class.php:191
+msgid "Text size"
+msgstr ""
+
+#: inc/config.class.php:194
+msgid "Text spacing between lines"
+msgstr ""
+
+#: inc/config.class.php:256
 msgid "code39"
 msgstr ""
 
-#: inc/config.class.php:265
+#: inc/config.class.php:257
+msgid "code128"
+msgstr ""
+
+#: inc/config.class.php:258
 msgid "ean13"
 msgstr ""
 
-#: inc/config.class.php:266
+#: inc/config.class.php:259
 msgid "int25"
 msgstr ""
 
-#: inc/config.class.php:267
+#: inc/config.class.php:260
 msgid "postnet"
 msgstr ""
 
-#: inc/config.class.php:268
+#: inc/config.class.php:261
 msgid "upca"
+msgstr ""
+
+#: inc/config.class.php:262
+msgid "QRcode"
+msgstr ""
+
+#: inc/profile.class.php:111
+msgid "Generation of barcode"
+msgstr ""
+
+#: inc/profile.class.php:117
+msgid "Manage configuration"
+msgstr ""
+
+#: inc/qrcode.class.php:175
+msgid "Web page of the item"
+msgstr ""
+
+#: inc/qrcode.class.php:176
+msgid "URL by inventory number"
+msgstr ""
+
+#: inc/qrcode.class.php:178
+msgid "Date QRcode (%s)"
+msgstr ""
+
+#: inc/qrcode.class.php:195
+msgid "QR codes are exported as a ZIP archive of BMP images (MS Access / Brother printer)."
+msgstr ""
+
+#: inc/qrcode.class.php:261
+msgid "Barcode temporary directory is not writable."
+msgstr ""
+
+#: inc/qrcode.class.php:282
+msgid "Unable to convert generated QR code to BMP."
+msgstr ""
+
+#: inc/qrcode.class.php:299
+msgid "No QR codes were generated."
+msgstr ""
+
+#: inc/qrcode.class.php:305
+msgid "Unable to create ZIP archive."
+msgstr ""
+
+#: inc/qrcode.class.php:312
+msgid "Unable to finalize ZIP archive."
+msgstr ""
+
+#: inc/qrcode.class.php:316
+msgid "Download %s"
+msgstr ""
+
+#: inc/qrcode.class.php:322
+msgid "Error creating ZIP archive: "
 msgstr ""
