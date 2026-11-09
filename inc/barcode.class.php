@@ -82,15 +82,6 @@ class PluginBarcodeBarcode {
 
 
 
-   function getCodeTypes() {
-      $types = ['Code39', 'code128', 'ean13', 'int25', 'postnet', 'upca',
-                'QRcode'
-               ];
-      return $types;
-   }
-
-
-
    /**
     * Page sizes supported by Cezpdf
     *
@@ -547,12 +538,6 @@ class PluginBarcodeBarcode {
          return false;
       }
       return imagepng($img, $file);
-   }
-
-
-
-   function getSpecificMassiveActions($checkitem = null) {
-      return [];
    }
 
 

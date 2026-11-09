@@ -39,7 +39,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "3.0.4");
+define("PLUGIN_BARCODE_VERSION", "3.1.0");
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_BARCODE_MIN_GLPI', '11.0.0');
@@ -57,6 +57,11 @@ function plugin_init_barcode() {
    Plugin::registerClass('PluginBarcodeProfile', ['addtabon' => ['Profile']]);
    Plugin::registerClass('PluginBarcodeBarcode');
    Plugin::registerClass('PluginBarcodeQRcode');
+
+   // Generation is also available in the simplified interface (helpdesk menu entry)
+   if (!in_array('plugin_barcode_barcode', Profile::$helpdesk_rights, true)) {
+      Profile::$helpdesk_rights[] = 'plugin_barcode_barcode';
+   }
 
    // Generation: massive actions and menu entries
    if (Session::haveRight('plugin_barcode_barcode', CREATE)) {

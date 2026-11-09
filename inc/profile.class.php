@@ -41,14 +41,11 @@
 
 class PluginBarcodeProfile extends Profile {
 
-   static string $rightname = "config";
-
-
    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
-      if ($item->getID() > 0
-              && $item->fields['interface'] == 'central') {
+      if ($item instanceof Profile && $item->getID() > 0) {
          return self::createTabEntry(__('Barcode', 'barcode'));
       }
+      return '';
    }
 
 
@@ -61,26 +58,30 @@ class PluginBarcodeProfile extends Profile {
 
 
 
-    /**
-    * Show profile form
+   /**
+    * Show the plugin rights of a profile
     *
-    * @param $items_id integer id of the profile
-    * @param $target value url of target
+    * @param int   $ID      id of the profile
+    * @param array $options not used
     *
-    * @return nothing
+    * @return void
     **/
    function showForm($ID, array $options = []) {
 
-      echo "<div class='firstbloc'>";
-      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))) {
-         $profile = new Profile();
-         echo "<form method='post' action='".$profile->getFormURL()."'>";
+      $profile = new Profile();
+      if (!$profile->getFromDB($ID)) {
+         return;
       }
 
-      $profile = new Profile();
-      $profile->getFromDB($ID);
+      // The form is saved by front/profile.form.php which requires the profile right
+      $canedit = Session::haveRight('profile', UPDATE);
 
-      $rights = $this->getAllRights();
+      echo "<div class='firstbloc'>";
+      if ($canedit) {
+         echo "<form method='post' action='" . htmlescape($profile->getFormURL()) . "'>";
+      }
+
+      $rights = $this->getAllRights($profile->fields['interface'] === 'helpdesk');
       $profile->displayRightsChoiceMatrix($rights, ['canedit'       => $canedit,
                                                     'default_class' => 'tab_bg_2',
                                                     'title'         => __('Barcode', 'barcode')
@@ -97,59 +98,30 @@ class PluginBarcodeProfile extends Profile {
 
 
 
-   static function uninstallProfile() {
-      $pfProfile = new self();
-      $a_rights = $pfProfile->getAllRights();
-      foreach ($a_rights as $data) {
-         ProfileRight::deleteProfileRights([$data['field']]);
-      }
-   }
-
-
-
-   function getAllRights() {
+   /**
+    * Rights managed by the plugin
+    *
+    * @param bool $helpdesk only rights available in the simplified interface
+    *
+    * @return array
+    */
+   function getAllRights(bool $helpdesk = false) {
       $a_rights = [
-          ['rights'    => [UPDATE  => __('Update')],
-                'label'     => __('Manage configuration', 'barcode'),
-                'field'     => 'plugin_barcode_config'
-          ],
           ['rights'    => [CREATE  => __('Create')],
                 'label'     => __('Generation of barcode', 'barcode'),
                 'field'     => 'plugin_barcode_barcode'
-          ]
+          ],
       ];
+      if (!$helpdesk) {
+         $a_rights[] = ['rights'    => [UPDATE  => __('Update')],
+                'label'     => __('Manage configuration', 'barcode'),
+                'field'     => 'plugin_barcode_config'
+          ];
+      }
       return $a_rights;
    }
 
 
-
-   static function addDefaultProfileInfos($profiles_id, $rights) {
-      $profileRight = new ProfileRight();
-      foreach ($rights as $right => $value) {
-         if (!countElementsInTable('glpi_profilerights',
-                                   ['profiles_id' => $profiles_id, 'name' => $right])) {
-            $myright['profiles_id'] = $profiles_id;
-            $myright['name']        = $right;
-            $myright['rights']      = $value;
-            $profileRight->add($myright);
-
-            //Add right to the current session
-            $_SESSION['glpiactiveprofile'][$right] = $value;
-         }
-      }
-   }
-
-   /**
-    * @param $profiles_id  integer
-    */
-   static function createFirstAccess($profiles_id) {
-      include_once(Plugin::getPhpDir('barcode')."/inc/profile.class.php");
-      $profile = new self();
-      foreach ($profile->getAllRights() as $right) {
-         self::addDefaultProfileInfos($profiles_id,
-                                      [$right['field'] => ALLSTANDARDRIGHT]);
-      }
-   }
 
    static function removeRights() {
       $profile = new self();
@@ -158,57 +130,6 @@ class PluginBarcodeProfile extends Profile {
             unset($_SESSION['glpiactiveprofile'][$right['field']]);
          }
          ProfileRight::deleteProfileRights([$right['field']]);
-      }
-   }
-
-   /**
-    * Get mapping of old profile rights to new ones.
-    * Used during migration from legacy profile table.
-    *
-    * @return array
-    */
-   static function getOldRightsMappings() {
-      return [
-         'barcode' => 'plugin_barcode_barcode',
-         'config'  => 'plugin_barcode_config',
-      ];
-   }
-
-   static function migrateProfiles() {
-      //Get all rights from the old table
-      $profiles = getAllDataFromTable(getTableForItemType(__CLASS__));
-
-      //Load mapping of old rights to their new equivalent
-      $oldrights = self::getOldRightsMappings();
-
-      //For each old profile : translate old right the new one
-      foreach ($profiles as $id => $profile) {
-         switch ($profile['right']) {
-            case 'r' :
-               $value = READ;
-               break;
-            case 'w':
-               $value = ALLSTANDARDRIGHT;
-               break;
-            case 0:
-            default:
-               $value = 0;
-               break;
-         }
-         //Write in glpi_profilerights the new fusioninventory right
-         if (isset($oldrights[$profile['type']])) {
-            //There's one new right corresponding to the old one
-            if (!is_array($oldrights[$profile['type']])) {
-               self::addDefaultProfileInfos($profile['profiles_id'],
-                                            [$oldrights[$profile['type']] => $value]);
-            } else {
-               //One old right has been splitted into serveral new ones
-               foreach ($oldrights[$profile['type']] as $newtype) {
-                  self::addDefaultProfileInfos($profile['profiles_id'],
-                                               [$newtype => $value]);
-               }
-            }
-         }
       }
    }
 
