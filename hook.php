@@ -189,7 +189,7 @@ function plugin_barcode_install() {
    PluginBarcodeProfile::initProfile();
    if ($DB->tableExists("glpi_plugin_barcode_profiles")) {
       $query = "DROP TABLE `glpi_plugin_barcode_profiles`";
-      $DB->query($query) or die("error deleting glpi_plugin_barcode_profiles");
+      $DB->doQuery($query) or die("error deleting glpi_plugin_barcode_profiles");
    }
    return true;
 }
