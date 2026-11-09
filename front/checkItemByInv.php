@@ -35,7 +35,11 @@ Session::checkRight("config", UPDATE);
 // To be available when plugin is not activated
 Plugin::load('barcode');
 Html::header(__('Barcode', 'barcode'), $_SERVER['PHP_SELF'], "config", "plugins");
-$itemtype = $_GET['itemtype'];
+
+$itemtype = $_GET['itemtype'] ?? '';
+if (!is_a($itemtype, CommonDBTM::class, true)) {
+   Html::displayErrorAndDie(__('Invalid item type'), true);
+}
 $item = new $itemtype();
 $itemInventoryNumber[] = $_GET['inventoryNumber'];
 foreach ($itemInventoryNumber as $key => $value) {

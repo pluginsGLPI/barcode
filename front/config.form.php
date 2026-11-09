@@ -60,11 +60,19 @@ if (isset($_POST['dropCache'])) {
    }
    Session::addMessageAfterRedirect(__('The logo has been removed.', 'barcode'));
 } else if (!empty($_FILES['logo']['name'])) {
+   // Validate uploaded file is actually a PNG image
+   $uploadedFile = $_FILES['logo']['tmp_name'];
+   $imgInfo = @getimagesize($uploadedFile);
+   if ($imgInfo === false || $imgInfo[2] !== IMAGETYPE_PNG) {
+      Session::addMessageAfterRedirect(__('The logo must be a PNG image.', 'barcode'), true, ERROR);
+      Html::back();
+      return;
+   }
    if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
       @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
    }
-   // Move
-   rename($_FILES['logo']['tmp_name'], GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+   // Move validated file
+   rename($uploadedFile, GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
 
 } else if (isset($_POST['type'])) {
    $pbconf = new PluginBarcodeConfig();

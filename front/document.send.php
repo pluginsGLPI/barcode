@@ -50,10 +50,8 @@ $doc = new Document;
 if (isset($_GET["file"])) { // for other file
    $splitter = explode("/", $_GET["file"]);
    if (count($splitter) == 2) {
-      $send = false;
-
-      if ($splitter[0] == "barcode") {
-         $send = true;
+      if ($splitter[0] !== "barcode") {
+         Html::displayErrorAndDie(__('Unauthorized access to this file'), true);
       }
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR."/".$_GET["file"])) {
