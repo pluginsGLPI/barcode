@@ -49,7 +49,7 @@ if (!defined('GLPI_ROOT')) {
 class PluginBarcodeBarcode {
    private $docsPath;
 
-   static $rightname = 'plugin_barcode_barcode';
+   static string $rightname = 'plugin_barcode_barcode';
 
 
    /**
@@ -57,6 +57,34 @@ class PluginBarcodeBarcode {
     **/
    function __construct() {
       $this->docsPath = GLPI_PLUGIN_DOC_DIR.'/barcode/';
+   }
+
+
+   /**
+    * GLPI 10/11/12 menu integration
+    */
+   static function getMenuName() {
+      return __('Barcode', 'barcode');
+   }
+
+   static function getMenuContent() {
+      $menu = [];
+      if (Session::haveRight('plugin_barcode_barcode', CREATE)) {
+         $menu['title']   = self::getMenuName();
+         $menu['page']    = '/plugins/barcode/front/barcode.form.php';
+         $menu['icon']    = 'fas fa-barcode';
+         $menu['options'] = [
+            'barcode' => [
+               'title' => __('Barcode', 'barcode'),
+               'page'  => '/plugins/barcode/front/barcode.form.php',
+               'links' => [
+                  'add'    => '/plugins/barcode/front/barcode.form.php',
+                  'config' => '/plugins/barcode/front/config.php',
+               ],
+            ],
+         ];
+      }
+      return $menu;
    }
 
 
@@ -151,7 +179,7 @@ class PluginBarcodeBarcode {
          $code = '';
       }
       echo "<form name='form' method='post'
-                  action='".Plugin::getWebDir('barcode')."/front/barcode.form.php'>";
+                  action='/plugins/barcode/front/barcode.form.php'>";
         echo "<div align='center'>";
         echo "<table class='tab_cadre'>";
          echo "<tr><th colspan='4'>".__('Generation', 'barcode')."</th></tr>";
@@ -308,7 +336,7 @@ class PluginBarcodeBarcode {
 
       $pdf= new Cezpdf($size, $orientation);
       $pdf->tempPath = GLPI_TMP_DIR;
-      $pdf->selectFont(Plugin::getPhpDir('barcode')."/lib/ezpdf/fonts/Helvetica.afm");
+      $pdf->selectFont(Plugin::getPhpDir('barcode')."/vendor/rospdf/pdf-php/src/fonts/Helvetica.afm");
       $pdf->ezSetMargins($config['marginTop'], $config['marginBottom'], $config['marginLeft'], $config['marginRight']);
       $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
       $width   = $config['maxCodeWidth'];
@@ -510,7 +538,7 @@ class PluginBarcodeBarcode {
                $filePath = explode('/', $file);
                $filename = $filePath[count($filePath)-1];
 
-               $msg = "<a href='".Plugin::getWebDir('barcode').'/front/send.php?file='.urlencode($filename)
+               $msg = "<a href='/plugins/barcode/front/send.php?file=".urlencode($filename)
                   ."'>".__('Generated file', 'barcode')."</a>";
 
                Session::addMessageAfterRedirect($msg);

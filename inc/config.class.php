@@ -45,7 +45,7 @@ if (!defined('GLPI_ROOT')) {
 
 class PluginBarcodeConfig extends CommonDBTM {
 
-   static $rightname = 'plugin_barcode_config';
+   static string $rightname = 'plugin_barcode_config';
 
    function showForm($ID, array $options = []) {
       global $CFG_GLPI;
@@ -53,7 +53,7 @@ class PluginBarcodeConfig extends CommonDBTM {
       $pbBarcode   = new PluginBarcodeBarcode();
       $defaultType = $this->getConfig();
       echo "<form name='form' method='post'
-                  action='".Plugin::getWebDir('barcode')."/front/config.form.php'
+                  action='/plugins/barcode/front/config.form.php'
                    enctype='multipart/form-data'>";
 
       echo "<div align='center'>";
@@ -85,7 +85,7 @@ class PluginBarcodeConfig extends CommonDBTM {
       if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
          echo "<tr class='tab_bg_1'>";
          echo "<td colspan='4' align='center'>";
-         echo "<img src='".Plugin::getWebDir('barcode')."/front/document.send.php?file=barcode/logo.png'
+         echo "<img src='/plugins/barcode/front/document.send.php?file=barcode/logo.png'
                width='300'/>";
          echo "</td>";
          echo "</tr>";
@@ -135,7 +135,7 @@ class PluginBarcodeConfig extends CommonDBTM {
 
       $config = $this->getConfigType($type);
       echo "<form name='form' method='post'
-            action='".Plugin::getWebDir('barcode')."/front/config_type.form.php'>";
+            action='/plugins/barcode/front/config_type.form.php'>";
       echo "<input type='hidden' name='type' value='".$type."'>";
       echo "<div align='center'>";
       echo "<table class='tab_cadre_fixe' >";

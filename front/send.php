@@ -46,41 +46,51 @@ if (!defined("GLPI_PLUGIN_DOC_DIR")) {
 }
 $docDir = GLPI_PLUGIN_DOC_DIR.'/barcode';
 
+// Check session and access rights
+Session::checkLoginUser();
+
 if (isset($_GET['file'])) {
-   $filename = $_GET['file'];
+    $filename = basename($_GET['file']); // Sanitize input
+    $allowed_extensions = ['zip', 'bmp', 'png', 'pdf'];
 
-   // Security test : document in $docDir
-   if (strstr($filename, "../") || strstr($filename, "..\\")) {
-      echo "Security attack !!!";
-      Toolbox::logDebug("[Plugin barcode][security][sendfile] ".
-               $_SESSION["glpiname"]." try to get a non standard file : ".$filename);
-      exit;
-   }
+    // Check file extension
+    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    if (!in_array($extension, $allowed_extensions)) {
+        echo "Invalid file type.";
+        exit;
+    }
 
-   $file = $docDir.'/'.$filename;
-   if (!file_exists($file)) {
-      echo "Error file $filename does not exist"; //TODO : traduire
-   } else {
-      // Now send the file with header() magic
-      header("Expires: Mon, 26 Nov 1962 00:00:00 GMT");
-      header('Pragma: private'); /// IE BUG + SSL
-      //header('Pragma: no-cache');
-      header('Cache-control: private, must-revalidate'); /// IE BUG + SSL
-      header("Content-disposition: filename=\"$filename\"");
-      header("Content-type: application/pdf");
+    $file = realpath($docDir.'/'.$filename);
 
-      $f=fopen($file, "r");
+    // Ensure the file is within the designated directory
+    if (strpos($file, realpath($docDir)) !== 0 || !file_exists($file)) {
+        echo "File does not exist or access denied.";
+        exit;
+    }
 
-      if (!$f) {
-         echo "Error opening file $filename";
-      } else {
-         $fsize=filesize($file);
+    // Send the file with headers
+    header("Expires: Mon, 26 Nov 1962 00:00:00 GMT");
+    header('Pragma: private');
+    header('Cache-control: private, must-revalidate');
+    header("Content-disposition: attachment; filename=\"$filename\"");
 
-         if ($fsize) {
-            echo fread($f, filesize($file));
-         } else {
-            echo 'error';
-         }
-      }
-   }
+    switch ($extension) {
+        case 'zip':
+            header("Content-type: application/zip");
+            break;
+        case 'png':
+            header("Content-type: image/png");
+            break;
+        case 'bmp':
+            header("Content-type: image/bmp");
+            break;
+        case 'pdf':
+            header("Content-type: application/pdf");
+            break;
+        default:
+            header("Content-type: application/octet-stream");
+            break;
+    }
+
+    readfile($file);
 }

@@ -41,7 +41,7 @@
 
 class PluginBarcodeProfile extends Profile {
 
-   static $rightname = "config";
+   static string $rightname = "config";
 
 
    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {

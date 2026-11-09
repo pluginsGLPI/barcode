@@ -39,12 +39,12 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_BARCODE_VERSION", "2.7.1");
+define ("PLUGIN_BARCODE_VERSION", "3.0.4");
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_BARCODE_MIN_GLPI', '10.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_BARCODE_MAX_GLPI', '10.0.99');
+define('PLUGIN_BARCODE_MAX_GLPI', '12.99');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_barcode() {
@@ -54,12 +54,11 @@ function plugin_init_barcode() {
 
    $PLUGIN_HOOKS['csrf_compliant']['barcode'] = true;
 
-   Plugin::registerClass('PluginBarcodeDropdown');
    Plugin::registerClass('PluginBarcodeProfile', ['addtabon' => ['Profile']]);
-   Plugin::registerClass('PluginBarcode');
+   Plugin::registerClass('PluginBarcodeBarcode');
+   Plugin::registerClass('PluginBarcodeQRcode');
 
    // Display a menu entry ?
-
    if (Session::haveRight('plugin_barcode_barcode', CREATE)
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
       $PLUGIN_HOOKS['pre_item_purge']['barcode']
@@ -68,12 +67,8 @@ function plugin_init_barcode() {
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
-      $web_dir = '/' . Plugin::getWebDir('barcode', false);
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['title'] = "Search";
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['page'] = $web_dir . '/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['search'] = $web_dir. '/front/barcode.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['add'] = $web_dir. '/front/barcode.form.php';
-      $PLUGIN_HOOKS['submenu_entry']['barcode']['options']['optionname']['links']['config'] = $web_dir. '/index.php';
+      // Menu entry (GLPI 10/11/12 compatible)
+      $PLUGIN_HOOKS['menu_toadd']['barcode'] = ['tools' => 'PluginBarcodeBarcode'];
 
       $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
    }
@@ -95,8 +90,7 @@ function plugin_version_barcode() {
       'shortname'      => 'barcode',
       'version'        => PLUGIN_BARCODE_VERSION,
       'license'        => 'AGPLv3+',
-      'author'         => '<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a> &
-                           Jean Marc GRISARD & Vincent MAZZONI',
+      'author'         => 'David DURIEUX, Jean Marc GRISARD, Vincent MAZZONI (GLPI 11 Update by Tamatoa)',
       'homepage'       => 'https://github.com/pluginsGLPI/barcode',
       'requirements'   => [
          'glpi' => [
