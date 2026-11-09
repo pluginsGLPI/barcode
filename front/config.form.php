@@ -39,7 +39,6 @@
    ------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
 
 if (isset($_POST['dropCache'])) {
    $dir = GLPI_PLUGIN_DOC_DIR.'/barcode';

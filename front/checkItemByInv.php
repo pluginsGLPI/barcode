@@ -31,7 +31,6 @@
 use Glpi\Exception\Http\BadRequestHttpException;
 use Glpi\Exception\Http\NotFoundHttpException;
 
-include ('../../../inc/includes.php');
 
 // Target page of the "URL by inventory number" QR codes: any logged-in user
 // may scan a label, the item form itself checks the view right.

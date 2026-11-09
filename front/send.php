@@ -39,7 +39,6 @@
    ------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
 
 if (!defined("GLPI_PLUGIN_DOC_DIR")) {
     define("GLPI_PLUGIN_DOC_DIR", GLPI_ROOT . "/files/_plugins");

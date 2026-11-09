@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.2",
         "cweagans/composer-patches": "^1.7",
         "deltalab/phpqrcode": "^1.1",
         "pear/image_barcode": "^1.1",
@@ -13,7 +13,7 @@
     "config": {
         "optimize-autoloader": true,
         "platform": {
-            "php": "7.4.0"
+            "php": "8.2.0"
         },
         "sort-packages": true,
         "allow-plugins": {

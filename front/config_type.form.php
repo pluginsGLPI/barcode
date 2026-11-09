@@ -44,7 +44,6 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-include ('../../../inc/includes.php');
 
 if (isset($_POST['type'])) {
    $pbcconf = new PluginBarcodeConfig_Type();

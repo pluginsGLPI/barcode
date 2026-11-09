@@ -42,7 +42,6 @@
 // Non menu entry case
 //header("Location:../../central.php");
 
-include ('../../../inc/includes.php');
 
 Session::checkRight("config", UPDATE);
 
