@@ -61,9 +61,6 @@ function plugin_init_barcode() {
    // Display a menu entry ?
    if (Session::haveRight('plugin_barcode_barcode', CREATE)
            || Session::haveRight('plugin_barcode_config', UPDATE)) {
-      $PLUGIN_HOOKS['pre_item_purge']['barcode']
-         = ['Profile' => ['PluginBarcodeProfile','cleanProfiles']];
-
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 

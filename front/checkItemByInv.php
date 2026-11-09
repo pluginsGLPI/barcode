@@ -28,25 +28,38 @@
    @since     2009
    ------------------------------------------------------------------------
  */
-// Non menu entry case
-//header("Location:../../central.php");
-include ('../../../inc/includes.php');
-Session::checkRight("config", UPDATE);
-// To be available when plugin is not activated
-Plugin::load('barcode');
-Html::header(__('Barcode', 'barcode'), $_SERVER['PHP_SELF'], "config", "plugins");
+use Glpi\Exception\Http\BadRequestHttpException;
+use Glpi\Exception\Http\NotFoundHttpException;
 
-$itemtype = $_GET['itemtype'] ?? '';
+include ('../../../inc/includes.php');
+
+// Target page of the "URL by inventory number" QR codes: any logged-in user
+// may scan a label, the item form itself checks the view right.
+Session::checkLoginUser();
+
+$itemtype        = $_GET['itemtype'] ?? '';
+$inventoryNumber = $_GET['inventoryNumber'] ?? '';
+
 if (!is_a($itemtype, CommonDBTM::class, true)) {
-   Html::displayErrorAndDie(__('Invalid item type'), true);
+   throw new BadRequestHttpException(__('Invalid item type', 'barcode'));
 }
+if (!is_string($inventoryNumber) || $inventoryNumber === '') {
+   throw new BadRequestHttpException(__('Missing inventory number', 'barcode'));
+}
+
+/** @var CommonDBTM $item */
 $item = new $itemtype();
-$itemInventoryNumber[] = $_GET['inventoryNumber'];
-foreach ($itemInventoryNumber as $key => $value) {
-   if ($item->getFromDBByCrit(['otherserial' => $value])) {
-      Html::redirect($item->getFormURLWithID($item->getID()));
-   } else {
-      Html::displayErrorAndDie(__('No item found'), true);
-   }
-};
-Html::footer();
+if (!$item->isField('otherserial')) {
+   throw new BadRequestHttpException(__('Invalid item type', 'barcode'));
+}
+
+$found = $item->find(['otherserial' => $inventoryNumber], [], 2);
+if (count($found) === 0) {
+   throw new NotFoundHttpException(__('No item found', 'barcode'));
+}
+if (count($found) > 1) {
+   throw new BadRequestHttpException(__('Several items share this inventory number', 'barcode'));
+}
+
+$id = (int) array_key_first($found);
+Html::redirect($itemtype::getFormURLWithID($id));

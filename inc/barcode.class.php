@@ -220,7 +220,7 @@ class PluginBarcodeBarcode {
       echo '<center>';
       echo '<strong>';
       echo __('It will generate only elements have defined field:', 'barcode').' ';
-      if (key($ma->items) == 'Ticket') {
+      if (is_a($ma->getItemtype(false), CommonITILObject::class, true)) {
          echo __('Ticket number', 'barcode');
       } else {
          echo __('Inventory number');
@@ -519,8 +519,8 @@ class PluginBarcodeBarcode {
             }
             foreach ($ids as $key) {
                $item->getFromDB($key);
-               if (key($ma->items) == 'CommonITILObject') {
-                  $codes[] = $item->getField('id');
+               if ($item instanceof CommonITILObject) {
+                  $codes[] = $item->getID();
                } else if ($item->isField('otherserial')) {
                   $codes[] = $item->getField('otherserial');
                }

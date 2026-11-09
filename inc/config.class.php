@@ -85,7 +85,7 @@ class PluginBarcodeConfig extends CommonDBTM {
       if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
          echo "<tr class='tab_bg_1'>";
          echo "<td colspan='4' align='center'>";
-         echo "<img src='/plugins/barcode/front/document.send.php?file=barcode/logo.png'
+         echo "<img src='/plugins/barcode/front/send.php?file=logo.png'
                width='300'/>";
          echo "</td>";
          echo "</tr>";
