@@ -43,84 +43,10 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access directly to this file");
 }
 
-if (!function_exists('imagebmp')) {
-    /**
-     * BMP output function for GD
-     * @param resource $image
-     * @param string|resource $filename
-     * @return bool
-     */
-    function imagebmp($image, $filename = null) {
-        $width = imagesx($image);
-        $height = imagesy($image);
-        $bytesPerPixel = 3;
-        $fileSize = (int)(($width * $bytesPerPixel + 4) * $height + 54);
-        $rowSize = (int)($width * $bytesPerPixel + 3) & ~3;
-
-        // Header
-        $header = pack('v', 0x4D42) // 'BM'
-                . pack('V', $fileSize) // File size
-                . pack('v', 0) // Reserved
-                . pack('v', 0) // Reserved
-                . pack('V', 54); // Pixel data offset
-
-        // DIB Header
-        $header .= pack('V', 40) // DIB header size
-                . pack('V', $width) // Width
-                . pack('V', $height) // Height
-                . pack('v', 1) // Color planes
-                . pack('v', 24) // Bits per pixel
-                . pack('V', 0) // Compression (BI_RGB)
-                . pack('V', $rowSize * $height) // Image size
-                . pack('V', 2835) // Horizontal resolution
-                . pack('V', 2835) // Vertical resolution
-                . pack('V', 0) // Colors used
-                . pack('V', 0); // Important colors
-
-        // Write file
-        if ($filename !== null) {
-            $fp = fopen($filename, 'wb');
-            if (!$fp) {
-                return false;
-            }
-            fwrite($fp, $header);
-            for ($y = $height - 1; $y >= 0; $y--) {
-                for ($x = 0; $x < $width; $x++) {
-                    $rgb = imagecolorat($image, $x, $y);
-                    $b = ($rgb >> 0) & 0xFF;
-                    $g = ($rgb >> 8) & 0xFF;
-                    $r = ($rgb >> 16) & 0xFF;
-                    fwrite($fp, pack('V', ($b << 16) | ($g << 8) | $r));
-                }
-                // Padding
-                $padding = $rowSize - $width * $bytesPerPixel;
-                if ($padding > 0) {
-                    fwrite($fp, str_repeat("\x00", $padding));
-                }
-            }
-            fclose($fp);
-        } else {
-            // Output directly to browser
-            header('Content-Type: image/bmp');
-            echo $header;
-            for ($y = $height - 1; $y >= 0; $y--) {
-                for ($x = 0; $x < $width; $x++) {
-                    $rgb = imagecolorat($image, $x, $y);
-                    $b = ($rgb >> 0) & 0xFF;
-                    $g = ($rgb >> 8) & 0xFF;
-                    $r = ($rgb >> 16) & 0xFF;
-                    echo pack('V', ($b << 16) | ($g << 8) | $r);
-                }
-                $padding = $rowSize - $width * $bytesPerPixel;
-                if ($padding > 0) {
-                    echo str_repeat("\x00", $padding);
-                }
-            }
-        }
-        return true;
-    }
-}
-
+/**
+ * QR code generation as a ZIP archive of BMP files
+ * (24-bit BMP, white margins cropped: MS Access / Brother P-touch labels)
+ */
 class PluginBarcodeQRcode {
 
    /**
@@ -131,368 +57,177 @@ class PluginBarcodeQRcode {
     * @return string The sanitized filename
     */
    private static function sanitizeFilename($name) {
-      // Replace spaces with underscores
-      $name = str_replace(' ', '_', $name);
-      // Remove invalid Windows filename characters: < > : " / \ | ? *
-      $name = preg_replace('/[<>:"\/\\\\|?*]/', '', $name);
-      // Remove trailing dots and spaces
+      $name = str_replace(' ', '_', (string) $name);
+      // Remove invalid Windows filename characters and control chars
+      $name = preg_replace('/[<>:"\/\\\\|?*\x00-\x1F]/', '', $name);
       $name = rtrim($name, ' .');
-      // Limit length (Windows max is 255 chars for full path)
-      $name = substr($name, 0, 100);
-      return $name;
+      return mb_substr($name, 0, 100);
    }
 
-   function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
-      global $CFG_GLPI;
-
-      /** @var CommonDBTM $item */
-      $item = new $itemtype();
-      $item->getFromDB($items_id);
-      $itemByInvNumber = $item->fields['otherserial'] ?? '';
-      $URLById = 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($items_id, false);
-      $URLByInvNumber = 'URL = ' . $CFG_GLPI['url_base'] . '/plugins/barcode/front/checkItemByInv.php?inventoryNumber='. $itemByInvNumber . '&itemtype=' . $itemtype;
-      $a_content = [];
-
-      $b_content = [];
-      $have_content = false;
-      if ($data['serialnumber']) {
-         if ($item->fields['serial'] ?? '' !== '') {
-            $have_content = true;
-         }
-         $a_content[] = __("Serial number").' = '.($item->fields['serial'] ?? '');
-         if ($data['displayserialnumber']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __("Serial number").': ';
-            }
-            $b_content[] = $label.($item->fields['serial'] ?? '');
-         }
-      }
-      if ($data['inventorynumber']) {
-         if ($item->fields['otherserial'] ?? '' !== '') {
-            $have_content = true;
-         }
-         $a_content[] = __('Inventory number').' = '.($item->fields['otherserial'] ?? '');
-         if ($data['displayinventorynumber']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('Inventory number').': ';
-            }
-            $b_content[] = $label.($item->fields['otherserial'] ?? '');
-         }
-      }
-      if ($data['id']) {
-         if ($item->fields['id'] ?? '' !== '') {
-            $have_content = true;
-         }
-         $a_content[] = __('ID').' = '.($item->fields['id'] ?? '');
-         if ($data['displayid']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('ID').': ';
-            }
-            $b_content[] = $label.($item->fields['id'] ?? '');
-         }
-      }
-      if (isset($data['uuid']) && $data['uuid']) {
-         if (isset($item->fields['uuid']) && $item->fields['uuid'] !== '') {
-            $have_content = true;
-         }
-         $a_content[] = __('UUID').' = '.($item->fields['uuid'] ?? '');
-         if ($data['displayuuid']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('UUID').': ';
-            }
-            $b_content[] = $label.($item->fields['uuid'] ?? '');
-         }
-      }
-      if ($data['name']) {
-         if ($item->fields['name'] ?? '' !== '') {
-            $have_content = true;
-         }
-         $a_content[] = __('Item Name').' = '.($item->fields['name'] ?? '');
-         if ($data['displayname']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('Item Name').': ';
-            }
-            $b_content[] = $label.($item->fields['name'] ?? '');
-         }
-      }
-      if ($data['url'] && !$item->no_form_page) {
-         if ($data['inventorynumberURL']) {
-            $a_content[] = $URLByInvNumber;
-         } else {
-            $a_content[] = $URLById;
-         }
-         if ($data['displayurl']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('Item URL').': ';
-            }
-            if ($data['inventorynumberURL']) {
-               $b_content[] = $label.$URLByInvNumber;
-            } else {
-               $b_content[] = $label.$URLById;
-            }
-         }
-      }
-      if ($data['qrcodedate']) {
-         $a_content[] = 'QRcode date = '.date('Y-m-d');
-         if ($data['displayqrcodedate']) {
-            $label = '';
-            if ($data['displaylabels'] ?? false) {
-               $label = __('Date').': ';
-            }
-            $b_content[] = $label.date('Y-m-d');
-         }
-      }
-
-      if (count($a_content) > 0) {
-         $codeContents = implode("\n", $a_content);
-         QRcode::png($codeContents,
-                     GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$number.'.png',
-                     QR_ECLEVEL_L,
-                     4);
-         return [GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$number.'.png', $b_content];
-      }
-      return false;
-   }
-
-
-   function cleanQRcodefiles($rand, $number) {
-      for ($i = 0; $i < $number; $i++) {
-         $file = GLPI_PLUGIN_DOC_DIR.'/barcode/_tmp_'.$rand.'-'.$i.'.png';
-         if (file_exists($file)) {
-            unlink($file);
-         }
-      }
-   }
 
 
    /**
-    * Show the massive actions sub form for QR code generation with ZIP output
+    * Text encoded in the QR code of one item.
+    *
+    * The format ("Label = value" lines) is consumed by external tools:
+    * keep it stable.
+    *
+    * @param CommonDBTM $item  loaded item
+    * @param array      $data  options posted by the massive action form
+    *
+    * @return string[] lines
+    */
+   static function getContent(CommonDBTM $item, array $data): array {
+      global $CFG_GLPI;
+
+      $fields   = $item->fields;
+      $itemtype = $item->getType();
+      $content  = [];
+      if (!empty($data['serialnumber'])) {
+         $content[] = __('Serial number') . ' = ' . ($fields['serial'] ?? '');
+      }
+      if (!empty($data['inventorynumber'])) {
+         $content[] = __('Inventory number') . ' = ' . ($fields['otherserial'] ?? '');
+      }
+      if (!empty($data['id'])) {
+         $content[] = __('ID') . ' = ' . ($fields['id'] ?? '');
+      }
+      if (!empty($data['uuid'])) {
+         $content[] = __('UUID') . ' = ' . ($fields['uuid'] ?? '');
+      }
+      if (!empty($data['name'])) {
+         $content[] = __('Item Name') . ' = ' . ($fields['name'] ?? '');
+      }
+      if (!empty($data['url']) && !$item->no_form_page) {
+         if (!empty($data['inventorynumberURL'])) {
+            $content[] = 'URL = ' . $CFG_GLPI['url_base'] . '/plugins/barcode/front/checkItemByInv.php?'
+               . http_build_query([
+                  'inventoryNumber' => $fields['otherserial'] ?? '',
+                  'itemtype'        => $itemtype,
+               ], '', '&', PHP_QUERY_RFC3986);
+         } else {
+            $content[] = 'URL = ' . $CFG_GLPI['url_base'] . $itemtype::getFormURLWithID($item->getID(), false);
+         }
+      }
+      if (!empty($data['qrcodedate'])) {
+         $content[] = 'QRcode date = ' . date('Y-m-d');
+      }
+      return $content;
+   }
+
+
+
+   /**
+    * Generate the QR code PNG of one item.
+    *
+    * @param string $itemtype
+    * @param int    $items_id
+    * @param int    $rand     unique id of the current generation
+    * @param int    $number   index of the file in the current generation
+    * @param array  $data     options posted by the massive action form
+    *
+    * @return string|false path of the PNG file
+    */
+   function generateQRcode($itemtype, $items_id, $rand, $number, $data) {
+      $item = getItemForItemtype($itemtype);
+      if (!$item || !$item->getFromDB($items_id)) {
+         return false;
+      }
+
+      $content = self::getContent($item, $data);
+      if (count($content) === 0) {
+         return false;
+      }
+
+      $file = GLPI_PLUGIN_DOC_DIR . '/barcode/_tmp_' . $rand . '-' . $number . '.png';
+      QRcode::png(implode("\n", $content), $file, QR_ECLEVEL_L, 4);
+      return is_file($file) ? $file : false;
+   }
+
+
+
+   /**
+    * Show the massive actions sub form for QR code generation
     *
     * @param MassiveAction $ma The massive action object
     * @return void
     */
    function showFormMassiveAction(MassiveAction $ma) {
-      global $CFG_GLPI;
 
-      $itemtype = $ma->getItemtype(false);
-      $item = null;
-      $fields = [];
+      $itemtype     = $ma->getItemtype(false);
+      $fields       = [];
       $no_form_page = true;
-
       if (is_a($itemtype, CommonDBTM::class, true)) {
          /** @var CommonDBTM $item */
          $item = new $itemtype();
          $item->getEmpty();
-         $fields = array_keys($item->fields);
-         $no_form_page = $item->no_form_page ?? true;
+         $fields       = array_keys($item->fields);
+         $no_form_page = $item->no_form_page;
       }
 
-      echo '<input type="hidden" name="type" value="QRcode" />';
+      // name => [label, default value, displayed?]
+      $options = [
+         'serialnumber'       => [__('Serial number'), 1, in_array('serial', $fields, true)],
+         'inventorynumber'    => [__('Inventory number'), 0, in_array('otherserial', $fields, true)],
+         'id'                 => [__('ID'), 0, true],
+         'uuid'               => [__('UUID'), 0, in_array('uuid', $fields, true)],
+         'name'               => [__('Name'), 1, in_array('name', $fields, true)],
+         'url'                => [__('Web page of the item', 'barcode'), 1, !$no_form_page],
+         'inventorynumberURL' => [__('URL by inventory number', 'barcode'), 0,
+                                  !$no_form_page && in_array('otherserial', $fields, true)],
+         'qrcodedate'         => [sprintf(__('Date QRcode (%s)', 'barcode'), date('Y-m-d')), 1, true],
+      ];
 
-      // Output form content
+      echo Html::hidden('type', ['value' => 'QRcode']);
       echo '<div class="d-flex flex-column gap-3">';
-
-      // Serial number option
-      if (in_array('serial', $fields, true)) {
+      foreach ($options as $name => [$label, $default, $displayed]) {
+         if (!$displayed) {
+            echo Html::hidden($name, ['value' => 0]);
+            continue;
+         }
          echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __("Serial number") . '</label>';
+         echo '<label class="col-sm-4 col-form-label">' . htmlescape($label) . '</label>';
          echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("serialnumber", 1, -1, ['width' => '100%']);
-         echo '</div></div>';
-      } else {
-         echo Html::hidden('serialnumber', ['value' => 0]);
-      }
-
-      // Display serial number
-      if (in_array('serial', $fields, true)) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Display serial number') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("displayserialnumber", 0, -1, ['width' => '100%']);
+         Dropdown::showYesNo($name, $default, -1, ['width' => '100%']);
          echo '</div></div>';
       }
-
-      // Inventory number
-      if (in_array('otherserial', $fields, true)) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Inventory number') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("inventorynumber", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-      } else {
-         echo Html::hidden('inventorynumber', ['value' => 0]);
-      }
-
-      // Display inventory number
-      if (in_array('otherserial', $fields, true)) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Display inventory number') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("displayinventorynumber", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-      }
-
-      // ID
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('ID') . '</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showYesNo("id", 0, -1, ['width' => '100%']);
-      echo '</div></div>';
-
-      // Display ID
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('Display ID') . '</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showYesNo("displayid", 0, -1, ['width' => '100%']);
-      echo '</div></div>';
-
-      // UUID
-      if (in_array('uuid', $fields, true)) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('UUID') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("uuid", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Display UUID') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("displayuuid", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-      } else {
-         echo Html::hidden('uuid', ['value' => 0]);
-      }
-
-      // Name
-      if (in_array('name', $fields, true)) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Name') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("name", 1, -1, ['width' => '100%']);
-         echo '</div></div>';
-
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Display name') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("displayname", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-      } else {
-         echo Html::hidden('name', ['value' => 0]);
-      }
-
-      // URL by inventory number
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('URL by inventory number') . '</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showYesNo("inventorynumberURL", 0, -1, ['width' => '100%']);
-      echo '</div></div>';
-
-      // URL
-      if (!$no_form_page) {
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Web page of the item') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("url", 1, -1, ['width' => '100%']);
-         echo '</div></div>';
-
-         echo '<div class="form-group row">';
-         echo '<label class="col-sm-4 col-form-label">' . __('Display web page of the item') . '</label>';
-         echo '<div class="col-sm-8">';
-         Dropdown::showYesNo("displayurl", 0, -1, ['width' => '100%']);
-         echo '</div></div>';
-      } else {
-         echo Html::hidden('url', ['value' => 0]);
-      }
-
-      // Date QRcode
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('Date QRcode') . ' (' . date('Y-m-d') . ')</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showYesNo("qrcodedate", 1, -1, ['width' => '100%']);
-      echo '</div></div>';
-
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('Display date QRcode') . ' (' . date('Y-m-d') . ')</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showYesNo("displayqrcodedate", 0, -1, ['width' => '100%']);
-      echo '</div></div>';
-
-      // QR code format option (for ZIP generation)
-      echo '<div class="form-group row">';
-      echo '<label class="col-sm-4 col-form-label">' . __('QR Code format') . '</label>';
-      echo '<div class="col-sm-8">';
-      Dropdown::showFromArray('qrcode_format', [
-         'bmp' => __('BMP (for MS Access / Brother printer)'),
-         'png' => __('PNG'),
-         'jpg' => __('JPEG'),
-      ], ['value' => 'bmp', 'width' => '100%']);
-      echo '</div></div>';
-
       echo '<div class="alert alert-info">';
-      echo __s('Note: When generating a ZIP archive, QR codes will be in BMP format for MS Access and Brother printer compatibility.');
+      echo __s('QR codes are exported as a ZIP archive of BMP images (MS Access / Brother printer).', 'barcode');
       echo '</div>';
-
-      echo '</div>'; // d-flex flex-column gap-3
+      echo '</div>';
    }
 
-
-   /**
-    * Get specific massive actions available for this object
-    *
-    * @param CommonDBTM|null $checkitem Check item
-    * @return array
-    */
-   function getSpecificMassiveActions($checkitem = null) {
-      $actions = [];
-
-      if (is_null($checkitem)) {
-         // Available from list view
-         $actions[__CLASS__ . '::Generate'] = __('Generate QR codes (ZIP archive)', 'barcode');
-      }
-
-      return $actions;
-   }
 
 
    /**
     * Show the massive actions sub form
     *
-    * @since version 0.85
-    * @see CommonDBTM::showMassiveActionsSubForm()
     * @param MassiveAction $ma The massive action object
     * @return bool True if the form was displayed
     */
    static function showMassiveActionsSubForm(MassiveAction $ma) {
-      $action = $ma->getAction();
-
-      if ($action === 'Generate') {
-         $qrcode = new self();
-         $qrcode->showFormMassiveAction($ma);
-
-         // Add the submit button - CRITICAL for GLPI 11 massive action modal
-         echo '<div class="mt-3 text-center">';
-         echo Html::submit(_x('button', 'Post'), [
-            'name'  => 'massiveaction',
-            'icon'  => 'ti ti-device-floppy',
-            'class' => 'btn btn-primary',
-         ]);
-         echo '</div>';
-
-         return true;
+      if ($ma->getAction() !== 'Generate') {
+         return false;
       }
 
-      return false;
+      $qrcode = new self();
+      $qrcode->showFormMassiveAction($ma);
+
+      echo '<div class="mt-3 text-center">';
+      echo Html::submit(_x('button', 'Post'), [
+         'name'  => 'massiveaction',
+         'icon'  => 'ti ti-device-floppy',
+         'class' => 'btn btn-primary',
+      ]);
+      echo '</div>';
+
+      return true;
    }
 
 
+
    /**
-    * Process massive actions for one itemtype
+    * Generate one BMP per item and send them as a ZIP archive
     *
     * @param MassiveAction $ma The massive action object
     * @param CommonDBTM $item The item object
@@ -500,339 +235,139 @@ class PluginBarcodeQRcode {
     * @return void
     */
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
-      $action = $ma->getAction();
+      if ($ma->getAction() !== 'Generate') {
+         return;
+      }
 
-      if ($action !== 'Generate') {
+      if (!Session::haveRight('plugin_barcode_barcode', CREATE)) {
+         $ma->itemDone($item->getType(), $ids, MassiveAction::ACTION_NORIGHT);
          return;
       }
 
       set_time_limit(0);
 
-      $qrcode = new self();
-      $rand = mt_rand();
-      $number = 0;
-      $itemNames = [];
-      $tmpPngFiles = [];
-      $tmpBmpFiles = [];
-      $zip = null;
-      $zipOpen = false;
-      $zipPath = null;
-      $actionResult = MassiveAction::ACTION_OK;
+      $qrcode     = new self();
+      $rand       = mt_rand();
+      $barcodeDir = GLPI_PLUGIN_DOC_DIR . '/barcode';
+      $zipName    = Session::getLoginUserID() . '_barcode_qrcodes.zip';
+      $zipPath    = $barcodeDir . '/' . $zipName;
+      $tmpFiles   = [];
+      $entries    = []; // archive name => bmp file
+      $processed  = [];
+      $handled    = []; // ids already reported as no right / nothing to do
 
       try {
-         $barcodeDir = GLPI_PLUGIN_DOC_DIR . '/barcode';
          if (!is_dir($barcodeDir) || !is_writable($barcodeDir)) {
             throw new RuntimeException(__('Barcode temporary directory is not writable.', 'barcode'));
          }
 
-         foreach ($ids as $key) {
-            if (!$item->getFromDB($key)) {
+         foreach ($ids as $id) {
+            if (!$item->getFromDB($id) || !$item->can($id, READ)) {
+               $ma->itemDone($item->getType(), $id, MassiveAction::ACTION_NORIGHT);
+               $handled[] = $id;
                continue;
             }
 
-            $itemName = $item->fields['name'] ?? '';
-            $sanitizedName = self::sanitizeFilename($itemName);
-            if ($sanitizedName === '') {
-               $sanitizedName = $item->getType() . '_' . (int) $key;
-            }
-
-            $archiveName = $sanitizedName;
-            $suffix = 2;
-            while (in_array($archiveName, $itemNames, true)) {
-               $archiveName = $sanitizedName . '_' . $suffix;
-               $suffix++;
-            }
-
-            $values = $qrcode->generateQRcode($item->getType(), $key, $rand, $number, $ma->POST);
-            if (!$values || empty($values[0])) {
+            $pngFile = $qrcode->generateQRcode($item->getType(), $id, $rand, count($tmpFiles), $ma->POST);
+            if ($pngFile === false) {
+               $ma->itemDone($item->getType(), $id, MassiveAction::NO_ACTION);
+               $handled[] = $id;
                continue;
             }
+            $tmpFiles[] = $pngFile;
 
-            $pngFile = $values[0];
-            if (!is_file($pngFile) || !is_readable($pngFile)) {
-               continue;
+            $bmpFile    = preg_replace('/\.png$/', '.bmp', $pngFile);
+            $tmpFiles[] = $bmpFile;
+            if (!self::pngToBmp($pngFile, $bmpFile)) {
+               throw new RuntimeException(__('Unable to convert generated QR code to BMP.', 'barcode'));
             }
 
-            $itemNames[] = $archiveName;
-            $tmpPngFiles[] = $pngFile;
-            $number++;
+            // Unique archive name based on the item name
+            $baseName = self::sanitizeFilename($item->fields['name'] ?? '');
+            if ($baseName === '') {
+               $baseName = $item->getType() . '_' . (int) $id;
+            }
+            $archiveName = $baseName;
+            for ($suffix = 2; isset($entries[$archiveName . '.bmp']); $suffix++) {
+               $archiveName = $baseName . '_' . $suffix;
+            }
+            $entries[$archiveName . '.bmp'] = $bmpFile;
+            $processed[] = $id;
          }
 
-         if ($number <= 0) {
-            Session::addMessageAfterRedirect(__('No QR codes were generated.', 'barcode'), true, 'warning');
-         } else {
-            for ($i = 0; $i < $number; $i++) {
-               $pngFile = $tmpPngFiles[$i];
-               $bmpFile = $barcodeDir . '/_tmp_' . $rand . '-' . $i . '.bmp';
-
-               if (!self::pngToBmp($pngFile, $bmpFile)) {
-                  throw new RuntimeException(__('Unable to convert generated QR code to BMP.', 'barcode'));
-               }
-
-               $tmpBmpFiles[] = $bmpFile;
-            }
-
-            $zipFileName = Session::getLoginUserID() . '_barcode_qrcodes.zip';
-            $zipPath = $barcodeDir . '/' . $zipFileName;
-
-            if (is_file($zipPath)) {
-               $lastModified = @filemtime($zipPath);
-               if ($lastModified !== false && (time() - $lastModified) > 300) {
-                  @unlink($zipPath);
-               }
-            }
-
-            $zip = new ZipArchive();
-            $zipStatus = $zip->open($zipPath, ZipArchive::CREATE);
-            if ($zipStatus !== true) {
-               throw new RuntimeException(__('Unable to create ZIP archive.', 'barcode'));
-            }
-            $zipOpen = true;
-
-            foreach ($tmpBmpFiles as $index => $bmpFile) {
-               if (!is_file($bmpFile) || !is_readable($bmpFile)) {
-                  throw new RuntimeException(__('A generated BMP file is missing or unreadable.', 'barcode'));
-               }
-
-               $bmpFileName = ($itemNames[$index] ?? ('qrcode_' . ($index + 1))) . '.bmp';
-               if (!$zip->addFile($bmpFile, $bmpFileName)) {
-                  throw new RuntimeException(__('Unable to add a BMP file to the ZIP archive.', 'barcode'));
-               }
-            }
-
-            if (!$zip->close()) {
-               $zipOpen = false;
-               throw new RuntimeException(__('Unable to finalize ZIP archive.', 'barcode'));
-            }
-            $zipOpen = false;
-
-            $msg = PluginBarcodeBarcode::getDownloadLink(
-               $zipFileName,
-               sprintf(__('Download %s', 'barcode'), 'barcode_qrcodes.zip')
-            );
-            Session::addMessageAfterRedirect($msg, true, 'information');
+         if (count($entries) === 0) {
+            Session::addMessageAfterRedirect(__('No QR codes were generated.', 'barcode'), true, WARNING);
+            return;
          }
+
+         $zip = new ZipArchive();
+         if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+            throw new RuntimeException(__('Unable to create ZIP archive.', 'barcode'));
+         }
+         foreach ($entries as $archiveName => $bmpFile) {
+            $zip->addFile($bmpFile, $archiveName);
+         }
+         // Files are read when the archive is closed: keep them until then
+         if (!$zip->close()) {
+            throw new RuntimeException(__('Unable to finalize ZIP archive.', 'barcode'));
+         }
+
+         Session::addMessageAfterRedirect(
+            PluginBarcodeBarcode::getDownloadLink($zipName, sprintf(__('Download %s', 'barcode'), 'barcode_qrcodes.zip'))
+         );
+         $ma->itemDone($item->getType(), $processed, MassiveAction::ACTION_OK);
 
       } catch (Throwable $e) {
-         $actionResult = MassiveAction::ACTION_KO;
-         Session::addMessageAfterRedirect(__('Error creating ZIP archive: ', 'barcode') . $e->getMessage(), true, 'error');
-
-         if ($zipPath !== null && is_file($zipPath)) {
+         Session::addMessageAfterRedirect(
+            htmlescape(__('Error creating ZIP archive: ', 'barcode') . $e->getMessage()),
+            true,
+            ERROR
+         );
+         if (is_file($zipPath)) {
             @unlink($zipPath);
          }
+         $ma->itemDone($item->getType(), array_values(array_diff($ids, $handled)), MassiveAction::ACTION_KO);
 
       } finally {
-         if ($zipOpen && $zip instanceof ZipArchive) {
-            $zip->close();
-         }
-
-         foreach ($tmpBmpFiles as $bmpFile) {
-            if (is_file($bmpFile)) {
-               @unlink($bmpFile);
+         foreach ($tmpFiles as $file) {
+            if (is_file($file)) {
+               @unlink($file);
             }
-         }
-
-         foreach ($tmpPngFiles as $pngFile) {
-            if (is_file($pngFile)) {
-               @unlink($pngFile);
-            }
-         }
-
-         if ($number > 0) {
-            $qrcode->cleanQRcodefiles($rand, $number);
-         }
-
-         unset($tmpBmpFiles, $tmpPngFiles, $itemNames, $zip);
-         if (function_exists('gc_collect_cycles')) {
-            gc_collect_cycles();
          }
       }
-
-      $ma->itemDone($item->getType(), count($ids), $actionResult);
-      return;
    }
 
 
+
    /**
-    * Convert PNG image to BMP format
+    * Convert a QR code PNG to a 24-bit BMP with white margins cropped
     *
     * @param string $pngFile Path to the source PNG file
     * @param string $bmpFile Path to the destination BMP file
     * @return bool True on success, false on failure
     */
    private static function pngToBmp($pngFile, $bmpFile) {
-      if (!is_file($pngFile) || !is_readable($pngFile)) {
+      $image = @imagecreatefrompng($pngFile);
+      if ($image === false) {
          return false;
       }
+      $cropped = imagecropauto($image, IMG_CROP_WHITE);
+      if ($cropped !== false) {
+         $image = $cropped;
+      }
+      // Palette images would be written as 8-bit BMP
+      imagepalettetotruecolor($image);
 
-      $imageSize = @getimagesize($pngFile);
-      if ($imageSize === false || count($imageSize) < 3) {
+      ob_start();
+      $ok  = imagebmp($image, null, false);
+      $bmp = ob_get_clean();
+      if (!$ok || strlen($bmp) < 54) {
          return false;
       }
-
-      list($width, $height, $type) = $imageSize;
-      $width = (int) $width;
-      $height = (int) $height;
-
-      if ($type !== IMAGETYPE_PNG || $width <= 0 || $height <= 0) {
-         return false;
-      }
-
-      // Refuse images that are unlikely to fit in memory before GD attempts to
-      // decode them. This avoids fatal memory exhaustion on crafted/huge PNGs.
-      $memoryLimit = trim((string) ini_get('memory_limit'));
-      if ($memoryLimit !== '' && $memoryLimit !== '-1') {
-         $unit = strtolower(substr($memoryLimit, -1));
-         $memoryLimitBytes = (int) $memoryLimit;
-         switch ($unit) {
-            case 'g':
-               $memoryLimitBytes *= 1024;
-               // no break
-            case 'm':
-               $memoryLimitBytes *= 1024;
-               // no break
-            case 'k':
-               $memoryLimitBytes *= 1024;
-               break;
-         }
-
-         if ($memoryLimitBytes > 0) {
-            $estimatedBytes = $width * $height * 8;
-            if ($estimatedBytes > ($memoryLimitBytes - memory_get_usage(true))) {
-               return false;
-            }
-         }
-      }
-
-      $srcImage = @imagecreatefrompng($pngFile);
-      if (!$srcImage) {
-         return false;
-      }
-
-      $isTrueColor = imageistruecolor($srcImage);
-      $getPixel = static function ($image, $x, $y) use ($isTrueColor) {
-         $pixel = imagecolorat($image, $x, $y);
-
-         if ($isTrueColor) {
-            $alpha = ($pixel & 0x7F000000) >> 24;
-            $red = ($pixel >> 16) & 0xFF;
-            $green = ($pixel >> 8) & 0xFF;
-            $blue = $pixel & 0xFF;
-         } else {
-            $colors = imagecolorsforindex($image, $pixel);
-            $alpha = $colors['alpha'];
-            $red = $colors['red'];
-            $green = $colors['green'];
-            $blue = $colors['blue'];
-         }
-
-         if ($alpha > 0) {
-            $opacity = 127 - $alpha;
-            $red = (int) round((($red * $opacity) + (255 * $alpha)) / 127);
-            $green = (int) round((($green * $opacity) + (255 * $alpha)) / 127);
-            $blue = (int) round((($blue * $opacity) + (255 * $alpha)) / 127);
-         }
-
-         return [$red, $green, $blue];
-      };
-
-      // Find exact non-white bounds to match the previous white-margin crop
-      // behavior without allocating another full-size image.
-      $left = $width;
-      $top = $height;
-      $right = -1;
-      $bottom = -1;
-      for ($y = 0; $y < $height; $y++) {
-         for ($x = 0; $x < $width; $x++) {
-            list($red, $green, $blue) = $getPixel($srcImage, $x, $y);
-            if ($red !== 255 || $green !== 255 || $blue !== 255) {
-               if ($x < $left) {
-                  $left = $x;
-               }
-               if ($x > $right) {
-                  $right = $x;
-               }
-               if ($y < $top) {
-                  $top = $y;
-               }
-               if ($y > $bottom) {
-                  $bottom = $y;
-               }
-            }
-         }
-      }
-
-      if ($right < $left || $bottom < $top) {
-         $left = 0;
-         $top = 0;
-         $right = $width - 1;
-         $bottom = $height - 1;
-      }
-
-      $bmpWidth = $right - $left + 1;
-      $bmpHeight = $bottom - $top + 1;
-      $rowSize = (($bmpWidth * 3) + 3) & ~3;
-      $pixelDataSize = $rowSize * $bmpHeight;
-      $fileSize = 54 + $pixelDataSize;
-
-      if ($fileSize > 0xFFFFFFFF || $pixelDataSize > 0xFFFFFFFF) {
-         imagedestroy($srcImage);
-         return false;
-      }
-
-      $fp = @fopen($bmpFile, 'wb');
-      if (!$fp) {
-         imagedestroy($srcImage);
-         return false;
-      }
-
-      $success = true;
-      $header = 'BM'
-         . pack('V', $fileSize)
-         . pack('v', 0)
-         . pack('v', 0)
-         . pack('V', 54)
-         . pack('V', 40)
-         . pack('V', $bmpWidth)
-         . pack('V', $bmpHeight)
-         . pack('v', 1)
-         . pack('v', 24)
-         . pack('V', 0)
-         . pack('V', $pixelDataSize)
-         . pack('V', 2835)
-         . pack('V', 2835)
-         . pack('V', 0)
-         . pack('V', 0);
-
-      if (fwrite($fp, $header) !== strlen($header)) {
-         $success = false;
-      }
-
-      $padding = str_repeat("\x00", $rowSize - ($bmpWidth * 3));
-      for ($y = $bottom; $success && $y >= $top; $y--) {
-         $row = '';
-         for ($x = $left; $x <= $right; $x++) {
-            list($red, $green, $blue) = $getPixel($srcImage, $x, $y);
-            $row .= pack('C3', $blue, $green, $red);
-         }
-         $row .= $padding;
-
-         if (fwrite($fp, $row) !== strlen($row)) {
-            $success = false;
-         }
-      }
-
-      if (!fclose($fp)) {
-         $success = false;
-      }
-
-      imagedestroy($srcImage);
-
-      if (!$success && is_file($bmpFile)) {
-         @unlink($bmpFile);
-      }
-
-      return $success;
+      // Normalize the BITMAPINFOHEADER as the labelling software expects it:
+      // 72 dpi (2835 px/m) and no palette entries declared for 24-bit data
+      // (GD writes 0 dpi and the source palette size).
+      $bmp = substr_replace($bmp, pack('VVVV', 2835, 2835, 0, 0), 38, 16);
+      return file_put_contents($bmpFile, $bmp) !== false;
    }
-
 }
