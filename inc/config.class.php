@@ -50,74 +50,76 @@ class PluginBarcodeConfig extends CommonDBTM {
    function showForm($ID, array $options = []) {
       global $CFG_GLPI;
 
-      $pbBarcode   = new PluginBarcodeBarcode();
       $defaultType = $this->getConfig();
-      echo "<form name='form' method='post'
-                  action='/plugins/barcode/front/config.form.php'
-                   enctype='multipart/form-data'>";
+      echo "<form name='form' method='post' enctype='multipart/form-data'
+                  action='" . htmlescape($CFG_GLPI['root_doc'] . '/plugins/barcode/front/config.form.php') . "'>";
 
       echo "<div align='center'>";
       echo "<table class='tab_cadre_fixe'>";
-      echo "<tr><th colspan='4'>".__('Barcode plugin configuration', 'barcode')."</th></tr>";
+      echo "<tr><th colspan='4'>".__s('Barcode plugin configuration', 'barcode')."</th></tr>";
       echo "</table><br>";
 
       echo "<table class='tab_cadre_fixe'>";
       echo "<tr class='tab_bg_1'>";
-      echo "<th colspan='4'>".__('General configuration', 'barcode')."</th>";
+      echo "<th colspan='4'>".__s('General configuration', 'barcode')."</th>";
       echo "</tr>";
 
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Type', 'barcode')."</td>";
+      echo "<td>".__s('Type', 'barcode')."</td>";
       echo "<td>";
-      $this->showTypeSelect($defaultType);
+      $this->showTypeSelect($defaultType, ['QRcode' => 'QRcode']);
       echo "</td>";
-      echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
+      echo "<td colspan='2'><input type='submit' value='".__s('Save')."' class='submit'></td>";
       echo "</tr>";
 
       echo "<tr class='tab_bg_1'>";
-      echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Empty the cache', 'barcode')."' class='submit' name='dropCache'></td>";
+      echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__s('Empty the cache', 'barcode')."' class='submit' name='dropCache'></td>";
       echo "</tr>";
 
       echo "<tr class='tab_bg_1'>";
-      echo "<th colspan='4'>".__('Company logo', 'barcode')."</th>";
+      echo "<th colspan='4'>".__s('Company logo', 'barcode')."</th>";
       echo "</tr>";
 
       if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
          echo "<tr class='tab_bg_1'>";
          echo "<td colspan='4' align='center'>";
-         echo "<img src='/plugins/barcode/front/send.php?file=logo.png'
+         echo "<img src='" . htmlescape($CFG_GLPI['root_doc'] . '/plugins/barcode/front/send.php?file=logo.png') . "'
                width='300'/>";
          echo "</td>";
          echo "</tr>";
 
          echo "<tr class='tab_bg_1'>";
-         echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Delete the logo', 'barcode')."' class='submit' name='dropLogo'></td>";
+         echo "<td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__s('Delete the logo', 'barcode')."' class='submit' name='dropLogo'></td>";
          echo "</tr>";
       }
 
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='2' align='center'><input type='file' name='logo' value='' /></td>";
-      echo "<td colspan='2'><input type='submit' value='".__('Save')."' class='submit'></td>";
+      echo "<td colspan='2'><input type='submit' value='".__s('Save')."' class='submit'></td>";
       echo "</tr>";
 
       echo "</table>";
       echo "</div>";
       Html::closeForm();
 
-      foreach ($pbBarcode->getCodeTypes() as $type) {
+      foreach (PluginBarcodeBarcode::getBarcodeTypes() as $type) {
          echo '<br>';
          $this->showFormConfigType($type);
       }
    }
 
+   /**
+    * Default barcode type
+    *
+    * @return string
+    */
    function getConfig() {
       $pbconf = new PluginBarcodeConfig();
-      if ($pbconf->getFromDB(1)) {
-         $type = $pbconf->fields['type'];
-      } else {
-         $type = 'code128';
+      if ($pbconf->getFromDB(1)
+          && in_array($pbconf->fields['type'], PluginBarcodeBarcode::getBarcodeTypes(), true)) {
+         return $pbconf->fields['type'];
       }
-      return $type;
+      return 'code128';
    }
 
 
@@ -135,74 +137,66 @@ class PluginBarcodeConfig extends CommonDBTM {
 
       $config = $this->getConfigType($type);
       echo "<form name='form' method='post'
-            action='/plugins/barcode/front/config_type.form.php'>";
-      echo "<input type='hidden' name='type' value='".$type."'>";
+            action='" . htmlescape($CFG_GLPI['root_doc'] . '/plugins/barcode/front/config_type.form.php') . "'>";
+      echo Html::hidden('type', ['value' => $type]);
       echo "<div align='center'>";
       echo "<table class='tab_cadre_fixe' >";
 
-      echo "<tr><th colspan='4'>".$type."</th></tr>";
+      echo "<tr><th colspan='4'>" . htmlescape($type) . "</th></tr>";
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Page size', 'barcode')."</td><td>";
+      echo "<td>".__s('Page size', 'barcode')."</td><td>";
       $pbBarcode->showSizeSelect($config['size']);
       echo "</td>";
-      echo "<td>".__('Orientation', 'barcode')."</td><td>";
+      echo "<td>".__s('Orientation', 'barcode')."</td><td>";
       $pbBarcode->showOrientationSelect($config['orientation']);
       echo "</td>";
       echo "</tr>";
-      echo "<tr><th colspan='4'>".__('Margins', 'barcode')."</th></tr>";
+      echo "<tr><th colspan='4'>".__s('Margins', 'barcode')."</th></tr>";
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Top', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginTop' value='".$config['marginTop']."'>";
+      echo "<td>".__s('Top', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginTop' value='" . htmlescape((string) $config['marginTop']) . "'>";
       echo "</td>";
-      echo "<td>".__('Bottom', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginBottom' value='".$config['marginBottom']."'>";
+      echo "<td>".__s('Bottom', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginBottom' value='" . htmlescape((string) $config['marginBottom']) . "'>";
       echo "</td>";
       echo "</tr>";
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Left', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginLeft' value='".$config['marginLeft']."'>";
+      echo "<td>".__s('Left', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginLeft' value='" . htmlescape((string) $config['marginLeft']) . "'>";
       echo "</td>";
-      echo "<td>".__('Right', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginRight' value='".$config['marginRight']."'>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Inner horizontal', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginHorizontal' value='".$config['marginHorizontal']."'>";
-      echo "</td>";
-      echo "<td>".__('Inner vertical', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='marginVertical' value='".$config['marginVertical']."'>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr><th colspan='4'>".__('Barcodes sizes', 'barcode')."</th></tr>";
-      echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Maximum width', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='maxCodeWidth' value='".$config['maxCodeWidth']."'>";
-      echo "</td>";
-      echo "<td>".__('Maximum height', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='maxCodeHeight' value='".$config['maxCodeHeight']."'>";
+      echo "<td>".__s('Right', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginRight' value='" . htmlescape((string) $config['marginRight']) . "'>";
       echo "</td>";
       echo "</tr>";
       echo "<tr class='tab_bg_1'>";
-      echo "<td>" . __('URL', 'barcode') . "</td><td>";
-      echo "<select> URL:";
-      echo "<option value='id'>".__('By ID', 'barcode')."</option>";
-      echo "<option value='serial'>".__('By serial number', 'barcode')."</option>";
-      echo "</select>";
+      echo "<td>".__s('Inner horizontal', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginHorizontal' value='" . htmlescape((string) $config['marginHorizontal']) . "'>";
+      echo "</td>";
+      echo "<td>".__s('Inner vertical', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='marginVertical' value='" . htmlescape((string) $config['marginVertical']) . "'>";
+      echo "</td>";
+      echo "</tr>";
+      echo "<tr><th colspan='4'>".__s('Barcodes sizes', 'barcode')."</th></tr>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__s('Maximum width', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='maxCodeWidth' value='" . htmlescape((string) $config['maxCodeWidth']) . "'>";
+      echo "</td>";
+      echo "<td>".__s('Maximum height', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='maxCodeHeight' value='" . htmlescape((string) $config['maxCodeHeight']) . "'>";
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr><th colspan='4'>".__('Text display options', 'barcode')."</th></tr>";
+      echo "<tr><th colspan='4'>".__s('Text display options', 'barcode')."</th></tr>";
       echo "<tr class='tab_bg_1'>";
-      echo "<td>".__('Text size', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='txtSize' value='".$config['txtSize']."'>";
+      echo "<td>".__s('Text size', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='txtSize' value='" . htmlescape((string) $config['txtSize']) . "'>";
       echo "</td>";
-      echo "<td>".__('Text spacing between lines', 'barcode')."</td><td>";
-      echo "<input type='text' size='20' name='txtSpacing' value='".$config['txtSpacing']."'>";
+      echo "<td>".__s('Text spacing between lines', 'barcode')."</td><td>";
+      echo "<input type='text' size='20' name='txtSpacing' value='" . htmlescape((string) $config['txtSpacing']) . "'>";
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__('Save')."' class='submit'></td></tr>";
+      echo "<tr><td class='tab_bg_1' colspan='4' align='center'><input type='submit' value='".__s('Save')."' class='submit'></td></tr>";
       echo "</table>";
       echo "</div>";
       Html::closeForm();

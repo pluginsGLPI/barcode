@@ -43,7 +43,20 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access directly to this file");
 }
 
+/**
+ * Page layout of one barcode type (table glpi_plugin_barcode_configs_types)
+ */
 class PluginBarcodeConfig_Type extends CommonDBTM {
 
+   static string $rightname = 'plugin_barcode_config';
+
+   /**
+    * Numeric layout fields editable from the configuration page
+    */
+   const INTEGER_FIELDS = [
+      'marginTop', 'marginBottom', 'marginLeft', 'marginRight',
+      'marginHorizontal', 'marginVertical', 'maxCodeWidth', 'maxCodeHeight',
+      'txtSize', 'txtSpacing',
+   ];
 }
 

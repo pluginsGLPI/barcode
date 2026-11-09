@@ -39,43 +39,38 @@
    ------------------------------------------------------------------------
  */
 
+Session::checkRight('plugin_barcode_config', UPDATE);
+
+$dir  = GLPI_PLUGIN_DOC_DIR . '/barcode';
+$logo = $dir . '/logo.png';
 
 if (isset($_POST['dropCache'])) {
-   $dir = GLPI_PLUGIN_DOC_DIR.'/barcode';
-   if (is_dir($dir)) {
-      if ($dh = opendir($dir)) {
-         while (($file = readdir($dh)) !== false) {
-            if ($file != "." && $file != ".." && $file != "logo.png") {
-               unlink($dir.'/'.$file);
-            }
-         }
-         closedir($dh);
+   // Remove every generated file except the logo
+   foreach (glob($dir . '/*') ?: [] as $file) {
+      if (is_file($file) && basename($file) !== 'logo.png') {
+         unlink($file);
       }
    }
    Session::addMessageAfterRedirect(__('The cache has been emptied.', 'barcode'));
 } else if (isset($_POST['dropLogo'])) {
-   if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
-      unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+   if (is_file($logo)) {
+      unlink($logo);
    }
    Session::addMessageAfterRedirect(__('The logo has been removed.', 'barcode'));
 } else if (!empty($_FILES['logo']['name'])) {
-   // Validate uploaded file is actually a PNG image
-   $uploadedFile = $_FILES['logo']['tmp_name'];
-   $imgInfo = @getimagesize($uploadedFile);
+   $upload  = $_FILES['logo'];
+   $imgInfo = ($upload['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_OK && is_uploaded_file($upload['tmp_name'])
+      ? @getimagesize($upload['tmp_name'])
+      : false;
    if ($imgInfo === false || $imgInfo[2] !== IMAGETYPE_PNG) {
       Session::addMessageAfterRedirect(__('The logo must be a PNG image.', 'barcode'), true, ERROR);
-      Html::back();
-      return;
+   } else if (!move_uploaded_file($upload['tmp_name'], $logo)) {
+      Session::addMessageAfterRedirect(__('Unable to save the logo.', 'barcode'), true, ERROR);
    }
-   if (is_file(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
-      @unlink(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
-   }
-   // Move validated file
-   rename($uploadedFile, GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
-
 } else if (isset($_POST['type'])) {
-   $pbconf = new PluginBarcodeConfig();
-   $_POST['id']=1;
-   $pbconf->update($_POST);
+   if (in_array($_POST['type'], PluginBarcodeBarcode::getBarcodeTypes(), true)) {
+      $pbconf = new PluginBarcodeConfig();
+      $pbconf->update(['id' => 1, 'type' => $_POST['type']]);
+   }
 }
 Html::back();

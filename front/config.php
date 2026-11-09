@@ -39,17 +39,10 @@
    ------------------------------------------------------------------------
  */
 
-// Non menu entry case
-//header("Location:../../central.php");
+Session::checkRight('plugin_barcode_config', UPDATE);
 
-
-Session::checkRight("config", UPDATE);
-
-// To be available when plugin is not activated
-Plugin::load('barcode');
-
-Html::header(__('Barcode', 'barcode'), $_SERVER['PHP_SELF'], "config", "plugins");
+Html::header(__('Barcode', 'barcode'), '', 'config', 'plugins');
 $pbConfig = new PluginBarcodeConfig();
-$pbConfig->showForm('');
+$pbConfig->showForm(1);
 
 Html::footer();

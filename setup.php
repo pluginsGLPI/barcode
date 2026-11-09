@@ -58,26 +58,22 @@ function plugin_init_barcode() {
    Plugin::registerClass('PluginBarcodeBarcode');
    Plugin::registerClass('PluginBarcodeQRcode');
 
-   // Display a menu entry ?
-   if (Session::haveRight('plugin_barcode_barcode', CREATE)
-           || Session::haveRight('plugin_barcode_config', UPDATE)) {
+   // Generation: massive actions and menu entries
+   if (Session::haveRight('plugin_barcode_barcode', CREATE)) {
       // Massive Action definition
       $PLUGIN_HOOKS['use_massive_action']['barcode'] = 1;
 
       // Menu entry
       $PLUGIN_HOOKS['menu_toadd']['barcode'] = ['tools' => 'PluginBarcodeBarcode'];
 
-      $PLUGIN_HOOKS["helpdesk_menu_entry"]['barcode'] = true;
+      $PLUGIN_HOOKS['helpdesk_menu_entry']['barcode']      = '/front/barcode.form.php';
+      $PLUGIN_HOOKS['helpdesk_menu_entry_icon']['barcode'] = 'ti ti-barcode';
    }
 
    // Config page
-   if (Session::haveRight('config', UPDATE)) {
+   if (Session::haveRight('plugin_barcode_config', UPDATE)) {
       $PLUGIN_HOOKS['config_page']['barcode'] = 'front/config.php';
    }
-
-   //Redirect code
-   //http://localhost/glpi/index.php?redirect=plugin_barcode_2 to form ID 2
-   $PLUGIN_HOOKS['redirect_page']['barcode'] = 'barcode.form.php';
 }
 
 function plugin_version_barcode() {

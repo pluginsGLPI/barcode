@@ -43,12 +43,13 @@
 function plugin_barcode_MassiveActions($itemtype) {
 
    $generate_barcode_action = 'PluginBarcodeBarcode' . MassiveAction::CLASS_ACTION_SEPARATOR . 'Generate';
-   $generate_barcode_label  = '<i class="fas fa-barcode"></i> ' . __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode');
+   $generate_barcode_label  = '<i class="ti ti-barcode"></i> ' . __('Barcode', 'barcode')." - ".__('Print barcodes', 'barcode');
 
    $generate_qrcode_action  = 'PluginBarcodeQRcode' . MassiveAction::CLASS_ACTION_SEPARATOR . 'Generate';
-   $generate_qrcode_label   = '<i class="fas fa-qrcode"></i> ' . __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode');
+   $generate_qrcode_label   = '<i class="ti ti-qrcode"></i> ' . __('Barcode', 'barcode')." - ".__('Print QRcodes', 'barcode');
 
-   if (!is_a($itemtype, CommonDBTM::class, true)) {
+   if (!is_a($itemtype, CommonDBTM::class, true)
+       || !Session::haveRight('plugin_barcode_barcode', CREATE)) {
       return [];
    }
 

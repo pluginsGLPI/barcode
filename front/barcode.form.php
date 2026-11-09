@@ -39,26 +39,25 @@
    ------------------------------------------------------------------------
  */
 
+Session::checkRight('plugin_barcode_barcode', CREATE);
 
-if (!isset($_POST["length"])) {
-   $_POST["length"] = "";
-}
-if (!isset($_POST["prefixe"])) {
-   $_POST["prefixe"] = "";
-}
-if (!isset($_POST["size"])) {
-   $_POST["size"] = "";
-}
-if (!isset($_POST["format"])) {
-   $_POST["format"] = "";
+$barcode = new PluginBarcodeBarcode();
+
+if (isset($_POST['generate'])) {
+   $file = $barcode->printPDF([
+      'code'        => $_POST['code'] ?? '',
+      'nb'          => $_POST['nb'] ?? 1,
+      'type'        => $_POST['type'] ?? '',
+      'size'        => $_POST['size'] ?? null,
+      'orientation' => $_POST['orientation'] ?? null,
+      'border'      => $_POST['border'] ?? 0,
+   ]);
+   if ($file !== false) {
+      Session::addMessageAfterRedirect(PluginBarcodeBarcode::getDownloadLink($file));
+   }
+   Html::back();
 }
 
-$barcode  = new PluginBarcodeBarcode();
-$file     = $barcode->printPDF($_POST);
-$filePath = explode('/', $file);
-$filename = $filePath[count($filePath)-1];
-
-$msg = "<a href='/plugins/barcode/front/send.php?file=".urlencode($filename)."'>".__('Generated file', 'barcode')."</a>";
-Session::addMessageAfterRedirect($msg);
-
-Html::back();
+Html::header(PluginBarcodeBarcode::getMenuName(), '', 'tools', 'PluginBarcodeBarcode');
+$barcode->showForm((string) ($_GET['code'] ?? ''));
+Html::footer();

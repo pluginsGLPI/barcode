@@ -70,19 +70,12 @@ class PluginBarcodeBarcode {
    static function getMenuContent() {
       $menu = [];
       if (Session::haveRight('plugin_barcode_barcode', CREATE)) {
-         $menu['title']   = self::getMenuName();
-         $menu['page']    = '/plugins/barcode/front/barcode.form.php';
-         $menu['icon']    = 'fas fa-barcode';
-         $menu['options'] = [
-            'barcode' => [
-               'title' => __('Barcode', 'barcode'),
-               'page'  => '/plugins/barcode/front/barcode.form.php',
-               'links' => [
-                  'add'    => '/plugins/barcode/front/barcode.form.php',
-                  'config' => '/plugins/barcode/front/config.php',
-               ],
-            ],
-         ];
+         $menu['title'] = self::getMenuName();
+         $menu['page']  = '/plugins/barcode/front/barcode.form.php';
+         $menu['icon']  = 'ti ti-barcode';
+         if (Session::haveRight('plugin_barcode_config', UPDATE)) {
+            $menu['links']['config'] = '/plugins/barcode/front/config.php';
+         }
       }
       return $menu;
    }
@@ -98,60 +91,74 @@ class PluginBarcodeBarcode {
 
 
 
-   function showSizeSelect($p_size = null) {
-      //TODO : utiliser fonction du coeur
+   /**
+    * Page sizes supported by Cezpdf
+    *
+    * @return array size => label
+    */
+   static function getPageSizes(): array {
+      $sizes = [
+         '4A0',
+         '2A0',
+         'A0',
+         'A1',
+         'A2',
+         'A3',
+         'A4',
+         'A5',
+         'A6',
+         'A7',
+         'A8',
+         'A9',
+         'A10',
+         'B0',
+         'B1',
+         'B2',
+         'B3',
+         'B4',
+         'B5',
+         'B6',
+         'B7',
+         'B8',
+         'B9',
+         'B10',
+         'C0',
+         'C1',
+         'C2',
+         'C3',
+         'C4',
+         'C5',
+         'C6',
+         'C7',
+         'C8',
+         'C9',
+         'C10',
+         'RA0',
+         'RA1',
+         'RA2',
+         'RA3',
+         'RA4',
+         'SRA0',
+         'SRA1',
+         'SRA2',
+         'SRA3',
+         'SRA4',
+         'LETTER',
+         'LEGAL',
+         'EXECUTIVE',
+         'FOLIO',
+      ];
+      return array_combine($sizes, $sizes);
+   }
 
-      Dropdown::showFromArray("size",
-                              ['4A0'       => __('4A0', 'barcode'),
-                               '2A0'       => __('2A0', 'barcode'),
-                               'A0'        => __('A0', 'barcode'),
-                               'A1'        => __('A1', 'barcode'),
-                               'A2'        => __('A2', 'barcode'),
-                               'A3'        => __('A3', 'barcode'),
-                               'A4'        => __('A4', 'barcode'),
-                               'A5'        => __('A5', 'barcode'),
-                               'A6'        => __('A6', 'barcode'),
-                               'A7'        => __('A7', 'barcode'),
-                               'A8'        => __('A8', 'barcode'),
-                               'A9'        => __('A9', 'barcode'),
-                               'A10'       => __('A10', 'barcode'),
-                               'B0'        => __('B0', 'barcode'),
-                               'B1'        => __('B1', 'barcode'),
-                               'B2'        => __('B2', 'barcode'),
-                               'B3'        => __('B3', 'barcode'),
-                               'B4'        => __('B4', 'barcode'),
-                               'B5'        => __('B5', 'barcode'),
-                               'B6'        => __('B6', 'barcode'),
-                               'B7'        => __('B7', 'barcode'),
-                               'B8'        => __('B8', 'barcode'),
-                               'B9'        => __('B9', 'barcode'),
-                               'B10'       => __('B10', 'barcode'),
-                               'C0'        => __('C0', 'barcode'),
-                               'C1'        => __('C1', 'barcode'),
-                               'C2'        => __('C2', 'barcode'),
-                               'C3'        => __('C3', 'barcode'),
-                               'C4'        => __('C4', 'barcode'),
-                               'C5'        => __('C5', 'barcode'),
-                               'C6'        => __('C6', 'barcode'),
-                               'C7'        => __('C7', 'barcode'),
-                               'C8'        => __('C8', 'barcode'),
-                               'C9'        => __('C9', 'barcode'),
-                               'C10'       => __('C10', 'barcode'),
-                               'RA0'       => __('RA0', 'barcode'),
-                               'RA1'       => __('RA1', 'barcode'),
-                               'RA2'       => __('RA2', 'barcode'),
-                               'RA3'       => __('RA3', 'barcode'),
-                               'RA4'       => __('RA4', 'barcode'),
-                               'SRA0'      => __('SRA0', 'barcode'),
-                               'SRA1'      => __('SRA1', 'barcode'),
-                               'SRA2'      => __('SRA2', 'barcode'),
-                               'SRA3'      => __('SRA3', 'barcode'),
-                               'SRA4'      => __('SRA4', 'barcode'),
-                               'LETTER'    => __('LETTER', 'barcode'),
-                               'LEGAL'     => __('LEGAL', 'barcode'),
-                               'EXECUTIVE' => __('EXECUTIVE', 'barcode'),
-                               'FOLIO'     => __('FOLIO', 'barcode')],
-                              (is_null($p_size)?['width' => '100']:['value' => $p_size, 'width' => '100']));
+
+
+   function showSizeSelect($p_size = null) {
+      Dropdown::showFromArray(
+         "size",
+         self::getPageSizes(),
+         (is_null($p_size) ? ['width' => '100'] : ['value' => $p_size, 'width' => '100'])
+      );
    }
 
 
@@ -167,48 +174,52 @@ class PluginBarcodeBarcode {
 
 
 
-   function showForm($p_type, $p_ID) {
+   /**
+    * Form to print one code on a sheet (Tools > Barcode)
+    *
+    * @param string $code default value of the code field
+    */
+   function showForm(string $code = '') {
       global $CFG_GLPI;
 
-      $config = $this->getConfigType();
-      $ci = new $p_type();
-      $ci->getFromDB($p_ID);
-      if ($ci->isField('otherserial')) {
-         $code = $ci->getField('otherserial');
-      } else {
-         $code = '';
-      }
-      echo "<form name='form' method='post'
-                  action='/plugins/barcode/front/barcode.form.php'>";
-        echo "<div align='center'>";
-        echo "<table class='tab_cadre'>";
-         echo "<tr><th colspan='4'>".__('Generation', 'barcode')."</th></tr>";
-         echo "<tr class='tab_bg_1'>";
-            echo "<td>".__('Code', 'barcode')."</td><td>";
-            echo "<input type='text' size='20' name='code' value='$code'>";
-            echo "</td>";
-            echo "<td>".__('Type', 'barcode')."</td><td>";
-            $this->showTypeSelect($config['type']);
-            echo "</td>";
-         echo "<tr class='tab_bg_1'>";
-            echo "<td>".__('Page size', 'barcode')."</td><td>";
-            $this->showSizeSelect($config['size']);
-            echo "</td>";
-            echo "<td>".__('Orientation', 'barcode')."</td><td>";
-            $this->showOrientationSelect($config['orientation']);
-            echo "</td>";
-         echo "</tr>";
-         echo "<tr class='tab_bg_1'>";
-            echo "<td>".__('Number of copies', 'barcode')."</td>";
-            echo "<td><input type='text' size='20' name='nb' value='1'></td>";
-            echo "<td colspan='2'></td>";
-         echo "</tr>";
-         echo "<tr><td class='tab_bg_1' colspan='4' align='center'>
-                   <input type='submit' value='".__('Create', 'barcode')."'
-                          class='submit'></td></tr>";
-        echo "</table>";
-        echo "</div>";
-        Html::closeForm();
+      $pbConfig = new PluginBarcodeConfig();
+      $config   = $pbConfig->getConfigType();
+
+      echo "<form name='form' method='post' action='"
+         . htmlescape($CFG_GLPI['root_doc'] . '/plugins/barcode/front/barcode.form.php') . "'>";
+      echo "<div class='center'>";
+      echo "<table class='tab_cadre_fixe'>";
+      echo "<tr><th colspan='4'>" . __s('Generation', 'barcode') . "</th></tr>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>" . __s('Code', 'barcode') . "</td><td>";
+      echo "<input type='text' class='form-control' size='20' name='code' required value='" . htmlescape($code) . "'>";
+      echo "</td>";
+      echo "<td>" . __s('Type', 'barcode') . "</td><td>";
+      $pbConfig->showTypeSelect($config['type'], ['QRcode' => 'QRcode']);
+      echo "</td>";
+      echo "</tr>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>" . __s('Page size', 'barcode') . "</td><td>";
+      $this->showSizeSelect($config['size']);
+      echo "</td>";
+      echo "<td>" . __s('Orientation', 'barcode') . "</td><td>";
+      $this->showOrientationSelect($config['orientation']);
+      echo "</td>";
+      echo "</tr>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>" . __s('Number of copies', 'barcode') . "</td><td>";
+      Dropdown::showNumber('nb', ['value' => 1, 'min' => 1, 'max' => 200, 'width' => '100']);
+      echo "</td>";
+      echo "<td>" . __s('Display border', 'barcode') . "</td><td>";
+      Dropdown::showYesNo('border', 1, -1, ['width' => '100']);
+      echo "</td>";
+      echo "</tr>";
+      echo "<tr><td class='tab_bg_1 center' colspan='4'>";
+      echo Html::submit(__('Create', 'barcode'), ['name' => 'generate']);
+      echo "</td></tr>";
+      echo "</table>";
+      echo "</div>";
+      Html::closeForm();
    }
 
 
@@ -287,80 +298,142 @@ class PluginBarcodeBarcode {
 
 
 
-   function printPDF($p_params) {
+   /**
+    * Barcode types rendered by PEAR Image_Barcode.
+    * QR codes are handled by PluginBarcodeQRcode (ZIP export).
+    *
+    * @return string[]
+    */
+   static function getBarcodeTypes(): array {
+      return ['Code39', 'code128', 'ean13', 'int25', 'postnet', 'upca'];
+   }
+
+
+
+   /**
+    * Check that a value can be encoded with the given barcode type.
+    *
+    * @param string $code
+    * @param string $type
+    *
+    * @return bool
+    */
+   static function isValidCode(string $code, string $type): bool {
+      if ($code === '' || strlen($code) > 128) {
+         return false;
+      }
+      switch ($type) {
+         case 'Code39':
+            return preg_match('/^[0-9A-Z\-+$%\/. ]+$/', $code) === 1;
+         case 'code128':
+            return preg_match('/^[\x20-\x7E]+$/', $code) === 1;
+         case 'ean13':
+            return preg_match('/^[0-9]{13}$/', $code) === 1;
+         case 'upca':
+            return preg_match('/^[0-9]{12}$/', $code) === 1;
+         case 'int25':
+         case 'postnet':
+            return preg_match('/^[0-9]+$/', $code) === 1;
+      }
+      return false;
+   }
+
+
+
+   /**
+    * Generate a PDF sheet of barcodes.
+    *
+    * @param array $p_params type, size, orientation, border, and either
+    *                        'code' + 'nb' (one code printed nb times) or
+    *                        'codes' (list, '' = empty cell) + optional
+    *                        'displayData' (list of text lines per code)
+    *
+    * @return string|false name of the generated file (served by front/send.php)
+    */
+   function printPDF(array $p_params) {
 
       $pbConfig = new PluginBarcodeConfig();
 
-      // create barcodes
-      $ext         = 'png';
-      $type        = $p_params['type'];
-      $size        = $p_params['size'];
-      $orientation = $p_params['orientation'];
-      $codes       = [];
+      $type = $p_params['type'] ?? '';
+      if (!in_array($type, self::getBarcodeTypes(), true)) {
+         Session::addMessageAfterRedirect(__('Invalid barcode type.', 'barcode'), true, ERROR);
+         return false;
+      }
 
+      if (isset($p_params['code'])) {
+         $nb    = max(1, min(1000, (int) ($p_params['nb'] ?? 1)));
+         $codes = array_fill(0, $nb, trim((string) $p_params['code']));
+      } else {
+         $codes = array_map(static fn ($c) => trim((string) $c), (array) ($p_params['codes'] ?? []));
+      }
       $displayDataCollection = $p_params['displayData'] ?? [];
 
-      if ($type == 'QRcode') {
-         $codes = $p_params['codes'];
-      } else {
-         if (isset($p_params['code'])) {
-            if (isset($p_params['nb']) AND $p_params['nb']>1) {
-               $this->create($p_params['code'], $type, $ext);
-               for ($i=1; $i<=$p_params['nb']; $i++) {
-                  $codes[] = $p_params['code'];
-               }
-            } else {
-               if (!$this->create($p_params['code'], $type, $ext)) {
-                  Session::addMessageAfterRedirect(__('The generation of some barcodes produced errors.', 'barcode'));
-               }
-               $codes[] = $p_params['code'];
-            }
-         } else if (isset($p_params['codes'])) {
-            $codes = $p_params['codes'];
-            foreach ($codes as $code) {
-               if ($code != '') {
-                  $this->create($code, $type, $ext);
-               }
-            }
-         } else {
-            // TODO : erreur ?
-            //         print_r($p_params);
-            return 0;
+      // Generate (or reuse from cache) one image per distinct code
+      $invalid = [];
+      foreach (array_unique($codes) as $code) {
+         if ($code !== '' && !$this->create($code, $type)) {
+            $invalid[] = $code;
          }
+      }
+      if (count($invalid) > 0) {
+         Session::addMessageAfterRedirect(
+            sprintf(
+               __('These values cannot be encoded as %1$s and were skipped: %2$s', 'barcode'),
+               $type,
+               htmlescape(implode(', ', $invalid))
+            ),
+            true,
+            WARNING
+         );
+      }
+      if (count(array_diff(array_unique($codes), $invalid, [''])) === 0) {
+         Session::addMessageAfterRedirect(__('No barcode was generated.', 'barcode'), true, ERROR);
+         return false;
+      }
+
+      $config      = $pbConfig->getConfigType($type);
+      $size        = $p_params['size'] ?? $config['size'];
+      $orientation = $p_params['orientation'] ?? $config['orientation'];
+      if (!array_key_exists($size, self::getPageSizes())) {
+         $size = 'A4';
+      }
+      if (!in_array($orientation, ['Portrait', 'Landscape'], true)) {
+         $orientation = 'Portrait';
       }
 
       // create pdf
       // x is horizontal axis and y is vertical
       // x=0 and y=0 in bottom left hand corner
-      $config = $pbConfig->getConfigType($type);
-
-      $pdf= new Cezpdf($size, $orientation);
+      $pdf = new Cezpdf($size, $orientation);
       $pdf->tempPath = GLPI_TMP_DIR;
-      $pdf->selectFont(Plugin::getPhpDir('barcode')."/vendor/rospdf/pdf-php/src/fonts/Helvetica.afm");
+      $pdf->selectFont(Plugin::getPhpDir('barcode') . "/vendor/rospdf/pdf-php/src/fonts/Helvetica.afm");
       $pdf->ezSetMargins($config['marginTop'], $config['marginBottom'], $config['marginLeft'], $config['marginRight']);
-      $pdf->ezStartPageNumbers($pdf->ez['pageWidth']-30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}').
-      $width   = $config['maxCodeWidth'];
-      $height  = $config['maxCodeHeight'];
-      $marginH = $config['marginHorizontal'];
-      $marginV = $config['marginVertical'];
+      $pdf->ezStartPageNumbers($pdf->ez['pageWidth'] - 30, 10, 10, 'left', '{PAGENUM} / {TOTALPAGENUM}');
+      $width      = $config['maxCodeWidth'];
+      $height     = $config['maxCodeHeight'];
+      $marginH    = $config['marginHorizontal'];
+      $marginV    = $config['marginVertical'];
       $txtSize    = $config['txtSize'];
       $txtSpacing = $config['txtSpacing'];
+      $border     = !empty($p_params['border']);
 
       $heightimage = $height;
 
-      if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
+      $logoFile = GLPI_PLUGIN_DOC_DIR . '/barcode/logo.png';
+      $logoimg  = false;
+      if (is_file($logoFile) && ($imgSize = @getimagesize($logoFile)) !== false) {
          // Add logo to barcode
+         $logoimg       = @imagecreatefrompng($logoFile);
          $heightLogomax = 20;
-         $imgSize       = getimagesize(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
          $logoWidth     = $imgSize[0];
          $logoHeight    = $imgSize[1];
          if ($logoHeight > $heightLogomax) {
-            $ratio      = (100 * $heightLogomax ) / $logoHeight;
+            $ratio      = (100 * $heightLogomax) / $logoHeight;
             $logoHeight = $heightLogomax;
             $logoWidth  = $logoWidth * ($ratio / 100);
          }
          if ($logoWidth > $width) {
-            $ratio      = (100 * $width ) / $logoWidth;
+            $ratio      = (100 * $width) / $logoWidth;
             $logoWidth  = $width;
             $logoHeight = $logoHeight * ($ratio / 100);
          }
@@ -368,63 +441,44 @@ class PluginBarcodeBarcode {
          $heightimage    = $heightyposText;
       }
 
-      $first=true;
-      for ($ia = 0; $ia < count($codes); $ia++) {
-         $code = $codes[$ia];
+      $first = true;
+      $x     = 0;
+      $y     = 0;
+      foreach (array_values($codes) as $ia => $code) {
          $displayData = $displayDataCollection[$ia] ?? [];
          if ($first) {
-            $x = $pdf->ez['leftMargin'];
-            $y = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
+            $x     = $pdf->ez['leftMargin'];
+            $y     = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
             $first = false;
-         } else {
-            if ($x + $width + $marginH > $pdf->ez['pageWidth']) { // new line
-               $x = $pdf->ez['leftMargin'];
-               if ($y - $height - $marginV < $pdf->ez['bottomMargin']) { // new page
-                  $pdf->ezNewPage();
-                  $y = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
-               } else {
-                  $y -= $height + $marginV;
-               }
+         } else if ($x + $width + $marginH > $pdf->ez['pageWidth']) { // new line
+            $x = $pdf->ez['leftMargin'];
+            if ($y - $height - $marginV < $pdf->ez['bottomMargin']) { // new page
+               $pdf->ezNewPage();
+               $y = $pdf->ez['pageHeight'] - $pdf->ez['topMargin'] - $height;
+            } else {
+               $y -= $height + $marginV;
             }
          }
-         if ($code != '') {
-            if ($type == 'QRcode') {
-               $imgFile = $code;
-            } else {
-               $imgFile = $this->docsPath.$code.'_'.$type.'.'.$ext;
-            }
-            if (file_exists($imgFile)) {
-               $imgSize   = getimagesize($imgFile);
-               $imgWidth  = $imgSize[0];
-               $imgHeight = $imgSize[1];
+         if ($code !== '' && !in_array($code, $invalid, true)) {
+            $imgFile = $this->getCacheFile($code, $type);
+            $image   = @imagecreatefrompng($imgFile);
+            if ($image !== false) {
+               $imgWidth  = imagesx($image);
+               $imgHeight = imagesy($image);
                if ($imgWidth > $width) {
-                  $ratio     = (100 * $width ) / $imgWidth;
+                  $ratio     = (100 * $width) / $imgWidth;
                   $imgWidth  = $width;
                   $imgHeight = $imgHeight * ($ratio / 100);
                }
                if ($imgHeight > $heightimage) {
-                  $ratio     = (100 * $heightimage ) / $imgHeight;
+                  $ratio     = (100 * $heightimage) / $imgHeight;
                   $imgHeight = $heightimage;
                   $imgWidth  = $imgWidth * ($ratio / 100);
                }
 
-               $image = imagecreatefrompng($imgFile);
-               if ($imgWidth < $width) {
-                  $pdf->addImage($image,
-                                 $x + (($width - $imgWidth) / 2),
-                                 $y,
-                                 $imgWidth,
-                                 $imgHeight);
-               } else {
-                  $pdf->addImage($image,
-                                 $x,
-                                 $y,
-                                 $imgWidth,
-                                 $imgHeight);
-               }
+               $pdf->addImage($image, $x + (($width - $imgWidth) / 2), $y, $imgWidth, $imgHeight);
 
-               if (file_exists(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png')) {
-                  $logoimg = imagecreatefrompng(GLPI_PLUGIN_DOC_DIR.'/barcode/logo.png');
+               if ($logoimg !== false) {
                   $pdf->addImage($logoimg,
                                  $x + (($width - $logoWidth) / 2),
                                  $y + $heightyposText,
@@ -432,48 +486,67 @@ class PluginBarcodeBarcode {
                                  $logoHeight);
                }
                $txtHeight = 0;
-               for ($i = 0; $i < count($displayData); $i++) {
-                   $pdf->addTextWrap(
-                       $x,
-                       $y - ($txtSpacing + $txtHeight),
-                       $txtSize,
-                       $displayData[$i],
-                       $width,
-                       'center');
-                   $txtHeight += $txtSpacing/2 + $txtSize;
+               foreach ($displayData as $line) {
+                  $pdf->addTextWrap(
+                     $x,
+                     $y - ($txtSpacing + $txtHeight),
+                     $txtSize,
+                     (string) $line,
+                     $width,
+                     'center'
+                  );
+                  $txtHeight += $txtSpacing / 2 + $txtSize;
                }
-               if ($p_params['border']) {
-                  $pdf->Rectangle($x, $y - ($txtHeight + $txtSpacing*2),
-                       $width, $height + ($txtHeight + $txtSpacing*2));
+               if ($border) {
+                  $pdf->Rectangle($x, $y - ($txtHeight + $txtSpacing * 2),
+                       $width, $height + ($txtHeight + $txtSpacing * 2));
                }
             }
          }
          $x += $width + $marginH;
-         $y -= 0;
       }
-      $file    = $pdf->ezOutput();
-      $pdfFile = $_SESSION['glpiID'].'_'.$type.'.pdf';
-      file_put_contents($this->docsPath.$pdfFile, $file);
-      return '/files/_plugins/barcode/'.$pdfFile;
+
+      $pdfFile = Session::getLoginUserID() . '_barcode_' . $type . '.pdf';
+      if (file_put_contents($this->docsPath . $pdfFile, $pdf->ezOutput()) === false) {
+         Session::addMessageAfterRedirect(__('Unable to write the PDF file.', 'barcode'), true, ERROR);
+         return false;
+      }
+      return $pdfFile;
    }
 
 
 
-   function create($p_code, $p_type, $p_ext) {
-      //TODO : filtre sur le type
-      if (!file_exists($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext)) {
-         ob_start();
-         $barcode = new Image_Barcode();
-         $resImg  = @imagepng(
-            @$barcode->draw($p_code, $p_type, $p_ext, false)
-         );
-         $img     = ob_get_clean();
-         file_put_contents($this->docsPath.$p_code.'_'.$p_type.'.'.$p_ext, $img);
-         if (!$resImg) {
-            return false;
-         }
+   /**
+    * Cache file of a barcode image. The code is hashed so that user input
+    * never ends up in a file path.
+    */
+   function getCacheFile(string $p_code, string $p_type): string {
+      return $this->docsPath . 'cache_' . md5($p_code) . '_' . $p_type . '.png';
+   }
+
+
+
+   /**
+    * Render a barcode image into the cache.
+    *
+    * @return bool false if the code cannot be encoded with this type
+    */
+   function create($p_code, $p_type) {
+      $p_code = (string) $p_code;
+      if (!in_array($p_type, self::getBarcodeTypes(), true) || !self::isValidCode($p_code, $p_type)) {
+         return false;
       }
-      return true;
+      $file = $this->getCacheFile($p_code, $p_type);
+      if (is_file($file) && filesize($file) > 0) {
+         return true;
+      }
+
+      $barcode = new Image_Barcode();
+      $img     = @$barcode->draw($p_code, $p_type, 'png', false);
+      if (!($img instanceof GdImage)) {
+         return false;
+      }
+      return imagepng($img, $file);
    }
 
 
@@ -503,52 +576,78 @@ class PluginBarcodeBarcode {
 
 
    static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids) {
-      global $CFG_GLPI;
 
-      switch ($ma->getAction()) {
-
-         case 'Generate' :
-            $pbQRcode = new PluginBarcodeQRcode();
-            $rand     = mt_rand();
-            $number   = 0;
-            $codes    = [];
-            if ($ma->POST['eliminate'] > 0) {
-               for ($nb=0; $nb < $ma->POST['eliminate']; $nb++) {
-                  $codes[] = '';
-               }
-            }
-            foreach ($ids as $key) {
-               $item->getFromDB($key);
-               if ($item instanceof CommonITILObject) {
-                  $codes[] = $item->getID();
-               } else if ($item->isField('otherserial')) {
-                  $codes[] = $item->getField('otherserial');
-               }
-            }
-            if (count($codes) > 0) {
-               $params['codes']       = $codes;
-               $params['type']        = $ma->POST['type'];
-               $params['size']        = $ma->POST['size'];
-               $params['border']      = $ma->POST['border'];
-               $params['orientation'] = $ma->POST['orientation'];
-               $params['displaylabels'] = $ma->POST['displaylabels'];
-
-               $barcode  = new PluginBarcodeBarcode();
-               $file     = $barcode->printPDF($params);
-               $filePath = explode('/', $file);
-               $filename = $filePath[count($filePath)-1];
-
-               $msg = "<a href='/plugins/barcode/front/send.php?file=".urlencode($filename)
-                  ."'>".__('Generated file', 'barcode')."</a>";
-
-               Session::addMessageAfterRedirect($msg);
-               $pbQRcode->cleanQRcodefiles($rand, $number);
-            }
-            $ma->itemDone($item->getType(), 0, MassiveAction::ACTION_OK);
-            return;
-
+      if ($ma->getAction() !== 'Generate') {
+         return;
       }
-      return;
+
+      if (!Session::haveRight('plugin_barcode_barcode', CREATE)) {
+         $ma->itemDone($item->getType(), $ids, MassiveAction::ACTION_NORIGHT);
+         return;
+      }
+
+      $displayLabels = !empty($ma->POST['displaylabels']);
+      $codes         = array_fill(0, max(0, (int) ($ma->POST['eliminate'] ?? 0)), '');
+      $displayData   = array_fill(0, count($codes), []);
+      $processed     = [];
+
+      foreach ($ids as $id) {
+         if (!$item->getFromDB($id) || !$item->can($id, READ)) {
+            $ma->itemDone($item->getType(), $id, MassiveAction::ACTION_NORIGHT);
+            continue;
+         }
+         if ($item instanceof CommonITILObject) {
+            $code = (string) $item->getID();
+         } else {
+            $code = trim((string) ($item->fields['otherserial'] ?? ''));
+         }
+         if ($code === '') {
+            // Nothing to encode for this item
+            $ma->itemDone($item->getType(), $id, MassiveAction::NO_ACTION);
+            continue;
+         }
+         $codes[]       = $code;
+         $displayData[] = $displayLabels ? [$item->fields['name'] ?? ''] : [];
+         $processed[]   = $id;
+      }
+
+      if (count($processed) === 0) {
+         return;
+      }
+
+      $barcode = new self();
+      $file    = $barcode->printPDF([
+         'codes'       => $codes,
+         'displayData' => $displayData,
+         'type'        => $ma->POST['type'] ?? '',
+         'size'        => $ma->POST['size'] ?? null,
+         'orientation' => $ma->POST['orientation'] ?? null,
+         'border'      => $ma->POST['border'] ?? 0,
+      ]);
+
+      if ($file === false) {
+         $ma->itemDone($item->getType(), $processed, MassiveAction::ACTION_KO);
+         return;
+      }
+
+      Session::addMessageAfterRedirect(self::getDownloadLink($file));
+      $ma->itemDone($item->getType(), $processed, MassiveAction::ACTION_OK);
    }
 
+
+
+   /**
+    * HTML link to download a generated file
+    *
+    * @param string $filename file name in the plugin doc dir
+    *
+    * @return string
+    */
+   static function getDownloadLink(string $filename, ?string $label = null): string {
+      global $CFG_GLPI;
+
+      $url = $CFG_GLPI['root_doc'] . '/plugins/barcode/front/send.php?file=' . rawurlencode($filename);
+      return '<a href="' . htmlescape($url) . '">'
+         . htmlescape($label ?? __('Generated file', 'barcode')) . '</a>';
+   }
 }

@@ -572,7 +572,7 @@ class PluginBarcodeQRcode {
                $tmpBmpFiles[] = $bmpFile;
             }
 
-            $zipFileName = 'barcode_qrcodes_user_' . Session::getLoginUserID() . '.zip';
+            $zipFileName = Session::getLoginUserID() . '_barcode_qrcodes.zip';
             $zipPath = $barcodeDir . '/' . $zipFileName;
 
             if (is_file($zipPath)) {
@@ -606,10 +606,10 @@ class PluginBarcodeQRcode {
             }
             $zipOpen = false;
 
-            $downloadUrl = '/plugins/barcode/front/send.php?file=' . urlencode(basename($zipPath));
-            $msg = "<a href='" . htmlspecialchars($downloadUrl, ENT_QUOTES, 'UTF-8') . "' class='alert-link'>"
-                 . sprintf(__('Download %s', 'barcode'), htmlspecialchars($zipFileName, ENT_QUOTES, 'UTF-8'))
-                 . '</a>';
+            $msg = PluginBarcodeBarcode::getDownloadLink(
+               $zipFileName,
+               sprintf(__('Download %s', 'barcode'), 'barcode_qrcodes.zip')
+            );
             Session::addMessageAfterRedirect($msg, true, 'information');
          }
 

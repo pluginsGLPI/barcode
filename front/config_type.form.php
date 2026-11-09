@@ -41,15 +41,27 @@
 
 // ----------------------------------------------------------------------
 // Original Author of file: Vincent Mazzoni
-// Purpose of file:
+// Purpose of file: save the page layout of one barcode type
 // ----------------------------------------------------------------------
 
+Session::checkRight('plugin_barcode_config', UPDATE);
 
 if (isset($_POST['type'])) {
    $pbcconf = new PluginBarcodeConfig_Type();
-   if ($res = array_keys($pbcconf->find(['type' => $_POST['type']]))) {
-      $_POST['id'] = $res[0];
-      $pbcconf->update($_POST);
+   if ($res = array_keys($pbcconf->find(['type' => (string) $_POST['type']]))) {
+      $input = ['id' => $res[0]];
+      foreach (PluginBarcodeConfig_Type::INTEGER_FIELDS as $field) {
+         if (isset($_POST[$field]) && is_numeric($_POST[$field])) {
+            $input[$field] = max(0, (int) $_POST[$field]);
+         }
+      }
+      if (array_key_exists($_POST['size'] ?? '', PluginBarcodeBarcode::getPageSizes())) {
+         $input['size'] = $_POST['size'];
+      }
+      if (in_array($_POST['orientation'] ?? '', ['Portrait', 'Landscape'], true)) {
+         $input['orientation'] = $_POST['orientation'];
+      }
+      $pbcconf->update($input);
    }
 }
 Html::back();
